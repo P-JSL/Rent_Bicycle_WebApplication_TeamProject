@@ -331,7 +331,7 @@ select {
 				<!-- row -->
 				<div class="row" id="comment_block">
 					<c:forEach items="${reply }" var="re">
-						<div class="col-md-4 col-lg-4 col-sm-4">
+						<div class="col-md-6 col-lg-6 col-sm-6">
 							<div class="white-box">
 								<h3 class="box-title">Recent Comments</h3>
 								<div class="comment-center">

@@ -233,12 +233,12 @@ select {
 				<!-- row -->
 				<div class="row">
 					<c:forEach items="${reply }" var="re">
-						<div class="col-md-4 col-lg-4 col-sm-6">
+						<div class="col-md-6 col-lg-6 col-sm-6">
 							<div class="white-box">
 								<h3 class="box-title">Recent Comments</h3>
 								<div class="comment-center">
 									<div class="comment-body" style="min-width: 100%">
-										<div class="user-img"></div>
+										
 
 										<div class="mail-contnet">
 											<h5>${re.comm }</h5>
