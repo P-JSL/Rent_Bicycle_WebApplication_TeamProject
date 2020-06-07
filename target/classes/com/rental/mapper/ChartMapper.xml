@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.ChartMapper">
+	<select id="JsonChartData"
+		resultType="com.rental.domain.ChartUser">
+		<![CDATA[
+		select
+		max(regdate) as day, count(userid) as dayofAccount
+		from
+		tbl_member tm natural join tbl_member_auth tma where tma.auth not like 'ROLE_ADMIN' group by regdate order by regdate
+		]]>
+	</select>
+	<select id="Jdata" resultType="com.rental.domain.ResTableVO">
+		select * from ( select
+		sum(res_table.price) as price, resdate from res_table
+		where
+		res_table.userid=#{userid} group by resdate ) A
+	</select>
+</mapper>

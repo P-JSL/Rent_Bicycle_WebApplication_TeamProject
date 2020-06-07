@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.ConTactMapper">
+	<select id="count" resultType="int">
+		select count(*) as count from
+		contactus
+	</select>
+	<select id="List" resultType="com.rental.domain.ConTactVO">
+	<![CDATA[	
+		 select * from 
+       (
+       select/*+ index_desc (contactus contactus_pk )*/
+	rownum rn , contactus.* from contactus
+       where rownum <= #{pageNum_c} * #{amount_c}
+       ) 
+       where rn > (#{pageNum_c}-1)*#{amount_c}  
+	]]>
+	</select>
+	<insert id="insert">
+	insert into contactus (num, title, message, email, status, regdate)
+	values (seq_cont.nextval, #{title}, #{message} , #{email}, 1, sysdate)
+	</insert>
+	<select id="getPage" resultType="com.rental.domain.ConTactVO">
+	select * from contactus where num = #{num} and email = #{email}
+	</select>
+	<update id="status">
+	update contactus set status = 0 where num = #{num}
+	</update>
+</mapper>

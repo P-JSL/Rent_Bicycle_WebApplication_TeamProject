@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.ProductMapper">
+	<select id="count" resultType="int">
+		select count(*) as count from
+		product
+	</select>
+	<select id="getListWithPaging"
+		resultType="com.rental.domain.ProductVO">
+	<![CDATA[	
+		 select * from 
+       (
+       select/*+ index_desc (product product_pk )*/
+		rownum rn , num, userid, goods, content, price, regdate, category, goodsphoto, many, status
+		 from product
+       where rownum <= #{pageNum} * #{amount}
+       ]]>
+		<if test="keyword != null">
+			<choose>
+				<when test="keyword.equals('desc')">
+					order by regdate desc
+				</when>
+				<when test="keyword.equals('asc')">
+					order by regdate asc
+				</when>
+				<when test="keyword.equals('price')">
+					order by price desc
+				</when>
+			</choose>
+		</if>
+	<![CDATA[	       
+       ) 
+       where rn > (#{pageNum}-1)*#{amount}  
+	]]>
+	</select>
+
+	<insert id="insert">
+		insert into product (num, userid, goods, content,
+		price, regdate, category,
+		goodsphoto, many, status)
+		values
+		(seq_product.nextval, #{userid}, #{goods} , #{content} , #{price},
+		sysdate, #{category}, #{goodsphoto}, #{many}, 1)
+	</insert>
+
+	<select id="getPage" resultType="com.rental.domain.ProductVO">
+		select * from product where num
+		= #{num}
+	</select>
+	<update id="notmany">
+	<![CDATA[
+		update product set many = many - 1 where num = #{num}	
+	]]>
+	</update>
+	<update id="statusminus">
+		update product set status = 0 where num = #{num}
+	</update>
+	
+	<select id="AllList" resultType="com.rental.domain.ProductVO">
+	<![CDATA[
+	select * from product where rownum > 0
+	]]>
+	</select>
+</mapper>

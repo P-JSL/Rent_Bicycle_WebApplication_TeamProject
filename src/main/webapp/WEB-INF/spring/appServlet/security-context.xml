@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security 
+						http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- BEAN 실정 -->
+	<bean id="customAccessDenied"
+		class="com.rental.security.CustomAccessDeniedHandler"></bean>
+	<bean id="customLoginSuccess"
+		class="com.rental.security.CustomLoginSuccessHandler"></bean>
+	<bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	<bean id="CustomUserDetailsService"
+		class="com.rental.security.CustomUserDetailsService">
+	</bean>
+	<bean id="CustomAuthenticationProvider"
+		class="com.rental.security.CustomAuthenticationProvider"></bean>
+	<!-- 메세지 에러 설정 프로퍼티 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages/spring_security_messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="cacheSeconds" value="60"></property>
+	</bean>
+	<!-- 보안 X 설정 -->
+	<security:http pattern="/resources/**" security="none" />
+	<security:http pattern="/**/*.js" security="none" />
+	<security:http pattern="/**/*.css" security="none" />
+	<security:http pattern="/**/*.scss" security="none" />
+	<security:http pattern="/**/*.map" security="none" />
+	<security:http pattern="/**/fonts/**" security="none" />
+	<security:http pattern="/**/vendor/**" security="none" />
+	<security:http pattern="/**/images/**" security="none" />
+	<security:http pattern="/**/plugins/**" security="none" />
+	<!-- http 가로채기 및 url 패턴 허가 -->
+	<security:http auto-config="true" use-expressions="true">
+		<security:csrf disabled="false" />
+		<security:intercept-url pattern="/admin/*"
+			access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/user/*"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/*"
+			access="permitAll()" />
+		<security:form-login login-page="/CustomLogin"
+			authentication-success-handler-ref="customLoginSuccess" />
+		<!-- 로그인 실패시, 에러 뜨는 Controller 참조 설정 -->
+		<security:access-denied-handler
+			ref="customAccessDenied" />
+		<!-- 로그아웃 -->
+		<security:logout
+			logout-success-url="/CustomLogin?logout"
+			delete-cookies="JSESSIONID, JSESSION_ID,USER" />
+
+		<security:session-management
+			session-fixation-protection="migrateSession">
+			<security:concurrency-control
+				max-sessions="1" expired-url="/CustomLogin"
+				error-if-maximum-exceeded="true" />
+		</security:session-management>
+
+	</security:http>
+
+
+	<security:authentication-manager>
+		<security:authentication-provider
+			ref="CustomAuthenticationProvider">
+		</security:authentication-provider>
+		<security:authentication-provider
+			user-service-ref="CustomUserDetailsService">
+
+			<!-- 비밀번호 bcrypt암호화 -->
+			<security:password-encoder
+				ref="bcryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.ReplyMapper">
+	<select id="replyList" resultType="com.rental.domain.ReplyVO">
+		select * from noticereply
+		where n_num = #{n_num}
+	</select>
+
+	<select id="Top6list" resultType="com.rental.domain.ReplyVO">
+	<![CDATA[	
+		select * from noticereply where rownum <= 6
+	]]>
+	</select>
+	<select id="UserReply" resultType="com.rental.domain.ReplyVO">
+		<![CDATA[select * from noticereply
+		where rownum <= 6 and userid= #{userid}]]>
+	</select>
+
+	<update id="likes">
+		update noticereply set likes = likes + 1 where n_num
+		= #{n_num} and num = #{num} and userid=#{userid}
+	</update>
+
+	<update id="hates">
+		update noticereply set hates = hates + 1 where n_num
+		= #{n_num} and num = #{num} and userid=#{userid}
+	</update>
+
+	<insert id="insertReply">
+		insert into noticereply (num, n_num, userid, comm, regdate, likes, hates)
+		values (seq_n_reply.nextval, #{n_num}, #{userid}, #{comm}, sysdate, 0,
+		0)
+	</insert>
+<select id="Yreply" resultType="com.rental.domain.ReplyVO">
+		select likes, hates from noticereply
+		where n_num = #{n_num} and num = #{num}
+	</select>
+</mapper>

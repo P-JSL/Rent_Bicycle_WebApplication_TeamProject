@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.UserLogMapper">
+	<update id="UserLoginSuccess">
+  <![CDATA[  
+  	update inlog set login_count = login_count + 1 where userid = #{userid}
+  ]]>
+	</update>
+
+	<update id="UserLoginFail">
+  <![CDATA[
+  	update inlog set fail_count = fail_count + 1 where userid = #{userid}
+ ]]>
+	</update>
+	<update id="FullFailCount">
+		call updates (
+		#{userid}
+		)
+
+	</update>
+
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<resultMap type="com.rental.domain.UserLogVO" id="LogInfo">
+		<id property="userid" column="userid" />
+		<result property="userid" column="userid" />
+		<result property="fail_count" column="fail_count" />
+		<result property="login_count" column="login_count" />
+		<result property="fullfail_count" column="fullfail_count" />
+	</resultMap>
+	<select id="UserLogInfo" resultMap="LogInfo">
+		select /*+index_desc
+		(tbl_member tbl_member_pk ) */ userid, login_count,
+		fail_count
+		,fullfail_count from
+		inlog where userid = #{userid}
+	</select>
+
+
+	<insert id="UserIntoLog">
+		insert into inlog (userid, fail_count, login_count)
+		values(#{userid}, 0,0)
+	</insert>
+	<select id="UserAllCount" resultType="int">
+		<![CDATA[select count(*) as count from tbl_member  
+		where ]]><include refid="criteria"></include> <![CDATA[rownum > 0]]>
+	</select>
+	<select id="UserCount" resultType="int">
+		select count(*) as count from
+		tbl_member NATURAL join tbl_member_auth
+		where tbl_member_auth.auth not like 'ROLE_ADMIN'
+	</select>
+	<select id="UserList" resultType="com.rental.domain.MemberVO">
+	<![CDATA[	
+		select * from tbl_member order by  regdate desc, enabled desc
+	]]>
+	</select>
+
+	<!-- 검색기능 -->
+	<sql id="criteria">
+		<trim prefix="( " suffix=" ) and " prefixOverrides="or">
+			<foreach item="type" collection="typeArr">
+				<trim prefix="or">
+					<choose>
+						<when test="type == 'U'.toString()">
+							userid like '%' || #{keyword} || '%'
+						</when>
+						<when test="type == 'E'.toString()">
+							useremail like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="getListWithPaging"
+		resultType="com.rental.domain.MemberVO">
+	<![CDATA[	
+		 select * from 
+       (
+       select/*+ index_desc (tbl_member tbl_member_pk )*/
+       rownum rn,userid,userpw,username,regdate,updatedate,enabled, useremail, au.auth
+     from tbl_member tm NATURAL join tbl_member_auth au
+       where ]]>
+		<include refid="criteria"></include>
+       <![CDATA[ rownum <= #{pageNum} * #{amount}
+       ) 
+       where rn > (#{pageNum}-1)*#{amount} and auth != 'ROLE_ADMIN'  
+	]]>
+	</select>
+	<select id="users" resultType="com.rental.domain.MemberVO">
+		select * from tbl_memeber where userid= #{userid}
+	</select>
+
+
+</mapper>
