@@ -14,6 +14,6 @@
 		select * from ( select
 		sum(res_table.price) as price, resdate from res_table
 		where
-		res_table.userid=#{userid} group by resdate ) A
+		res_table.userid=#{userid} group by resdate ) A order by resdate
 	</select>
 </mapper>

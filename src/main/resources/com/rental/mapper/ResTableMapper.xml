@@ -3,7 +3,7 @@
 <mapper namespace="com.rental.mapper.ResTableMapper">
 	<select id="count" resultType="com.rental.domain.ResTableVO">
 		select count(*) as count , sum(price) as price from
-		res_table where userid= #{userid} group by #{userid}
+		res_table where userid= #{userid} group by #{userid} 
 	</select>
 	<select id="Res" resultType="com.rental.domain.ResTableVO">
 		select * from res_table where userid
@@ -23,7 +23,7 @@
 		rownum rn, res_table.* from res_table
        where rownum <= #{pageNum} * #{amount}
        ) 
-       where rn > (#{pageNum}-1)*#{amount} and userid = #{userid}
+       where rn > (#{pageNum}-1)*#{amount} and userid = #{userid} order by resdate
 	]]>
 	</select>
 </mapper>
