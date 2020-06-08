@@ -2,28 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rental.mapper.ResTableMapper">
 	<select id="count" resultType="com.rental.domain.ResTableVO">
-		select count(*) as count , sum(price) as price from
-		res_table where userid= #{userid} group by #{userid} 
+		select count(*) as count ,
+		sum(price) as price from
+		res_table where userid= #{userid} group by
+		#{userid}
 	</select>
 	<select id="Res" resultType="com.rental.domain.ResTableVO">
 		select * from res_table where userid
 		= #{userid}
 	</select>
 	<insert id="insert">
-		insert into res_table (num, n_num, userid, goods, status, resdate, price,
+		insert into res_table (num, n_num, userid, goods,
+		status, resdate, price,
 		goodsphoto)
-		values (seq_res.nextval,#{n_num}, #{userid}, #{goods}, 2 , sysdate,
+		values (seq_res.nextval,#{n_num},
+		#{userid}, #{goods}, 2 , sysdate,
 		#{price}, #{goodsphoto})
 	</insert>
-	<select id="pageList" parameterType="hashmap" resultType="com.rental.domain.ResTableVO">
+	<select id="pageList" parameterType="hashmap"
+		resultType="com.rental.domain.ResTableVO">
 	<![CDATA[	
-		 select * from 
+        select B.* from ( select /*+ index_desc (res_table res_table_pk )*/  rownum r, A.* from 
        (
        select/*+ index_desc (res_table res_table_pk )*/
 		rownum rn, res_table.* from res_table
-       where rownum <= #{pageNum} * #{amount}
-       ) 
-       where rn > (#{pageNum}-1)*#{amount} and userid = #{userid} order by resdate
+       ) A
+       where rn > (#{pageNum}-1)*#{amount} and userid = #{userid}  ) B where r <= #{pageNum} * #{amount} 
 	]]>
 	</select>
 </mapper>

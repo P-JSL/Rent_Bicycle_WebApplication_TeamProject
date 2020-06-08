@@ -45,7 +45,7 @@
 		<security:csrf disabled="false" />
 		<security:intercept-url pattern="/admin/*"
 			access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/user/*"
+		<security:intercept-url pattern="/users/*"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/*"
 			access="permitAll()" />

@@ -118,23 +118,23 @@ body {
 										Nomal</a>
 								</p>
 							</div>
-							<div class="col-lg-12">
-								<h5>남은 물품 갯수 :</h5>
+							<div class="col-lg-12" style="border-top: 1px solid #ddd; padding-top: 20px;">
+								
 								<input type="text" readonly
-									class="form-control text-center w-100" value="${view.many }"
-									style="font-size: 1.5rem">
+									class="form-control text-center w-100" value="남은 렌탈 회수 : ${view.many }"
+									style="font-size: 1.5rem; background-color: transparent;">
 							</div>
 							<div class="col-lg-12 mt-3">
 								<div class="row">
 									<div class="col-lg-12 pb-2">
 										<sec:authorize access="isAuthenticated()">
-											<a href="javascript:void(0)" class="btn  btn-warning w-100"
+											<a href="javascript:void(0)" class="btn  btn-warning w-100"   style="font-size: 1.5rem;"
 												onclick="insert('${id}','${view.goods }','${view.num }','${view.price }','${view.goodsphoto }')">Add
 												to cart</a>
 										</sec:authorize>
 										<sec:authorize access="isAnonymous()">
 											<a href="javascript:void(0)" class="btn  btn-warning w-100"
-												onclick="location.href='/CustomLogin'">Add to cart</a>
+												onclick="location.href='/CustomLogin'" style="font-size: 1.5rem;">Add to cart</a>
 										</sec:authorize>
 									</div>
 
@@ -149,7 +149,7 @@ body {
 					<h4>제품 상세 내용</h4>
 				</div>
 			</div>
-			<div class="row mt-3 p-0 text-center pro-box-section">
+			<div class="row mt-3 p-0 text-center pro-box-section" style="border-bottom: 3px double black; margin-bottom: 40px;" >
 
 				<div class="container" style="text-align: center;">${view.content }</div>
 				<hr class="m-0 pt-2 mt-2">

@@ -128,16 +128,20 @@
 										</tr>
 									</thead>
 									<tbody>
+									<c:set
+									value="${pageMaker.total - (pageMaker.cri.pageNum - 1) * pageMaker.cri.amount}"
+									var="bno"/>
 										<c:forEach items="${res }" var="res">
 
 											<tr>
-												<td></td>
+												<td>${bno }</td>
 												<td><img style="max-width: 150px;"
 													src="/upload/${res.goodsphoto }"></td>
 												<td>${res.resdate }</td>
 												<td>7일</td>
 												<td id="prices">${res.price }</td>
 											</tr>
+											<c:set var="bno" value="${bno-1 }"/>
 										</c:forEach>
 
 										<tr style="border-top: 4px double black;">
