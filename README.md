@@ -282,10 +282,9 @@ Oracle DataBase 의 Member 테이블에 넣어주는 SQL문을 실행 합니다.
 MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서   
 #{파라미터} 에 자동적으로 들어가서 SQL문을 실행합니다.   
  - 위의 mapper.insert_auth도 마찬가지로 작동을 하는 서비스 로직입니다.
- 
- 위의 흐름대로 되며, 회원가입이 정상적으로 됩니다.
+   이러한 흐름대로 되며, 회원가입이 정상적으로 됩니다.
 ---
-#1-2 로그인 코드 설명
+1-2.로그인 코드 설명
 **CustomLogin.jsp** 내의 로그인 Form 코드
 ```
 <form class="login100-form validate-form" action="/login"
