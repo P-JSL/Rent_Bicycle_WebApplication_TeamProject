@@ -281,7 +281,7 @@ Oracle DataBase 의 Member 테이블에 넣어주는 SQL문을 실행 합니다.
 MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
 #{파라미터} 에 자동적으로 들어가서 SQL문을 실행합니다.
  
- **mapper.insert_auth** 도 위와 같이, 실행이 되며, 그 유저에게 권한을 주는 서비스 로직 입니다.
+ -mapper.insert_auth 도 위와 같이, 실행이 되며, 그 유저에게 권한을 주는 서비스 로직 입니다.
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
 ---
