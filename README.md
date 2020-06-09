@@ -58,7 +58,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ---
 
 코드 설명 (기능)   
----
+===
 1.스프링 시큐리티를 이용한 로그인, 회원가입  설명 과 세팅 
 ---   
 1-1. 회원가입의 코드 설명과 세팅
@@ -432,6 +432,45 @@ $("#submit").on("click",function() {
 	})
 })
 </script>
+```
+
+**MainController - Ajax **
+```
+@ResponseBody
+@PostMapping(value = "/forgot/reset", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public ResponseEntity<String> Reset(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
+		throws JsonParseException, JsonMappingException, IOException {
+
+	JsonParser parser = new JsonParser();
+
+	String userid = parser.parse(recommend).getAsJsonObject().get("userid").getAsString().toString();
+	String userpw = parser.parse(recommend).getAsJsonObject().get("userpw").getAsString().toString();
+
+	MemberVO mvo = new MemberVO();
+	mvo.setUserid(userid);
+	mvo.setUserpw(userpw);
+	String password = service.Reset(mvo);
+	System.out.println(userpw);
+	mvo.setUserpw(password);
+	return new ResponseEntity<>(userpw, HttpStatus.OK);
+
+}
+
+@ResponseBody
+@PostMapping(value = "/forgot/findId", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public ResponseEntity<String> FindId(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
+		throws JsonParseException, JsonMappingException, IOException {
+
+	JsonParser parser = new JsonParser();
+
+	String useremail = parser.parse(recommend).getAsJsonObject().get("useremail").getAsString().toString();
+
+	MemberVO mvo = new MemberVO();
+	mvo.setUseremail(useremail);
+	mvo = service.FindId(mvo);
+	return new ResponseEntity<>(mvo.getUserid(), HttpStatus.OK);
+
+}
 ```
 
   3.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
