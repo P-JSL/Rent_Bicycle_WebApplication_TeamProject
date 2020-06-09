@@ -118,7 +118,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 **CustomLogin.JSP Page**에서 Form Tags
 ```
-<form class="login100-form validate-form" action="/signup" method="post" onsubmit="return checkAccount()">
+<form class="login100-form validate-form" action="/signup" method="post">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
 ```
 여기서 
@@ -216,6 +216,38 @@ public interface MemberMapper {
 
 	... 생략
 ```
+스프링에서 JSP의 Form action과 Method 에 따라
+Controller 의 @GetMapping / @PostMapping 에 action에 적힌 문자( 예: /signup ) 와 같은 문자가 적힌 곳으로 맵핑 됩니다.
+그 다음, Controller 의 @PostMapping("/signup") 의
+```
+@PostMapping("/signup")
+	public String signup(MemberVO memvo) throws UnsupportedEncodingException, SQLException {
+		if (service.signup(memvo)) {
+			service.Account_loginto(memvo.getUserid());
+			log.info("sign up success");
+		} 
+	}
+```
+으로 와서  if문 안의 **service.signup()** 을 실행 합니다.
+실행 하기 전에 
+```
+@Setter(onMethod_ = { @Autowired })
+	private MemberService service;
+```
+가 의존주입이 되어 있어야 합니다.
+그리고 **service.signup()** 은
+**MemberService Interface를 상속받은 MemberServiceImpl** 에서 실행합니다. 
+```
+@Override
+	public boolean signup(MemberVO mvo) {
+	mvo.setUserpw(BCPE.encode(mvo.getUserpw()));
+		mapper.insert(mvo);
+		MailSendMethod(mvo);
+		return mapper.insert_auth(mvo) == 1 ? true : false;
+	}
+```
+여기서 BCPE.encode(~~)
+
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
 ---
