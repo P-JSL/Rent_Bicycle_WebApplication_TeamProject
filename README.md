@@ -51,9 +51,14 @@
  ----
 스프링 MVC와 스프링 Security 
 ---
--스프링 MVC 패턴  :
+-스프링 MVC 패턴  
+<img src="https://user-images.githubusercontent.com/64994827/84133689-6bd7da00-aa82-11ea-987d-68d35283edd4.png"
+ width="80%">
 
--스프링 Serucity :
+
+-스프링 Serucity 
+<img src="https://user-images.githubusercontent.com/64994827/84133702-6da19d80-aa82-11ea-96d4-67bd44c99d2b.png"
+ width="80%">
 
 ---
 스프링 프레임워크 기초
