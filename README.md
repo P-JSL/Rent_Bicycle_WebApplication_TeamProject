@@ -155,7 +155,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 먼저 아래에 실행되는 순서대로 코드를 보여주고 설명 하겠습니다.
 
-**MemberService***
+**MemberService**
 ```
 
 public interface MemberService {
@@ -195,4 +195,25 @@ public interface MemberMapper {
 	public int insert_auth(MemberVO mvo);
 	
 	...생략
+```
+**MemberMapper.xml**
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.MemberMapper">
+	<insert id="insert">
+		insert into tbl_member (userid, userpw, username,
+		regdate, enabled, useremail) values
+		(#{userid}, #{userpw}, '일반사용자'
+		,sysdate,0, #{useremail})
+	</insert>
+	<insert id="insert_auth">
+		insert into tbl_member_auth (userid, auth ) values
+		(#{userid} , 'ROLE_USER' )
+	</insert>
+
+...
+
 ```
