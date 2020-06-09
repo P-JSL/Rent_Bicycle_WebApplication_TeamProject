@@ -67,11 +67,11 @@
  +6. 여기서, Mapper.xml은 실질적인 쿼리문을 작성 하게 된다.    
     작성 방식 > 
     ```
-    <mapper namespace="com.xxx.mapper.Mapper">
-    	<select id="xxx" resultType="com.xxx.domain.xxxVO">
-		select * from xxxTable
-	</select>
-    </mapper>
+    <mapper namespace="com.xxx.mapper.Mapper">   
+    	<select id="xxx" resultType="com.xxx.domain.xxxVO">   
+		select * from xxxTable   
+	</select>   
+    </mapper>   
     ```   
     +7. 이렇게 Service 단에서 DB와 연동 된 mapper 를 처리 받은 데이터 (반환 데이터-return data)를 다시 Controller에 돌려주게 된다.   
     +8. Controller에서는 반환 되어 온 데이터를 다시 View에 뿌려줘야 한다. 만약 반환 된 데이터가 없으면 안해주어도 무관하다. 하지만 사용자가 그것이 재대로 되었는지 확인을 하려 한다면, update, delete와 같은 작업을 할 떄는 int형으로 반환을 하기 떄문에, 삼항 연산자를 이용하여 true/false 를 만들어 반환해서 확인하게 하면 된다.   
