@@ -1,16 +1,4 @@
-#Pre Start explan  
-
----
-#PROJECT Title  
-
----
-#Getting Start  
-
----
-#Version  
- 
- ---
- 프로젝트 이름
+프로젝트 이름
  - 자전거 대여 홈페이지
  ---
  #사용한 언어 및 프레임워크
