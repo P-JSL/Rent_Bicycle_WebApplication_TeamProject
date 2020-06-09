@@ -48,7 +48,7 @@
  - JS (Javascript) 를 이용해서 유효성 검사 기능
  - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력  
  - Mybatis를 이용한 CRUD  + @ 
- ---
+ ----
 프로젝트 흐름 
 ---
 _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
@@ -434,3 +434,11 @@ $("#submit").on("click",function() {
 </script>
 ```
 
+  3.예약 문의 기능 및 1 : 1 문의 기능 
+  ---
+  4.Ajax를 이용하여 회원 실시간 관리 기능 
+  ---
+  5.관리자 페이지와 유저 마이페이지에서 전체 관리 기능
+  ---
+  6.물품 등록 및 물품 예약 & 확인 기능 
+  ---
