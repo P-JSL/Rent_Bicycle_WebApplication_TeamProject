@@ -31,7 +31,7 @@
  - Oracle DataBase (11g) , Mybatis (마이바티스)
  ---
  
-사용한 기능  
+프로젝트에 사용 된 기술 및 넣은 기능  
 ---
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
