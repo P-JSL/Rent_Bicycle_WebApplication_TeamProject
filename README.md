@@ -476,7 +476,7 @@ Jsp의 Ajax --> Controller --> Service --> DB 로 갑니다.
   
   3.물품 등록 및 물품 예약 & 확인 기능 및 코드 설명
   ---
-  3-1 물품 예약 코드 설명
+  <h3>3-1 물품 예약 코드 설명</h3>
   
   물품 등록은 **관리자** 가 하게 됩니다.    
   그렇지만, 물품 예약과 예약 된 물품을 확인하는 것은 **사용자** 입니다.
@@ -565,7 +565,7 @@ public interface ProductMapper {
 		public void insert(ProductVO pvo);
 }
 ```
-   3-2 물품  코드 설명
+   <h3>3-2 물품  코드 설명</h3>
   
   
   ---
