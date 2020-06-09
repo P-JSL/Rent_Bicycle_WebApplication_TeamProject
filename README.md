@@ -150,6 +150,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 @PostMapping
 ```
 으로 갑니다.   
+   
 **Controller**
 ```
 	@Setter(onMethod_ = { @Autowired })
