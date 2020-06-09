@@ -567,7 +567,7 @@ public interface ProductMapper {
 
   
   ---
-  4.예약 문의 기능 및 1 : 1 문의 기능 및 
+  4.예약 문의 기능 코드 순서 
   ---
   **Inquire.jsp**
   
@@ -606,9 +606,65 @@ public void insert(ConTactVO cvo) {
   
   
   ---
-  5.Ajax를 이용하여 회원 실시간 관리 기능 및 코드 순서
+  5.Ajax를 이용하여 실시간 좋아요/싫어요 기능 및 코드 순서
   ---
-  
+  ```
+  $("#commend #likes").on("click",function(){
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	})
+	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
+	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
+	console.log(userid);
+	console.log(n_num);
+	var lik = $(this).parent().parent().find("#liking");
+	console.log(lik[0].innerText);
+	$.ajax({
+		url : "/likes",
+		type : 'POST',
+		data : JSON.stringify({
+			"userid" : userid,
+			"num" : n_num,
+			"n_num" : sequence
+		}),
+		contentType : "application/json; charset=UTF-8",
+		processData : false,
+		success : function(result) {
+			console.log(result);
+			lik[0].innerText=result.likes;
+		},
+		error : function(req, status, error) {
+			console.log(error);
+		}
+	})
+});
+$("#commend li #hates").on("click",function(){
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	})
+	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
+	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
+	var lik = $(this).parent().parent().find("#hat");
+	console.log(lik[0].innerText);
+	$.ajax({
+		url : "/hates",
+		type : 'POST',
+		data : JSON.stringify({
+			"userid" : userid,
+			"num" : n_num,
+			"n_num" : sequence
+	}),
+		contentType : "application/json; charset=UTF-8",
+		processData : false,
+		success : function(result) {
+			lik[0].innerText=result.hates;
+		},
+		error : function(req, status, error) {
+			console.log(error);
+		}
+	})
+});
+  ```
   
   6.관리자 페이지와 유저 마이페이지에서 전체 관리 기능 및 코드 순서
   ---
