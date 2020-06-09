@@ -140,17 +140,59 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 으로 갑니다.
 ```
+	@Setter(onMethod_ = { @Autowired })
+	private MemberService service;
+
 	@PostMapping("/signup")
 	public String signup(MemberVO memvo) throws UnsupportedEncodingException, SQLException {
 		log.info("error : " + memvo);
 		if (service.signup(memvo)) {
 			service.Account_loginto(memvo.getUserid());
 			log.info("sign up success");
-		} else {
-			trans.rollback();
-			return "redirect:/signup";
-		}
+		} 
 		return "redirect:/CustomLogin";
 	}
 ```
+먼저 아래에 실행되는 순서대로 코드를 보여주고 설명 하겠습니다.
 
+**MemberService***
+```
+
+public interface MemberService {
+
+	public boolean signup(MemberVO mvo);
+	
+	...생략
+}
+```
+
+**MemberServiceImpl**
+```
+	@Setter(onMethod_ = { @Autowired })
+	private MemberMapper mapper;
+
+	@Inject
+	private BCryptPasswordEncoder BCPE;
+
+	@Override
+	public boolean signup(MemberVO mvo) {
+		log.info("on");
+		// TODO Auto-generated method stub
+		mvo.setUserpw(BCPE.encode(mvo.getUserpw()));
+		mapper.insert(mvo);
+
+		MailSendMethod(mvo);
+		return mapper.insert_auth(mvo) == 1 ? true : false;
+
+	}
+```
+**MemberMapper**
+```
+
+public interface MemberMapper {
+
+	public int insert(MemberVO mvo);
+	public int insert_auth(MemberVO mvo);
+	
+	...생략
+```
