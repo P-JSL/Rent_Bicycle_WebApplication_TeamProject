@@ -94,7 +94,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 	
 	...생략
 ```
-**Web.xml*** 추가 설정
+**Web.xml** 추가 설정
 ```
 	<filter>
 		<display-name>springMultipartFilter</display-name>
@@ -117,4 +117,4 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 	</filter-mapping>
 ```
 
-===
+---
