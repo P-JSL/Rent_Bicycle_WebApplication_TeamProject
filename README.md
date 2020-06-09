@@ -69,7 +69,7 @@
 
 
 - 0. 먼저 스프링 기본 세팅 (log4j, DataSource -DB연동, ) 등을 다 하기.   
- - 1. View ( .jsp) 의 Form에서 처리 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
+ - 1. View ( .jsp) 의 Form에서 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
  - 2. 맵핑된 Controller 에서 Action속성으로 보내져 온 데이터 (ID,PW등) 을 가지고 처리 할 준비를 함.   
 ![05](https://user-images.githubusercontent.com/64994827/84134859-2c11f200-aa84-11ea-8129-969448bb59bf.png)
  - 3. Controller에서 처리를 하지 않고, Service를 주입 받아 Service 단에서 처리를 진행 한다.   
