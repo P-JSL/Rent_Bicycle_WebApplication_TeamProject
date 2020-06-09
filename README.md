@@ -138,7 +138,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 @PostMapping
 ```
-으로 갑니다.
+으로 갑니다.   
 **Controller**
 ```
 	@Setter(onMethod_ = { @Autowired })
@@ -155,7 +155,26 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 	}
 ```
 먼저 아래에 실행되는 순서대로 코드를 보여주고 설명 하겠습니다.
+**MemberVO**
+```
+@Getter
+@Setter
+@ToString
+public class MemberVO {
 
+	
+	private String userid;
+	private String userpw,userName;
+	private String useremail;
+	
+	private boolean enabled;
+	private String regDate;
+	private Date updateDate;
+	private List<AuthVO> authList;
+
+}
+
+```
 **MemberService**
 ```
 
@@ -243,7 +262,6 @@ Controller 의 @GetMapping / @PostMapping 에 action에 적힌 문자( 예: /sig
 	public boolean signup(MemberVO mvo) {
 	mvo.setUserpw(BCPE.encode(mvo.getUserpw()));
 		mapper.insert(mvo);
-		MailSendMethod(mvo);
 		return mapper.insert_auth(mvo) == 1 ? true : false;
 	}
 ```
@@ -260,7 +278,10 @@ Oracle DataBase 의 Member 테이블에 넣어주는 SQL문을 실행 합니다.
 		,sysdate,0, #{useremail})
 	</insert>
 ```
+MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
+#{파라미터} 에 자동적으로 들어가서 SQL문을 실행합니다.
 
+**mapper.insert_auth** 도 위와 같이, 실행이 되며, 그 유저에게 권한을 주는 서비스 로직 입니다.
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
 ---
