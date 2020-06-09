@@ -440,18 +440,9 @@ $("#submit").on("click",function() {
 @PostMapping(value = "/forgot/reset", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public ResponseEntity<String> Reset(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
 		throws JsonParseException, JsonMappingException, IOException {
-
-	JsonParser parser = new JsonParser();
-
-	String userid = parser.parse(recommend).getAsJsonObject().get("userid").getAsString().toString();
-	String userpw = parser.parse(recommend).getAsJsonObject().get("userpw").getAsString().toString();
-
-	MemberVO mvo = new MemberVO();
-	mvo.setUserid(userid);
-	mvo.setUserpw(userpw);
-	String password = service.Reset(mvo);
-	System.out.println(userpw);
-	mvo.setUserpw(password);
+		
+		...생략
+		
 	return new ResponseEntity<>(userpw, HttpStatus.OK);
 
 }
@@ -461,13 +452,8 @@ public ResponseEntity<String> Reset(@RequestBody String recommend, HttpServletRe
 public ResponseEntity<String> FindId(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
 		throws JsonParseException, JsonMappingException, IOException {
 
-	JsonParser parser = new JsonParser();
+	...
 
-	String useremail = parser.parse(recommend).getAsJsonObject().get("useremail").getAsString().toString();
-
-	MemberVO mvo = new MemberVO();
-	mvo.setUseremail(useremail);
-	mvo = service.FindId(mvo);
 	return new ResponseEntity<>(mvo.getUserid(), HttpStatus.OK);
 
 }
