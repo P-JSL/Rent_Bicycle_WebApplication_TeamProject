@@ -10,7 +10,7 @@
 #사용한 언어 및 프레임워크  
  - HTML, CSS, JS, JQUERY, AJAX (FRONT END)
  - JAVA, JSP (BACKEND)
- - SPRING, SPRING-SECURITY (Spring FrameWork ) 
+ - SPRING,SPRING-MVC, SPRING-SECURITY (Spring FrameWork ) 
  - Oracle DataBase (11g) , Mybatis (마이바티스)
  ---
  
