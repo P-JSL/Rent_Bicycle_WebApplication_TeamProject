@@ -299,10 +299,17 @@ MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
 ---
 **CustomLogin.jsp** 내의 로그인 Form 코드
 ```
-<form class="login100-form validate-form" action="/login"
-				method="post">
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token }"> 
+<form class="login100-form validate-form" action="/login"method="post">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
+```
+**AuthVO**
+```
+@Getter
+@Setter
+@ToString
+public class AuthVO {
+	private String userid, auth;
+}
 ```
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
