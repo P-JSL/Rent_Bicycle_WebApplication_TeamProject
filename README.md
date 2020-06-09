@@ -302,15 +302,86 @@ MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
 <form class="login100-form validate-form" action="/login"method="post">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }"> 
 ```
-**AuthVO**
+**AuthenticationProvider**
 ```
-@Getter
-@Setter
-@ToString
-public class AuthVO {
-	private String userid, auth;
+@Log4j
+@Component
+public class CustomAuthenticationProvider implements AuthenticationProvider {
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	String username = (String) authentication.getPrincipal();
+	String password = (String) authentication.getCredentials();
+	log.debug("AuthenticationProvider :::::: 1");
+
+	CustomUser user = (CustomUser) service.loadUserByUsername(username);
+	log.info("성공적인 로그인");
+	
+	...생략
+	
+	return new UsernamePasswordAuthenticationToken(user, user, user.getAuthorities());
+	}
+	
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return true;
+	}
 }
 ```
+**UserDetailsService**
+```
+@Log4j
+public class CustomUserDetailsService implements UserDetailsService {
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		log.warn("Load User & UserName : " + username);
+		
+		// userName means userid
+		MemberVO vo = mapper.read(username);
+
+		log.warn("queried by member mapper :" + vo);
+		return vo == null ? null : new CustomUser(vo);
+	}
+}
+```
+**LoginSuccessHandler**
+```
+@Log4j
+public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
+	
+@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication auth) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		log.warn("Login Success");
+
+		List<String> roleNames = new ArrayList<>();
+
+		auth.getAuthorities().forEach(authority -> {
+			roleNames.add(authority.getAuthority());
+		});
+		log.warn("ROLE NAMES : " + roleNames);
+		service.UserLoginSuccess(auth.getName());
+		if(roleNames.contains("ROLE_ADMIN")) {
+			response.sendRedirect("/admin/index?userid="+auth.getName());		
+			return;
+		}
+		if(roleNames.contains("ROLE_USER")) {
+			service.UserLoginSuccess(auth.getName());
+			response.sendRedirect("/");
+			return;
+		}	
+		response.sendRedirect("/");
+	}
+}
+```
+
+로그인을 하면, Login.jsp 에서 Security Filter를 거쳐서 위의 순서처럼
+**AuthenticationProvider** 에서 먼저 DB에서 유저의 권한을 체크 하고나서 **UserDetailsService** 에서 유저 정보를 가져옵니다.
+가져온 유저 정보를 자동으로 세션 만들어 줍니다.
+그 뒤에 **LoginSuccessHandler** 에서 성공적으로 로그인이 되었다면, 각 권한에 따라 response.sendRedirect 에 된 URL로 이동을 합니다.
+유저라면 메인화면으로, 관리자라면 관리자 페이지로 이동하게 설정이 되어있습니다.
+
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
 ---
