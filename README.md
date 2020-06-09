@@ -50,7 +50,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 #코드 설명 (기능)   
 스프링 보안 (Spring security) Dependency 설정
 ```
-<dependency>
+                 <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>5.3.3.RELEASE</version>
@@ -76,4 +76,20 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 			<artifactId>spring-security-test</artifactId>
 			<version>5.3.3.RELEASE</version>
 		</dependency>
+```
+그 다음
+**Security-context.xml** 에서 설정을 해줘야 Spring Security 를 사용 할 수 있다.
+```
+	
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security 
+	http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	...생략
 ```
