@@ -247,8 +247,8 @@ Controller 의 @GetMapping / @PostMapping 에 action에 적힌 문자( 예: /sig
 	}
 ```
 여기서 BCPE.encode(-) 는 암호화 입니다.
-그것을 객체 MemberVO 의 UserPw에 다시 초기화를 해준 뒤,
-~~회원가입 떄 입력 한 userid, useremail, userpw 은 자동적으로 객체 MemberVO에 Set 됩니다.~~
+그것을 객체 MemberVO 의 UserPw에 다시 초기화를 해준 뒤,  
+~~회원가입 떄 입력 한 userid, useremail, userpw 은 자동적으로 객체 MemberVO에 Set 됩니다.~~  
 Oracle DataBase 의 Member 테이블에 넣어주는 SQL문을 실행 합니다.
 
 ```
