@@ -729,7 +729,7 @@ public interface ReplyMapper {
   ---
   
   
-  7.로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 확인 기능 및 코드 설명
+  7.로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 기능 및 코드 설명
   ---
 
 **AuthenticationProvider**
@@ -786,4 +786,45 @@ create or replace PROCEDURE updates
     update inlog set fail_count = 0 where userid = ids ;
 commit;
 end updates;
+```
+**예약 횟수 카운트 **
+**UserController**
+```
+@Controller
+@RequestMapping(value="/users/*", method = {RequestMethod.GET,RequestMethod.POST})
+public class UserController {
+
+		...생략...
+
+	@GetMapping("/Reservation")
+	public void Reservation(String userid, Model model, Criteria cri) {
+		
+		...생략...
+		
+		//다중 파라미터를 mybatis로 보낼떄 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("userid", userid);
+		map.put("pageNum" , cri.getPageNum());
+		map.put("amount", cri.getAmount());
+
+		model.addAttribute("count",rst.count(userid));
+		
+		...생략...
+	}
+}
+```
+**ResTableMapper**
+```
+	...생략...
+	
+<select id="pageList" parameterType="hashmap" resultType="com.rental.domain.ResTableVO">
+<![CDATA[	
+	select B.* from ( select /*+ index_desc (res_table res_table_pk )*/  rownum r, A.* from 
+	(
+	select/*+ index_desc (res_table res_table_pk )*/
+		rownum rn, res_table.* from res_table
+	) A
+	where rn > (#{pageNum}-1)*#{amount} and userid = #{userid}  ) B where r <= #{pageNum} * #{amount} 
+]]>
+</select>
 ```
