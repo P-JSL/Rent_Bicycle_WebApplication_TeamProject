@@ -1,29 +1,36 @@
-#프로젝트 시작일  
+프로젝트 시작일 
+---
 2020/05/04 ~   
-#완성일
+완성일
+---
 미정
 ---
-#프로젝트 이름#
- - 자전거 대여 홈페이지
+프로젝트 이름
+---
+- 자전거 대여 홈페이지
  ---
- #프로젝트 인원 및 팀원
-  - 신기연, 주장익, 김준영, 성기원, 간예은 (총 5명)  
+프로젝트 인원 및 팀원
+---
+ - 신기연, 주장익, 김준영, 성기원, 간예은 (총 5명)  
   
- #맡은 기능  
+ 맡은 기능  
+---
   - 주장익 : 물품 예약, 등록 기능 및 상세페이지 UI  
   - 신기연 : Security 를 이용한 전체적인 보안 및 로그인/로그아웃/회원가입 등 전반적인 틀  
   - 성기원 : 유저 게시판 등록, 삭제, 수정 등 CRUD 기능 외  +@  
   - 간예은 : 유저 마이페이지의 전체적인 기능 및 메인 UI 수정 등  
   - 김준영 : 
  ---
-#사용한 언어 및 프레임워크  
- - HTML5, CSS3, JS, JQUERY, AJAX (FRONT END)
+사용한 언어 및 프레임워크  
+---
+- HTML5, CSS3, JS, JQUERY, AJAX (FRONT END)
  - JAVA, JSP (BACKEND)
  - SPRING, SPRING-SECURITY (Spring FrameWork ) 
  - Oracle DataBase (11g) , Mybatis (마이바티스)
  ---
  
-#사용한 기능   
+사용한 기능  
+---
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
  - Ajax를 이용하여 회원 실시간 관리 기능  
@@ -40,14 +47,15 @@
  - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력  
  - Mybatis를 이용한 CRUD  + @ 
  ---
-#프로젝트 흐름  
+프로젝트 흐름 
+---
 _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ---
 #수정사항
 
 ---
 
-#코드 설명 (기능)   
+코드 설명 (기능)   
 ---
 1.스프링 시큐리티를 이용한 로그인, 회원가입 설명 과 세팅 
 ---   
@@ -285,8 +293,8 @@ MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
    이러한 흐름대로 되며, 회원가입이 정상적으로 됩니다.
 ---
 
-#로그인 코드 설명   
-===
+1-2.로그인 코드 설명   
+---
 **CustomLogin.jsp** 내의 로그인 Form 코드
 ```
 <form class="login100-form validate-form" action="/login"
