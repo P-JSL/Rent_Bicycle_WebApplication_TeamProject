@@ -6,15 +6,17 @@
 #프로젝트 이름#
  - 자전거 대여 홈페이지
  ---
+ #프로젝트 인원 및 팀원
  
+ ---
 #사용한 언어 및 프레임워크  
  - HTML5, CSS3, JS, JQUERY, AJAX (FRONT END)
  - JAVA, JSP (BACKEND)
- - SPRING, SPRING-MVC, SPRING-SECURITY (Spring FrameWork ) 
+ - SPRING, SPRING-SECURITY (Spring FrameWork ) 
  - Oracle DataBase (11g) , Mybatis (마이바티스)
  ---
  
-#사용한 기능  
+#사용한 기능   
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
  - Ajax를 이용하여 회원 실시간 관리 기능  
