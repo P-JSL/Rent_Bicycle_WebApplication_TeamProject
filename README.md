@@ -47,3 +47,4 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 
 ---
 
+#코드 설명 (기능)
