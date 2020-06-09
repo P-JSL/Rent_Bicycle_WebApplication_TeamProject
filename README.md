@@ -284,3 +284,50 @@ MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
 ---
+**forgot.jsp** 의 Ajax
+```
+<script type="text/javascript">
+		$(function() {
+			var csrfHeaderName = "${_csrf.headerName}";
+			var csrfTokenValue = "${_csrf.token}";
+			$(document).ajaxSend(function(e, xhr, options) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			})
+			$("#submit").on(
+					"click",
+					function() {
+						if (!$("input[name='userid']").val()) {
+							alert("아이디를 입력해주세요.");
+							return false;
+						}
+						if (!$("input[name='userpw']").val()) {
+							alert("비밀번호를 입력해주세요.");
+							return false;
+						}
+						let userid = $("input[name='userid']").val();
+						let userpw = $("input[name='userpw']").val();
+						$.ajax({
+							url : "/forgot/reset",
+							type : 'POST',
+							data : JSON.stringify({
+								"userid" : userid,
+								"userpw" : userpw
+							}),
+							dataType : "text",
+							contentType : "application/json; charset=UTF-8",
+							processData : false,
+							success : function(result) {
+
+								$(opener.document).find("#change").text(
+										"정상적으로 비밀번호가 변경되었습니다.");
+								self.close();
+								return;
+
+							},
+							error : function(req, status, error) {
+								console.log("req" + req + "status " + status
+										+ " error " + error);
+							}
+						})
+					})
+```
