@@ -214,8 +214,8 @@ public interface MemberMapper {
 		(#{userid} , 'ROLE_USER' )
 	</insert>
 
-...
+	... 생략
 ```
 ---
-2.비밀번호 변경 및 아이디 찾기
+2.비밀번호 변경 및 아이디 찾기 기능
 ---
