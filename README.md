@@ -65,7 +65,6 @@
  +4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)   
  +5. Mapper는 Mapper.xml과 Mapper Interface와 이름(인터페이스 명 == xml 명) 이 같아야 한다.   
  +6. 여기서, Mapper.xml은 실질적인 쿼리문을 작성 하게 된다.    
-    작성 방식 > 
     ```
     <mapper namespace="com.xxx.mapper.Mapper">   
     	<select id="xxx" resultType="com.xxx.domain.xxxVO">   
