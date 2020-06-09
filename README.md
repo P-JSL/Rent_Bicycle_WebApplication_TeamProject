@@ -765,8 +765,18 @@ log.info("성공적인 로그인");
 
 ...생략...
 ```
-**로그인 실패 횟수 누적 프로시저 (Procedure)**
+**mapper.FullfailCount 에 사용한 로그인 실패 횟수 누적 프로시저 (Procedure) 및 mapper.xml 코드**
 ```
+mapper.xml 코드
+
+...생략...
+<update id="FullFailCount">
+call updates 
+( #{userid} )
+</update>
+...생략...
+
+프로시저 코드 
 create or replace PROCEDURE updates
 (  ids IN inlog.userid%type )
    is
