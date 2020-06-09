@@ -108,16 +108,6 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 **Web.xml** 추가 설정
 ```
 	<filter>
-		<display-name>springMultipartFilter</display-name>
-		<filter-name>springMultipartFilter</filter-name>
-		<filter-class>org.springframework.web.multipart.support.MultipartFilter
-		</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springMultipartFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
 		</filter-class>
@@ -483,14 +473,78 @@ Jsp의 Ajax --> Controller --> Service --> DB 로 갑니다.
 
 
 ---
+  
+  3.물품 등록 및 물품 예약 & 확인 기능 및 코드 설명
+  ---
+  물품 등록은 **관리자** 가 하게 됩니다.    
+  그렇지만, 물품 예약과 예약 된 물품을 확인하는 것은 **사용자** 입니다.
+  순차대로 작성 하겠습니다.   
+  
+  **ProductController**
+  ```
+  @Controller
+@Log4j
+@RequestMapping(value = "/product/*")
+public class ProductControll {
 
-  3.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
+	@GetMapping("/write")
+	public void productregister() {
+		log.info("product writing");
+
+	}
+	
+	...생략
+	
+	@PostMapping("/write")
+	public String productregisterAction(ProductVO product, RedirectAttributes rttr) {
+		log.info("productregisterAction");
+
+		MultipartFile multipartFile = product.getGoodsfile();
+		
+		...생략
+		
+		service.insert(product);
+		rttr.addFlashAttribute("result", product.getNum());
+		return "redirect:/product/product";
+	}
+}
+  ```
+  **SPRING SECURITY** 에서 파일을 첨부하려면 설정을 추가 해줘야 합니다.
+  
+  **Web.xml** 에서    
+  ```
+  <filter>
+	<display-name>springMultipartFilter</display-name>
+	<filter-name>springMultipartFilter</filter-name>
+	<filter-class>org.springframework.web.multipart.support.MultipartFilter
+	</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>springMultipartFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+  ```
+  이것을 
+  ```
+<filter>
+	<filter-name>springSecurityFilterChain</filter-name>
+	<filter-class>org.springframework.web.filter.DelegatingFilterProxy
+	</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>springSecurityFilterChain</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+  ```
+  앞에 추가를 해주어야 재대로 정상 작동 하게 됩니다.
+  
+  
   ---
-  4.Ajax를 이용하여 회원 실시간 관리 기능 및 코드 설명
+  4.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
   ---
-  5.관리자 페이지와 유저 마이페이지에서 전체 관리 기능 및 코드 설명
+  5.Ajax를 이용하여 회원 실시간 관리 기능 및 코드 설명
   ---
-  6.물품 등록 및 물품 예약 & 확인 기능 및 코드 설명
+  6.관리자 페이지와 유저 마이페이지에서 전체 관리 기능 및 코드 설명
   ---
   7.로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 확인 기능 및 코드 설명
   ---
