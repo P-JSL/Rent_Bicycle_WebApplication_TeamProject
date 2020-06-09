@@ -503,8 +503,13 @@ public class ProductControll {
 		
 		...생략
 		
+		try {
+			multipartFile.transferTo(saveFile);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		
 		service.insert(product);
-		rttr.addFlashAttribute("result", product.getNum());
 		return "redirect:/product/product";
 	}
 }
@@ -537,7 +542,28 @@ public class ProductControll {
 </filter-mapping>
   ```
   앞에 추가를 해주어야 재대로 정상 작동 하게 됩니다.
-  
+ ```
+ @Service
+@AllArgsConstructor
+public class ProductServiceImpl implements ProductService {
+
+	...생략
+	@Override
+	public void insert(ProductVO pvo) {
+		// TODO Auto-generated method stub
+		mapper.insert(pvo);
+	}
+	
+	...생략
+}
+ ```
+그 뒤, 컨트롤러에서  Service 로 넘어오고, 이 서비스에서 다시 Mapper를 호출하여 DB에 저장을 하게 됩니다.
+```
+public interface ProductMapper {
+		public void insert(ProductVO pvo);
+}
+```
+ 
   
   ---
   4.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
