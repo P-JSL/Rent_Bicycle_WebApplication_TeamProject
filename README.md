@@ -118,10 +118,8 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 **CustomLogin.JSP Page**에서 Form Tags
 ```
-<form class="login100-form validate-form" action="/signup"
-					method="post" onsubmit="return checkAccount()">
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token }">
+<form class="login100-form validate-form" action="/signup" method="post" onsubmit="return checkAccount()">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
 ```
 여기서 
 ```
@@ -129,4 +127,30 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 는 **Method='POST'** 일 떄는 무조건 사용 해야 **Security** 에서 정상적으로 작동 하여 Request로 허가를 보냅니다.
 그 후에 **action="/signup"** 의 URL이 적힌 Controller 로 이동 합니다.
+
+**Controller** 에서는 
+**URL이 /signup** 인 곳에 Request Mapping 되어 요청을 합니다.
+이유는 **Method='POST'** 이기 떄문에 
+```
+@GetMapping 
+```
+이 아닌 
+```
+@PostMapping
+```
+으로 갑니다.
+```
+	@PostMapping("/signup")
+	public String signup(MemberVO memvo) throws UnsupportedEncodingException, SQLException {
+		log.info("error : " + memvo);
+		if (service.signup(memvo)) {
+			service.Account_loginto(memvo.getUserid());
+			log.info("sign up success");
+		} else {
+			trans.rollback();
+			return "redirect:/signup";
+		}
+		return "redirect:/CustomLogin";
+	}
+```
 
