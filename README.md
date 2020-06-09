@@ -127,4 +127,6 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ```
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token }">
 ```
----
+는 **Method='POST'** 일 떄는 무조건 사용 해야 **Security** 에서 정상적으로 작동 하여 Request로 허가를 보냅니다.
+그 후에 **action="/signup"** 의 URL이 적힌 Controller 로 이동 합니다.
+
