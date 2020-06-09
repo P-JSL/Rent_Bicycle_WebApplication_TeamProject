@@ -48,7 +48,10 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 ---
 
 #코드 설명 (기능)   
-스프링 보안 (Spring security) Dependency 설정
+---
+1.스프링 시큐리티를 이용한 로그인, 회원가입 기능 설명 과 세팅 
+---   
+#스프링 보안 (Spring security) Dependency 설정
 ```
                  <dependency>
 			<groupId>org.springframework.security</groupId>
@@ -91,3 +94,27 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 	
 	...생략
 ```
+**Web.xml*** 추가 설정
+```
+	<filter>
+		<display-name>springMultipartFilter</display-name>
+		<filter-name>springMultipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springMultipartFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+```
+
+===
