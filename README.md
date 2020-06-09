@@ -378,11 +378,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 }
 ```
 
-로그인을 하면, Login.jsp 에서 Security Filter를 거쳐서 위의 순서처럼
-**AuthenticationProvider** 에서 먼저 DB에서 유저의 권한을 체크 하고나서 **UserDetailsService** 에서 유저 정보를 가져옵니다.
-가져온 유저 정보를 자동으로 세션 만들어 줍니다.
-그 뒤에 **LoginSuccessHandler** 에서 성공적으로 로그인이 되었다면, 각 권한에 따라 response.sendRedirect 에 된 URL로 이동을 합니다.
-유저라면 메인화면으로, 관리자라면 관리자 페이지로 이동하게 설정이 되어있습니다.
+로그인을 하면, Login.jsp 에서 Security Filter를 거쳐서 위의 순서처럼   
+**AuthenticationProvider** 에서 먼저 DB에서 유저의 권한을 체크 하고나서 **UserDetailsService** 에서 유저 정보를 가져옵니다.   
+가져온 유저 정보를 자동으로 세션 만들어 줍니다.   
+그 뒤에 **LoginSuccessHandler** 에서 성공적으로 로그인이 되었다면, 각 권한에 따라 response.sendRedirect 에 된 URL로 이동을 합니다.   
+유저라면 메인화면으로, 관리자라면 관리자 페이지로 이동하게 설정이 되어있습니다.   
 
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
@@ -476,7 +476,7 @@ public ResponseEntity<String> FindId(@RequestBody String recommend, HttpServletR
 		return mapper.FindId(mvo);
 	}
 ```
-Jsp의 Ajax --> Controller의 ResponseBody --> Service --> DB 로 갑니다.
+Jsp의 Ajax --> Controller --> Service --> DB 로 갑니다.
 
 그래서 아이디를 찾을 떄는 아이디를 찾아서 반환해주고   
 비밀번호를 바꿀떄는 재차 암호화를 한 뒤에 바뀐 비밀번호를 반환 해주어 유저가 알 수 있도록 화면에 띄워주게 됩니다.
