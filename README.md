@@ -246,7 +246,19 @@ Controller 의 @GetMapping / @PostMapping 에 action에 적힌 문자( 예: /sig
 		return mapper.insert_auth(mvo) == 1 ? true : false;
 	}
 ```
-여기서 BCPE.encode(~~)
+여기서 BCPE.encode(-) 는 암호화 입니다.
+그것을 객체 MemberVO 의 UserPw에 다시 초기화를 해준 뒤,
+~~회원가입 떄 입력 한 userid, useremail, userpw 은 자동적으로 객체 MemberVO에 Set 됩니다.~~
+Oracle DataBase 의 Member 테이블에 넣어주는 SQL문을 실행 합니다.
+
+```
+<insert id="insert">
+		insert into tbl_member (userid, userpw, username,
+		regdate, enabled, useremail) values
+		(#{userid}, #{userpw}, '일반사용자'
+		,sysdate,0, #{useremail})
+	</insert>
+```
 
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
