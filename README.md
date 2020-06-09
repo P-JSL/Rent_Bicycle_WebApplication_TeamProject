@@ -167,6 +167,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 	}
 ```
 먼저 아래에 실행되는 순서대로 코드를 보여주고 설명 하겠습니다.
+
 **MemberVO**
 ```
 @Getter
