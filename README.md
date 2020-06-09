@@ -565,7 +565,6 @@ public interface ProductMapper {
 		public void insert(ProductVO pvo);
 }
 ```
----
    <h3>3-2 물품  코드 설명</h3>
   
   
