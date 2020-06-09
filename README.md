@@ -820,7 +820,7 @@ create or replace PROCEDURE updates
 commit;
 end updates;
 ```
-**예약 횟수 카운트 **
+**예약 횟수 카운트**
 **UserController**
 ```
 @Controller
