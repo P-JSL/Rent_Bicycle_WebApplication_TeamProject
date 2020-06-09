@@ -306,7 +306,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	log.debug("AuthenticationProvider :::::: 1");
 
 	CustomUser user = (CustomUser) service.loadUserByUsername(username);
-	log.info("성공적인 로그인");
 	
 	...생략
 	
@@ -732,3 +731,37 @@ public interface ReplyMapper {
   
   7.로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 확인 기능 및 코드 설명
   ---
+
+**AuthenticationProvider**
+**로그인 할 떄, 요청을 가로채서 AuthenticationProvider 에서 먼저 처리를 한다**
+**로그인 및 누적 실패 등을 알려주는 코드**
+```
+		...생략...
+
+if (!pass.matches(password, user.getPassword())) {
+			log.debug("matchPassword :::::::: false!");
+			mapper.UserLoginFail(user.getUsername());
+			throw new BadCredentialsException(ACCOUNT_NOT_PASSWORD_ERROR);
+		}
+		if (mapper.UserLogInfo(user.getUsername()).getFail_count() >= 10) {
+			log.debug("계정 잠금");
+			mmapper.DisEnabled(user.getUsername());
+			throw new LockedException(ACCOUNT_DISENABLE_ERROR);
+		}
+
+		log.debug("User Enabled : " + user.isEnabled());
+		log.debug("User Enabled : " + user.isAccountNonLocked());
+		
+
+		if (!user.isEnabled()) {
+			log.debug("isEnabled :::::::: false!");
+			log.info("이메일 인증을 해주시길 바랍니다.");
+			throw new DisabledException(ACCOUNT_NOT_EMAIL_AUTH);
+		}
+
+		log.debug("matchPassword :::::::: true!");
+		mapper.FullFailCount(user.getUsername());
+		log.info("성공적인 로그인");
+		
+		...생략...
+```
