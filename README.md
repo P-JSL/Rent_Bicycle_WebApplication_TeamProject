@@ -56,15 +56,15 @@
 -스프링 Serucity :
 
 ---
-#스프링 프레임워크 기초
-
+스프링 프레임워크 기초
+--
 -0. 먼저 스프링 기본 세팅 (log4j, DataSource -DB연동, ) 등을 다 하기.   
- +1. View ( .jsp) 의 Form에서 처리 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
- +2. 맵핑된 Controller 에서 Action속성으로 보내져 온 데이터 (ID,PW등) 을 가지고 처리 할 준비를 함.   
- +3. Controller에서 처리를 하지 않고, Service를 주입 받아 Service 단에서 처리를 진행 한다.   
- +4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)   
- +5. Mapper는 Mapper.xml과 Mapper Interface와 이름(인터페이스 명 == xml 명) 이 같아야 한다.   
- +6. 여기서, Mapper.xml은 실질적인 쿼리문을 작성 하게 된다.
+ -1. View ( .jsp) 의 Form에서 처리 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
+ -2. 맵핑된 Controller 에서 Action속성으로 보내져 온 데이터 (ID,PW등) 을 가지고 처리 할 준비를 함.   
+ -3. Controller에서 처리를 하지 않고, Service를 주입 받아 Service 단에서 처리를 진행 한다.   
+ -4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)   
+ -5. Mapper는 Mapper.xml과 Mapper Interface와 이름(인터페이스 명 == xml 명) 이 같아야 한다.   
+ -6. 여기서, Mapper.xml은 실질적인 쿼리문을 작성 하게 된다.
  ```
     <mapper namespace="com.xxx.mapper.Mapper">   
     	<select id="xxx" resultType="com.xxx.domain.xxxVO">   
@@ -73,10 +73,10 @@
     </mapper>   
     
  ```
- +7. 이렇게 Service 단에서 DB와 연동 된 mapper 를 처리 받은 데이터 (반환 데이터-return data)를 다시 Controller에 돌려주게 된다.   
-    +8. Controller에서는 반환 되어 온 데이터를 다시 View에 뿌려줘야 한다. 만약 반환 된 데이터가 없으면 안해주어도 무관하다. 하지만 사용자가 그것이 재대로 되었는지 확인을 하려 한다면, update, delete와 같은 작업을 할 떄는 int형으로 반환을 하기 떄문에, 삼항 연산자를 이용하여 true/false 를 만들어 반환해서 확인하게 하면 된다.   
-    +9. Controller 에서 View로 반환 할 떄는 Servlet과는 다르게 Model객체를 이용하여 반환 해준다.   
-    +10 Model 객체로 반환 되어진 데이터는 View단에서 C core 태그와 같이 사용할 수 있고, 단일 객체 혹은 단일 변수만을 반환 하였다면, ${변수명} 혹은 ${객체명.변수명} 이렇게 써주면 된다.   
+ -7. 이렇게 Service 단에서 DB와 연동 된 mapper 를 처리 받은 데이터 (반환 데이터-return data)를 다시 Controller에 돌려주게 된다.   
+ -8. Controller에서는 반환 되어 온 데이터를 다시 View에 뿌려줘야 한다. 만약 반환 된 데이터가 없으면 안해주어도 무관하다. 하지만 사용자가 그것이 재대로 되었는지 확인을 하려 한다면, update, delete와 같은 작업을 할 떄는 int형으로 반환을 하기 떄문에, 삼항 연산자를 이용하여 true/false 를 만들어 반환해서 확인하게 하면 된다.   
+ -9. Controller 에서 View로 반환 할 떄는 Servlet과는 다르게 Model객체를 이용하여 반환 해준다.   
+ -10 Model 객체로 반환 되어진 데이터는 View단에서 C core 태그와 같이 사용할 수 있고, 단일 객체 혹은 단일 변수만을 반환 하였다면, ${변수명} 혹은 ${객체명.변수명} 이렇게 써주면 된다.   
  
 ---
 
