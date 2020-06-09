@@ -434,7 +434,7 @@ $("#submit").on("click",function() {
 </script>
 ```
 
-**MainController - Ajax **
+**MainController - Ajax**
 ```
 @ResponseBody
 @PostMapping(value = "/forgot/reset", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -476,6 +476,13 @@ public ResponseEntity<String> FindId(@RequestBody String recommend, HttpServletR
 		return mapper.FindId(mvo);
 	}
 ```
+Jsp의 Ajax --> Controller의 ResponseBody --> Service --> DB 로 갑니다.
+
+그래서 아이디를 찾을 떄는 아이디를 찾아서 반환해주고   
+비밀번호를 바꿀떄는 재차 암호화를 한 뒤에 바뀐 비밀번호를 반환 해주어 유저가 알 수 있도록 화면에 띄워주게 됩니다.
+
+
+---
 
   3.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
   ---
