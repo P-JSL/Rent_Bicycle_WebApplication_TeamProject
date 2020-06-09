@@ -293,7 +293,7 @@ Oracle DataBase 의 Member 테이블에 넣어주는 SQL문을 실행 합니다.
 ```
 MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서   
 #{파라미터} 에 자동적으로 들어가서 SQL문을 실행합니다.   
- - 위의 mapper.insert_auth도 마찬가지로 작동을 하는 서비스 로직입니다.
+ - 위의 mapper.insert_auth도 마찬가지로 작동을 하며, 권한을 부여해주는 서비스 로직입니다.
    이러한 흐름대로 되며, 회원가입이 정상적으로 됩니다.
 ---
 
@@ -431,4 +431,23 @@ $(function() {
 			}
 		})
 	})
+</script>
 ```
+여기서, Ajax의 기본 문법은
+
+```
+<script>
+$.ajax({
+			url : URL 경로,
+			type : 'POST'/ 'GET',
+			data : 데이터 정보,
+			dataType : "데이터 타입", \\json 등
+			contentType : "컨텐츠 타입"
+			success : function(data) {
+			},
+			error : function(req, status, error) {
+			}
+		})
+</script>
+```
+입니다.
