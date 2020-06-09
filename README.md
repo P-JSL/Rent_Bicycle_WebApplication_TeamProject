@@ -459,6 +459,24 @@ public ResponseEntity<String> FindId(@RequestBody String recommend, HttpServletR
 }
 ```
 
+**ServiceImpl**
+```
+@Override
+	public String Reset(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		String userpw = BCPE.encode(mvo.getUserpw());
+		mvo.setUserpw(userpw);
+		mapper.Reset(mvo);
+		return mvo.getUserpw();
+	}
+	
+@Override
+	public MemberVO FindId(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		return mapper.FindId(mvo);
+	}
+```
+
   3.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
   ---
   4.Ajax를 이용하여 회원 실시간 관리 기능 및 코드 설명
