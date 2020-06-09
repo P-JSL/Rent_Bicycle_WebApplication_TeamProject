@@ -80,8 +80,6 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 그 다음
 **Security-context.xml** 에서 설정을 해줘야 Spring Security 를 사용 할 수 있다.
 ```
-	
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
