@@ -49,9 +49,12 @@
  - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력  
  - Mybatis를 이용한 CRUD  + @ 
  ----
-프로젝트 흐름 
+스프링 MVC와 스프링 Security 
 ---
-_-> JSP - Controller - Service - Mapper(Mybatis) - DB_
+스프링 MVC 패턴  :
+
+스프링 Serucity :
+
 ---
 #수정사항
 
