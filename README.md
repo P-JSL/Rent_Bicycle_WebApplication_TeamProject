@@ -1,12 +1,12 @@
 Pre Start explan  
- This project is starting korea language.
+ -This project is starting korea language.  
  this project is you see uncomfortable 
 ---
  PROJECT Title  
- Rent Bicycle HomePage _Jsl Team Project
+ -Rent Bicycle HomePage _Jsl Team Project
 ---
 Getting Start  
- These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+ -These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 ---
 Version  
  This project isn't deloyment. so version is zero.
