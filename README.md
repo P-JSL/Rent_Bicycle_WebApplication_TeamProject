@@ -739,29 +739,29 @@ public interface ReplyMapper {
 		...생략...
 
 if (!pass.matches(password, user.getPassword())) {
-			log.debug("matchPassword :::::::: false!");
-			mapper.UserLoginFail(user.getUsername());
-			throw new BadCredentialsException(ACCOUNT_NOT_PASSWORD_ERROR);
-		}
-		if (mapper.UserLogInfo(user.getUsername()).getFail_count() >= 10) {
-			log.debug("계정 잠금");
-			mmapper.DisEnabled(user.getUsername());
-			throw new LockedException(ACCOUNT_DISENABLE_ERROR);
-		}
+	log.debug("matchPassword :::::::: false!");
+	mapper.UserLoginFail(user.getUsername()); \\<!--비밀번호 실패 시, 실패 횟수 증가 -->
+	throw new BadCredentialsException(ACCOUNT_NOT_PASSWORD_ERROR);
+}
+if (mapper.UserLogInfo(user.getUsername()).getFail_count() >= 10) {
+	log.debug("계정 잠금");
+	mmapper.DisEnabled(user.getUsername()); \\<!-- 비밀번호 10회 이상 실패 시, 계정 잠금 -->
+	throw new LockedException(ACCOUNT_DISENABLE_ERROR);
+}
 
-		log.debug("User Enabled : " + user.isEnabled());
-		log.debug("User Enabled : " + user.isAccountNonLocked());
-		
+log.debug("User Enabled : " + user.isEnabled());
+log.debug("User Enabled : " + user.isAccountNonLocked());
 
-		if (!user.isEnabled()) {
-			log.debug("isEnabled :::::::: false!");
-			log.info("이메일 인증을 해주시길 바랍니다.");
-			throw new DisabledException(ACCOUNT_NOT_EMAIL_AUTH);
-		}
 
-		log.debug("matchPassword :::::::: true!");
-		mapper.FullFailCount(user.getUsername());
-		log.info("성공적인 로그인");
-		
-		...생략...
+if (!user.isEnabled()) { \\<!-- 회원 가입 후, 이메일 인증이 안됬을 시, 이메일 인증을 하라는 메시지를 Customer에게 출력-->
+	log.debug("isEnabled :::::::: false!");
+	log.info("이메일 인증을 해주시길 바랍니다."); 
+	throw new DisabledException(ACCOUNT_NOT_EMAIL_AUTH);
+}
+
+log.debug("matchPassword :::::::: true!");
+mapper.FullFailCount(user.getUsername()); \\<!--로그인이 성공적으로 되었을 시, 실패 횟수를 0으로 만들고, 누적 실패 횟수에 통합시킨다 -->
+log.info("성공적인 로그인");
+
+...생략...
 ```
