@@ -609,7 +609,7 @@ public void insert(ConTactVO cvo) {
   5.Ajax를 이용하여 실시간 좋아요/싫어요 기능 및 코드 순서
   ---
   
-  ****
+ **Notice/View.jsp - Javascipt / Ajax **
   ```
   $("#commend #likes").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
