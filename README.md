@@ -1,14 +1,14 @@
-프로젝트 이름
+#프로젝트 이름
  - 자전거 대여 홈페이지
  ---
  
- #사용한 언어 및 프레임워크
+#사용한 언어 및 프레임워크
  - HTML, CSS, JS, JQUERY, AJAX (FRONT END)
  - JAVA, JSP, SPRING, SPRING-SECURITY (BACKEND)
  - Oracle DataBase (11g) , Mybatis (마이바티스)
  ---
  
- #사용한 기능
+#사용한 기능
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
  - Spring security 를 사용하여, 관리자/회원/비회원 권한 부여.
@@ -17,4 +17,5 @@
  - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력
  - 
  ---
- #사용한것
+#프로젝트 흐름
+-> JSP - Controller - Service - Mapper(Mybatis) - DB
