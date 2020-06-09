@@ -608,17 +608,16 @@ public void insert(ConTactVO cvo) {
   ---
   5.Ajax를 이용하여 실시간 좋아요/싫어요 기능 및 코드 순서
   ---
+  
+  ****
   ```
   $("#commend #likes").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
-	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
-	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
-	console.log(userid);
-	console.log(n_num);
-	var lik = $(this).parent().parent().find("#liking");
-	console.log(lik[0].innerText);
+
+	...생략
+	
 	$.ajax({
 		url : "/likes",
 		type : 'POST',
@@ -642,10 +641,9 @@ $("#commend li #hates").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
-	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
-	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
-	var lik = $(this).parent().parent().find("#hat");
-	console.log(lik[0].innerText);
+	
+	...생략
+	
 	$.ajax({
 		url : "/hates",
 		type : 'POST',
@@ -664,6 +662,68 @@ $("#commend li #hates").on("click",function(){
 		}
 	})
 });
+  ```
+  **Controller**
+  
+  ```
+  @Setter(onMethod_ = { @Autowired })
+	private ReplyService rs;
+
+  @ResponseBody
+	@PostMapping(value = "/likes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Object> likes(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		...생략
+		
+		 rs.likes(rvo) 
+		return new ResponseEntity<>(rs.Yreply(rvo), HttpStatus.OK);
+	}
+
+	@ResponseBody
+	@PostMapping(value = "/hates", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Object> hates(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		...생략
+		
+		 rs.hates(rvo);
+		return new ResponseEntity<>(rs.Yreply(rvo), HttpStatus.OK);
+	}
+  ```
+  **ReplyServiceImpl**
+  ```
+ @Service
+public class ReplyServiceImpl implements ReplyService {
+
+  @Override
+	public int hates(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return mapper.hates(rvo);
+	}
+	@Override
+	public int likes(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return mapper.likes(rvo);
+	}
+
+	@Override
+	public ReplyVO Yreply(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return mapper.Yreply(rvo);
+	}
+}
+  ```
+  **ReplyMapper**
+  ```
+  
+public interface ReplyMapper {
+	public int likes(ReplyVO rvo);
+
+	public int hates(ReplyVO rvo);
+
+	public ReplyVO Yreply(ReplyVO rvo);
+}
   ```
   
   6.관리자 페이지와 유저 마이페이지에서 전체 관리 기능 및 코드 순서
