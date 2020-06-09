@@ -569,9 +569,49 @@ public interface ProductMapper {
   ---
   4.예약 문의 기능 및 1 : 1 문의 기능 및 코드 설명
   ---
+  **Inquire.jsp**
+  
+  ```
+  <form class="form-contact contact_form" action="/contact/mail" method="post" id="contactForm" novalidate="novalidate">
+  <input type="hidden" value="${_csrf.token }" name="${_csrf.parameterName }">
+  ```
+  
+  **Controller**
+  ```
+@Setter(onMethod_ = { @Autowired })
+private ConTactService cs;
+
+@PostMapping("/contact/mail")
+public String mail(ConTactVO cvo) {
+	cs.insert(cvo);
+
+	return "redirect:/contact/contact";
+}
+  ```
+  **ConTactServiceImpl**
+  ```
+@Override
+public void insert(ConTactVO cvo) {
+	// TODO Auto-generated method stub
+	mapper.insert(cvo);
+}
+  ```
+  **ConTactMapper**
+  ```
+  public interface ConTactMapper {
+  
+	public void insert(ConTactVO cvo);
+	
+  ```
+  
+  
   5.Ajax를 이용하여 회원 실시간 관리 기능 및 코드 설명
   ---
+  
+  
   6.관리자 페이지와 유저 마이페이지에서 전체 관리 기능 및 코드 설명
   ---
+  
+  
   7.로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 확인 기능 및 코드 설명
   ---
