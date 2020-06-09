@@ -74,7 +74,7 @@
 ![05](https://user-images.githubusercontent.com/64994827/84134859-2c11f200-aa84-11ea-8129-969448bb59bf.png)
  - 3. Controller에서 처리를 하지 않고, Service를 주입 받아 Service 단에서 처리를 진행 한다.   
  ![03](https://user-images.githubusercontent.com/64994827/84134856-2ae0c500-aa84-11ea-9afd-b0cb352146bb.png)
- - 4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)
+ - 4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)    
  ![04](https://user-images.githubusercontent.com/64994827/84134857-2b795b80-aa84-11ea-9d0b-1e4bec71870f.png)
  - 5. Mapper는 Mapper.xml과 Mapper Interface와 이름(인터페이스 명 == xml 명) 이 같아야 한다.   
   ![02](https://user-images.githubusercontent.com/64994827/84134860-2c11f200-aa84-11ea-8367-3dcb1f47de18.png)
