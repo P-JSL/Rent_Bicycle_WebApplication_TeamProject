@@ -17,5 +17,5 @@
  - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력
  - 
  ---
-#프로젝트 흐름
+#프로젝트 흐름  
 -> JSP - Controller - Service - Mapper(Mybatis) - DB
