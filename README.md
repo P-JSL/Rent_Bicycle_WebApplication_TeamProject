@@ -21,12 +21,13 @@
  - Spring security 를 사용하여, 관리자/회원/비회원 권한 부여.
  - Spring security 를 사용한 로그인, 로그아웃 시 권한 인증을 통한 기능
  - ChatJs를 이용한 예약 날짜 & 사용한 금액 확인 기능
- - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력 
  - 관리자 페이지와 유저 마이페이지에서 전체 관리 기능
  - 마이페이지에서 로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 확인 기능
- - Q&A , 공지사항 ( 뎃글 기능 ) , 포토 리뷰 ( Spring security 상에서의 파일 업로드 기능 )
  - 물품 등록 및 물품 예약 & 확인 기능 
- - 예약 문의 기능(시스템) 및 1 : 1 문의 기능 (시스템)
+ - 예약 문의 기능 및 1 : 1 문의 기능 
+ - JS (Javascript) 를 이용해서 유효성 검사 기능
+ - Mybatis 를 이용하여 DB를 Dynamic sql 로 제어 및 데이터 저장/출력  
+ - Mybatis를 이용한 CRUD  + @ 
  ---
 #프로젝트 흐름  
 _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
