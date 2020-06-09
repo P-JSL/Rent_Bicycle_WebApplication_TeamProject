@@ -285,7 +285,14 @@ MemberVO의 객체에 저장된 변수가 Mapper.xml 에서 Mybatis에 의해서
  
  위의 흐름대로 되며, 회원가입이 정상적으로 됩니다.
  
- #1-2 로그인 코드 설명
+1-2 로그인 코드 설명
+**CustomLogin.jsp** 내의 로그인 Form 코드
+```
+<form class="login100-form validate-form" action="/login"
+				method="post">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token }"> 
+```
 ---
 2.비밀번호 변경 및 아이디 찾기 기능
 ---
