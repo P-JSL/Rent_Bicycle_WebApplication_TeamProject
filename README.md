@@ -57,7 +57,7 @@ _-> JSP - Controller - Service - Mapper(Mybatis) - DB_
 
 코드 설명 (기능)   
 ---
-1.스프링 시큐리티를 이용한 로그인, 회원가입 설명 과 세팅 
+1.스프링 시큐리티를 이용한 로그인, 회원가입  설명 과 세팅 
 ---   
 1-1. 회원가입의 코드 설명과 세팅
 #스프링 보안 (Spring security) Dependency 설정
