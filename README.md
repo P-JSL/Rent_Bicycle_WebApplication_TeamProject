@@ -31,7 +31,7 @@
  - Oracle DataBase (11g) , Mybatis (마이바티스)
  ---
  
-사용한 기능  
+프로젝트에 사용 된 기술 및 넣은 기능  
 ---
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
@@ -64,12 +64,20 @@
 ---
 스프링 프레임워크 기초
 --
+
+
+
+
 - 0. 먼저 스프링 기본 세팅 (log4j, DataSource -DB연동, ) 등을 다 하기.   
- - 1. View ( .jsp) 의 Form에서 처리 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
+ - 1. View ( .jsp) 의 Form에서 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
  - 2. 맵핑된 Controller 에서 Action속성으로 보내져 온 데이터 (ID,PW등) 을 가지고 처리 할 준비를 함.   
+![05](https://user-images.githubusercontent.com/64994827/84134859-2c11f200-aa84-11ea-8129-969448bb59bf.png)
  - 3. Controller에서 처리를 하지 않고, Service를 주입 받아 Service 단에서 처리를 진행 한다.   
- - 4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)   
+ ![03](https://user-images.githubusercontent.com/64994827/84134856-2ae0c500-aa84-11ea-9afd-b0cb352146bb.png)
+ - 4. Service에서는 DB와 연동 되어진 Mapper를 주입 받아서 DB와 직접 연동을 한다. (여기서 Mybatis를 사용 > xml에 설정을 해야 함)    
+ ![04](https://user-images.githubusercontent.com/64994827/84134857-2b795b80-aa84-11ea-9d0b-1e4bec71870f.png)
  - 5. Mapper는 Mapper.xml과 Mapper Interface와 이름(인터페이스 명 == xml 명) 이 같아야 한다.   
+  ![02](https://user-images.githubusercontent.com/64994827/84134860-2c11f200-aa84-11ea-8367-3dcb1f47de18.png)
  - 6. 여기서, Mapper.xml은 실질적인 쿼리문을 작성 하게 된다.
  ```
     <mapper namespace="com.xxx.mapper.Mapper">   
@@ -84,6 +92,72 @@
  - 9. Controller 에서 View로 반환 할 떄는 Servlet과는 다르게 Model객체를 이용하여 반환 해준다.   
  - 10 Model 객체로 반환 되어진 데이터는 View단에서 C core 태그와 같이 사용할 수 있고, 단일 객체 혹은 단일 변수만을 반환 하였다면, ${변수명} 혹은 ${객체명.변수명} 이렇게 써주면 된다.   
  
+---
+다양한 쿼리문 작성 방법
+---
+1.페이지네이션   
+```
+<![CDATA[	
+	 select * from 
+(
+select/*+ index_desc (ABCTable ABCTable_pk )*/
+rownum rn , a.* from ABCTable a
+where rownum <= #{pageNum} * #{amount}
+) 
+where rn > #{pageNum} * #{amount}
+]]>
+	<!-- 여기서 pageNum 은 페이지 번호 / amount 는 페이지당 보여줄 게시물 갯수 -->
+```
+2. 조회   
+```
+<!--ResultType : 반환 할 타입에 대해서 명시 ; 예) int, com.xxx.domain.oooVO , string 등-->
+<select id="xxx" resultType="OOO">
+	select * from TableName (Where ~ )
+	<!-- * 부분에는 Table속성 중 일부분을 넣어도 됨-->
+</select>
+```   
+
+3. 저장   
+```
+<insert id="xxx">
+	insert into TableName ( 변수/속성 )
+	values (값)  
+</insert>
+
+예시) 
+<insert id="abc">
+	insert into ABCTable (num, name, id)
+	values (sequence.nextval, #{name}, #{id})  
+</insert>
+
+```
+4. 삭제   
+```
+<delete id="xxx">
+	delete from TableName (where ~)
+</delete>
+<!--where을 안쓰면 모든 Table 내의 데이터를 삭제함-->
+```
+5. 수정   
+```
+<update id="xxx">
+	update TableName set 변수/속성 = #{변수/속성}
+</update>
+
+예시)   
+<update id="xxx">
+	update ABCTable set name = #{name}
+</update>
+
+```
+ - 부등호 등 을 사용 할 떄는 아래의 CDATA 사이에 값을 넣어주어야 한다.
+ ```
+ <![CDATA[
+ 	select * from XXXtable rownum > 0
+ ]]>
+ ```
+  만약 이렇게 하지 않고 실행을 하면 에러가 나온다.
+  
 ---
 
 코드 설명 (기능)   
@@ -812,7 +886,7 @@ create or replace PROCEDURE updates
 commit;
 end updates;
 ```
-**예약 횟수 카운트 **
+**예약 횟수 카운트**
 **UserController**
 ```
 @Controller
