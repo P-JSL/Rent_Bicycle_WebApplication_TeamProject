@@ -150,7 +150,13 @@ where rn > #{pageNum} * #{amount}
 </update>
 
 ```
- 
+ - 부등호 등 을 사용 할 떄는 아래의 CDATA 사이에 값을 넣어주어야 한다.
+ ```
+ <![CDATA[
+ 	select * from XXXtable rownum > 0
+ ]]>
+ ```
+  만약 이렇게 하지 않고 실행을 하면 에러가 나온다.
   
 ---
 
