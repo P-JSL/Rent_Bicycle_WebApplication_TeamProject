@@ -128,7 +128,7 @@ where rn > #{pageNum} * #{amount}
 </select>
 ```   
 
-- 3. 저장   
+- 3. 삽입(저장)   
 ```
 <insert id="xxx">
 	insert into TableName ( 변수/속성 )
