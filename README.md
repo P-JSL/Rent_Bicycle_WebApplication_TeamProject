@@ -93,6 +93,58 @@
  - 10 Model 객체로 반환 되어진 데이터는 View단에서 C core 태그와 같이 사용할 수 있고, 단일 객체 혹은 단일 변수만을 반환 하였다면, ${변수명} 혹은 ${객체명.변수명} 이렇게 써주면 된다.   
  
 ---
+다양한 쿼리문 작성 방법
+---
+1.페이지네이션   
+2. 조회   
+```
+<select id="xxx" resultType="OOO"> <!--ResultType : 반환 할 타입에 대해서 명시 ; 예) int, com.xxx.domain.oooVO , string 등-->
+	select * from TableName (Where ~ )
+	<!-- * 부분에는 Table속성 중 일부분을 넣어도 됨-->
+</select>
+```   
+ - 다른 방식   
+ ```
+ <resultMap>
+ 	
+ </resultMao>
+ ```
+3. 저장   
+```
+<insert id="xxx">
+	insert into TableName ( 변수/속성 )
+	values (값)  
+</insert>
+
+예시) 
+<insert id="abc">
+	insert into ABCTable (num, name, id)
+	values (sequence.nextval, #{name}, #{id})  
+</insert>
+
+```
+4. 삭제   
+```
+<delete id="xxx">
+	delete from TableName (where ~)
+</delete>
+<!--where을 안쓰면 모든 Table 내의 데이터를 삭제함-->
+```
+5. 수정   
+```
+<update id="xxx">
+	update TableName set 변수/속성 = #{변수/속성}
+</update>
+
+예시)   
+<update id="xxx">
+	update ABCTable set name = #{name}
+</update>
+
+```
+ 
+  
+---
 
 코드 설명 (기능)   
 ===
