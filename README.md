@@ -96,6 +96,18 @@
 다양한 쿼리문 작성 방법
 ---
 1.페이지네이션   
+```
+<![CDATA[	
+	 select * from 
+(
+select/*+ index_desc (ABCTable ABCTable_pk )*/
+rownum rn , a.* from ABCTable a
+where rownum <= #{pageNum} * #{amount}
+) 
+where rn > #{pageNum} * #{amount}
+]]>
+	<!-- 여기서 pageNum 은 페이지 번호 / amount 는 페이지당 보여줄 게시물 갯수 -->
+```
 2. 조회   
 ```
 <!--ResultType : 반환 할 타입에 대해서 명시 ; 예) int, com.xxx.domain.oooVO , string 등-->
@@ -104,7 +116,6 @@
 	<!-- * 부분에는 Table속성 중 일부분을 넣어도 됨-->
 </select>
 ```   
- - 다른 방식   
  ```
  <resultMap>
  	
