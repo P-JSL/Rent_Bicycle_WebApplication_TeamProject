@@ -98,7 +98,8 @@
 1.페이지네이션   
 2. 조회   
 ```
-<select id="xxx" resultType="OOO"> <!--ResultType : 반환 할 타입에 대해서 명시 ; 예) int, com.xxx.domain.oooVO , string 등-->
+<select id="xxx" resultType="OOO">
+<!--ResultType : 반환 할 타입에 대해서 명시 ; 예) int, com.xxx.domain.oooVO , string 등-->
 	select * from TableName (Where ~ )
 	<!-- * 부분에는 Table속성 중 일부분을 넣어도 됨-->
 </select>
