@@ -70,6 +70,17 @@
 
  - 0. 먼저 스프링 기본 세팅 (log4j, DataSource -DB연동, ) 등을 다 하기.   
  - 1. View ( .jsp) 의 Form에서 혹은 Ajax에서 처리 할 데이터를 URL (Form의 Action 속성) 으로 맵핑을 시킨다.  
+**jsp의 form태그에서의 mapping 설정**
+ ```
+ <form action="/abc" method="GET/POST"> 
+ 	<input type="text" name="id">
+	<input type="password" name="pw">
+	<input type="email" name="email">
+ </form>
+ <!-- action에 쓰여진 /abc 와 같은 Controller에 명시된 @GetMapping / @PostMapping ("/abc") 로 감-->
+ <!-- input 태그의 name 은, value값을 가져가는 변수. 이것은 Controller의 args 값 안에 자동적으로 들어간다.-->
+ <!-- 단, VO객체 내에 변수를 선언 해두고, getter/setter 이 만들어 진 상태에서 args 대신 객체VO로 넣어주면 자동으로 초기화가 된다.-->
+ ```
  - 2. 맵핑된 Controller 에서 Action속성으로 보내져 온 데이터 (ID,PW등) 을 가지고 처리 할 준비를 함.   
 ![05](https://user-images.githubusercontent.com/64994827/84134859-2c11f200-aa84-11ea-8129-969448bb59bf.png)
  - 3. Controller에서 처리를 하지 않고, Service를 주입 받아 Service 단에서 처리를 진행 한다.   
