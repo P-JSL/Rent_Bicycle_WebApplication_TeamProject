@@ -61,8 +61,6 @@
 <img src="https://user-images.githubusercontent.com/64994827/84133702-6da19d80-aa82-11ea-96d4-67bd44c99d2b.png"
  width="80%">   
 
-- 클래스 관계도
-![클래스관계도](https://user-images.githubusercontent.com/64994827/84218967-82c20f00-ab0a-11ea-99ae-0d5f21c9ff06.jpg)
 ---
 스프링 프레임워크 기초
 --
