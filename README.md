@@ -95,7 +95,7 @@
 ---
 다양한 쿼리문 작성 방법
 ---
-1. 페이지네이션   
+- 1. 페이지네이션   
 ```
 <![CDATA[	
 	 select * from 
@@ -108,7 +108,7 @@ where rn > #{pageNum} * #{amount}
 ]]>
 	<!-- 여기서 pageNum 은 페이지 번호 / amount 는 페이지당 보여줄 게시물 갯수 -->
 ```
-2. 조회   
+- 2. 조회   
 ```
 <!--ResultType : 반환 할 타입에 대해서 명시 ; 예) int, com.xxx.domain.oooVO , string 등-->
 <select id="xxx" resultType="OOO">
@@ -117,7 +117,7 @@ where rn > #{pageNum} * #{amount}
 </select>
 ```   
 
-3. 저장   
+- 3. 저장   
 ```
 <insert id="xxx">
 	insert into TableName ( 변수/속성 )
@@ -131,14 +131,14 @@ where rn > #{pageNum} * #{amount}
 </insert>
 
 ```
-4. 삭제   
+- 4. 삭제   
 ```
 <delete id="xxx">
 	delete from TableName (where ~)
 </delete>
 <!--where을 안쓰면 모든 Table 내의 데이터를 삭제함-->
 ```
-5. 수정   
+- 5. 수정   
 ```
 <update id="xxx">
 	update TableName set 변수/속성 = #{변수/속성}
