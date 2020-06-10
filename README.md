@@ -116,11 +116,7 @@ where rn > #{pageNum} * #{amount}
 	<!-- * 부분에는 Table속성 중 일부분을 넣어도 됨-->
 </select>
 ```   
- ```
- <resultMap>
- 	
- </resultMao>
- ```
+
 3. 저장   
 ```
 <insert id="xxx">
