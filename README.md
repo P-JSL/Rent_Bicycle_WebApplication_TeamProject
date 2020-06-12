@@ -192,7 +192,6 @@ where rn > #{pageNum} * #{amount}
 - 인증서 생성 (keytool 이용)
 ```
 keytool -genkey -alias [별칭] -keyalg RSA -keystore [저장할 파일명].jks
-
 ```
 - 인증서 추출 및 저장
 ```
