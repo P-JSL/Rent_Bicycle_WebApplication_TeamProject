@@ -183,7 +183,50 @@ where rn > #{pageNum} * #{amount}
   만약 이렇게 하지 않고 실행을 하면 에러가 나온다.
   
 ---
+인증서 적용 하는법 (https://)
+---
 
+- 인증서 생성 (keytool 이용)
+```
+keytool -genkey -alias [별칭] -keyalg RSA -keystore [저장할 파일명].jks
+
+```
+- 인증서 추출 및 저장
+```
+keytool -export -alias [별칭] -file [저장할 파일명].cer -keystore [생성한 jks파일]
+```
+- 인증서 확인
+```
+keytool -list -v -keystore [추출한 파일 jks명]
+```
+
+ - 톰켓 설정
+ ```
+ <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+               maxThreads="150" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" keystorePass="[생성한 인증서 비밀번호]" 
+               keystoreFile="[저장된 인증서 파일 경로]/[파일명]"/>
+```
+ - security-context.xml 설정
+ ```
+ <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" requires-channel="https" />
+이런식으로 requires-channel = "https" 를 적용 해준다.
+ ```
+ - Web.xml 설정
+ ```
+ <security-constraint>
+			<web-resource-collection>
+				<web-resource-name>SSL Redirect</web-resource-name>
+					<url-pattern>/*</url-pattern>
+				</web-resource-collection>
+			<user-data-constraint>
+		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+	</user-data-constraint>
+</security-constraint>
+
+ ```
+ 
+---
 코드 설명 (기능)   
 ===
 1.스프링 시큐리티를 이용한 로그인, 회원가입  설명 과 세팅 
