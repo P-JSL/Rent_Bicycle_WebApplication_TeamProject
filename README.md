@@ -1,3 +1,6 @@
+README.md
+>작성자 : 신기연
+---
 프로젝트 시작일 
 ---
 2020/05/04 ~  
@@ -192,7 +195,6 @@ where rn > #{pageNum} * #{amount}
 - 인증서 생성 (keytool 이용)
 ```
 keytool -genkey -alias [별칭] -keyalg RSA -keystore [저장할 파일명].jks
-
 ```
 - 인증서 추출 및 저장
 ```
@@ -212,7 +214,7 @@ keytool -list -v -keystore [추출한 파일 jks명]
 ```
  - security-context.xml 설정
  ```
- <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" requires-channel="https" />
+ <intercept-url pattern="/**" access="permitAll" requires-channel="https" />
 이런식으로 requires-channel = "https" 를 적용 해준다.
  ```
  - Web.xml 설정
