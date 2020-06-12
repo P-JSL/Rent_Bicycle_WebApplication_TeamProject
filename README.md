@@ -34,6 +34,8 @@
  
 프로젝트에 사용 된 기술 및 넣은 기능  
 ---
+ - Https 및 인증서 (kettool) 적용    
+ ![https](https://user-images.githubusercontent.com/64994827/84469843-f73caf80-acbc-11ea-87cd-8f674887e331.png)
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
  - Ajax를 이용하여 회원 실시간 관리 기능  
