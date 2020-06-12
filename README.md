@@ -185,6 +185,10 @@ where rn > #{pageNum} * #{amount}
 ---
 인증서 적용 하는법 (https://)
 ---
+- 인증서 적용 전 cmd 관리자 실행으로 가야 
+```
+![cmdlocation](https://user-images.githubusercontent.com/64994827/84470392-37e8f880-acbe-11ea-80c2-061d3b8d0f10.png)
+```
 
 - 인증서 생성 (keytool 이용)
 ```
