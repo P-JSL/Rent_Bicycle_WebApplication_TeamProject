@@ -318,8 +318,8 @@ input.btn {
 			<ul id="projects">
 				<c:forEach items="${list }" var="re">
 
-					<li id="p1" class="flipper"  >
-						<div class="front" >
+					<li id="p1" class="flipper">
+						<div class="front">
 							<img style="width: 100%" src="/upload/review/${re.photo }" alt="">
 						</div>
 						<div class="back">
@@ -366,10 +366,23 @@ input.btn {
 		</div>
 	</div>
 </div>
+<form action="/review/photo" method="get" id="photoForm">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+</form>
 <script
 	src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$(".pagination a").on("click", function(e) {
+		e.preventDefault();
+		var form = $("#photoForm");
+		let num = $(this).attr("href");
+		form.append("<input type='hidden' name='pageNum' value='"+num+"'>");
+		form.submit();
+	})
+</script>
 <script type="text/javascript">
 	$('#projects > li').hover(function() {
 		$(this).siblings().addClass('blur');

@@ -162,9 +162,10 @@ body {
 	<script src="/resources/product/script.js" charset="utf-8"></script>
 	<script type="text/javascript">
 		function insert(id, goods, n_num, price, goodsphoto) {
+			var pageNum = ${cri.pageNum};
 			location.href = "/product/reservation?userid=" + id + "&goods="
 					+ goods + "&n_num=" + n_num + "&price=" + price
-					+ "&goodsphoto=" + goodsphoto;
+					+ "&goodsphoto=" + goodsphoto +"&pageNum="+pageNum;
 		}
 	</script>
 

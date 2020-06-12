@@ -222,7 +222,7 @@ input.btn {
 
 									<td>${bno}</td>
 									<td><a
-										href="/board/view?sequence=${no.sequence }&userid=${no.userid}">${no.title }</a></td>
+										href="/board/view?sequence=${no.sequence }&userid=${no.userid}&pageNum=${pageMaker.cri.pageNum}">${no.title }</a></td>
 
 									<c:choose>
 										<c:when test="${no.userid eq 'althsuwpfl'}">

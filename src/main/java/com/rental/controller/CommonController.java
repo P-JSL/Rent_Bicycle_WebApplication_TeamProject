@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -170,7 +171,7 @@ public class CommonController {
 	private NoticeService noticeservice;
 
 	@GetMapping("/board/notice")
-	public String board(String userid, Model model, Criteria cri) {
+	public String board(String userid, Model model,@ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("userid", userid);
 		model.addAttribute("count", noticeservice.NoticeCount());
 		model.addAttribute("list", noticeservice.List(cri));
@@ -188,7 +189,7 @@ public class CommonController {
 
 	@PostAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/board/write")
-	public String board_insert(NoticeVO nvo) {
+	public String board_insert(NoticeVO nvo,@ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
 		noticeservice.insert(nvo);
 
 		return "redirect:/board/notice";
@@ -196,11 +197,12 @@ public class CommonController {
 
 	@PreAuthorize("permitAll")
 	@GetMapping("/board/view")
-	public String view(int sequence, Model model, String userid) {
+	public String view(int sequence, Model model, String userid, @ModelAttribute("cri") Criteria cri) {
 		noticeservice.viewcount(sequence);
 		model.addAttribute("vo", noticeservice.viewer(sequence));
 		model.addAttribute("userid", userid);
 		model.addAttribute("reply", rs.replyList(sequence));
+		model.addAttribute("cri",cri);
 		return "board/viewer";
 	}
 

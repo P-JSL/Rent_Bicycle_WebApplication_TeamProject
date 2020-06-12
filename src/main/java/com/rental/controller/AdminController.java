@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
@@ -48,11 +49,10 @@ public class AdminController {
 	@Setter(onMethod_ = { @Autowired })
 	private ProductService ps;
 
-	
 	Gson gson = new Gson();
 
 	@GetMapping("/index")
-	public void index(String userid, Model model, Criteria cri) {
+	public void index(String userid, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("welcome admin dashboard");
 
 		String DataToJson = gson.toJson(Chart.JsonData());
@@ -75,14 +75,14 @@ public class AdminController {
 	}
 
 	@GetMapping("/CommunityManager")
-	public void Manager(Model model, String userid) {
+	public void Manager(Model model, String userid, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("userid", userid);
 	}
 
 	@GetMapping("/product_manager")
-	public void product(String userid, Model model, Criteria cri) {
-		for(ProductVO pvo : ps.AllList()) {
-			if(pvo.getMany() == 0) {
+	public void product(String userid, Model model, @ModelAttribute("cri") Criteria cri) {
+		for (ProductVO pvo : ps.AllList()) {
+			if (pvo.getMany() == 0) {
 				ps.statusminus(pvo.getNum());
 			}
 		}
@@ -93,7 +93,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/notice")
-	public void notice(String userid, Model model, Criteria cri) {
+	public void notice(String userid, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("userid", userid);
 
 		model.addAttribute("list", ns.List(cri));
@@ -101,12 +101,12 @@ public class AdminController {
 	}
 
 	@GetMapping("/QnA")
-	public void Qna(String userid, Model model, Criteria cri, Criteria_c cri_c) {
+	public void Qna(String userid, Model model, @ModelAttribute("cri") Criteria cri, Criteria_c cri_c) {
 		model.addAttribute("userid", userid);
 		model.addAttribute("qa", qs.list(cri));
-		model.addAttribute("pageMaker" , new PageDTO(cri, qs.count()));
-		//Contact
-		model.addAttribute("cs",cs.List(cri_c) );
-		model.addAttribute("pageMaker_c",new PageDTO_c(cri_c, cs.count()));
+		model.addAttribute("pageMaker", new PageDTO(cri, qs.count()));
+		// Contact
+		model.addAttribute("cs", cs.List(cri_c));
+		model.addAttribute("pageMaker_c", new PageDTO_c(cri_c, cs.count()));
 	}
 }

@@ -84,6 +84,8 @@ body {
 				value="${_csrf.token}"> <input type="hidden" name="sequence"
 				value="${vo.sequence }">
 			<!-- <input type="hidden" value="save" name="t_gubun"> -->
+			<input type="hidden" name="pageNum" value="${ cri.pageNum }">
+			<input type="hidden" name="pageNum" value="${ cri.amount }">
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 
 			<fieldset>
@@ -150,7 +152,7 @@ body {
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-5 offset-lg-4 col-12 comment-main rounded">
+		<div class="col-lg-8 offset-lg-2 col-12 comment-main rounded">
 			<ul class="p-0" id="commend">
 				<c:forEach items="${reply }" var="re">
 
@@ -160,10 +162,10 @@ body {
 								style="vertical-align: middle; font-size: 1.3rem;" id="userid">${re.userid }</div>
 							<div class="col-lg-10 col-9 user-comment bg-light rounded pb-1">
 								<div class="row">
-									<div class="col-lg-10 col-8 border-bottom pr-0">
+									<div class="col-lg-8 col-8 border-bottom pr-0">
 										<p class="w-100 p-2 m-0">${re.comm }</p>
 									</div>
-									<div class="col-lg-2 col-4 border-bottom">
+									<div class="col-lg-4 col-4 border-bottom">
 										<p class="w-100 p-2 m-0">
 
 											<span class="float-right"><i
@@ -175,11 +177,13 @@ body {
 								<div class="user-comment-desc p-1 pl-2">
 									<p class="m-0 mr-2">
 										<span><i id="likes" class="fa fa-thumbs-up mr-1"
-											aria-hidden="true" style="color: blue;"></i></span> <span style="color: blue;" id="liking">${re.likes }</span>
+											aria-hidden="true" style="color: blue;"></i></span> <span
+											style="color: blue;" id="liking">${re.likes }</span>
 									</p>
 									<p class="m-0 mr-2">
 										<span><i id="hates" class="fa fa-thumbs-down mr-1"
-											aria-hidden="true" style="color: red;"></i></span> <span style="color: red;" id="hat">${re.hates }</span>
+											aria-hidden="true" style="color: red;"></i></span> <span
+											style="color: red;" id="hat">${re.hates }</span>
 									</p>
 								</div>
 								<input type="hidden" name="n_num" value="${re.num }" id="number">

@@ -187,7 +187,9 @@
 	</div>
 	<!-- /#wrapper -->
 	
-	<form id="actionForm" action="/users/Reservation" method="get"></form>
+	<form id="actionForm" action="/users/Reservation" method="get">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+	</form>
 	<!-- jQuery -->
 	<script
 		src="/resources/admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -162,23 +163,24 @@ input.btn {
 										</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${product }" var="pro">									
-										<tr>
-											<td>${pro.num }</td>
-											<td>${pro.goods }</td>
-											<td><img src="/upload/${pro.goodsphoto }" style="max-width: 120px;"></td>
-											<td>${pro.price }</td>
-											<td>${pro.category =='1' ? '일반' : '브랜드' }</td>
-											<td>${pro.status =='2' ? '○': pro.status == '1' ? '예약' : pro.status == '0' ? '렌탈중' : '' }</td>
-											<td>${pro.many }</td>
-										</tr>
-									</c:forEach>
+										<c:forEach items="${product }" var="pro">
+											<tr>
+												<td>${pro.num }</td>
+												<td>${pro.goods }</td>
+												<td><img src="/upload/${pro.goodsphoto }"
+													style="max-width: 120px;"></td>
+												<td>${pro.price }</td>
+												<td>${pro.category =='1' ? '일반' : '브랜드' }</td>
+												<td>${pro.status =='2' ? '○': pro.status == '1' ? '예약' : pro.status == '0' ? '렌탈중' : '' }</td>
+												<td>${pro.many }</td>
+											</tr>
+										</c:forEach>
 
 									</tbody>
 								</table>
 							</div>
 							<div class="flex paging">
-								<ul>
+								<ul class="paginations">
 									<c:if test="${pageMaker.prev }">
 										<li><a href="${pageMaker.startPage - 1 }"><i
 												class="fa  fa-arrow-left"></i></a></li>
@@ -212,6 +214,8 @@ input.btn {
 	<form id="actionForm" action="/product/write" method="get">
 		<input type="hidden" name="userid"
 			value="<sec:authentication property="principal.member.userid"/>">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 	</form>
 	<!-- /#wrapper -->
 	<!-- jQuery -->
@@ -229,10 +233,19 @@ input.btn {
 	<!-- Custom Theme JavaScript -->
 	<script src="/resources/admin/js/custom.min.js"></script>
 	<script type="text/javascript">
+		var form = $("#actionForm");
 		function movewrite() {
-			var form = $("#actionForm");
 			form.submit();
 		}
+	</script>
+	<script type="text/javascript">
+		$(".paginations a").on("click", function(e) {
+			e.preventDefault();
+			var num = $(this).attr("href");
+			$("input[name='pageNum']").val(num);
+			form.attr("action", "/admin/product_manager");
+			form.submit();
+		})
 	</script>
 </body>
 

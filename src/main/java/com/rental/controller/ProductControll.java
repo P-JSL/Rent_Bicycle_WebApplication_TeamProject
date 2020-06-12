@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +34,7 @@ public class ProductControll {
 	private ResTableService rs;
 
 	@GetMapping("/product")
-	public void product(Model model, Criteria cri) {
+	public void product(Model model,@ModelAttribute("cri") Criteria cri) {
 		log.info("productlist");
 		log.info(service.getList(cri));
 		int total = service.count();
@@ -90,7 +91,7 @@ public class ProductControll {
 	}
 
 	@GetMapping("/view")
-	public void view(String userid, Model model, int num) {
+	public void view(String userid, Model model, int num,@ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("userid", userid);
 		model.addAttribute("view", service.getPage(num));
 	}

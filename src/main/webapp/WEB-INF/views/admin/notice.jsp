@@ -197,7 +197,7 @@ input.btn {
 									name="userid"> <input type="hidden" name="sequence">
 							</form>
 							<div class="flex paging">
-								<ul>
+								<ul class="paginations">
 									<c:if test="${pageMaker.prev }">
 										<li><a href="${pageMaker.startPage - 1 }"><i
 												class="fa  fa-arrow-left"></i></a></li>
@@ -228,7 +228,10 @@ input.btn {
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
-	<form id="actionForm" action="/board/write" method="get"></form>
+	<form id="actionForm" action="/board/write" method="get">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+	</form>
 	<!-- /#wrapper -->
 	<!-- jQuery -->
 	<script
@@ -245,8 +248,19 @@ input.btn {
 	<!-- Custom Theme JavaScript -->
 	<script src="/resources/admin/js/custom.min.js"></script>
 	<script type="text/javascript">
+	var form = $("#actionForm");
+	$(".paginations a").on("click",function(e){
+		e.preventDefault();
+		var num = $(this).attr("href");
+		form.append("<input type='hidden' name='userid' value='"+userid+"'>")
+		$("input[name='pageNum']").val(num);
+		form.attr("action","/admin/notice")
+		form.submit();
+	})
+	</script>
+	<script type="text/javascript">
+	var userid = '<%=request.getParameter("userid")%>';
 		function movewrite() {
-	let userid = '<%=request.getParameter("userid")%>';
 			var form = $("#actionForm");
 			form.append("<input type='hidden' name='userid' value='"+userid+"'>")
 			form.submit();

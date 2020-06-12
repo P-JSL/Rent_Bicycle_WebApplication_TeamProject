@@ -41,7 +41,7 @@ footer {
 					<c:when test="${pro.status !=0 }">
 					<button class="btn btn-info"
 							style="background: none; color: black;"
-							onclick="javascript:location.href='/product/view?num=${pro.num }&userid=${pro.userid }'">상세보기</button>
+							onclick="javascript:location.href='/product/view?num=${pro.num }&userid=${pro.userid }&pageNum=${pageMaker.cri.pageNum }'">상세보기</button>
 					</c:when>
 					<c:when test="${pro.status == 0 }">
 						<button class="btn btn-info"
