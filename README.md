@@ -34,6 +34,8 @@
  
 프로젝트에 사용 된 기술 및 넣은 기능  
 ---
+ - Https 및 인증서 (kettool) 적용    
+ ![https](https://user-images.githubusercontent.com/64994827/84469843-f73caf80-acbc-11ea-87cd-8f674887e331.png)
  - Spring framework를 사용하여 MVC pattren을 사용.
  - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
  - Ajax를 이용하여 회원 실시간 관리 기능  
@@ -181,7 +183,53 @@ where rn > #{pageNum} * #{amount}
   만약 이렇게 하지 않고 실행을 하면 에러가 나온다.
   
 ---
+인증서 적용 하는법 (https://)
+---
+- 인증서 적용 전 cmd 관리자 실행으로 가야 합니다.  
+![cmdlocation](https://user-images.githubusercontent.com/64994827/84470392-37e8f880-acbe-11ea-80c2-061d3b8d0f10.png)
 
+
+- 인증서 생성 (keytool 이용)
+```
+keytool -genkey -alias [별칭] -keyalg RSA -keystore [저장할 파일명].jks
+
+```
+- 인증서 추출 및 저장
+```
+keytool -export -alias [별칭] -file [저장할 파일명].cer -keystore [생성한 jks파일]
+```
+- 인증서 확인
+```
+keytool -list -v -keystore [추출한 파일 jks명]
+```
+
+ - 톰켓 설정
+ ```
+ <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+               maxThreads="150" scheme="https" secure="true"
+               clientAuth="false" sslProtocol="TLS" keystorePass="[생성한 인증서 비밀번호]" 
+               keystoreFile="[저장된 인증서 파일 경로]/[파일명]"/>
+```
+ - security-context.xml 설정
+ ```
+ <intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" requires-channel="https" />
+이런식으로 requires-channel = "https" 를 적용 해준다.
+ ```
+ - Web.xml 설정
+ ```
+ <security-constraint>
+			<web-resource-collection>
+				<web-resource-name>SSL Redirect</web-resource-name>
+					<url-pattern>/*</url-pattern>
+				</web-resource-collection>
+			<user-data-constraint>
+		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+	</user-data-constraint>
+</security-constraint>
+
+ ```
+ 
+---
 코드 설명 (기능)   
 ===
 1.스프링 시큐리티를 이용한 로그인, 회원가입  설명 과 세팅 
