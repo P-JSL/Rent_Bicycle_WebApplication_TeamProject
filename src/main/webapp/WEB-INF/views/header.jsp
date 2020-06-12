@@ -42,7 +42,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/slicknav.css">
 <link rel="stylesheet"
-	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+	href="httpss://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
