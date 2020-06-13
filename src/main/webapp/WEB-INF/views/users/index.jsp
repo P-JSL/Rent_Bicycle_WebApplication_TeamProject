@@ -466,13 +466,13 @@ categoryAxis.fontSize = 11;
 
 var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 valueAxis.min = 0;
-valueAxis.max = Math.max.apply(null,price)+20000;
+valueAxis.max = Math.max.apply(null,price)+3000;
 valueAxis.strictMinMax = true;
 valueAxis.renderer.minGridDistance = 30;
 // axis break
 var axisBreak = valueAxis.axisBreaks.create();
 axisBreak.startValue = 2100;
-axisBreak.endValue = 22900;
+axisBreak.endValue = 10000;
 //axisBreak.breakSize = 0.005;
 
 // fixed axis break

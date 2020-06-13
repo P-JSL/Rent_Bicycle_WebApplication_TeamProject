@@ -103,7 +103,7 @@ body {
 
 
 					<tr>
-						<td colspan="2"> <input type="button"
+						<td colspan="2"><input type="button"
 							onclick="history.back();" value="목록" class="btn"></td>
 					</tr>
 
@@ -111,9 +111,11 @@ body {
 			</fieldset>
 		</form>
 	</div>
-	<script
-		src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
-	<script type="text/javascript">
+</div>
+
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
+<script type="text/javascript">
 	ClassicEditor
     .create( document.querySelector( '#cont' ), {
     	removePlugins: [  'Image', 'List' ],
@@ -122,4 +124,4 @@ body {
         console.log( error );
     } );
 	</script>
-	<%@include file="../footer.jsp"%>
+<%@include file="../footer.jsp"%>
