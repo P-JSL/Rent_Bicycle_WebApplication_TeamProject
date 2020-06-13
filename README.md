@@ -46,6 +46,7 @@ README.md
  - Spring security 의 암호화를 이용한 비밀번호 보안
  - Spring security 를 사용하여, 관리자/회원/비회원 권한 부여.
  - Spring security 를 사용한 로그인, 로그아웃 시 권한 인증을 통한 기능
+ - Spring security의 Remember-me 를 이용한 자동 로그인 기능 
  - ChatJs를 이용한 예약 날짜 & 사용한 금액 확인 기능
  - 관리자 페이지와 유저 마이페이지에서 전체 관리 기능
  - 로그인 횟수, 로그인 누적 실패 횟수 , 예약 횟수 확인 기능
