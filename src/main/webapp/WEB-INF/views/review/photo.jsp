@@ -22,6 +22,7 @@
 <!-- color CSS -->
 <link href="/resources/admin/css/colors/blue-dark.css" id="theme"
 	rel="stylesheet">
+<link rel="stylesheet" href="/resources/noticenav.css">
 <%@include file="../header.jsp"%>
 </head>
 <style>
@@ -210,78 +211,6 @@ input.btn {
 	margin: 10px;
 }
 
-.container {
-	padding: 10px 0px 20px 0px;
-	border: inherit !important;
-	border-radius: 4px;
-}
-
-.link {
-	font-size: 16px;
-	font-weight: 300;
-	text-align: center;
-	position: relative;
-	height: 40px;
-	line-height: 40px;
-	margin-top: 10px;
-	overflow: hidden;
-	width: 90%;
-	margin-left: 5%;
-	cursor: pointer;
-}
-
-.link:after {
-	content: '';
-	position: absolute;
-	width: 80%;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-	bottom: 50%;
-	left: -100%;
-	transition-delay: all 0.5s;
-	transition: all 0.5s;
-}
-
-.link:hover:after, .link.hover:after {
-	left: 100%;
-}
-
-.link .text {
-	text-shadow: 0px -40px 0px rgba(255, 255, 255, 1);
-	transition: all 0.75s;
-	transform: translateY(100%) translateZ(0);
-	transition-delay: all 0.25s;
-}
-
-.link:hover .text, .link.hover .text {
-	text-shadow: 0px -40px 0px rgba(255, 255, 255, 0);
-	transform: translateY(0%) translateZ(0) scale(1.1);
-	font-weight: 600;
-}
-
-@media ( max-width : 1500px) {
-	.navigator {
-		max-width: 100px !important;
-	}
-}
-
-@media ( max-width : 1350px) {
-	.navigator {
-		max-width: 100px !important;
-	}
-}
-
-@media ( max-width : 1024px) {
-	.navigator {
-		max-width: 75px !important;
-	}
-}
-
-@media ( max-width : 768px) {
-	.navigator {
-		max-width: 50px !important;
-	}
-}
-
 .d-flex {
 	display: inherit !important;
 }
@@ -294,23 +223,13 @@ input.btn {
 	width: 1400px !important;
 }
 </style>
-<div class="container navigator"
-	style="z-index: 111; position: absolute; left: 10; max-width: 200px; box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.75); background: rgba(0, 0, 0, 0.75); margin: 40px auto;">
-	<div class="link">
-		<div class="text">
-			<a href="/board/notice">Notice</a>
-		</div>
-	</div>
-	<div class="link">
-		<div class="text">
-			<a href="/review/photo">PhotoView</a>
-		</div>
-	</div>
-	<div class="link">
-		<div class="text">
-			<a href="/QnA/QnA">QnA</a>
-		</div>
-	</div>
+<div class="action" onclick="actionToggle();">
+	<span>+</span>
+	<ul>
+		<li><i class="fa fa-paper-plane-o fa-fw" aria-hidden="true"><a href="/board/notice">&nbsp;&nbsp;&nbsp;Notice</a></i></li>
+		<li><i class="fa fa-commenting-o fa-fw" aria-hidden="true"><a href="/review/photo">&nbsp;&nbsp;&nbsp;PhotoView</a></i></li>
+		<li><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"><a href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
+	</ul>
 </div>
 <div class="container">
 	<div class="col-sm-12">
@@ -395,5 +314,10 @@ input.btn {
 		$(this).addClass('clicked');
 	});
 </script>
-
+<script type="text/javascript">
+ function actionToggle(){
+	 var action = document.querySelector(".action");
+	 action.classList.toggle('active');
+ }
+</script>
 <%@include file="../footer.jsp"%>
