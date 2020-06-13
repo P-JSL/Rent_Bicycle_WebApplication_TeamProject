@@ -30,6 +30,7 @@
 		<property name="defaultEncoding" value="UTF-8"></property>
 		<property name="cacheSeconds" value="60"></property>
 	</bean>
+
 	<!-- 보안 X 설정 -->
 	<security:http pattern="/resources/**" security="none" />
 	<security:http pattern="/**/*.js" security="none" />
@@ -54,11 +55,14 @@
 		<!-- 로그인 실패시, 에러 뜨는 Controller 참조 설정 -->
 		<security:access-denied-handler
 			ref="customAccessDenied" />
+			<!-- 자동로그인 -->
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+		
 		<!-- 로그아웃 -->
 		<security:logout
 			logout-success-url="/CustomLogin?logout"
-			delete-cookies="JSESSIONID, JSESSION_ID,USER" />
-
+			delete-cookies="JSESSIONID,remember-me" />
+			
 		<security:session-management
 			session-fixation-protection="migrateSession">
 			<security:concurrency-control

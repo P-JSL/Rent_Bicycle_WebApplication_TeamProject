@@ -48,8 +48,7 @@
 					class="login100-form-title p-b-34"> Account Login <c:if
 						test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 						<font color="red">
-							<p>
-								${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+							<p>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 							</p> <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
 						</font>
 					</c:if>
@@ -68,14 +67,17 @@
 					<input class="input100" type="password" name="password"
 						placeholder="password"> <span class="focus-input100"></span>
 				</div>
-
+				<div class="btn btn-outline-info m-b-20">
+				 <input type="checkbox" id="remember-me" name="remember-me"> 자동로그인
+				</div>
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn">Sign in</button>
 				</div>
 
 				<div class="w-full text-center p-t-27 p-b-239">
-					<span class="txt1"> Forgot </span> <a href="javascript:window.open('/forgot/forgot','','width=100px,heigth=100px, resize=none')" class="txt2">
-						User name / password? </a>
+					<span class="txt1"> Forgot </span> <a
+						href="javascript:window.open('/forgot/forgot','','width=100px,heigth=100px, resize=none')"
+						class="txt2"> User name / password? </a>
 				</div>
 
 				<div class="w-full text-center">
@@ -116,6 +118,6 @@
 <!--===============================================================================================-->
 <script src="/resources/user/js/main.js"></script>
 <script type="text/javascript">
-
+	
 </script>
 <%@include file="footer.jsp"%>

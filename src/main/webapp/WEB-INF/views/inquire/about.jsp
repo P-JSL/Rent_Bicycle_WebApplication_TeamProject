@@ -41,7 +41,7 @@
 										<a href="/inquire" class="btn btna2 mv3 moveit">렌탈 문의 바로가기</a>
 									</sec:authorize>
 									<sec:authorize access="isAnonymous()">
-										<a href="javascript:alert('로그인이 필요합니다.')"
+										<a href="javascript:loginmove();"
 											class="btn btna2 mv3 moveit">렌탈 문의 바로가기</a>
 									</sec:authorize>
 								</section></li>
@@ -95,5 +95,11 @@
 			  })
 
 			})
+		</script>
+		<script type="text/javascript">
+		function loginmove(){
+			alert("로그인이 필요합니다.");
+			location.href='/CustomLogin';
+		}
 		</script>
 	<%@include file="../footer.jsp"%>

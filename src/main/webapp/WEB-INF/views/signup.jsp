@@ -87,7 +87,7 @@ input[name='useremail']::after{
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">Sign up</button>
+						<button class="btn btn-outline-success login100-form-btn" >Sign up</button>
 					</div>
 
 				</form>
