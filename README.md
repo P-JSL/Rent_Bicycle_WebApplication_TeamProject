@@ -230,7 +230,8 @@ keytool -list -v -keystore [추출한 파일 jks명]
 </security-constraint>
 
  ```
- 
+  - certification 폴더 안에 있는 것들은 C:\Program Files\Java\jdk1.8.0_241\bin 에 넣어서 적용 할 것.
+  
 ---
 코드 설명 (기능)   
 ===
