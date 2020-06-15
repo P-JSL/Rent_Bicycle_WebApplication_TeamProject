@@ -2,13 +2,17 @@ package com.rental.controller;
 
 import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.rental.domain.Criteria;
@@ -83,5 +87,12 @@ public class UserController {
 	@GetMapping("/Apply")
 	public void Apply(Model model, String userid) {
 		model.addAttribute("userid", userid);
+	}
+	
+	@PostMapping("/Apply/{userid}")
+	public String applyid(@PathVariable("userid") String userid, RedirectAttributes rttr) {
+			System.out.println(userid);
+			rttr.addAttribute("userid",userid);
+			return "redirect:/users/index";
 	}
 }

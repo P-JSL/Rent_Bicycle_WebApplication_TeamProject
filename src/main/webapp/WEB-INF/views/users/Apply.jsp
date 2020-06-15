@@ -82,7 +82,10 @@
 					<sub></sub>
 					<div class="col-md-8 col-xs-12">
 						<div class="white-box">
-							<form class="form-horizontal form-material">
+							<form class="form-horizontal form-material" id="modifyform"
+								method="post" action="/users/Apply/${userid }">
+								<input type="hidden" value="${_csrf.token }" name="${_csrf.parameterName }">
+
 								<div class="form-group">
 									<label class="col-md-12">User NickName</label>
 									<div class="col-md-12">
@@ -91,15 +94,7 @@
 											class="form-control form-control-line">
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="col-md-12">User Name</label>
-									<div class="col-md-12">
-										<input type="text" class="form-control form-control-line"
-											name="userid"
-											value='<sec:authentication property="principal.member.userid"/>'
-											readonly>
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<label for="example-email" class="col-md-12">Email</label>
 									<div class="col-md-12">
@@ -121,7 +116,7 @@
 									<div class="col-md-12">
 										<input type="text" class="form-control form-control-line"
 											name="phonenum" id="phonenum" pattern="[0-9]{3,12}"
-											maxlength="12" min="3"
+											maxlength="11" min="3"
 											placeholder="Wrtie Your Phone Number no hyphen">
 									</div>
 								</div>
@@ -134,10 +129,12 @@
 											readonly class="form-control form-control-line">
 									</div>
 								</div>
-								<a href="../users/Apply_insert" class="btn label label-warning"
-									id="app">신청</a> <a href="javascript:void(0)"
-									class="btn label label-info" id="modify">수정</a> <span
-									class="btn label label-success" onclick="location.href='/contact/contact'">신청 취소 문의</span>
+								<a href="javascript:void(0)" onclick="onCheck()"
+									class="btn label label-warning" id="app">신청</a> <a
+									href="javascript:void(0)" class="btn label label-info"
+									id="modify" onclick="onCheck()">수정</a> <span
+									class="btn label label-success"
+									onclick="location.href='/contact/contact'">신청 취소 문의</span>
 							</form>
 						</div>
 					</div>
@@ -183,29 +180,65 @@
 		})
 	</script>
 	<script type="text/javascript">
+		var phone = $("input[name='phonenum']");
+		$(phone).on(
+				"change",
+				function(e) {
+
+					$(this).val(
+							$(this).val().replace(/[^0-9]/g, "").replace(
+									/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
+									.replace("--", "-"));
+
+				})
+		var form = $("#modifyform");
+		function onCheck() {
+
+			var nickname = $("input[name='userName']").val();
+			var Addr = $("input[name='address']").val();
+			var phone = $("input[name='phonenum']").val();
+
+			if (!nickname) {
+				alert("닉네임을 적어주시길 바랍니다.");
+				return false;
+			}
+			if (!Addr) {
+				alert("주소를 적어주세요");
+				return false;
+			}
+			if (!phone && phone.length < 12) {
+				alert("핸드폰 번호를 적어주시길 바랍니다.");
+				return false;
+			}
+			form.submit();
+
+		}
+	</script>
+	<script type="text/javascript">
 		$(document).on("ready", function(e) {
 			var csrfHeaderName = "${_csrf.headerName}";
 			var csrfTokenValue = "${_csrf.token}";
 			$(document).ajaxSend(function(e, xhr, options) {
 				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 			})
-		
-			
+
 			var id = `${userid}`;
+			$("#modify").hide();
+			$("#app").show();
 			$.ajax({
-				url:"/confirm",
-				type:"post",
-				data:JSON.stringify({
+				url : "/confirm",
+				type : "post",
+				data : JSON.stringify({
 					"userid" : id
 				}),
-				dataType:"json",
+				dataType : "json",
 				contentType : "application/json; charset=UTF-8",
 				processData : false,
-				success : $(function(res){
-					if(res){
+				success : $(function(res) {
+					if (!res) {
 						$("#app").hide();
 						$("#modify").show();
-					}else if(!res){
+					} else {
 						$("#app").show();
 						$("#modify").hide();
 					}
