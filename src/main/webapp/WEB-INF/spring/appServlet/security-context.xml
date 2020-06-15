@@ -71,11 +71,10 @@
 				error-if-maximum-exceeded="true" />
 		</security:session-management>
 
-		<security:headers defaults-disabled="true">
+		<security:headers>
 			<security:cache-control/>
 			<security:frame-options policy="SAMEORIGIN"/>
 			<security:hsts include-subdomains="true" max-age-seconds="31536000"/>
-			<security:xss-protection block="false"/>
 		</security:headers>
 
 	</security:http>
