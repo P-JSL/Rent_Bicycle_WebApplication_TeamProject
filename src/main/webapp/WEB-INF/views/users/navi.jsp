@@ -6,12 +6,15 @@
 			<li><a href="/" class="waves-effect"><i
 					class="fa fa-home fa-fw" aria-hidden="true"></i><span
 					class="hide-menu">HOME</span></a></li>
-			<li><a href="/users/index?userid=${userid }" class="waves-effect"><i
-					class="fa fa-user fa-fw" aria-hidden="true"></i><span
-					class="hide-menu">DashBoard</span></a></li>
+			<li><a href="/users/index?userid=${userid }"
+				class="waves-effect"><i class="fa fa-user fa-fw"
+					aria-hidden="true"></i><span class="hide-menu">DashBoard</span></a></li>
 			<li><a href="/users/profile?userid=${userid }"
 				class="waves-effect"><i class="fa fa-user fa-fw"
 					aria-hidden="true"></i><span class="hide-menu">Profile</span></a></li>
+			<li><a href="/users/Apply?userid=${userid }"
+				class="waves-effect"><i class="fa fa-usd fa-fw"
+					aria-hidden="true"></i><span class="hide-menu">Apply Rental</span></a></li>
 			<li><a href="/users/Reservation?userid=${userid }"
 				class="waves-effect"><i class="fa fa-table fa-fw"
 					aria-hidden="true"></i><span class="hide-menu">Reservation</span></a></li>

@@ -8,4 +8,6 @@ import com.rental.domain.Criteria;
 public interface ApplyService {
 	public List<ApplyVO> pageList(Criteria cri);
 	public int insert(ApplyVO avo);
+	
+	public int configm(ApplyVO avo);
 }

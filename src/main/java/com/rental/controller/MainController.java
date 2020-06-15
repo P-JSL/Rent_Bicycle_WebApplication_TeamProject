@@ -20,10 +20,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.rental.domain.ApplyVO;
 import com.rental.domain.MemberVO;
 import com.rental.domain.NoticeVO;
 import com.rental.domain.QnAVO;
 import com.rental.domain.ReplyVO;
+import com.rental.service.ApplyService;
 import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
 import com.rental.service.QNAService;
@@ -295,6 +297,28 @@ public class MainController {
 		log.warn("아이디 !! : " + userid);
 
 		boolean ok = qs.delete(qvo) == 1 ? true : false;
+		System.out.println("ok ? : " + ok);
+		return new ResponseEntity<>(ok, HttpStatus.OK);
+	}
+	
+	@Setter(onMethod_ = { @Autowired })
+	private ApplyService as;
+	
+	@ResponseBody
+	@PostMapping(value = "/confirm", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> ApplyConfirm(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+
+		ApplyVO avo = new ApplyVO();
+		avo.setUserid(userid);
+		
+		log.warn("아이디 !! : " + userid);
+
+		boolean ok =  as.configm(avo)== 1 ? true : false;
 		System.out.println("ok ? : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}

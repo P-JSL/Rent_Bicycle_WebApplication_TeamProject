@@ -23,59 +23,65 @@ import com.rental.service.UserLogService;
 import lombok.Setter;
 
 @Controller
-@RequestMapping(value="/users/*", method = {RequestMethod.GET,RequestMethod.POST})
+@RequestMapping(value = "/users/*", method = { RequestMethod.GET, RequestMethod.POST })
 public class UserController {
 
-	@Setter(onMethod_ = {@Autowired})
+	@Setter(onMethod_ = { @Autowired })
 	private UserLogService logser;
-	
-	@Setter(onMethod_ = {@Autowired})
-	private ReplyService rs;	
-	
-	@Setter(onMethod_ = {@Autowired})
-	private ChartService chart;	
 
-	@Setter(onMethod_ = {@Autowired})
-	private ResTableService rst;	
-	
-	@Setter(onMethod_ = {@Autowired})
+	@Setter(onMethod_ = { @Autowired })
+	private ReplyService rs;
+
+	@Setter(onMethod_ = { @Autowired })
+	private ChartService chart;
+
+	@Setter(onMethod_ = { @Autowired })
+	private ResTableService rst;
+
+	@Setter(onMethod_ = { @Autowired })
 	private ProductService ps;
-	
+
 	@GetMapping("/index")
 	public void index(@RequestParam("userid") String userid, Model model) {
 		Gson gson = new Gson();
-		String DataToJson =gson.toJson(chart.Jdata(userid));		
+		String DataToJson = gson.toJson(chart.Jdata(userid));
 		System.out.println(DataToJson);
-		model.addAttribute("count",rst.count(userid));
+		model.addAttribute("count", rst.count(userid));
 		model.addAttribute("JsonData", DataToJson);
 		model.addAttribute("userid", userid);
-		model.addAttribute("loginfo",logser.UserLogInfo(userid));
-		model.addAttribute("reply",rs.UserReply(userid));
+		model.addAttribute("loginfo", logser.UserLogInfo(userid));
+		model.addAttribute("reply", rs.UserReply(userid));
 	}
+
 	@GetMapping("/profile")
 	public void profile(String userid, Model model) {
-		model.addAttribute("user",logser.users(userid));
+		model.addAttribute("user", logser.users(userid));
 		model.addAttribute("userid", userid);
-		
+
 	}
-	
+
 	@GetMapping("/Reservation")
 	public void Reservation(String userid, Model model, Criteria cri) {
-		for(ProductVO pvo : ps.AllList()) {
-			if(pvo.getMany() == 0 && pvo.getStatus() ==1) {
+		for (ProductVO pvo : ps.AllList()) {
+			if (pvo.getMany() == 0 && pvo.getStatus() == 1) {
 				ps.statusminus(pvo.getNum());
 			}
 		}
-		//다중 파라미터를 mybatis로 보낼떄 
+		// 다중 파라미터를 mybatis로 보낼떄
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);
-		map.put("pageNum" , cri.getPageNum());
+		map.put("pageNum", cri.getPageNum());
 		map.put("amount", cri.getAmount());
-		
-		model.addAttribute("count",rst.count(userid));
-		model.addAttribute("res",rst.pageList(map));
+
+		model.addAttribute("count", rst.count(userid));
+		model.addAttribute("res", rst.pageList(map));
 		model.addAttribute("userid", userid);
 		model.addAttribute("pageMaker", new PageDTO(cri, rst.count(userid).getCount()));
-		
+
+	}
+
+	@GetMapping("/Apply")
+	public void Apply(Model model, String userid) {
+		model.addAttribute("userid", userid);
 	}
 }

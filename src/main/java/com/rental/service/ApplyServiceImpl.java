@@ -27,4 +27,9 @@ public class ApplyServiceImpl implements ApplyService {
 		// TODO Auto-generated method stub
 		return mapper.insert(avo);
 	}
+	@Override
+	public int configm(ApplyVO avo) {
+		// TODO Auto-generated method stub
+		return mapper.confirm(avo);
+	}
 }

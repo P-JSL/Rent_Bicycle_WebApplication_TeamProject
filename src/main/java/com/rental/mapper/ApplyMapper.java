@@ -10,4 +10,6 @@ public interface ApplyMapper {
 	public List<ApplyVO> pageList(Criteria cri);
 	
 	public int insert(ApplyVO avo);
+	
+	public int confirm(ApplyVO avo);
 }
