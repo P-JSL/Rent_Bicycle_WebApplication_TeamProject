@@ -71,7 +71,7 @@
 
 						</div>
 						<div class="form-group mt-3">
-							<button type="submit" class="button button-contactForm boxed-btn"
+							<button type="submit" class="genric-btn primary circle arrow"
 								id="send">보내기</button>
 						</div>
 					</form>

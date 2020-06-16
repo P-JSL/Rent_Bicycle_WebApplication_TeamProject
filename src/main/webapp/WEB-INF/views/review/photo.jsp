@@ -259,7 +259,7 @@ input.btn {
 				style="position: relative; text-align: center;">
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="principal.member.userid" var="id" />
-					<button type="button" class="btn btn-info"
+					<button type="button" class="genric-btn info-border circle"
 						style="position: relative; top: -33px; left: 400px;"
 						onclick="javascript:location.href='/review/write?writer=${id}'">글쓰기</button>
 				</sec:authorize>

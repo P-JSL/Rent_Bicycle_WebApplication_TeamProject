@@ -39,12 +39,12 @@ footer {
 					</div>
 					<c:choose>
 					<c:when test="${pro.status !=0 }">
-					<button class="btn btn-info"
+					<button class="genric-btn success-border circle"
 							style="background: none; color: black;"
 							onclick="javascript:location.href='/product/view?num=${pro.num }&userid=${pro.userid }&pageNum=${pageMaker.cri.pageNum }'">상세보기</button>
 					</c:when>
 					<c:when test="${pro.status == 0 }">
-						<button class="btn btn-info"
+						<button class="genric-btn danger-border circle"
 							style="background: none; color: black;"
 							onclick="alert('재고가 없는 상품은 예약 할 수 없습니다.');">예약불가</button>
 					</c:when>
@@ -75,7 +75,7 @@ footer {
 				</c:if>
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="principal.member.userid" var="id" />
-					<button class="btn btn-info"
+					<button class="genric-btn info-border circle"
 						style="position: absolute; right: 140px;"
 						onclick="javascript:location.href='/product/write?userid=${id}'">글쓰기</button>
 				</sec:authorize>

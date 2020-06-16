@@ -67,8 +67,9 @@
 					<input class="input100" type="password" name="password"
 						placeholder="password"> <span class="focus-input100"></span>
 				</div>
-				<div class="btn btn-outline-info m-b-20">
-				 <input type="checkbox" id="remember-me" name="remember-me"> 자동로그인
+				<div class="genric-btn primary-border circle m-b-20" style="font-size: 1.3em;">
+					<input type="checkbox" id="remember-me" name="remember-me"
+						style="position: relative; top: 4px; right: 5px;"> 자동로그인
 				</div>
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn">Sign in</button>
@@ -80,9 +81,7 @@
 						class="txt2"> User name / password? </a>
 				</div>
 
-				<div class="w-full text-center">
-					<a href="#" class="txt3"> Sign Up </a>
-				</div>
+	
 			</form>
 
 			<div class="login100-more"
