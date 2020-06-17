@@ -62,9 +62,10 @@
 		padding: 30px 20px !important;
 	}
 }
-@media (min-width : 993px){
-	.col-lg-4{
-	 display: inline-block !important;
+
+@media ( min-width : 993px) {
+	.col-lg-4 {
+		display: inline-block !important;
 	}
 }
 </style>
