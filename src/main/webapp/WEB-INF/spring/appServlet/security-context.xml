@@ -72,9 +72,10 @@
 		</security:session-management>
 
 		<security:headers>
-			<security:cache-control/>
-			<security:frame-options policy="SAMEORIGIN"/>
-			<security:hsts include-subdomains="true" max-age-seconds="31536000"/>
+			<security:cache-control />
+			<security:frame-options policy="SAMEORIGIN" />
+			<security:hsts include-subdomains="true"
+				max-age-seconds="31536000" />
 		</security:headers>
 
 	</security:http>
