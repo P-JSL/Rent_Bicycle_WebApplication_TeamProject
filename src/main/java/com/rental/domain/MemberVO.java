@@ -21,5 +21,7 @@ public class MemberVO {
 	private String regDate;
 	private Date updateDate;
 	private List<AuthVO> authList;
-
+	
+	private String ip;
+	private boolean thisip;
 }

@@ -19,38 +19,37 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
-	@Autowired 
+	@Autowired
 	private UserLogService service;
-	
+
 	@Override
-		public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-				Authentication auth) throws IOException, ServletException {
-			// TODO Auto-generated method stub
-			log.warn("Login Success");
-			
-			
-			List<String> roleNames = new ArrayList<>();
-			
-			auth.getAuthorities().forEach(authority -> {
-				roleNames.add(authority.getAuthority());
-			});
-			
-			log.warn("ROLE NAMES : " + roleNames);
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
+			throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		log.warn("Login Success");
+
+		List<String> roleNames = new ArrayList<>();
+	
+		auth.getAuthorities().forEach(authority -> {
+			roleNames.add(authority.getAuthority());
+		});
+
+		log.warn("ROLE NAMES : " + roleNames);
+		service.UserLoginSuccess(auth.getName());
+		if (roleNames.contains("ROLE_ADMIN")) {
+			response.sendRedirect("/admin/index?userid=" + auth.getName());
+			return;
+		}
+
+		if (roleNames.contains("ROLE_USER")) {
 			service.UserLoginSuccess(auth.getName());
-			if(roleNames.contains("ROLE_ADMIN")) {
-				response.sendRedirect("/admin/index?userid="+auth.getName());		
-				return;
-			}
-			
-			if(roleNames.contains("ROLE_USER")) {
-				service.UserLoginSuccess(auth.getName());
-				response.sendRedirect("/");
-				return;
-			}
-			
 			response.sendRedirect("/");
+			return;
+		}
+
+		response.sendRedirect("/");
 	}
+
 	
-	
-	
+
 }

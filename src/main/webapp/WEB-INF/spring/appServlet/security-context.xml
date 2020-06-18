@@ -62,7 +62,7 @@
 		<!-- 로그아웃 -->
 		<security:logout
 			logout-success-url="/CustomLogin?logout"
-			delete-cookies="JSESSIONID,remember-me" 
+			delete-cookies="JSESSIONID,remember-me,JSESSION_ID" 
 			invalidate-session="true"
 			/>
 

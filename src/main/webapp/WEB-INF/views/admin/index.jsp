@@ -105,7 +105,6 @@ select {
 	.table>thead>tr>td, .table>thead>tr>th {
 	vertical-align: inherit;
 }
-
 </style>
 
 
@@ -271,11 +270,11 @@ select {
 									<thead>
 										<tr>
 											<th style="text-align: center; justify-content: center;">名前</th>
-											<th style="text-align: center; justify-content: center;">メール</th>
 											<th style="text-align: center; justify-content: center;">登録日</th>
-											<th style="text-align: center; justify-content: center;">状態</th>
-											<th style="text-align: center; justify-content: center;">変更</th>
-											<th style="text-align: center; justify-content: center;">脱退</th>
+											<th style="text-align: center; justify-content: center;">ip</th>
+											<th colspan="2" style="text-align: center; justify-content: center;">계정 &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; IP</th>
+											<th colspan="3"
+												style="text-align: center; justify-content: center;">기타</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -283,18 +282,28 @@ select {
 
 											<tr id="tab">
 												<td class="txt-oflo" id="userid">${list.userid }</td>
-												<td>${list.useremail }</td>
 												<td class="txt-oflo">${list.regDate }</td>
+												<td class="ip">${list.ip }</td>
 												<td><span class="text-success"
-													id="${list.enabled == true ? 'enabled' : 'disenabled'}">${list.enabled == true ? '使用可能' : '使用不可' }</span></td>
+													id="${list.enabled == true ? 'enabled' : 'disenabled'}">${list.enabled == true ? '사용가능' : '사용불가' }</span></td>
+												<td><span class="text-success"
+													id="${list.thisip == true ? 'Block' : 'NonBlock'}">${list.thisip == true ? '차단' : '차단해체' }</span></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><select name="select"
 													id="select" style="text-align: center;">
 														<option value="null">선택</option>
-														<option value="true">enabled</option>
-														<option value="false">disenabled</option>
+														<option value="true">사용가능</option>
+														<option value="false">사용불가</option>
 												</select> <a href="#" type="button" class="btn" style="color: red;"
 													id="change">변경</a></td>
+												<td class="input-group-addon"
+													style="background-color: #fff;"><select name="ban"
+													id="ban" style="text-align: center;">
+														<option value="null">선택</option>
+														<option value="true">차단헤체</option>
+														<option value="false">차단</option>
+												</select> <a href="#" type="button" class="btn" style="color: red;"
+													id="ipban">차단</a></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><input name="out"
 													type="radio"
@@ -347,9 +356,8 @@ select {
 												class="ti-check text-success"></i></a> <span class="pull-left"
 												style="color: green;"><i
 												class="fa fa-thumbs-o-up fa-fw" aria-hidden="true"></i><b
-												style="color: blue;">${re.likes }</b>&nbsp;&nbsp;</span>
-											<span class="pull-left"
-												style="color: red; text-align: right;"><i
+												style="color: blue;">${re.likes }</b>&nbsp;&nbsp;</span> <span
+												class="pull-left" style="color: red; text-align: right;"><i
 												class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i><b>${re.hates }</b></span>
 											<span class="time pull-right"><fmt:formatDate
 													value="${re.regdate }" pattern="YY/MM/dd" /></span>
@@ -546,6 +554,53 @@ select {
 		})
 
 		})
+</script>
+	<script type="text/javascript">
+$(function(e){
+	
+	var values = false;
+	var userid = "";
+	var ip = "";
+	console.log(userid);
+	$("#table tbody #ban").on("change",function(e){
+	values = $(this).val();
+	console.log(values);
+	ip = $(this).parent().parent().find(".ip").text();
+	userid = $(this).parent().parent().find("#userid").text();
+	console.log(ip);
+	})
+	
+	$("#table tbody #ipban").on("click",function(e){
+	e.preventDefault();
+
+	console.log("this values :" +values);
+		$.ajax({
+			url : "/ip",
+			type : 'POST',
+			data : JSON.stringify({
+				"ip" : ip,
+				"userid" : userid,
+				"ban" : values
+			}),
+			contentType : "application/json; charset=UTF-8",
+			processData : false,
+			success : function(result) {
+				if(result){
+				alert(userid + "님이 차단되었습니다.");
+					window.location.href=window.location.href
+				}else{
+					alert(userid + "님이 차단해체 되었습니다.");					
+					window.location.href=window.location.href
+				}
+			},
+			error : function(req, status, error) {
+				console.log(error);
+			}
+		})
+	
+	})
+
+	})
 </script>
 	<script>
 

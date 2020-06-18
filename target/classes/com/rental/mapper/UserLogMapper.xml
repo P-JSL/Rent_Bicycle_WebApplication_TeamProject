@@ -76,14 +76,14 @@
 	<select id="getListWithPaging"
 		resultType="com.rental.domain.MemberVO">
 	<![CDATA[	
-		 select * from 
+		 select /*+ index_desc (tbl_member tbl_member_pk )*/ * from 
        (
-       select/*+ index_desc (tbl_member tbl_member_pk )*/
-       rownum rn,userid,userpw,username,regdate,updatedate,enabled, useremail, au.auth
+       select /*+ index_desc (tbl_member tbl_member_pk )*/
+       rownum rn,userid,userpw,username,regdate,updatedate,enabled, useremail, au.auth, ip
      from tbl_member tm NATURAL join tbl_member_auth au
        where ]]>
 		<include refid="criteria"></include>
-       <![CDATA[ rownum <= #{pageNum} * #{amount}
+       <![CDATA[ rownum <= #{pageNum} * #{amount} order by regdate desc
        ) 
        where rn > (#{pageNum}-1)*#{amount} and auth != 'ROLE_ADMIN'  
 	]]>

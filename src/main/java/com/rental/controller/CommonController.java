@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -32,6 +34,7 @@ import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
+import com.rental.util.Utility;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -80,8 +83,9 @@ public class CommonController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(MemberVO memvo) throws UnsupportedEncodingException, SQLException {
-
+	public String signup(MemberVO memvo,HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
+		memvo.setIp(Utility.ip(request));
+		log.info("ip : " + memvo.getIp());
 		log.info("error : " + memvo);
 		if (service.signup(memvo)) {
 			service.Account_loginto(memvo.getUserid());

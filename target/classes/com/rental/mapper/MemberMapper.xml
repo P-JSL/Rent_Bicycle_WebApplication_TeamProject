@@ -12,6 +12,7 @@
 		<result property="regDate" column="regdate" />
 		<result property="updateDate" column="updatedate" />
 		<result property="useremail" column="useremail" />
+		<result property="ip" column="ip"/>
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 
@@ -23,7 +24,7 @@
 	<select id="read" resultMap="memberMap">
 		select
 		mem.userid, userpw, username,
-		ENABLED, regdate, updatedate, useremail, auth
+		ENABLED, regdate, updatedate, useremail, auth, ip
 		from
 		tbl_member mem left
 		outer join tbl_member_auth auth on mem.userid =
@@ -34,9 +35,9 @@
 
 	<insert id="insert">
 		insert into tbl_member (userid, userpw, username,
-		regdate, enabled, useremail) values
+		regdate, enabled, useremail, ip) values
 		(#{userid}, #{userpw}, '일반사용자'
-		,sysdate,0, #{useremail})
+		,sysdate,0, #{useremail}, #{ip})
 	</insert>
 	<insert id="insert_auth">
 		insert into tbl_member_auth (userid, auth ) values

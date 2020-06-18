@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.rental.domain.CustomUser;
 import com.rental.mapper.MemberMapper;
 import com.rental.mapper.UserLogMapper;
+import com.rental.service.IPService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,18 +34,29 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	private BCryptPasswordEncoder pass;
 
+	@Autowired
+	private IPService ips;
+
 	// 에러 메세지
 	private static final String ACCOUNT_DISENABLE_ERROR = "비밀번호 실패 10회 초과되어 계정이 일시 잠금 되었습니다. <p>관리자에게 문의해주세요.</p>";
 	private static final String ACCOUNT_NOT_PASSWORD_ERROR = "비밀번호가 일치하지 않습니다.<p>다시 시도해주세요.</p>";
 	private static final String ACCOUNT_NOT_EMAIL_AUTH = "이메일 인증을 하시면 계정이 활성화 됩니다.";
+	private static final String IP_BLOCK_ID = "당신의 아이피가 차단 되었습니다.";
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = (String) authentication.getPrincipal();
 		String password = (String) authentication.getCredentials();
+
 		log.debug("AuthenticationProvider :::::: 1");
 
 		CustomUser user = (CustomUser) service.loadUserByUsername(username);
+		if (ips.isBlock(user.getMember().getIp()) != null) {
+			if (!ips.isBlock(user.getMember().getIp()).isEnabled()) {
+				log.info("IP가 차단 되었습니다.");
+				throw new org.springframework.security.authentication.AccountExpiredException(IP_BLOCK_ID);
+			}
+		}
 
 		log.debug("AuthenticationProvider loadUserByUsername :::::: 3");
 		if (!pass.matches(password, user.getPassword())) {
@@ -60,7 +72,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		log.debug("User Enabled : " + user.isEnabled());
 		log.debug("User Enabled : " + user.isAccountNonLocked());
-		
 
 		if (!user.isEnabled()) {
 			log.debug("isEnabled :::::::: false!");

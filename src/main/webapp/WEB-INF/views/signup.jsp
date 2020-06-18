@@ -48,8 +48,9 @@
 	margin: 0 0 0 0 !important;
 	font-size: 20px !important;
 }
-input[name='useremail']::after{
-	content : attr(data-content);
+
+input[name='useremail']::after {
+	content: attr(data-content);
 }
 </style>
 <body>
@@ -59,7 +60,7 @@ input[name='useremail']::after{
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="/signup"
-					method="post" onsubmit="return checkAccount()">
+					method="post" onsubmit="return checkAccount()" id="signform">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token }"> <span
 						class="login100-form-title p-b-34"> Account Create </span> <input
@@ -87,7 +88,8 @@ input[name='useremail']::after{
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="btn btn-outline-success login100-form-btn" >Sign up</button>
+						<button class="btn btn-outline-success login100-form-btn">Sign
+							up</button>
 					</div>
 
 				</form>
@@ -123,6 +125,15 @@ input[name='useremail']::after{
 	<script src="/resources/user/vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="/resources/user/js/main.js"></script>
+	<script type="application/javascript">
+		
+  function getIP(json) {
+    console.log("My public IP address is: ", json.ip);
+  }
+	
+	</script>
+	<script type="application/javascript"
+		src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
 	<script type="text/javascript">
 		function checkAccount() {
 			let userid = $("input[name='userid']").val();
@@ -143,7 +154,9 @@ input[name='useremail']::after{
 				alert("비밀번호를 정확히 입력 해주세요.");
 				return false;
 			}
-			return true;
+			var form = $("#signform");
+			form.append("<input type='hidden' name='ip' value='"+getIP(json)+"'>")
+			form.submit();
 		}
 	</script>
 	<script type="text/javascript">
@@ -162,7 +175,7 @@ input[name='useremail']::after{
 				var datas = {
 					"useremail" : useremail
 				};
-				
+
 				$.ajax({
 					url : "/emailcheck",
 					type : 'POST',
@@ -172,7 +185,7 @@ input[name='useremail']::after{
 					processData : false,
 					success : function(result) {
 						console.log(result);
-						if(!result){
+						if (!result) {
 							alert('중복된 이메일입니다.다시 입력해주세요.');
 							$("input[name='useremail']").val("");
 						}
@@ -201,7 +214,7 @@ input[name='useremail']::after{
 				var datas = {
 					"userid" : userid
 				};
-				
+
 				$.ajax({
 					url : "/idcheck",
 					type : 'POST',
@@ -211,7 +224,7 @@ input[name='useremail']::after{
 					processData : false,
 					success : function(result) {
 						console.log(result);
-						if(!result){
+						if (!result) {
 							alert('중복된 아이디입니다.다시 입력해주세요.');
 							$("input[name='userid']").val("");
 						}
@@ -224,4 +237,5 @@ input[name='useremail']::after{
 
 		})
 	</script>
+
 	<%@include file="footer.jsp"%>

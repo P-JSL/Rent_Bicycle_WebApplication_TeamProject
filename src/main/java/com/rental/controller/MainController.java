@@ -21,11 +21,13 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.rental.domain.ApplyVO;
+import com.rental.domain.IPBanList;
 import com.rental.domain.MemberVO;
 import com.rental.domain.NoticeVO;
 import com.rental.domain.QnAVO;
 import com.rental.domain.ReplyVO;
 import com.rental.service.ApplyService;
+import com.rental.service.IPService;
 import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
 import com.rental.service.QNAService;
@@ -300,10 +302,10 @@ public class MainController {
 		System.out.println("ok ? : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
-	
+
 	@Setter(onMethod_ = { @Autowired })
 	private ApplyService as;
-	
+
 	@ResponseBody
 	@PostMapping(value = "/confirm", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Boolean> ApplyConfirm(@RequestBody String JsonData, HttpServletResponse res,
@@ -315,12 +317,42 @@ public class MainController {
 
 		ApplyVO avo = new ApplyVO();
 		avo.setUserid(userid);
-		
+
 		log.warn("아이디 !! : " + userid);
 
-		boolean ok =  as.configm(avo)== 1 ? true : false;
+		boolean ok = as.configm(avo) == 1 ? true : false;
 		System.out.println("ok ? : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
 
+	@Setter(onMethod_ = { @Autowired })
+	private IPService ipservice;
+
+	@ResponseBody
+	@PostMapping(value = "/ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> ip(@RequestBody String JsonData, HttpServletResponse res, HttpServletRequest req)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+		String ip = parser.parse(JsonData).getAsJsonObject().get("ip").getAsString();
+		boolean ban = parser.parse(JsonData).getAsJsonObject().get("ban").getAsBoolean();
+
+		IPBanList iplist = new IPBanList();
+
+		iplist.setIp(ip);
+		iplist.setUserid(userid);
+		log.warn("아이디 !! : " + userid);
+		log.warn("IP !! : " + ip);
+		log.warn("ban 여부 : " + ban);
+		boolean ok = false;
+		if (!ban) {
+			ok = ipservice.ipinsert(iplist) == 1 ? true : false;
+		} else {
+			ok = ipservice.ipdelete(iplist) == 1 ? false : true;
+		}
+		log.warn("OK boolean : " + ok);
+		return new ResponseEntity<>(ok, HttpStatus.OK);
+	}
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.IPMapper">
+
+	<select id="ipcheck" resultType="com.rental.domain.IPBanList">
+		select /*+ index_desc(ipbanlist ipbanlist_pk)*/ * from ipbanlist
+	</select>
+	
+	<insert id="ipinsert">
+		insert into ipbanlist (userid, ip, bandate)
+		values (#{userid}, #{ip} , sysdate)
+	</insert>
+	<delete id="ipdelete">
+		delete from ipbanlist where userid = #{userid} and ip = #{ip}
+	</delete>
+	<select id="isBlock" resultType="com.rental.domain.IPBanList">
+		select * from ipbanlist where ip = #{ip}
+	</select>
+</mapper>
