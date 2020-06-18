@@ -110,6 +110,7 @@ README.md
  - 6. 여기서, Mapper.xml은 실질적인 쿼리문을 작성 하게 된다.
  ```
     <mapper namespace="com.xxx.mapper.Mapper">   
+    <!--id : Mapper안의 method명 / resultType : 반환 할 타입-->
     	<select id="xxx" resultType="com.xxx.domain.xxxVO">   
 		select * from xxxTable   
 	</select>   
@@ -196,6 +197,7 @@ where rn > #{pageNum} * #{amount}
 
 - 인증서 생성 (keytool 이용)
 ```
+<!--jdk안에 내장 된 Keytool을 이용한 인증서 만들기-->
 keytool -genkey -alias [별칭] -keyalg RSA -keystore [저장할 파일명].jks
 ```
 - 인증서 추출 및 저장
