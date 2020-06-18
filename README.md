@@ -224,14 +224,15 @@ keytool -list -v -keystore [추출한 파일 jks명]
  - Web.xml 설정
  ```
  <security-constraint>
-			<web-resource-collection>
-				<web-resource-name>SSL Redirect</web-resource-name>
-					<url-pattern>/*</url-pattern>
-				</web-resource-collection>
-			<user-data-constraint>
+		<web-resource-collection>
+			<web-resource-name>SSL Redirect</web-resource-name>
+				<url-pattern>/*</url-pattern>
+			</web-resource-collection>
+		<user-data-constraint>
 		<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 	</user-data-constraint>
 </security-constraint>
+<!--SSL 및 https 적용이 되기 위한 xml설정-->
 
  ```
   - certification 폴더 안에 있는 것들은 C:\Program Files\Java\jdk1.8.0_241\bin 에 넣어서 적용 할 것.
