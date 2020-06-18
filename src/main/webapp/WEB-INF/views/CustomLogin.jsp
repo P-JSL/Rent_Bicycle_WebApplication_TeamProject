@@ -68,7 +68,7 @@
 						placeholder="password"> <span class="focus-input100"></span>
 				</div>
 				<div class="genric-btn primary-border circle m-b-20"
-					style="font-size: 1.3em;">
+					style="font-size: 1.3em;" id="remember">
 					<input type="checkbox" id="remember-me" name="remember-me"
 						style="position: relative; top: 4px; right: 5px;"> 자동로그인
 				</div>
@@ -118,6 +118,13 @@
 <!--===============================================================================================-->
 <script src="/resources/user/js/main.js"></script>
 <script type="text/javascript">
-	
+	$("#remember").on("click", function() {
+		if (!$("input[name='remember-me']").is(":checked")) {
+			$("input[name='remember-me']").prop("checked", true);
+		} else if($("input[name='remember-me']").is(":checked")) {
+			$("input[name='remember-me']").prop("checked",false);
+		}
+
+	})
 </script>
 <%@include file="footer.jsp"%>
