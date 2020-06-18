@@ -245,6 +245,7 @@ keytool -list -v -keystore [추출한 파일 jks명]
 1-1. 회원가입의 코드 설명과 세팅
 #스프링 보안 (Spring security) Dependency 설정
 ```
+<!--스프링 보안 pom.xml 에 의존성 추가-->
                  <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -324,6 +325,8 @@ keytool -list -v -keystore [추출한 파일 jks명]
    
 **Controller**
 ```
+<!--service를 컨트롤러에 주입-->
+
 	@Setter(onMethod_ = { @Autowired })
 	private MemberService service;
 
@@ -345,7 +348,7 @@ keytool -list -v -keystore [추출한 파일 jks명]
 @Setter
 @ToString
 public class MemberVO {
-
+<!-- 인증에 필요한 유저 정보 VO-->
 	
 	private String userid;
 	private String userpw,userName;
@@ -355,6 +358,7 @@ public class MemberVO {
 	private String regDate;
 	private Date updateDate;
 	private List<AuthVO> authList;
+	<!--유저 권한 정보가 들어가 있는 VO-->
 
 }
 
@@ -374,10 +378,12 @@ public interface MemberService {
 ```
 	@Setter(onMethod_ = { @Autowired })
 	private MemberMapper mapper;
-
+	<!--mapper 주입-->
+	
 	@Inject
 	private BCryptPasswordEncoder BCPE;
-
+	<!--Serurity에 있는 암호화 -->
+	
 	@Override
 	public boolean signup(MemberVO mvo) {
 		log.info("on");
