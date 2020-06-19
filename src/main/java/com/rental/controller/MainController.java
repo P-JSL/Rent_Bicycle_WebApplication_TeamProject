@@ -302,7 +302,26 @@ public class MainController {
 		System.out.println("ok ? : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
+	@ResponseBody
+	@PostMapping(value = "/reply/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> replyDelete(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
 
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+		int sequence = parser.parse(JsonData).getAsJsonObject().get("n_num").getAsInt();
+
+		ReplyVO rvo = new ReplyVO();
+		rvo.setNum(sequence);
+		rvo.setUserid(userid);
+		log.warn("번호 !! : " + sequence);
+		log.warn("아이디 !! : " + userid);
+
+		boolean ok = rs.ReplyDelete(rvo) == 1 ? true : false;
+		System.out.println("ok ? : " + ok);
+		return new ResponseEntity<>(ok, HttpStatus.OK);
+	}
 	@Setter(onMethod_ = { @Autowired })
 	private ApplyService as;
 

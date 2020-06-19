@@ -51,4 +51,9 @@ public class ReplyServiceImpl implements ReplyService {
 		// TODO Auto-generated method stub
 		return mapper.Yreply(rvo);
 	}
+	@Override
+	public int ReplyDelete(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return mapper.ReplyDelete(rvo);
+	}
 }

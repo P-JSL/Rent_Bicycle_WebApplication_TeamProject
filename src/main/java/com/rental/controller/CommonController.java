@@ -212,8 +212,10 @@ public class CommonController {
 	}
 
 	@GetMapping("/board/notice/reply")
-	public String reply(ReplyVO rvo) {
+	public String reply(ReplyVO rvo, RedirectAttributes rttr) {
 		rs.insert(rvo);
+		rttr.addAttribute("sequence", rvo.getN_num());
+		
 		return "redirect:/board/view";
 	}
 

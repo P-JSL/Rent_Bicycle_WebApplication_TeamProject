@@ -19,4 +19,6 @@ public interface ReplyMapper {
 	public void insertReply(ReplyVO rvo);
 	
 	public ReplyVO Yreply(ReplyVO rvo);
+	
+	public int ReplyDelete(ReplyVO rvo);
 }

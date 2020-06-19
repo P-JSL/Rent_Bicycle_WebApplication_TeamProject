@@ -18,4 +18,6 @@ public interface ReplyService {
 	public void insert(ReplyVO rvo);
 	
 	public ReplyVO Yreply(ReplyVO rvo);
+	
+	public int ReplyDelete(ReplyVO rvo);
 }

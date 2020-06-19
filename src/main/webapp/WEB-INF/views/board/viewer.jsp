@@ -123,7 +123,9 @@ body {
 						<td><i class="fa fa-thumbs-o-down fa-fw fa-2x"
 							aria-hidden="true" id="down" style="cursor: pointer;"></i><br>
 							<mark id="disrecommend" style="color: red; font-size: 14px">${vo.disrecommend }</mark>
+
 						</td>
+
 						<td><i class="fa fa-eye fa-fw fa-2x" aria-hidden="true">
 						</i><br> ${vo.viewer }</td>
 					</tr>
@@ -139,7 +141,7 @@ body {
 					<tr>
 						<td colspan="5"><input type="submit" value="수정" class="btn"
 							onclick="noticeSave()"> <input type="button"
-							onclick="history.back();" value="목록" class="btn"></td>
+							onclick="location.href='/board/notice'" value="목록" class="btn"></td>
 					</tr>
 
 				</table>
@@ -185,6 +187,23 @@ body {
 											aria-hidden="true" style="color: red;"></i></span> <span
 											style="color: red;" id="hat">${re.hates }</span>
 									</p>
+
+									<sec:authorize access="isAuthenticated()">
+										<sec:authentication property="principal.member.userid"
+											var="uid" />
+										<sec:authorize access="hasRole('ROLE_USER')">
+											<c:if test="${uid == re.userid }">
+												<span class="float-right" id="dlt">
+													<button class="btn btn-warning" id="delete">삭제</button>
+												</span>
+											</c:if>
+										</sec:authorize>
+										<sec:authorize access="hasRole('ROLE_ADMIN')">
+											<span class="float-right" id="dlt">
+												<button class="btn btn-warning" id="delete">삭제</button>
+											</span>
+										</sec:authorize>
+									</sec:authorize>
 								</div>
 								<input type="hidden" name="n_num" value="${re.num }" id="number">
 							</div>
@@ -194,13 +213,13 @@ body {
 				<sec:authorize access="isAuthenticated()">
 					<div class="row">
 
-						<input type="hidden" name="userid" value="${id }">
+						<input type="hidden" name="commentid" value="${id }">
 						<div class="col-lg-11 col-11">
 							<input type="text" class="form-control"
 								placeholder="write comments ..." id="comment">
 						</div>
 						<div class="col-lg-1 col-1 send-icon">
-							<a href="javascript:void(0)" onclick="submitcom();"><i
+							<a href="javascript:void(0)" onclick="submitcom()"><i
 								class="fa fa-paper-plane" aria-hidden="true"></i></a>
 						</div>
 					</div>
@@ -210,6 +229,10 @@ body {
 	</div>
 </div>
 <form action="/board/notice/reply" method="get" id="servform"></form>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.member.userid" var="uid" />
+	<c:set value="${uid }" var="ud" />
+</sec:authorize>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
 <script type="text/javascript">
@@ -232,11 +255,37 @@ if(tf == false){
 })
 </script>
 <script type="text/javascript">
-var userid = '${userid}';
-var sequence =<%=request.getParameter("sequence")%>;
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
+var sequence = <%=request.getParameter("sequence")%>;
+$("#commend li #delete").on("click",function(){
+	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
+	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
 
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	})
+	alert("삭제");
+	$.ajax({
+		url : "/reply/delete",
+		type : 'POST',
+		data : JSON.stringify({
+			"userid" : userid,
+			"n_num" : n_num
+		}),
+		contentType : "application/json; charset=UTF-8",
+		processData : false,
+		success : function(result) {
+		if(result){			
+			alert("삭제되었습니다.");
+			location.href = location.href;
+		}
+			},
+		error : function(req, status, error) {
+			console.log(error);
+		}
+	})
+});
 $("#theup").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
@@ -337,17 +386,18 @@ $("#commend li #hates").on("click",function(){
 });
 </script>
 <script type="text/javascript">
-$(function(){
-	var sequence =<%=request.getParameter("sequence")%>;
+
+	var seq =<%=request.getParameter("sequence")%>;
 	function submitcom(){
-		var userid = $("input[name='userid']").val();
+		var userid = $("input[name='commentid']").val();
 		var comment = $("#comment").val();
 		var form = $("#servform");
 		form.append("<input type='hidden' name='userid' value='"+userid+"'>");
 		form.append("<input type='hidden' name='comm' value='"+comment+"'>");
-		form.append("<input type='hidden' name='n_num' value='"+sequence+"'>");
+		form.append("<input type='hidden' name='n_num' value='"+seq+"'>");
 		form.submit();
 }
-})
+
+		
 </script>
 <%@include file="../footer.jsp"%>
