@@ -12,9 +12,12 @@ import lombok.ToString;
 @ToString
 public class MemberVO {
 
-	
 	private String userid;
-	private String userpw,userName;
+	
+	private String userpw;
+	
+	private String userName;
+	
 	private String useremail;
 	
 	private boolean enabled;

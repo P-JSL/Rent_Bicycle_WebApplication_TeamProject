@@ -269,10 +269,10 @@ select {
 									style="text-align: center; justify-content: center;">
 									<thead>
 										<tr>
-											<th style="text-align: center; justify-content: center;">名前</th>
-											<th style="text-align: center; justify-content: center;">登録日</th>
-											<th style="text-align: center; justify-content: center;">ip</th>
-											<th colspan="2" style="text-align: center; justify-content: center;">계정 &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp; IP</th>
+											<th style="text-align: center; justify-content: center;">아이디</th>
+											<th style="text-align: center; justify-content: center;">등록일자</th>
+											<th colspan="2" style="text-align: center; justify-content: center;">ip</th>
+											<th colspan="1" style="text-align: center; justify-content: center;">계정</th>
 											<th colspan="3"
 												style="text-align: center; justify-content: center;">기타</th>
 										</tr>
@@ -285,9 +285,9 @@ select {
 												<td class="txt-oflo">${list.regDate }</td>
 												<td class="ip">${list.ip }</td>
 												<td><span class="text-success"
-													id="${list.enabled == true ? 'enabled' : 'disenabled'}">${list.enabled == true ? '사용가능' : '사용불가' }</span></td>
-												<td><span class="text-success"
 													id="${list.thisip == true ? 'Block' : 'NonBlock'}">${list.thisip == true ? '차단' : '차단해체' }</span></td>
+												<td><span class="text-success"
+													id="${list.enabled == true ? 'enabled' : 'disenabled'}">${list.enabled == true ? '사용가능' : '사용불가' }</span></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><select name="select"
 													id="select" style="text-align: center;">
@@ -602,6 +602,14 @@ $(function(e){
 
 	})
 </script>
+	<script type="text/javascript">
+	$(function(){
+		var b = document.querySelectorAll("#Block");
+		$(b).css({"color":"rgba(181, 52, 113,1.0)"},{"font-size" : "1rem"});
+		var nb = document.querySelectorAll("#NonBlock");
+		$(nb).css({"color":"rgba(95, 39, 205,1.0)", "font-size" : "1rem"});
+	})
+	</script>
 	<script>
 
 	am4core.ready(function() {

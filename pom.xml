@@ -68,6 +68,7 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
+		<!-- Validation -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>

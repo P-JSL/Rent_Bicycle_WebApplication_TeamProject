@@ -65,13 +65,9 @@ public class CommonController {
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
 		log.info("logout : " + logout);
-
 		if (error != null) {
-
 			model.addAttribute("error", "아이디 혹은 비밀번호가 틀리셨습니다.");
-
 		}
-
 		if (logout != null) {
 			model.addAttribute("logout", "로그아웃 하셨습니다.");
 		}
@@ -83,19 +79,17 @@ public class CommonController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(MemberVO memvo,HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
+	public String signup(MemberVO memvo, HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
+
 		memvo.setIp(Utility.ip(request));
-		log.info("ip : " + memvo.getIp());
-		log.info("error : " + memvo);
+
 		if (service.signup(memvo)) {
 			service.Account_loginto(memvo.getUserid());
 			log.info("sign up success");
-		} else {
-			trans.rollback();
-			return "redirect:/signup";
+			return "redirect:/CustomLogin";
 		}
 
-		return "redirect:/CustomLogin";
+		return "redirect:/signup";
 	}
 
 	@GetMapping("/review/photo")
@@ -175,7 +169,7 @@ public class CommonController {
 	private NoticeService noticeservice;
 
 	@GetMapping("/board/notice")
-	public String board(String userid, Model model,@ModelAttribute("cri") Criteria cri) {
+	public String board(String userid, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("userid", userid);
 		model.addAttribute("count", noticeservice.NoticeCount());
 		model.addAttribute("list", noticeservice.List(cri));
@@ -193,7 +187,7 @@ public class CommonController {
 
 	@PostAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/board/write")
-	public String board_insert(NoticeVO nvo,@ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
+	public String board_insert(NoticeVO nvo, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		noticeservice.insert(nvo);
 
 		return "redirect:/board/notice";
@@ -206,7 +200,7 @@ public class CommonController {
 		model.addAttribute("vo", noticeservice.viewer(sequence));
 		model.addAttribute("userid", userid);
 		model.addAttribute("reply", rs.replyList(sequence));
-		model.addAttribute("cri",cri);
+		model.addAttribute("cri", cri);
 		return "board/viewer";
 	}
 

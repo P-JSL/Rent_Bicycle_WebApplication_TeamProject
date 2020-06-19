@@ -74,7 +74,6 @@ public class AdminController {
 				}
 			}
 		}
-		System.out.println("MVO : " + mvo);
 		
 		String DataToJson = gson.toJson(Chart.JsonData());
 		System.out.println(DataToJson);
