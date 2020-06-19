@@ -3,6 +3,8 @@ package com.rental.controller;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -196,10 +198,15 @@ public class CommonController {
 	@PreAuthorize("permitAll")
 	@GetMapping("/board/view")
 	public String view(int sequence, Model model, String userid, @ModelAttribute("cri") Criteria cri) {
+		Map<String, Object> replymap = new HashMap<String, Object>();
+		replymap.put("pageNum", cri.getPageNum());
+		replymap.put("amount", cri.getAmount());
+		replymap.put("n_num", sequence);
 		noticeservice.viewcount(sequence);
 		model.addAttribute("vo", noticeservice.viewer(sequence));
 		model.addAttribute("userid", userid);
-		model.addAttribute("reply", rs.replyList(sequence));
+		model.addAttribute("reply", rs.replyList(replymap));
+		model.addAttribute("pageMaker",new PageDTO(cri, rs.count(sequence)));
 		model.addAttribute("cri", cri);
 		return "board/viewer";
 	}

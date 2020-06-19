@@ -1,6 +1,7 @@
 package com.rental.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,9 @@ public class ReplyServiceImpl implements ReplyService {
 	private ReplyMapper mapper;
 	
 	@Override
-	public List<ReplyVO> replyList(int n_num) {
+	public List<ReplyVO> replyList(Map<String, Object> replymap) {
 		// TODO Auto-generated method stub
-		return mapper.replyList(n_num);
+		return mapper.replyList(replymap);
 	}
 	@Override
 	public List<ReplyVO> list() {
@@ -55,5 +56,10 @@ public class ReplyServiceImpl implements ReplyService {
 	public int ReplyDelete(ReplyVO rvo) {
 		// TODO Auto-generated method stub
 		return mapper.ReplyDelete(rvo);
+	}
+	@Override
+	public int count(int n_num) {
+		// TODO Auto-generated method stub
+		return mapper.count(n_num);
 	}
 }

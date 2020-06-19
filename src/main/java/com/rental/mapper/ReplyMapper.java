@@ -1,12 +1,13 @@
 package com.rental.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rental.domain.ReplyVO;
 
 public interface ReplyMapper {
 
-	public List<ReplyVO> replyList(int num);
+	public List<ReplyVO> replyList(Map<String, Object> replymap);
 
 	public List<ReplyVO> Top6list();
 
@@ -21,4 +22,6 @@ public interface ReplyMapper {
 	public ReplyVO Yreply(ReplyVO rvo);
 	
 	public int ReplyDelete(ReplyVO rvo);
+	
+	public int count(int n_num);
 }

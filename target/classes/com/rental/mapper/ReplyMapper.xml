@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rental.mapper.ReplyMapper">
-	<select id="replyList" resultType="com.rental.domain.ReplyVO">
-		select /*+index_asc(noticereply noticereply_pk)*/ * from noticereply
-		where n_num = #{n_num} 
+	<select id="replyList" parameterType="map" resultType="com.rental.domain.ReplyVO">
+		<![CDATA[	
+		 select * from 
+       (
+       select /*+index_asc(noticereply noticereply_pk)*/
+       rownum rn , n.* from noticereply n
+       where rownum <= #{pageNum} * #{amount} and n_num = #{n_num} order by regdate desc
+       ) 
+       where rn > (#{pageNum}-1)*#{amount}  
+	]]>
 	</select>
 
 	<select id="Top6list" resultType="com.rental.domain.ReplyVO">
@@ -38,4 +45,7 @@
 	<delete id="ReplyDelete">
 	delete from noticereply where num = #{num} and userid = #{userid}
 	</delete>
+	<select id="count" resultType="int">
+	select count(*) from noticereply where n_num = #{n_num}
+	</select>
 </mapper>

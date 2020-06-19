@@ -278,8 +278,6 @@ input.btn {
 						<li><a href="${pageMaker.endPage+1}"><i
 								class="fa  fa-arrow-right"></i></a></li>
 					</c:if>
-					</a>
-					</li>
 				</ul>
 			</div>
 		</div>

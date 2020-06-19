@@ -140,7 +140,7 @@ body {
 
 					<tr>
 						<td colspan="5"><input type="submit" value="수정" class="btn"
-							onclick="noticeSave()"> <input type="button"
+							onclick="noticeSave()"> <input type="button" 
 							onclick="location.href='/board/notice'" value="목록" class="btn"></td>
 					</tr>
 
@@ -176,6 +176,7 @@ body {
 										</p>
 									</div>
 								</div>
+
 								<div class="user-comment-desc p-1 pl-2">
 									<p class="m-0 mr-2">
 										<span><i id="likes" class="fa fa-thumbs-up mr-1"
@@ -207,24 +208,49 @@ body {
 								</div>
 								<input type="hidden" name="n_num" value="${re.num }" id="number">
 							</div>
+
 						</div>
 					</li>
+
 				</c:forEach>
+
+				<div class="container"
+					style="text-align: center; justify-content: center; max-height: 45px; position: relative;">
+					<ul class="pagination"
+						style="justify-content: center; position: relative; top: -10px;">
+						<c:if test="${pageMaker.prev }">
+							<li><a href="${pageMaker.startPage - 1 }"><i
+									class="fa  fa-arrow-left"></i></a></li>
+						</c:if>
+						<c:forEach var="num" begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }">
+							<li><a href="${num }"
+								class="${pageMaker.cri.pageNum == num ? 'active':''  }">${num }</a></li>
+						</c:forEach>
+						<c:if test="${pageMaker.next }">
+							<li><a href="${pageMaker.endPage+1}"><i
+									class="fa  fa-arrow-right"></i></a></li>
+						</c:if>
+					</ul>
+				</div>
 				<sec:authorize access="isAuthenticated()">
-					<div class="row">
+					<div class="row" style="position: relative;">
 
 						<input type="hidden" name="commentid" value="${id }">
-						<div class="col-lg-11 col-11">
+						<div class="col-lg-11 col-11" style="margin-top: 15px;">
 							<input type="text" class="form-control"
 								placeholder="write comments ..." id="comment">
 						</div>
-						<div class="col-lg-1 col-1 send-icon">
+
+						<div class="col-lg-1 col-1 send-icon"
+							style="margin-top: 30px; margin-right: 0; padding: 0; right: -5px;">
 							<a href="javascript:void(0)" onclick="submitcom()"><i
 								class="fa fa-paper-plane" aria-hidden="true"></i></a>
 						</div>
 					</div>
 				</sec:authorize>
 			</ul>
+
 		</div>
 	</div>
 </div>
@@ -244,15 +270,35 @@ body {
         console.log( error );
     } );
 	</script>
+
+<script type="text/javascript">
+	ClassicEditor
+    .create( document.querySelector( '#comment' ), {
+    	 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote','undo', 'redo', 'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify', 'alignment', 'fontSize', 'fontFamily', 'highlight:yellowMarker', 'highlight:greenMarker', 'highlight:pinkMarker', 'highlight:blueMarker', 'highlight:redPen', 'highlight:greenPen', 'removeHighlight', 'highlight', 'bold', 'italic', 'strikethrough', 'underline', 'blockQuote',  'heading', 'link', 'numberedList', 'bulletedList',  'indent', 'outdent', 'fontColor', 'fontBackgroundColor', 'code'
+ ]
+
+
+    } )
+    .catch( error => {
+        console.log( error );
+    } );
+	</script>
+<script type="text/javascript">
+
+</script>
 <script type="text/javascript">
 $(function(){
 	
 var tf = ${userid eq id};
 if(tf == false){
-	$(".ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred").addClass("ck-read-only");
-	$(".ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred").attr("contenteditable","false");
+	$("#cont").parent().find(".ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred").addClass("ck-read-only");
+	$("#cont").parent().find(".ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred").attr("contenteditable","false");
 }
+
+var e2 = $("#comment").parent().find(".ck.ck-editor__main");
+$(e2).css({"height":"50px","overflow-y":"hidden"});
 })
+
 </script>
 <script type="text/javascript">
 var csrfHeaderName = "${_csrf.headerName}";
@@ -265,7 +311,6 @@ $("#commend li #delete").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
-	alert("삭제");
 	$.ajax({
 		url : "/reply/delete",
 		type : 'POST',

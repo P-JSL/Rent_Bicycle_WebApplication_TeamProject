@@ -1,11 +1,12 @@
 package com.rental.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rental.domain.ReplyVO;
 
 public interface ReplyService {
-	public List<ReplyVO> replyList(int n_num);
+	public List<ReplyVO> replyList(Map<String, Object> replymap);
 
 	public List<ReplyVO> list();
 
@@ -20,4 +21,6 @@ public interface ReplyService {
 	public ReplyVO Yreply(ReplyVO rvo);
 	
 	public int ReplyDelete(ReplyVO rvo);
+	
+	public int count(int n_num);
 }
