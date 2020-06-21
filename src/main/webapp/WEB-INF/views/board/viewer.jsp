@@ -85,7 +85,7 @@ body {
 				value="${vo.sequence }">
 			<!-- <input type="hidden" value="save" name="t_gubun"> -->
 			<input type="hidden" name="pageNum" value="${ cri.pageNum }">
-			<input type="hidden" name="pageNum" value="${ cri.amount }">
+			<input type="hidden" name="amount" value="${ cri.amount }">
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 
 			<fieldset>
@@ -139,9 +139,15 @@ body {
 
 
 					<tr>
-						<td colspan="5"><input type="submit" value="수정" class="btn"
-							onclick="noticeSave()"> <input type="button" 
-							onclick="location.href='/board/notice'" value="목록" class="btn"></td>
+						<td colspan="5"><sec:authorize access="isAuthenticated()">
+								<sec:authentication property="principal.member.userid" var="is" />
+								<c:if test="${is == userid }">
+									<input type="submit" value="수정" class="btn"
+										onclick="noticeSave()">
+								</c:if>
+							</sec:authorize> <input type="button"
+							onclick="location.href='/board/notice?pageNum=<%=request.getParameter("pageNum")%>'"
+							value="목록" class="btn"></td>
 					</tr>
 
 				</table>
@@ -214,7 +220,7 @@ body {
 
 				</c:forEach>
 
-				<div class="container"
+				<div class="col-md-12 col-sx-12 col-sm-12 col-lg-12"
 					style="text-align: center; justify-content: center; max-height: 45px; position: relative;">
 					<ul class="pagination"
 						style="justify-content: center; position: relative; top: -10px;">
@@ -225,7 +231,7 @@ body {
 						<c:forEach var="num" begin="${pageMaker.startPage }"
 							end="${pageMaker.endPage }">
 							<li><a href="${num }"
-								class="${pageMaker.cri.pageNum == num ? 'active':''  }">${num }</a></li>
+								class="${pageMaker.cri_c.pageNum_c == num ? 'active':''  }">${num }</a></li>
 						</c:forEach>
 						<c:if test="${pageMaker.next }">
 							<li><a href="${pageMaker.endPage+1}"><i
@@ -238,8 +244,7 @@ body {
 
 						<input type="hidden" name="commentid" value="${id }">
 						<div class="col-lg-11 col-11" style="margin-top: 15px;">
-							<input type="text" class="form-control"
-								placeholder="write comments ..." id="comment">
+							<textarea class="form-control" id="comment"> </textarea>
 						</div>
 
 						<div class="col-lg-1 col-1 send-icon"
@@ -264,7 +269,7 @@ body {
 <script type="text/javascript">
 	ClassicEditor
     .create( document.querySelector( '#cont' ), {
-    	removePlugins: [  'Image', 'List' ],
+   	 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote','undo', 'redo', 'indent', 'outdent']
     } )
     .catch( error => {
         console.log( error );
@@ -274,7 +279,7 @@ body {
 <script type="text/javascript">
 	ClassicEditor
     .create( document.querySelector( '#comment' ), {
-    	 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote','undo', 'redo', 'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify', 'alignment', 'fontSize', 'fontFamily', 'highlight:yellowMarker', 'highlight:greenMarker', 'highlight:pinkMarker', 'highlight:blueMarker', 'highlight:redPen', 'highlight:greenPen', 'removeHighlight', 'highlight', 'bold', 'italic', 'strikethrough', 'underline', 'blockQuote',  'heading', 'link', 'numberedList', 'bulletedList',  'indent', 'outdent', 'fontColor', 'fontBackgroundColor', 'code'
+    	 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote','undo', 'redo','indent', 'outdent'
  ]
 
 
@@ -284,13 +289,11 @@ body {
     } );
 	</script>
 <script type="text/javascript">
-
-</script>
-<script type="text/javascript">
 $(function(){
 	
-var tf = ${userid eq id};
-if(tf == false){
+var t1 = '<%=request.getParameter("userid")%>';
+var t2 = '${ud}';
+if((t1 == t2) == false){
 	$("#cont").parent().find(".ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred").addClass("ck-read-only");
 	$("#cont").parent().find(".ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred").attr("contenteditable","false");
 }
@@ -435,7 +438,7 @@ $("#commend li #hates").on("click",function(){
 	var seq =<%=request.getParameter("sequence")%>;
 	function submitcom(){
 		var userid = $("input[name='commentid']").val();
-		var comment = $("#comment").val();
+		var comment = $("#comment").next().find(".ck.ck-editor__main").children().html();
 		var form = $("#servform");
 		form.append("<input type='hidden' name='userid' value='"+userid+"'>");
 		form.append("<input type='hidden' name='comm' value='"+comment+"'>");
@@ -443,6 +446,29 @@ $("#commend li #hates").on("click",function(){
 		form.submit();
 }
 
-		
+	</script>
+
+<script type="text/javascript">
+$(function(){	
+			var form =$("#servform");
+			$(".pagination li a").on("click",function(e){
+				e.preventDefault();
+				var pageNum = $(this).attr("href");
+				console.log(pageNum);
+				var seq = <%=request.getParameter("sequence")%>;
+				var userid = '<%=request.getParameter("userid")%>';
+				var pn = <%=request.getParameter("pageNum")%>;
+				$(form).attr("action","/board/view");
+				$(form).attr("method","get");
+				form.append("<input type='hidden' name='pageNum_c' value='"+pageNum+"'>");
+				form.append("<input type='hidden' name='amount_c' value='${pageMaker.cri_c.amount_c}'>");
+				form.append("<input type='hidden' name='pageNum' value='"+pn+"'>");
+				form.append("<input type='hidden' name='sequence' value='"+seq+"'>");
+				form.append("<input type='hidden' name='userid' value='"+userid+"'>");
+				form.submit();
+			})
+})
 </script>
+
+
 <%@include file="../footer.jsp"%>

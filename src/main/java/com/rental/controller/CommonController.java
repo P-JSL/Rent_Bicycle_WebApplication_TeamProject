@@ -18,15 +18,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rental.domain.ConTactVO;
 import com.rental.domain.Criteria;
+import com.rental.domain.Criteria_c;
 import com.rental.domain.MemberVO;
 import com.rental.domain.NoticeVO;
 import com.rental.domain.PageDTO;
+import com.rental.domain.PageDTO_c;
 import com.rental.domain.QnAVO;
 import com.rental.domain.ReplyVO;
 import com.rental.domain.ReviewVO;
@@ -197,17 +201,20 @@ public class CommonController {
 
 	@PreAuthorize("permitAll")
 	@GetMapping("/board/view")
-	public String view(int sequence, Model model, String userid, @ModelAttribute("cri") Criteria cri) {
+	public String view(int sequence, Model model, String userid, @RequestParam("pageNum") int pageNum,@ModelAttribute("cri_c") Criteria_c cri_c) {
+		
 		Map<String, Object> replymap = new HashMap<String, Object>();
-		replymap.put("pageNum", cri.getPageNum());
-		replymap.put("amount", cri.getAmount());
+		replymap.put("pageNum", cri_c.getPageNum_c());
+		replymap.put("amount", cri_c.getAmount_c());
 		replymap.put("n_num", sequence);
 		noticeservice.viewcount(sequence);
+		
 		model.addAttribute("vo", noticeservice.viewer(sequence));
 		model.addAttribute("userid", userid);
 		model.addAttribute("reply", rs.replyList(replymap));
-		model.addAttribute("pageMaker",new PageDTO(cri, rs.count(sequence)));
-		model.addAttribute("cri", cri);
+		model.addAttribute("pageMaker",new PageDTO_c(cri_c, rs.count(sequence)));
+		model.addAttribute("cri_c", cri_c);
+		model.addAttribute("sequence", sequence);
 		return "board/viewer";
 	}
 

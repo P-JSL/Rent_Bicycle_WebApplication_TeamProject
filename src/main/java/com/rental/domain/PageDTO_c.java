@@ -17,10 +17,10 @@ public class PageDTO_c {
 	
 	private int total; //총 레코드 개수
 	
-	private Criteria_c cri; // 페이지 넘버, 1블록당 보여줄 개수
+	private Criteria_c cri_c; // 페이지 넘버, 1블록당 보여줄 개수
 	
 	public PageDTO_c(Criteria_c cri, int total) {
-		this.cri = cri;
+		this.cri_c = cri;
 		this.total = total;
 		this.endPage = (int) (Math.ceil(cri.getPageNum_c() / 10.0) * 10);
 		this.startPage = this.endPage - 9 ;
