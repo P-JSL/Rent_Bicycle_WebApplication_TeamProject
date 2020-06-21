@@ -1,9 +1,6 @@
 package com.rental.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +21,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.rental.domain.ApplyVO;
-import com.rental.domain.Criteria_c;
 import com.rental.domain.IPBanList;
 import com.rental.domain.MemberVO;
 import com.rental.domain.NoticeVO;
@@ -36,7 +32,6 @@ import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
-import com.rental.util.ReplyTemplete;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -352,27 +347,27 @@ public class MainController {
 	@Setter(onMethod_ = { @Autowired })
 	private IPService ipservice;
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping(value = "/ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 * public ResponseEntity<Boolean> ip(@RequestBody String JsonData,
-	 * HttpServletResponse res, HttpServletRequest req) throws JsonParseException,
-	 * JsonMappingException, IOException {
-	 * 
-	 * JsonParser parser = new JsonParser(); log.warn(JsonData); String userid =
-	 * parser.parse(JsonData).getAsJsonObject().get("userid").getAsString(); String
-	 * ip = parser.parse(JsonData).getAsJsonObject().get("ip").getAsString();
-	 * boolean ban =
-	 * parser.parse(JsonData).getAsJsonObject().get("ban").getAsBoolean();
-	 * 
-	 * IPBanList iplist = new IPBanList();
-	 * 
-	 * iplist.setIp(ip); iplist.setUserid(userid); log.warn("아이디 !! : " + userid);
-	 * log.warn("IP !! : " + ip); log.warn("ban 여부 : " + ban); boolean ok = false;
-	 * if (!ban) { ok = ipservice.ipinsert(iplist) == 1 ? true : false; } else { ok
-	 * = ipservice.ipdelete(iplist) == 1 ? false : true; } log.warn("OK boolean : "
-	 * + ok); return new ResponseEntity<>(ok, HttpStatus.OK); }
-	 */
+	
+	  @ResponseBody
+	  
+	  @PostMapping(value = "/ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	  public ResponseEntity<Boolean> ip(@RequestBody String JsonData,
+	  HttpServletResponse res, HttpServletRequest req) throws JsonParseException,
+	  JsonMappingException, IOException {
+	  
+	  JsonParser parser = new JsonParser(); log.warn(JsonData); String userid =
+	  parser.parse(JsonData).getAsJsonObject().get("userid").getAsString(); String
+	  ip = parser.parse(JsonData).getAsJsonObject().get("ip").getAsString();
+	  boolean ban =
+	  parser.parse(JsonData).getAsJsonObject().get("ban").getAsBoolean();
+	  
+	  IPBanList iplist = new IPBanList();
+	  
+	  iplist.setIp(ip); iplist.setUserid(userid); log.warn("아이디 !! : " + userid);
+	  log.warn("IP !! : " + ip); log.warn("ban 여부 : " + ban); boolean ok = false;
+	  if (!ban) { ok = ipservice.ipinsert(iplist) == 1 ? true : false; } else { ok
+	  = ipservice.ipdelete(iplist) == 1 ? false : true; } log.warn("OK boolean : "
+	  + ok); return new ResponseEntity<>(ok, HttpStatus.OK); }
+	 
 	
 }
