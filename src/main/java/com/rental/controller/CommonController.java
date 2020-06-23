@@ -13,6 +13,7 @@ import org.apache.ibatis.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.web.util.matcher.IpAddressMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -88,7 +89,7 @@ public class CommonController {
 	public String signup(MemberVO memvo, HttpServletRequest request) throws UnsupportedEncodingException, SQLException {
 
 		memvo.setIp(Utility.ip(request));
-
+		
 		if (service.signup(memvo)) {
 			service.Account_loginto(memvo.getUserid());
 			log.info("sign up success");
