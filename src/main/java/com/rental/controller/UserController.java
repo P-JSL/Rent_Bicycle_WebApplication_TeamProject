@@ -66,9 +66,11 @@ public class UserController {
 
 	@GetMapping("/Reservation")
 	public void Reservation(String userid, Model model, Criteria cri) {
-		for (ProductVO pvo : ps.AllList()) {
-			if (pvo.getMany() == 0 && pvo.getStatus() == 1) {
-				ps.statusminus(pvo.getNum());
+		if(ps.AllList() != null) {			
+			for (ProductVO pvo : ps.AllList()) {
+				if (pvo.getMany() == 0 && pvo.getStatus() == 1) {
+					ps.statusminus(pvo.getNum());
+				}
 			}
 		}
 		// 다중 파라미터를 mybatis로 보낼떄
@@ -76,11 +78,15 @@ public class UserController {
 		map.put("userid", userid);
 		map.put("pageNum", cri.getPageNum());
 		map.put("amount", cri.getAmount());
-
-		model.addAttribute("count", rst.count(userid));
-		model.addAttribute("res", rst.pageList(map));
-		model.addAttribute("userid", userid);
-		model.addAttribute("pageMaker", new PageDTO(cri, rst.count(userid).getCount()));
+		try {			
+			model.addAttribute("count", rst.count(userid));
+			model.addAttribute("res", rst.pageList(map));
+			model.addAttribute("userid", userid);
+			model.addAttribute("pageMaker", new PageDTO(cri, rst.count(userid).getCount()));
+		}catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getClass().getMethods());
+		}
 
 	}
 

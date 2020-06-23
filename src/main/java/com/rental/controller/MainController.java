@@ -32,6 +32,7 @@ import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
+import com.rental.service.ResTableService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -369,5 +370,26 @@ public class MainController {
 	  = ipservice.ipdelete(iplist) == 1 ? false : true; } log.warn("OK boolean : "
 	  + ok); return new ResponseEntity<>(ok, HttpStatus.OK); }
 	 
-	
+		@Setter(onMethod_ = { @Autowired })
+		private ResTableService rst;
+
+		
+	  @ResponseBody
+		@PostMapping(value = "/res_conf", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		public ResponseEntity<Boolean> res_conf(@RequestBody String JsonData, HttpServletResponse res,
+				HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+			JsonParser parser = new JsonParser();
+			log.warn(JsonData);
+			String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+
+			ApplyVO avo = new ApplyVO();
+			avo.setUserid(userid);
+
+			log.warn("아이디 !! : " + userid);
+
+			boolean ok = rst.count(userid) != null ? true : false;
+			System.out.println("ok ? : " + ok);
+			return new ResponseEntity<>(ok, HttpStatus.OK);
+		}
 }
