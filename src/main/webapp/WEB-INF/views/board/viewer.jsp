@@ -307,10 +307,9 @@ $(e2).css({"height":"50px","overflow-y":"hidden"});
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 var sequence = <%=request.getParameter("sequence")%>;
-$("#commend li #delete").on("click",function(){
 	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
+$("#commend li #delete").on("click",function(){
 	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
-
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
