@@ -271,7 +271,7 @@ select {
 										<tr>
 											<th style="text-align: center; justify-content: center;">아이디</th>
 											<th style="text-align: center; justify-content: center;">등록일자</th>
-											<th colspan="2" style="text-align: center; justify-content: center;">ip</th>
+											<th colspan="1" style="text-align: center; justify-content: center;">ip</th>
 											<th colspan="1" style="text-align: center; justify-content: center;">계정</th>
 											<th colspan="3"
 												style="text-align: center; justify-content: center;">기타</th>
@@ -285,9 +285,7 @@ select {
 												<td class="txt-oflo">${list.regDate }</td>
 												<td class="ip">${list.ip }</td>
 												<td><span class="text-success"
-													id="${list.thisip == true ? 'Block' : 'NonBlock'}">${list.thisip == true ? '차단' : '차단해체' }</span></td>
-												<td><span class="text-success"
-													id="${list.enabled == true ? 'enabled' : 'disenabled'}">${list.enabled == true ? '사용가능' : '사용불가' }</span></td>
+													id="${list.enabled == true && list.thisip == false ? 'enabled' : 'disenabled'}">${list.enabled == true && list.thisip == false ? '사용가능' : '사용불가' }</span></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><select name="select"
 													id="select" style="text-align: center;">

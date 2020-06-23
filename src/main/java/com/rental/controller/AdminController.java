@@ -1,6 +1,5 @@
 package com.rental.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,18 +62,21 @@ public class AdminController {
 	@GetMapping("/index")
 	public void index(String userid, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("welcome admin dashboard");
-		
+
 		List<MemberVO> mvo = service.getListWithPaging(cri);
-		
+
 		List<IPBanList> ib = ips.find_ip_ban_list();
-		for(int i = 0 ; i < mvo.size() ; i ++) {
-			for(int j=0; j < ib.size(); j++) {				
-				if(mvo.get(i).getIp().equals(ib.get(j).getIp())) {
+		for (int i = 0; i < mvo.size(); i++) { // i = 1 ~ 6
+			for (int j = 0; j < ib.size(); j++) { // j = 1
+				if (mvo.get(i).getUserid().equals(ib.get(j).getUserid())
+						&& mvo.get(i).getIp().equals(ib.get(j).getIp())) {
 					mvo.get(i).setThisip(!ib.get(j).isEnabled());
+				} else {
+					mvo.get(i).setThisip(ib.get(j).isEnabled());
 				}
 			}
 		}
-		
+
 		String DataToJson = gson.toJson(Chart.JsonData());
 		System.out.println(DataToJson);
 		model.addAttribute("JsonData", DataToJson);
@@ -82,7 +84,8 @@ public class AdminController {
 		model.addAttribute("reply", rs.list());
 		model.addAttribute("users", service.PureAllUser());
 		model.addAttribute("loginfo", service.UserLogInfo(userid));
-		model.addAttribute("UserList", mvo);;
+		model.addAttribute("UserList", mvo);
+		;
 		model.addAttribute("pageMaker", new PageDTO(cri, service.AllUser(cri)));
 
 	}
