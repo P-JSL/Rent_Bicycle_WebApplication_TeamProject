@@ -13,7 +13,7 @@
 	<delete id="ipdelete">
 		delete from ipbanlist where userid = #{userid} and ip = #{ip}
 	</delete>
-	<select id="isBlock" resultType="com.rental.domain.IPBanList">
-		select * from ipbanlist where ip = #{ip}
+	<select id="isBlock" parameterType="map"  resultType="com.rental.domain.IPBanList">
+		select * from ipbanlist where ip = #{ip} and userid = #{userid}
 	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.rental.security;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -49,10 +51,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String password = (String) authentication.getCredentials();
 
 		log.debug("AuthenticationProvider :::::: 1");
-
+		HashMap<String, String> ip = new HashMap<String, String>();
 		CustomUser user = (CustomUser) service.loadUserByUsername(username);
-		if (ips.isBlock(user.getMember().getIp()) != null) {
-			if (!ips.isBlock(user.getMember().getIp()).isEnabled()) {
+		ip.put("ip",user.getMember().getIp());
+		ip.put("userid", user.getMember().getUserid());
+		if (ips.isBlock(ip) != null) {
+			if (!ips.isBlock(ip).isEnabled()) {
 				log.info("IP가 차단 되었습니다.");
 				throw new org.springframework.security.authentication.AccountExpiredException(IP_BLOCK_ID);
 			}

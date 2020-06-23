@@ -1,5 +1,6 @@
 package com.rental.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class IPServiceImpl implements IPService{
 		return mapper.ipinsert(ip);
 	}
 	@Override
-	public IPBanList isBlock(String ip) {
+	public IPBanList isBlock(HashMap<String,String> ip) {
 		// TODO Auto-generated method stub
 		return mapper.isBlock(ip);
 	}
