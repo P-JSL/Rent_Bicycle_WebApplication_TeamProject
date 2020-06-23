@@ -230,7 +230,7 @@ input.btn {
 									</thead>
 									<tbody style="text-align: center;">
 										<c:set
-											value="${pageMaker_c.total - (pageMaker_c.cri.pageNum_c - 1) * pageMaker_c.cri.amount_c}"
+											value="${pageMaker_c.total - (pageMaker_c.cri_c.pageNum_c - 1) * pageMaker_c.cri_c.amount_c}"
 											var="bno"></c:set>
 										<c:forEach items="${cs }" var="no">
 
@@ -257,7 +257,7 @@ input.btn {
 									<c:forEach var="num" begin="${pageMaker_c.startPage }"
 										end="${pageMaker_c.endPage }">
 										<li><a href="${num }"
-											class="${pageMaker_c.cri.pageNum_c == num ? 'active':''  }">${num }</a></li>
+											class="${pageMaker_c.cri_c.pageNum_c == num ? 'active':''  }">${num }</a></li>
 									</c:forEach>
 									<c:if test="${pageMaker_c.next }">
 										<li><a href="${pageMaker_c.endPage+1}"><i

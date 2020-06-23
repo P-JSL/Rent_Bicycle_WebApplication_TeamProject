@@ -84,7 +84,7 @@
 					  $("header a").css("color", "#fff");
 					  $("header p").css("color", "#fff");
 					  $("header ul#navigation ul.submenu").css("background", "transparent");
-					  $("ul.submenu a").css("color", "black");
+					  $("ul.submenu a").css("color", "#fff");
 					  $("div.mobile_menu a").css("color", "black");
 				  }
 				  if($(this).scrollTop() > 400){
