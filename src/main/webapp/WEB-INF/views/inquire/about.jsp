@@ -38,7 +38,7 @@
 									내 집 앞으로 쏘카를 부를 수도 있습니다.</p>
 								<section class="banner-01" style="overflow: hidden;">
 									<sec:authorize access="isAuthenticated()">
-										<a href="/inquire" class="btn btna2 mv3 moveit">렌탈 문의 바로가기</a>
+										<a href="/inquire" class="btn btna2 mv3 moveit">렌탈 예약 문의 바로가기</a>
 									</sec:authorize>
 									<sec:authorize access="isAnonymous()">
 										<a href="javascript:loginmove();"
