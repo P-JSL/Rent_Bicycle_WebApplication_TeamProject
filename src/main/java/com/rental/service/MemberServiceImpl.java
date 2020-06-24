@@ -1,7 +1,5 @@
 package com.rental.service;
 
-import java.util.UUID;
-
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 
@@ -95,6 +93,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO FindId(MemberVO mvo) {
 		// TODO Auto-generated method stub
 		return mapper.FindId(mvo);
+	}
+	@Override
+	public MemberVO read(String username) {
+		// TODO Auto-generated method stub
+		return mapper.read(username);
 	}
 
 	private String MailSendMethod(MemberVO mvo) {

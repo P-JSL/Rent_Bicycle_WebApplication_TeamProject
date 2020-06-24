@@ -21,4 +21,6 @@ public interface MemberService {
 	public String Reset(MemberVO mvo);
 	
 	public MemberVO FindId(MemberVO mvo);
+	
+	public MemberVO read(String username);
 }

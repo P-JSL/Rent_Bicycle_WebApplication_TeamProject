@@ -33,10 +33,12 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
-
+	<!-- <logger name="org.springframework.security.*">
+		<level value="info" />
+	</logger> -->
 	<!-- Root Logger -->
 	<root>
-		<priority value="info" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
 	<!-- SQL Logger -->
