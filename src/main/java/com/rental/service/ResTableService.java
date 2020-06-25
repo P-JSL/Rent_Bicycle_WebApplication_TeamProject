@@ -3,7 +3,6 @@ package com.rental.service;
 import java.util.HashMap;
 import java.util.List;
 
-import com.rental.domain.Criteria;
 import com.rental.domain.ResTableVO;
 
 public interface ResTableService {
