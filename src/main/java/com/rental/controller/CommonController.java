@@ -232,11 +232,14 @@ public class CommonController {
 		return "redirect:/board/view";
 	}
 
-	@GetMapping("/forgot/forgot")
-	public void fotgot() {
+	@GetMapping("/forgot/forgotpw")
+	public void fotgotpw() {
 
 	}
+	@GetMapping("/forgot/forgotid")
+	public void fotgotid() {
 
+	}
 	@GetMapping("/contact/contact")
 	public void contact() {
 

@@ -77,9 +77,13 @@
 				</div>
 
 				<div class="w-full text-center p-t-27 p-b-239">
-					<span class="txt1"> Forgot </span> <a
-						href="javascript:window.open('/forgot/forgot','','width=100px,heigth=100px, resize=none')"
-						class="txt2"> User name / password? </a>
+					<span class="txt1"> ID/PW Search </span><hr><br> <a
+						href="javascript:void(0)" onClick="window.open('/forgot/forgotid','','width=100px,heigth=100px, resize=none')"
+						class="txt2"> 아이디 찾기 </a>
+						 <hr><br><a
+						href="javascript:void(0)" onclick="window.open('/forgot/forgotpw','','width=100px,heigth=100px, resize=none');"
+						class="txt2"> 비밀번호 찾기 </a>
+						<hr>
 				</div>
 
 
@@ -127,4 +131,5 @@
 
 	})
 </script>
+
 <%@include file="footer.jsp"%>

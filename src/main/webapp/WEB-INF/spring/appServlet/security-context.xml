@@ -66,7 +66,7 @@
 			invalidate-session="true" />
 
 		<security:session-management
-			session-fixation-protection="migrateSession">
+			session-fixation-protection="changeSessionId">
 			<security:concurrency-control
 				max-sessions="1" expired-url="/CustomLogin"
 				error-if-maximum-exceeded="true" />
