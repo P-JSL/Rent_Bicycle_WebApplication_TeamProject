@@ -45,7 +45,7 @@
 				method="post">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token }"> <span
-					class="login100-form-title p-b-34"> Account Login <c:if
+					class="login100-form-title p-b-34"> 로그인 <c:if
 						test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 						<font color="red">
 							<p>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
