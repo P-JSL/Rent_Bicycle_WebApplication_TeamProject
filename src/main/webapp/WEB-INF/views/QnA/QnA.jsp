@@ -40,7 +40,7 @@
 	</ul>
 </div>
 <div class="container">
-	<h1 class="heading-primary">Q & A 게시판</h1>
+	<h1 class="heading-primary">FAQ 게시판</h1>
 	<div class="accordion">
 		<dl>
 			<c:forEach items="${list }" var="qa">

@@ -95,9 +95,9 @@
 												</ul></li>
 											<li><a href="contact.html">커뮤니티</a>
 												<ul class="submenu">
-													<li><a href="/QnA/QnA">Q&A</a></li>
 													<li><a href="/board/notice">공지사항</a></li>
 													<li><a href="/review/photo">포토리뷰</a></li>
+													<li><a href="/QnA/QnA">FAQ</a></li>
 												</ul></li>
 											<li><a href="javascript:void(0)">기타</a>
 												<ul class="submenu">

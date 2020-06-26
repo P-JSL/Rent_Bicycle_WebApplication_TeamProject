@@ -151,7 +151,7 @@ public class CommonController {
 	public String inWrite(QnAVO qvo, Model model, RedirectAttributes rttr) {
 		rttr.addAttribute("userid", qvo.getWriter());
 		qs.insert(qvo);
-		return "redirect:/QnA/QnA";
+		return "redirect:/admin/QnA";
 	}
 
 	@GetMapping("/QnA/view")

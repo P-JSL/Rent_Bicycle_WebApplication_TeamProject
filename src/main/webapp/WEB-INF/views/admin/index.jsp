@@ -51,7 +51,14 @@
 <![endif]-->
 <link href="/resources/admin/css/admin.index.css" rel="stylesheet">
 </head>
-
+<style>
+#intable th{
+padding: 0 !important;
+margin: 0 !important;
+border-left: 1px solid #eee;
+height: 30px;
+}
+</style>
 <body>
 
 	<!-- Preloader -->
@@ -211,14 +218,23 @@
 							<div class="table-responsive" id="table">
 								<table class="table table-striped"
 									style="text-align: center; justify-content: center;">
-									<thead>
+									<thead style="border-top: 1px solid">
 										<tr>
 											<th style="text-align: center; justify-content: center;">아이디</th>
 											<th style="text-align: center; justify-content: center;">등록일자</th>
-											<th colspan="1" style="text-align: center; justify-content: center;">ip</th>
-											<th colspan="1" style="text-align: center; justify-content: center;">계정</th>
-											<th colspan="3"
-												style="text-align: center; justify-content: center;">기타</th>
+											<th colspan="1"
+												style="text-align: center; justify-content: center;">ip</th>
+											<th colspan="1"
+												style="text-align: center; justify-content: center;">계정</th>
+											<th colspan="3" 
+												style="text-align: center; justify-content: center; padding-bottom: 0 !important;"><table class="table table-striped" id="intable" >
+													<tr >
+														<th style="text-align: center;">계정여부</th>
+														<th style="text-align: center;width:155px; ">IP차단여부</th>
+														<th style="text-align: center; width: 75px;">㉿</th>
+													</tr>
+												</table>
+											</th>
 										</tr>
 									</thead>
 									<tbody>

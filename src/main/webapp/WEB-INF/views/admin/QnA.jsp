@@ -105,7 +105,7 @@
 											<tr>
 												<td>${bno}</td>
 												<td><a href="${no.num }" id="num">${no.title }</a></td>
-												<td>${no.content }</td>
+												<td style="white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; height: 20px;">${fn:substring(no.content,0,30) }...</td>
 												<td class="${no.writer }" id="userid">관리자</td>
 												<td><fmt:formatDate value="${no.regdate }" pattern="YY-MM-dd HH:MM"/></td>
 												<td><button class="btn btn-dangerous" id="delete">삭제</button></td>

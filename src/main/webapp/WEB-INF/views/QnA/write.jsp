@@ -74,7 +74,7 @@ body {
 		<form name="write" style="background-color: #6daeb8"
 			action="/QnA/write" method="post">
 			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}"> <input type="hidden" name="userid"
+				value="${_csrf.token}"> <input type="hidden" name="writer"
 				value="<%=request.getParameter("userid")%>">
 			<!-- <input type="hidden" value="save" name="t_gubun"> -->
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
