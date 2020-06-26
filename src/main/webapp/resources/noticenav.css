@@ -65,6 +65,7 @@
 	transition: 0.3s;
 	background: #fff;
 	font-size: 2rem;
+	border-bottom: 0.5px solid #c3c3c3;
 }
 
 .action ul li:hover {
@@ -80,7 +81,9 @@
 	opacity: 0.4;
 	transform: scale(0.8);
 }
-
+.action ul li i a{
+	color:black;
+}
 .action ul li:hover i {
 	opacity: 1;
 }

@@ -38,7 +38,6 @@ a:hover {
 }
 
 a:link, a:visited {
-	color: #4083A9;
 	outline: none;
 	text-decoration: none;
 }
