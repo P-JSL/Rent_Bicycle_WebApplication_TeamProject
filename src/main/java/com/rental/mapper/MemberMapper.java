@@ -19,4 +19,6 @@ public interface MemberMapper {
 	public int Reset(MemberVO mvo);
 	
 	public MemberVO FindId(MemberVO mvo);
+	
+	public void updatedate(String userid);
 }

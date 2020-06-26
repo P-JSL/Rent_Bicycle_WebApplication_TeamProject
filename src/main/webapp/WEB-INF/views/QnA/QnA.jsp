@@ -31,9 +31,12 @@
 <div class="action" onclick="actionToggle();">
 	<span>+</span>
 	<ul>
-		<li><i class="fa fa-paper-plane-o fa-fw" aria-hidden="true"><a href="/board/notice">&nbsp;&nbsp;&nbsp;Notice</a></i></li>
-		<li><i class="fa fa-commenting-o fa-fw" aria-hidden="true"><a href="/review/photo">&nbsp;&nbsp;&nbsp;PhotoView</a></i></li>
-		<li><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"><a href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
+		<li><i class="fa fa-paper-plane-o fa-fw" aria-hidden="true"><a
+				href="/board/notice">&nbsp;&nbsp;&nbsp;Notice</a></i></li>
+		<li><i class="fa fa-commenting-o fa-fw" aria-hidden="true"><a
+				href="/review/photo">&nbsp;&nbsp;&nbsp;PhotoView</a></i></li>
+		<li><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"><a
+				href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
 	</ul>
 </div>
 <div class="container">
@@ -118,9 +121,9 @@
 	})();
 </script>
 <script type="text/javascript">
- function actionToggle(){
-	 var action = document.querySelector(".action");
-	 action.classList.toggle('active');
- }
+	function actionToggle() {
+		var action = document.querySelector(".action");
+		action.classList.toggle('active');
+	}
 </script>
 <%@include file="../footer.jsp"%>

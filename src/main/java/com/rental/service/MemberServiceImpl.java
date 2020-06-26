@@ -80,6 +80,7 @@ public class MemberServiceImpl implements MemberService {
 		String userpw = BCPE.encode(mvo.getUserpw());
 		mvo.setUserpw(userpw);
 		mapper.Reset(mvo);
+		mapper.updatedate(mvo.getUserid());
 		return mvo.getUserpw();
 	}
 

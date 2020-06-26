@@ -13,74 +13,9 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="custom.css">
+<link rel="stylesheet" type="text/css" href="/resources/custom.css">
+<link rel="stylesheet" type="text/css" href="/resources/product_view.css">
 </head>
-<style type="text/css">
-body {
-	font-family: 'Roboto Condensed', sans-serif;
-}
-
-.hedding {
-	font-size: 20px;
-	color: #ab8181`;
-}
-
-.main-section {
-	position: relative;
-	left: 50%;
-	right: 50%;
-	transform: translate(-50%, 5%);
-}
-
-.left-side-product-box img {
-	width: 100%;
-}
-
-.left-side-product-box .sub-img img {
-	margin-top: 5px;
-	width: 83px;
-	height: 100px;
-}
-
-.right-side-pro-detail span {
-	font-size: 15px;
-}
-
-.right-side-pro-detail p {
-	font-size: 25px;
-	color: #a1a1a1;
-}
-
-.right-side-pro-detail .price-pro {
-	color: #E45641;
-}
-
-.right-side-pro-detail .tag-section {
-	font-size: 18px;
-	color: #5D4C46;
-}
-
-.pro-box-section .pro-box img {
-	width: 100%;
-	height: 200px;
-}
-
-.border {
-	border: none !important;
-}
-
-@media ( min-width :360px) and (max-width:640px) {
-	.pro-box-section .pro-box img {
-		height: auto;
-	}
-}
-
-@media ( min-width :1200px) {
-	.container {
-		max-width: 1170px;
-	}
-}
-</style>
 <body>
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal.member.userid" var="id" />

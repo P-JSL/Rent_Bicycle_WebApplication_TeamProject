@@ -49,64 +49,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<link href="/resources/admin/css/admin.index.css" rel="stylesheet">
 </head>
-<style type="text/css">
-.flex {
-	width: 50vw;
-	height: 80px;
-	line-height: 80px;
-	background-color: white;
-	margin: 0 auto;
-}
-
-.flex ul {
-	display: flex;
-	padding: 0;
-	margin: 0;
-	box-shadow: 0 10px 20px 0 rgba(black, 0.25);
-}
-
-.flex ul li {
-	flex: 1;
-	list-style: none;
-	text-align: center;
-	position: relative;
-	font-size: 20px;
-	font-weight: bold;
-	cursor: pointer;
-	user-select: none;
-}
-
-.flex ul li &:hover {
-	background-color: rgba(white, 0.25);
-	color: #f564a9;
-}
-
-.flex ul .active:hover {
-	width: 10%;
-	background-color: #f564a9;
-	height: 5px;
-}
-
-#chartdiv {
-	width: 100%;
-	height: 500px;
-}
-
-select {
-	padding: 4px;
-	font-size: 12px;
-	border: 1px solid #ccc;
-	background-color: #fff;
-	appearance: none; /* 기본 스타일 없애기 */
-}
-
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
-	.table>thead>tr>td, .table>thead>tr>th {
-	vertical-align: inherit;
-}
-</style>
-
 
 <body>
 
@@ -417,38 +361,7 @@ select {
 	<script src="https://www.amcharts.com/lib/4/core.js"></script>
 	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
 	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$.toast({
-				heading : 'Welcome to admin Page',
-				text : 'You are Management All of User in Admin Page.',
-				position : 'top-right',
-				loaderBg : '#ff6849',
-				icon : 'info',
-				hideAfter : 3500,
-				stack : 6
-			})
-		});
-
-	</script>
-
-
-	<script type="text/javascript">
-		$(".flex ul li").on("mouseover", function(e) {
-			$(this).addClass("active");
-		})
-		$(".flex ul li").on("mouseout", function(e) {
-			$(this).removeClass("active");
-		})
-	</script>
-	<script type="text/javascript">
-		var actionForm = $("#actionForm");
-		$(".paging li a").on("click", function(e) {
-			e.preventDefault();
-			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-			actionForm.submit();
-		})
-	</script>
+	<script src="/resources/admin/js/admin.index.js"></script>
 	<script type="text/javascript">
 	var data = ${JsonData };
 	console.log(data);
@@ -600,14 +513,7 @@ $(function(e){
 
 	})
 </script>
-	<script type="text/javascript">
-	$(function(){
-		var b = document.querySelectorAll("#Block");
-		$(b).css({"color":"rgba(181, 52, 113,1.0)"},{"font-size" : "1rem"});
-		var nb = document.querySelectorAll("#NonBlock");
-		$(nb).css({"color":"rgba(95, 39, 205,1.0)", "font-size" : "1rem"});
-	})
-	</script>
+
 	<script>
 
 	am4core.ready(function() {

@@ -80,4 +80,7 @@
 	<select id="FindId" resultType="com.rental.domain.MemberVO">
 	select userid from tbl_member where useremail = #{useremail}
 	</select>
+	<update id="updatedate">
+	update tbl_member set updatedate = sysdate where userid = #{userid}
+	</update>
 </mapper>

@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+h2 {
+	font-size: 20px;
+	color: #333;
+	margin: 7px 0;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #205F82;
+}
+
+a:link, a:visited {
+	outline: none;
+	text-decoration: none;
+}
+
+.author {
+	font-size: 13px;
+	margin: 5px 0 25px;
+}
+
+.date {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+/**/
+#projects {
+	width: 1200px;
+	margin: 30px auto;
+	perspective: 1000;
+}
+
+#projects .flipper {
+	width: 400px;
+	height: 300px;
+	display: inline-block;
+	-webkit-transform: scale(0.90);
+	-moz-transform: scale(0.90);
+	-o-transform: scale(0.90);
+	-ms-transform: scale(0.90);
+	transform: scale(0.90);
+	-webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+	box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	transition: all 0.3s;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+#projects .flipper:hover {
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-o-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+	-webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, .2);
+	box-shadow: 0 5px 25px rgba(0, 0, 0, .2);
+	cursor: pointer;
+}
+
+#projects .flipper.blur {
+	-webkit-filter: blur(3px);
+	-webkit-transform: scale(0.88);
+	-moz-transform: scale(0.88);
+	-o-transform: scale(0.88);
+	-ms-transform: scale(0.88);
+	transform: scale(0.88);
+	filter: alpha(opacity = 60);
+	opacity: 0.6;
+}
+
+#projects .flipper.rotate {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+#projects:hover .clicked {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+.front, .back {
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	backface-visibility: hidden;
+}
+
+.front {
+	z-index: 2;
+}
+
+.back {
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+	width: 360px;
+	height: 260px;
+	padding: 20px;
+	z-index: 1;
+	background: white;
+}
+
+.flex {
+	width: 50vw;
+	height: 80px;
+	line-height: 80px;
+	background-color: white;
+	margin: 0 auto;
+}
+
+.flex ul {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	box-shadow: 0 10px 20px 0 rgba(black, 0.25);
+}
+
+.flex ul li {
+	flex: 1;
+	list-style: none;
+	text-align: center;
+	position: relative;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	user-select: none;
+}
+
+.flex ul li &:hover {
+	background-color: rgba(white, 0.25);
+	color: #f564a9;
+}
+
+.flex ul .active:hover {
+	width: 10%;
+	background-color: #f564a9;
+	height: 5px;
+}
+
+#chartdiv {
+	width: 100%;
+	height: 500px;
+}
+
+select {
+	padding: 4px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	appearance: none; /* 기본 스타일 없애기 */
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
+	.table>thead>tr>td, .table>thead>tr>th {
+	vertical-align: inherit;
+}
+
+input.btn {
+	width: 95px;
+	height: 40px;
+	border: 1px solid #6dcddc;
+	background: 0 none;
+	cursor: pointer;
+	margin: 10px;
+}
+
+.d-flex {
+	display: inherit !important;
+}
+
+.row {
+	display: inherit !important;
+}
+
+#projects {
+	width: 1400px !important;
+}
