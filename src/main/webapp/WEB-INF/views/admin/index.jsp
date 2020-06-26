@@ -102,7 +102,7 @@ height: 30px;
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i data-icon="E" class="linea-icon linea-basic"></i>
-									<h5 class="text-muted vb">ログイン回数</h5>
+									<h5 class="text-muted vb">로그인 횟수</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-danger">${loginfo.login_count }</h3>
@@ -127,7 +127,7 @@ height: 30px;
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
 									<h5 class="text-muted vb">
-										累積ログイン<br>失敗数
+										누적 로그인 실패<br>
 									</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
@@ -152,7 +152,7 @@ height: 30px;
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
-									<h4 class="text-muted vb">全会員</h4>
+									<h4 class="text-muted vb">모든 회원</h4>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-primary">${users }</h3>
