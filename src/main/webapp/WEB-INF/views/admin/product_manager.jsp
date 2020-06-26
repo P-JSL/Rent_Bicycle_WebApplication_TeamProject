@@ -16,7 +16,6 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../plugins/images/favicon.png">
 <title>Admin Management Page</title>
-<link href="/resources/write/css/noticewrite.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="/resources/admin/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -150,8 +149,8 @@ input.btn {
 							<h3 class="box-title">상품 테이블</h3>
 
 							<div class="table-responsive" style="margin-bottom: 30px;">
-								<table class="table">
-									<thead>
+								<table class="table table-striped">
+									<thead style="border-bottom: 2px double">
 										<tr>
 											<th>#</th>
 											<th>상품명</th>

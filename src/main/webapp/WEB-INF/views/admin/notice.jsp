@@ -17,7 +17,6 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../plugins/images/favicon.png">
 <title>Admin Management Page</title>
-<link href="/resources/write/css/noticewrite.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="/resources/admin/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -151,8 +150,8 @@ input.btn {
 							<h3 class="box-title">공지사항 테이블</h3>
 
 							<div class="table-responsive" style="margin-bottom: 30px;">
-								<table class="table table-bordered" style="text-align: center;">
-									<thead>
+								<table class="table table-striped" style="text-align: center;">
+									<thead style="border-bottom: 2px solid">
 										<tr>
 											<th style="text-align: center;">번호</th>
 											<th style="text-align: center;">이름</th>
@@ -169,8 +168,8 @@ input.btn {
 											var="bno"></c:set>
 										<c:forEach items="${list }" var="no">
 
-											<tr>
-												<td>${bno}</td>
+											<tr >
+												<th scope="row" style="text-align: center;">${bno}</th>
 												<td><a href="${no.sequence }" id="num">${no.title }</a></td>
 												<c:choose>
 													<c:when test="${no.userid eq 'althsuwpfl'}">
@@ -228,6 +227,7 @@ input.btn {
 		</div>
 		<!-- /#page-wrapper -->
 	</div>
+	
 	<form id="actionForm" action="/board/write" method="get">
 	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 	<input type="hidden" name="amount" value="${pageMaker.cri.amount }">

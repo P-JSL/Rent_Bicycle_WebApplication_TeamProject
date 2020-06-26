@@ -18,7 +18,6 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../plugins/images/favicon.png">
 <title>Admin Management Page</title>
-<link href="/resources/write/css/noticewrite.css" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
 <link href="/resources/admin/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -135,12 +134,12 @@ input.btn {
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">NOTICE BOARD</h4>
+						<h4 class="page-title">Q&A / ConTact Us TableSheet</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 						<ol class="breadcrumb">
 							<li><a href="#">Dashboard</a></li>
-							<li class="active">NOTICE TABLE</li>
+							<li class="active">Q&A / ConTact Us</li>
 						</ol>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -151,14 +150,14 @@ input.btn {
 						<div class="white-box">
 							<h3 class="box-title">Q&A 테이블</h3>
 							<div class="table-responsive" style="margin-bottom: 30px;">
-								<table class="table table-bordered" id="QNAtable" style="text-align: center;">
-									<thead>
+								<table class="table table-striped" id="QNAtable" style="text-align: center;">
+									<thead style="border-bottom: 2px double">
 										<tr>
-											<th style="text-align: center;">번호</th>
-											<th style="text-align: center;">제목</th>
-											<th style="text-align: center;">내용</th>
-											<th style="text-align: center;">작성자</th>
-											<th style="text-align: center;">작성날짜</th>
+											<th style="text-align: center;" scope="row">번호</th>
+											<th style="text-align: center;" scope="row">제목</th>
+											<th style="text-align: center;" scope="row">내용</th>
+											<th style="text-align: center;" scope="row">작성자</th>
+											<th style="text-align: center;" scope="row">작성날짜</th>
 										</tr>
 									</thead>
 									<tbody style="text-align: center;">
@@ -216,16 +215,16 @@ input.btn {
 							<h3 class="box-title">ConTactUs 테이블</h3>
 
 							<div class="table-responsive" style="margin-bottom: 30px;">
-								<table class="table table-bordered" id="contable"
+								<table class="table table-striped" id="contable"
 									style="text-align: center;">
-									<thead>
-										<tr>
-											<th style="text-align: center;">번호</th>
-											<th style="text-align: center;">제목</th>
-											<th style="text-align: center;">메세지</th>
-											<th style="text-align: center;">이메일</th>
-											<th style="text-align: center;">작성날짜</th>
-											<th style="text-align: center;">상태</th>
+									<thead style="border-bottom: 2px double">
+										<tr >
+											<th style="text-align: center;" scope="row">번호</th>
+											<th style="text-align: center;" scope="row">제목</th>
+											<th style="text-align: center;" scope="row">메세지</th>
+											<th style="text-align: center;" scope="row">이메일</th>
+											<th style="text-align: center;" scope="row">작성날짜</th>
+											<th style="text-align: center;" scope="row">상태</th>
 										</tr>
 									</thead>
 									<tbody style="text-align: center;">

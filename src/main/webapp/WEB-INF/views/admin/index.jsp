@@ -265,7 +265,7 @@ select {
 							</div>
 
 							<div class="table-responsive" id="table">
-								<table class="table table-bordered"
+								<table class="table table-striped"
 									style="text-align: center; justify-content: center;">
 									<thead>
 										<tr>
