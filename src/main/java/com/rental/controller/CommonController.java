@@ -225,10 +225,10 @@ public class CommonController {
 	}
 
 	@GetMapping("/board/notice/reply")
-	public String reply(ReplyVO rvo, RedirectAttributes rttr) {
+	public String reply(ReplyVO rvo, RedirectAttributes rttr,String pageNum) {
 		rs.insert(rvo);
 		rttr.addAttribute("sequence", rvo.getN_num());
-		
+		rttr.addAttribute("pageNum", pageNum);
 		return "redirect:/board/view";
 	}
 

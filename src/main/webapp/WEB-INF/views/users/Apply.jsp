@@ -37,8 +37,21 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<link href="/resources/write/css/noticewrite.css" rel="stylesheet">
+<link href="/resources/write/css/common.css" rel="stylesheet">
+<link href="/resources/write/css/login.css" rel="stylesheet">
+<link href="/resources/write/css/join.css" rel="stylesheet">
+<link href="/resources/write/css/sub-notice.css" rel="stylesheet">
+<link href="/resources/write/css/sub-qna.css" rel="stylesheet">
+<link href="/resources/write/css/sub-faq.css" rel="stylesheet">
 </head>
-
+<style>
+.notice-write {
+	idth: 100%;
+	padding: 0px 20px 130px 20px;
+	margin: 0 auto;
+}
+</style>
 <body>
 	<!-- Preloader -->
 	<div class="preloader">
@@ -80,21 +93,23 @@
 				<div class="row">
 
 					<sub></sub>
-					<div class="col-md-8 col-xs-12">
+					<div class="col-md-3 col-xs-12" id="appform">
 						<div class="white-box">
 							<form class="form-horizontal form-material" id="modifyform"
 								method="post" action="/users/Apply/${userid }">
-								<input type="hidden" value="${_csrf.token }" name="${_csrf.parameterName }">
+								<input type="hidden" value="${_csrf.token }"
+									name="${_csrf.parameterName }">
 
 								<div class="form-group">
 									<label class="col-md-12">User NickName</label>
 									<div class="col-md-12">
-										<input type="text" name="userName"
-											placeholder="Write Your NickName"
+										<input type="text" name="username"
+											placeholder="Write Your NickName" value="${nickname }"
+											${nickname ==null ?'':'readonly' }
 											class="form-control form-control-line">
 									</div>
 								</div>
-								
+
 								<div class="form-group">
 									<label for="example-email" class="col-md-12">Email</label>
 									<div class="col-md-12">
@@ -108,7 +123,7 @@
 									<label for="example-email" class="col-md-12">Address</label>
 									<div class="col-md-12">
 										<input type="text" class="form-control form-control-line"
-											name="address" id="address" placeholder="Wrtie Your Address">
+											name="addr" id="address" placeholder="Wrtie Your Address">
 									</div>
 								</div>
 								<div class="form-group">
@@ -116,8 +131,7 @@
 									<div class="col-md-12">
 										<input type="text" class="form-control form-control-line"
 											name="phonenum" id="phonenum" pattern="[0-9]{3,12}"
-											maxlength="11" min="3"
-											placeholder="Wrtie Your Phone Number no hyphen">
+											maxlength="11" min="3" placeholder="하이픈(-)없이 적어주세요.">
 									</div>
 								</div>
 
@@ -138,7 +152,83 @@
 							</form>
 						</div>
 					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12" id="writeform">
+						<div class="notice-write ">
+							<form name="write" style="background-color: #6daeb8"
+								action="/users/Apply/write" method="post"
+								enctype="multipart/form-data">
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}">
+								<!-- <input type="hidden" value="save" name="t_gubun"> -->
+								<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
+
+								<fieldset
+									class="table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl">
+									<legend>공지사항 글쓰기</legend>
+
+									<table class="table">
+										<caption>공지사항 글쓰기</caption>
+										<colgroup>
+											<col width="20%">
+											<col width="*">
+										</colgroup>
+
+										<tr>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">제목</label></th>
+											<td><input type="text" name="title" id="title"
+												class="title" placeholder="제목을 입력해주세요"></td>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">카테고리</label></th>
+											<td><input type="text" name="category" id="title"
+												class="title"></td>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">작성자</label></th>
+											<td colspan="3"><input type="text" name="nickname"
+												id="title" class="title" readonly value="${nickname }">
+												<input type="hidden" name="userid" id="title" class="title"
+												value="${ userid}"></td>
+										<tr>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">가격</label></th>
+											<td><input type="text" name="price" id="title"
+												class="title"></td>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">품목</label></th>
+
+											<td colspan="1"><input type="text" name="goods"
+												id="title" class="title"></td>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">수량</label></th>
+											<td><input type="text" name="many" id="title"
+												class="title"></td>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">이미지</label></th>
+											<td colspan="1"><input type="file" name="goodsfile"
+												id="title" class="title"></td>
+
+										</tr>
+										<tr>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="cont">내용</label></th>
+											<td colspan="7"><textarea type="cont" name="content"
+													id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
+										</tr>
+
+
+										<tr>
+											<td colspan="8"><input type="submit" class="btn"
+												onclick="noticeSave()"><input type="button"
+												onclick="history.back();" value="목록" class="btn"></td>
+										</tr>
+
+									</table>
+								</fieldset>
+							</form>
+						</div>
+					</div>
 				</div>
+
 				<!-- /.row -->
 			</div>
 			<!-- /.container-fluid -->
@@ -158,10 +248,12 @@
 		src="/resources/admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="/resources/admin/js/jquery.slimscroll.js"></script>
+
 	<!--Wave Effects -->
 	<script src="/resources/admin/js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="/resources/admin/js/custom.min.js"></script>
+	<script src="https:/code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#modify").on("click", function(e) {
@@ -179,6 +271,7 @@
 			})
 		})
 	</script>
+
 	<script type="text/javascript">
 		var phone = $("input[name='phonenum']");
 		$(phone).on(
@@ -194,8 +287,8 @@
 		var form = $("#modifyform");
 		function onCheck() {
 
-			var nickname = $("input[name='userName']").val();
-			var Addr = $("input[name='address']").val();
+			var nickname = $("input[name='username']").val();
+			var Addr = $("input[name='addr']").val();
 			var phone = $("input[name='phonenum']").val();
 
 			if (!nickname) {
@@ -223,8 +316,8 @@
 			})
 
 			var id = `${userid}`;
-			$("#modify").hide();
-			$("#app").show();
+			$("#modify").show();
+			$("#app").hide();
 			$.ajax({
 				url : "/confirm",
 				type : "post",
@@ -236,11 +329,11 @@
 				processData : false,
 				success : $(function(res) {
 					if (!res) {
-						$("#app").hide();
-						$("#modify").show();
+						$("#appform").css("display", "inherit");
+						$("#writeform").css("display", "none");
 					} else {
-						$("#app").show();
-						$("#modify").hide();
+						$("#appform").css("display", "none");
+						$("#writeform").css("display", "inherit");
 					}
 				})
 			})

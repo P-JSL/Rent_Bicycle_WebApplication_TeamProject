@@ -30,4 +30,12 @@
        where rn > (#{pageNum}-1)*#{amount} and userid = #{userid}  ) B where r <= #{pageNum} * #{amount} 
 	]]>
 	</select>
+	<select id="List" parameterType="map" resultType="com.rental.domain.ResTableVO">
+
+ 	<![CDATA[	
+		   select /*+index_desc (res_table res_table_pk)*/ r.userid, p.goods, r.price, r.goodsphoto
+        from product p, res_table r
+       where  r.n_num = p.num  and p.goods in  (select goods from product where userid =  #{userid}) order by resdate desc
+	]]>
+	</select>
 </mapper>

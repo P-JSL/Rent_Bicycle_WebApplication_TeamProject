@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rental.mapper.NoticeMapper">
 	<insert id="Insert">
-		insert into noticewrite (SEQUENCE, userid, title, content)
-		values( SEQ_NOTICEWRITE.nextval , #{userid} , #{title} , #{content} )
+		insert into noticewrite (SEQUENCE, userid,nickname, title, content)
+		values( SEQ_NOTICEWRITE.nextval , #{userid} ,'관리자', #{title} , #{content} )
 	</insert>
 	<select id="List" resultType="com.rental.domain.NoticeVO">
  	<![CDATA[	

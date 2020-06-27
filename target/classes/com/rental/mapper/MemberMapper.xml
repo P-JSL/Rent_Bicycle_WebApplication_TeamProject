@@ -8,6 +8,7 @@
 		<result property="userid" column="userid" />
 		<result property="userpw" column="userpw" />
 		<result property="userName" column="username" />
+		<result property="nickname" column="nickname"/>
 		<result property="enabled" column="enabled" />
 		<result property="regDate" column="regdate" />
 		<result property="updateDate" column="updatedate" />
@@ -23,7 +24,7 @@
 
 	<select id="read" resultMap="memberMap">
 		select
-		mem.userid, userpw, username,
+		mem.userid, userpw, username,nickname,
 		ENABLED, regdate, updatedate, useremail, auth, ip
 		from
 		tbl_member mem left
@@ -34,9 +35,9 @@
 	</select>
 
 	<insert id="insert">
-		insert into tbl_member (userid, userpw, username,
+		insert into tbl_member (userid, userpw, username,nickname,
 		regdate, enabled, useremail, ip) values
-		(#{userid}, #{userpw}, '일반사용자'
+		(#{userid}, #{userpw}, '일반사용자', #{nickname}
 		,sysdate,0, #{useremail}, #{ip})
 	</insert>
 	<insert id="insert_auth">

@@ -110,7 +110,7 @@ public class MemberServiceImpl implements MemberService {
 				helper.setFrom("althsuwpfl@gmail.com");
 				helper.setTo(mvo.getUseremail());
 
-				helper.setSubject(mvo.getUserid() + " 님 회원가입을 축하합니다.");
+				helper.setSubject(mvo.getNickname() + " 님 회원가입을 축하합니다.");
 				String body = new StringBuffer().append("<html>").append("<body>").append("<h2>안녕하세요.</h2>")
 						.append("<p> 이메일 인증 입니다.</p>").append("<p>인증하기 버튼을 누르시면 계정을 사용 하실 수 있습니다.</p>")
 						.append("<b><a href='http://localhost:8080/emailauth?userid=").append(mvo.getUserid())

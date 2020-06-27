@@ -94,7 +94,9 @@ input {
 
 textarea {
   outline: none;
-  border: none;
+  border: 0px;
+  border:none;
+  border-bottom: 1px solid;
 }
 
 textarea:focus, input:focus {
@@ -268,7 +270,7 @@ iframe {
 
 .rs1-wrap-input100,
 .rs2-wrap-input100 {
-  width: 50%;
+  width: 80%;
 }
 
 .rs2-wrap-input100 {

@@ -103,7 +103,11 @@ public class ProductControll {
 		for (ProductVO pvo : service.AllList()) {
 			if (pvo.getMany() > 0 && pvo.getStatus() != 0) {
 				service.notmany(rsvo.getN_num());
-				
+				if(pvo.getMany() == 0) {
+					service.statusminus(rsvo.getN_num());
+					rttr.addFlashAttribute("NoRes","<script>alert('예약 불가입니다.')</script>");
+					return "redirect:/product/product";
+				}
 			}
 
 		}

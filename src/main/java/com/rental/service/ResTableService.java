@@ -13,4 +13,6 @@ public interface ResTableService {
 	public void insert(ResTableVO rtvo);
 	
 	public List<ResTableVO> pageList(HashMap<String,Object> map);
+	
+	public List<ResTableVO> List(HashMap<String,Object> map);
 }

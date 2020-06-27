@@ -34,8 +34,8 @@
 	</update>
 
 	<insert id="insertReply">
-		insert into noticereply (num, n_num, userid, comm, regdate, likes, hates)
-		values (seq_n_reply.nextval, #{n_num}, #{userid}, #{comm}, sysdate, 0,
+		insert into noticereply (num, n_num, userid,nickname, comm, regdate, likes, hates)
+		values (seq_n_reply.nextval, #{n_num}, #{userid},#{nickname}, #{comm}, sysdate, 0,
 		0)
 	</insert>
 <select id="Yreply" resultType="com.rental.domain.ReplyVO">

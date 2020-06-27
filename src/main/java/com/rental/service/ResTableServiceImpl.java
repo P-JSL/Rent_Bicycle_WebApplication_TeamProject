@@ -40,4 +40,9 @@ public class ResTableServiceImpl implements ResTableService {
 		// TODO Auto-generated method stub
 		return mapper.pageList(map);
 	}
+	@Override
+	public java.util.List<ResTableVO> List(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.List(map);
+	}
 }

@@ -68,30 +68,38 @@ input[name='useremail']::after {
 					method="post" onsubmit="return checkAccount()" id="signform">
 					<span class="login100-form-title p-b-34"> 회원가입 페이지 </span>
 					<input type="hidden" name="userName" value="일반사용자">
+					<div class="row" style="justify-content: center;">
 					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 						data-validate="Type user name">
 						<input id="first-name" class="input100" type="text" name="userid"
-							placeholder="User id"> <span class="focus-input100"></span>
+							placeholder="id"> <span class="focus-input100"></span>
 
 					</div>
-					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20"
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
+						data-validate="Type user NickName">
+						<input id="nickname" class="input100" type="text" name="nickname"
+							placeholder="NickName"> <span class="focus-input100"></span>
+
+					</div>
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 						data-validate="형식에 맞는 이메일 작성.">
 						<input class="input100" type="email" name="useremail"
 							placeholder="Email"> <span class="focus-input100"></span>
 
 					</div>
-					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20"
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 						data-validate="Type password">
 						<input class="input100" type="password" name="userpw"
 							placeholder="password"> <span class="focus-input100"></span>
 
 					</div>
 
-					<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20"
+					<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 						data-validate="Type password">
 						<input class="input100" type="password" name="userpw_confirm"
 							placeholder="password confirm"> <span
 							class="focus-input100"></span>
+					</div>
 					</div>
 					<div class="form-group">
 						<div class="input-group">
@@ -342,9 +350,10 @@ input[name='useremail']::after {
 			}
 			if (chk) {
 				alert("모든 약관에 동의함.");
-				return false;
+				
 			} else {
-				alert("모든 약관에 동의해 주세요.")
+				alert("모든 약관에 동의해 주세요.");
+				return false;
 			}
 
 			var form = $("#signform");

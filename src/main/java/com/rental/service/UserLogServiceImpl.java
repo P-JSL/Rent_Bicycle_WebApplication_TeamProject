@@ -62,6 +62,6 @@ public class UserLogServiceImpl implements UserLogService {
 	@Override
 	public MemberVO users(String userid) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.users(userid);
 	}
 }

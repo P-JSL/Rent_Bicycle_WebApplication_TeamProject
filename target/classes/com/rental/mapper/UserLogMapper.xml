@@ -79,7 +79,7 @@
 		 select /*+ index_desc (tbl_member tbl_member_pk )*/ * from 
        (
        select /*+ index_desc (tbl_member tbl_member_pk )*/
-       rownum rn,userid,userpw,username,regdate,updatedate,enabled, useremail, au.auth, ip
+       rownum rn,userid,userpw,username,nickname,regdate,updatedate,enabled, useremail, au.auth, ip
      from tbl_member tm NATURAL join tbl_member_auth au
        where ]]>
 		<include refid="criteria"></include>
@@ -89,7 +89,7 @@
 	]]>
 	</select>
 	<select id="users" resultType="com.rental.domain.MemberVO">
-		select * from tbl_memeber where userid= #{userid}
+		select * from tbl_member where userid= #{userid}
 	</select>
 
 

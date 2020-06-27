@@ -79,7 +79,7 @@ body {
 			action="/review/write" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}"> <input type="hidden" name="writer"
-				value="<sec:authentication property="principal.member.userid"/>">
+				value="<sec:authentication property="principal.member.nickname"/>">
 			<!-- <input type="hidden" value="save" name="t_gubun"> -->
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 

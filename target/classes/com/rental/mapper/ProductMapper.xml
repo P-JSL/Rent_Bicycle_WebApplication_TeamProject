@@ -37,11 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insert">
-		insert into product (num, userid, goods, content,
+		insert into product (num, userid,nickname, goods, content,
 		price, regdate, category,
 		goodsphoto, many, status)
 		values
-		(seq_product.nextval, #{userid}, #{goods} , #{content} , #{price},
+		(seq_product.nextval, #{userid},#{nickname}, #{goods} , #{content} , #{price},
 		sysdate, #{category}, #{goodsphoto}, #{many}, 1)
 	</insert>
 

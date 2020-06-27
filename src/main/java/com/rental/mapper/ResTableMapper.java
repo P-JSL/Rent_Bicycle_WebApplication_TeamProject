@@ -15,4 +15,6 @@ public interface ResTableMapper {
 	
 	public List<ResTableVO> pageList(HashMap<String,Object> map);
 	
+
+	public List<ResTableVO> List(HashMap<String,Object> map);
 }

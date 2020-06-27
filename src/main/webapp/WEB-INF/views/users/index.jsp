@@ -49,7 +49,8 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<link href="/resources/user.index.css"  rel="stylesheet">
+<link href="/resources/user.index.css" rel="stylesheet">
+<link href="/resources/user/css/popup.css" rel="stylesheet">
 </head>
 <body>
 
@@ -94,7 +95,7 @@
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i data-icon="E" class="linea-icon linea-basic"></i>
-									<h5 class="text-muted vb">ログイン回数</h5>
+									<h5 class="text-muted vb">로그인 횟수</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-danger">${loginfo.login_count }</h3>
@@ -119,7 +120,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
 									<h5 class="text-muted vb">
-										累積ログイン<br>失敗数
+										누적 로그인<br> 실패 횟수
 									</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
@@ -166,7 +167,10 @@
 				<!-- /.row -->
 				<!--row -->
 				<div class="row" id="chartRow">
-					<h4 style="text-align: center;">예약 날짜 및 총 금액</h4>
+					<h4 style="text-align: center;">
+						예약 날짜 및 총 금액 <a href="#layer1" class="btn btn-warning btn-example">내
+							상품 예약 </a>
+					</h4>
 					<!-- HTML -->
 					<div id="chartdiv"></div>
 				</div>
@@ -181,12 +185,12 @@
 								<h3 class="box-title">Recent Comments</h3>
 								<div class="comment-center">
 									<div class="comment-body" style="min-width: 100%">
-										
+
 
 										<div class="mail-contnet">
 											<h5>${re.comm }</h5>
 											<span class="mail-desc">${re.n_num }번 공지사항 :
-												${re.userid }님의 댓글</span><a href="javacript:void(0)" class="action"><i
+												${re.nickname == null ? re.userid : re.nickname }님의 댓글</span><a href="javacript:void(0)" class="action"><i
 												class="ti-close text-danger"></i></a> <a
 												href="javacript:void(0)" class="action"><i
 												class="ti-check text-success"></i></a> <span class="pull-left"
@@ -212,6 +216,64 @@
 				brought to you by wrappixel.com </footer>
 		</div>
 		<!-- /#page-wrapper -->
+	</div>
+	<div id="layer1" class="pop-layer">
+		<div class="pop-container">
+			<div class="pop-conts" style="overflow: scroll;">
+				<!--content //-->
+				<p class="ctxt mb20">
+				<div class="col-12">
+					<div class="card" style="width: 700px; height: 100%;">
+						<div class="card-body text-center">
+							<h3 class="card-title m-b-0">
+								등록물품 예약자 현황<a href="#" class="btn-layerClose"
+									style="width: 30px; border: none; position: absolute; right: 50px; top: 10px; background: #fff;"><i
+									class="fa fa-times fa-fw fa-2x" style="color: black;"></i></a>
+							</h3>
+
+
+						</div>
+						<div class="table-responsive">
+							<table class="table">
+								<thead class="thead-light" style="text-align: center;">
+									<tr>
+										<!-- <th style="text-align: center; vertical-align: middle;"><label
+									class="customcheckbox m-b-20">
+								</label></th> -->
+										<th style="text-align: left;">이름</th>
+										<th style="text-align: left;">상품</th>
+										<th style="text-align: left;">가격</th>
+										<th style="text-align: left;">사진</th>
+
+									</tr>
+								</thead>
+								<!--start-->
+								<tbody>
+									<c:forEach items="${list}" var="index">
+										<tr>
+											<td class="goods"><a  href="javascript:void(0)" style="color:black;">${index.userid}</a>
+											</td>
+
+											<td class="goods"><a  href="javascript:void(0)" style="color:black;">${index.goods}</a>
+											</td>
+											<td class="goods"><a  href="javascript:void(0)" style="color:black;">${index.price}</a>
+											</td>
+											<td><img style="max-width: 150px;"
+												src="/upload/${index.goodsphoto }"></td>
+
+										</tr>
+
+									</c:forEach>
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!--// content-->
+			</div>
+		</div>
 	</div>
 	<form id="actionForm" action="/admin/index" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
@@ -254,6 +316,7 @@
 	<script src="https://www.amcharts.com/lib/4/core.js"></script>
 	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
 	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="/resources/user/js/simple.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.toast({
@@ -300,7 +363,8 @@
 			$("#chartRow").show();
 		}
 </script>
-	<script type="text/javascript">
+<script type="text/javascript">
+
 	$(function(e) {
 
 		var csrfHeaderName = "${_csrf.headerName}";

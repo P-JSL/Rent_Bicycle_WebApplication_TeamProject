@@ -11,6 +11,7 @@ footer {
 }
 </style>
 <body>
+${NoRes }
 	<div class="container">
 
 		<nav class="product-filter">
@@ -112,5 +113,4 @@ footer {
 
 				})
 	</script>
-	<script type="text/javascript"></script>
 	<%@include file="../footer.jsp"%>

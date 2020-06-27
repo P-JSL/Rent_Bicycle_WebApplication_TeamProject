@@ -131,7 +131,9 @@ body {
 					<li>
 						<div class="row comment-box p-1 pt-3 pr-4">
 							<div class="col-lg-2 col-3 user-img text-center"
-								style="vertical-align: middle; font-size: 1.3rem;" id="userid">${re.userid }</div>
+								style="vertical-align: middle; font-size: 1.3rem;" id="userid" hidden="hidden">${re.userid  }</div>
+								<div class="col-lg-2 col-3 user-img text-center"
+								style="vertical-align: middle; font-size: 1.3rem;" id="userid">${re.nickname == null ? re.userid : re.nickname }</div>
 							<div class="col-lg-10 col-9 user-comment bg-light rounded pb-1">
 								<div class="row">
 									<div class="col-lg-8 col-8 border-bottom pr-0">
@@ -163,7 +165,12 @@ body {
 										<sec:authentication property="principal.member.userid"
 											var="uid" />
 										<sec:authorize access="hasRole('ROLE_USER')">
-											<c:if test="${uid == re.userid }">
+											<c:if test="${uid == re.userid}">
+												<span class="float-right" id="dlt">
+													<button class="btn btn-warning" id="delete">삭제</button>
+												</span>
+											</c:if>
+											<c:if test="${(nicknames == re.nickname) && re.nickname ne null}">
 												<span class="float-right" id="dlt">
 													<button class="btn btn-warning" id="delete">삭제</button>
 												</span>
@@ -204,8 +211,10 @@ body {
 					</ul>
 				</div>
 				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal.member.nickname"
+						var="nicknames" />
 					<div class="row" style="position: relative;">
-
+						<input type="hidden" name="nickname" value="${nicknames }">
 						<input type="hidden" name="commentid" value="${id }">
 						<div class="col-lg-11 col-11" style="margin-top: 15px;">
 							<textarea class="form-control" id="comment"> </textarea>
@@ -271,8 +280,8 @@ $(e2).css({"height":"50px","overflow-y":"hidden"});
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 var sequence = <%=request.getParameter("sequence")%>;
-	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
 $("#commend li #delete").on("click",function(){
+	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
 	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
@@ -400,12 +409,16 @@ $("#commend li #hates").on("click",function(){
 
 	var seq =<%=request.getParameter("sequence")%>;
 	function submitcom(){
+		var pageNum = <%=request.getParameter("pageNum")%>;
 		var userid = $("input[name='commentid']").val();
+		var nickname = $("input[name='nickname']").val();
 		var comment = $("#comment").next().find(".ck.ck-editor__main").children().html();
 		var form = $("#servform");
 		form.append("<input type='hidden' name='userid' value='"+userid+"'>");
+		form.append("<input type='hidden' name='nickname' value='"+nickname+"'>");
 		form.append("<input type='hidden' name='comm' value='"+comment+"'>");
 		form.append("<input type='hidden' name='n_num' value='"+seq+"'>");
+		form.append("<input type='hidden' name='pageNum' value='"+pageNum+"'>");
 		form.submit();
 }
 

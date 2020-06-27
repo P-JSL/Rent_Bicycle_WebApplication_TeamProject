@@ -41,7 +41,7 @@
 <div class="limiter">
 	<div class="container-login100">
 		<div class="wrap-login100">
-			<form class="login100-form validate-form" action="/login"
+			<form class="login100-form validate-form" action="/login" style="justify-content: center;"
 				method="post">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token }"> <span
@@ -60,12 +60,12 @@
 				<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 					data-validate="아이디를 입력하세요.">
 					<input id="first-name" class="input100" type="text" name="username"
-						placeholder="User name"> <span class="focus-input100"></span>
+						placeholder="아이디를 입력해주세요."> <span class="focus-input100"></span>
 				</div>
-				<div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20"
+				<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 					data-validate="비밀번호를 입력하세요.">
 					<input class="input100" type="password" name="password"
-						placeholder="password"> <span class="focus-input100"></span>
+						placeholder="비밀번호를 입력해주세요."> <span class="focus-input100"></span>
 				</div>
 				<div class="genric-btn primary-border circle m-b-20"
 					style="font-size: 1.3em;" id="remember">
