@@ -36,7 +36,7 @@
 </div>
 <div class="container">
 	<div class="col-sm-12">
-		<div class="row d-flex">
+		<div class="row">
 			<ul id="projects">
 				<c:forEach items="${list }" var="re">
 
@@ -45,8 +45,8 @@
 							<img style="width: 100%" src="/upload/review/${re.photo }" alt="">
 						</div>
 						<div class="back">
-							<h2>${re.title }</h2>
-							<p class="author">by ${re.nickname == null? re.writer : re.nickname }</p>
+							<h2>${re.title } <small><sub>by ${re.nickname == null? re.writer : re.nickname }</sub></small></h2>
+							
 							<p>${re.content }</p>
 							<p class="date">
 								<fmt:formatDate value="${re.regdate }" pattern="YY-MM-dd" />
@@ -54,9 +54,6 @@
 						</div>
 					</li>
 				</c:forEach>
-				<!--
-    -->
-
 			</ul>
 			<div class="container"
 				style="position: relative; text-align: center;">
@@ -69,16 +66,16 @@
 
 				<ul class="pagination" style="justify-content: center;">
 					<c:if test="${pageMaker.prev }">
-						<li><a href="${pageMaker.startPage - 1 }"><i
+						<li style="font-size:medium"><a href="${pageMaker.startPage - 1 }"><i
 								class="fa  fa-arrow-left"></i></a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage }">
-						<li><a href="${num }"
+						<li style="font-size:medium"><a href="${num }"
 							class="${pageMaker.cri.pageNum == num ? 'active':''  }">${num }</a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
-						<li><a href="${pageMaker.endPage+1}"><i
+						<li style="font-size:medium"><a href="${pageMaker.endPage+1}"><i
 								class="fa  fa-arrow-right"></i></a></li>
 					</c:if>
 				</ul>
@@ -100,6 +97,7 @@
 		var form = $("#photoForm");
 		let num = $(this).attr("href");
 		form.append("<input type='hidden' name='pageNum' value='"+num+"'>");
+		form.append("<input type='hidden' name='amount' value='"+6+"'>");
 		form.submit();
 	})
 </script>

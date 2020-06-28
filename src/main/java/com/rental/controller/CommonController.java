@@ -99,6 +99,7 @@ public class CommonController {
 
 	@GetMapping("/review/photo")
 	public String photo(Criteria cri, Model model) {
+		cri.setAmount(6);
 		model.addAttribute("list", rw.list(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, rw.count()));
 		log.info("photo");

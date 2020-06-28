@@ -15,13 +15,6 @@ body {
 .accordion dl, .accordion-list {
   border: 1px solid #ddd;
 }
-.accordion dl:after, .accordion-list:after {
-  content: "";
-  display: block;
-  height: 1em;
-  width: 100%;
-  background-color: #2ba659;
-}
 .accordion dd, .accordion__panel {
   background-color: #fff;
   font-size: 1em;

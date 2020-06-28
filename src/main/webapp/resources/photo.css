@@ -56,6 +56,18 @@ a:link, a:visited {
 	position: relative;
 }
 
+@media screen and (max-width:990px){
+	#projects .flipper,#projects .flipper .back, #projects .flipper .front{
+		width:350px;
+		height: 260px;
+	}
+}
+@media screen and (max-width:768px){
+	#projects .flipper,#projects .flipper .back, #projects .flipper .front{
+		width:325px;
+		height: 245px;
+	}
+}
 #projects .flipper:hover {
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);

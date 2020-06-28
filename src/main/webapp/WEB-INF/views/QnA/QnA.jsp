@@ -51,7 +51,7 @@
 				</dt>
 				<dd class="accordion-content accordionItem is-collapsed"
 					id="accordion${qa.num }" aria-hidden="true">
-					<div>${qa.content }</div>
+					<div style="overflow: scroll;height: 300px;">${qa.content }</div>
 				</dd>
 
 			</c:forEach>
