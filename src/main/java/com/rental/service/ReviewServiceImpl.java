@@ -32,5 +32,10 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 		return mapper.count();
 	}
+	@Override
+	public ReviewVO UserNickName(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.OneUser(userid);
+	}
 
 }

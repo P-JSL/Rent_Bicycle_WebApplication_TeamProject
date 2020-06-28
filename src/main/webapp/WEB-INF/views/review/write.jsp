@@ -79,8 +79,9 @@ body {
 			action="/review/write" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}"> <input type="hidden" name="writer"
+				value="<sec:authentication property="principal.member.userid"/>">
+			<input type="hidden" name="nickname"
 				value="<sec:authentication property="principal.member.nickname"/>">
-			<!-- <input type="hidden" value="save" name="t_gubun"> -->
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 
 			<fieldset>
@@ -104,9 +105,10 @@ body {
 						<td><textarea type="cont" name="content" id="cont"
 								class="cont" placeholder="내용을 입력해주세요"></textarea>
 					</tr>
-<tr>
-						<th style="vertical-align: middle;"><label for="cont">이미지 파일</label></th>
-						<td><input type="file" name="photos" ></td>
+					<tr>
+						<th style="vertical-align: middle;"><label for="cont">이미지
+								파일</label></th>
+						<td><input type="file" name="photos"></td>
 					</tr>
 
 					<tr>

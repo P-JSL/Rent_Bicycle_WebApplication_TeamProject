@@ -12,4 +12,6 @@ public interface ReviewMapper {
 	public List<ReviewVO> llst(Criteria cri);
 	
 	public int count();
+	
+	public ReviewVO OneUser(String userid);
 }

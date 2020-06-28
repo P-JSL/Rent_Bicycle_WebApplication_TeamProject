@@ -234,13 +234,13 @@
 
 						</div>
 						<div class="table-responsive">
-							<table class="table">
+							<table class="table table-bordered">
 								<thead class="thead-light" style="text-align: center;">
 									<tr>
 										<!-- <th style="text-align: center; vertical-align: middle;"><label
 									class="customcheckbox m-b-20">
 								</label></th> -->
-										<th style="text-align: left;">이름</th>
+										<th style="text-align: left;">닉네임</th>
 										<th style="text-align: left;">상품</th>
 										<th style="text-align: left;">가격</th>
 										<th style="text-align: left;">사진</th>
@@ -251,7 +251,7 @@
 								<tbody>
 									<c:forEach items="${list}" var="index">
 										<tr>
-											<td class="goods"><a  href="javascript:void(0)" style="color:black;">${index.userid}</a>
+											<td class="goods"><a  href="javascript:void(0)" style="color:black;">${index.nickname == null ? index.userid : index.nickname}</a>
 											</td>
 
 											<td class="goods"><a  href="javascript:void(0)" style="color:black;">${index.goods}</a>

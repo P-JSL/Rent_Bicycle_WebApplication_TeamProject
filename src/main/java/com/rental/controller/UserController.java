@@ -93,6 +93,7 @@ public class UserController {
 		map.put("pageNum", cri.getPageNum());
 		map.put("amount", cri.getAmount());
 		try {
+			log.info("카운트  : {}",rst.count(userid).getCount());
 			model.addAttribute("count", rst.count(userid));
 			model.addAttribute("res", rst.pageList(map));
 			model.addAttribute("userid", userid);

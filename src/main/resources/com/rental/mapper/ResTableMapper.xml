@@ -14,26 +14,27 @@
 	<insert id="insert">
 		insert into res_table (num, n_num, userid, goods,
 		status, resdate, price,
-		goodsphoto)
+		goodsphoto,nickname)
 		values (seq_res.nextval,#{n_num},
 		#{userid}, #{goods}, 2 , sysdate,
-		#{price}, #{goodsphoto})
+		#{price}, #{goodsphoto},#{nickname})
 	</insert>
 	<select id="pageList" parameterType="hashmap"
 		resultType="com.rental.domain.ResTableVO">
 	<![CDATA[	
-        select B.* from ( select /*+ index_desc (res_table res_table_pk )*/  rownum r, A.* from 
+      select * from 
        (
-       select/*+ index_desc (res_table res_table_pk )*/
-		rownum rn, res_table.* from res_table
-       ) A
-       where rn > (#{pageNum}-1)*#{amount} and userid = #{userid}  ) B where r <= #{pageNum} * #{amount} 
+       select/*+ index_desc (res_table res_table_pk)*/
+       rownum rn, res_table.* from res_table
+       where rownum <= #{pageNum} * #{amount} and userid = #{userid} order by resdate desc
+       ) 
+       where rn > (#{pageNum}-1) * #{amount}
 	]]>
 	</select>
 	<select id="List" parameterType="map" resultType="com.rental.domain.ResTableVO">
 
  	<![CDATA[	
-		   select /*+index_desc (res_table res_table_pk)*/ r.userid, p.goods, r.price, r.goodsphoto
+		   select /*+index_desc (res_table res_table_pk)*/ r.userid, p.goods, r.price, r.goodsphoto,r.nickname
         from product p, res_table r
        where  r.n_num = p.num  and p.goods in  (select goods from product where userid =  #{userid}) order by resdate desc
 	]]>

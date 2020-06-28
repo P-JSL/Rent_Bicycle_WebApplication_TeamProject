@@ -33,12 +33,12 @@ import com.rental.domain.PageDTO_c;
 import com.rental.domain.QnAVO;
 import com.rental.domain.ReplyVO;
 import com.rental.domain.ReviewVO;
-import com.rental.mapper.ReviewMapper;
 import com.rental.service.ConTactService;
 import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
+import com.rental.service.ReviewService;
 import com.rental.util.Utility;
 
 import lombok.Setter;
@@ -61,7 +61,7 @@ public class CommonController {
 	private QNAService qs;
 
 	@Setter(onMethod_ = { @Autowired })
-	private ReviewMapper rw;
+	private ReviewService rw;
 
 	@Setter(onMethod_ = { @Autowired })
 	private ConTactService cs;
@@ -99,7 +99,7 @@ public class CommonController {
 
 	@GetMapping("/review/photo")
 	public String photo(Criteria cri, Model model) {
-		model.addAttribute("list", rw.llst(cri));
+		model.addAttribute("list", rw.list(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, rw.count()));
 		log.info("photo");
 
@@ -108,7 +108,6 @@ public class CommonController {
 
 	@GetMapping("/review/write")
 	public void write() {
-
 	}
 
 	@PostMapping("/review/write")

@@ -129,7 +129,7 @@
 									</thead>
 									<tbody>
 									<c:set
-									value="${pageMaker.total - (pageMaker.cri.pageNum - 1) * pageMaker.cri.amount}"
+									value="${count.count - (pageMaker.cri.pageNum - 1) * pageMaker.cri.amount}"
 									var="bno"/>
 										<c:forEach items="${res }" var="res">
 

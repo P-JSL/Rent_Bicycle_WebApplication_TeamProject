@@ -64,7 +64,7 @@
 									<div class="col-lg-12 pb-2">
 										<sec:authorize access="isAuthenticated()">
 											<a href="javascript:void(0)" class="btn  btn-warning w-100"   style="font-size: 1.5rem;"
-												onclick="insert('${id}','${view.goods }','${view.num }','${view.price }','${view.goodsphoto }')">Add
+												onclick="insert('${id}','${view.goods }','${view.num }','${view.price }','${view.goodsphoto }','${view.nickname }')">Add
 												to cart</a>
 										</sec:authorize>
 										<sec:authorize access="isAnonymous()">
@@ -96,11 +96,11 @@
 		charset="utf-8"></script>
 	<script src="/resources/product/script.js" charset="utf-8"></script>
 	<script type="text/javascript">
-		function insert(id, goods, n_num, price, goodsphoto) {
+		function insert(id, goods, n_num, price, goodsphoto,nickname) {
 			var pageNum = ${cri.pageNum};
 			location.href = "/product/reservation?userid=" + id + "&goods="
 					+ goods + "&n_num=" + n_num + "&price=" + price
-					+ "&goodsphoto=" + goodsphoto +"&pageNum="+pageNum;
+					+ "&goodsphoto=" + goodsphoto +"&pageNum="+pageNum+"&nickname="+nickname;
 		}
 	</script>
 

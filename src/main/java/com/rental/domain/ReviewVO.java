@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class ReviewVO {
 	private int num;
-	private String title, content, writer;
+	private String title, content, writer,nickname;
 	private Date regdate;
 	private String photo;
 	

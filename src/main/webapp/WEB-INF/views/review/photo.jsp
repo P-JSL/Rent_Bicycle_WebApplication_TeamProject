@@ -46,7 +46,7 @@
 						</div>
 						<div class="back">
 							<h2>${re.title }</h2>
-							<p class="author">by ${re.writer }</p>
+							<p class="author">by ${re.nickname == null? re.writer : re.nickname }</p>
 							<p>${re.content }</p>
 							<p class="date">
 								<fmt:formatDate value="${re.regdate }" pattern="YY-MM-dd" />

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rental.mapper.ReviewMapper">
 <insert id="insert">
-	insert into review (num, title, content, writer, regdate, photo)
-	values (seq_review.nextval, #{title}, #{content}, #{writer}, sysdate, #{photo})
+	insert into review (num, title, content, writer,nickname, regdate, photo)
+	values (seq_review.nextval, #{title}, #{content}, #{writer},#{nickname}, sysdate, #{photo})
 </insert>
 <select id="llst"  resultType="com.rental.domain.ReviewVO">
 <![CDATA[	
@@ -18,5 +18,8 @@
 </select>
 <select id="count" resultType="int">
 select count(*) as count from review
+</select>
+<select id="OneUser" resultType="com.rental.domain.ReviewVO">
+	select /*+index_desc (review review_pk)*/nickname from review where userid = #{userid}
 </select>
 </mapper>
