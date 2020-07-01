@@ -59,10 +59,7 @@ body {
 				}
 			}
 		}
-
-		write.action = "/" //URL
-		write.method = "post";
-		write.submit();
+		
 	}
 </script>
 <!-- sub page start -->
@@ -76,13 +73,10 @@ body {
 	<div class="notice-write">
 
 		<form name="write" style="background-color: #6daeb8"
-			onsubmit="return confirm();" action="/product/write" method="post"
-			enctype="multipart/form-data">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}"> <input type="hidden"
-				value="${user.nickname }" name="nickname"> <input
-				type="hidden" value="<%=request.getParameter("userid")%>"
-				name="userid">
+			action="/course/coursewriteok" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
+				<input type="hidden" name="userid" value="${userid }">
+
 			<!-- <input type="hidden" value="save" name="t_gubun"> -->
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 
@@ -100,41 +94,25 @@ body {
 						<th style="vertical-align: middle;"><label for="t_title">제목</label></th>
 						<td><input type="text" name="title" id="title" class="title"
 							placeholder="제목을 입력해주세요"></td>
-						<th style="vertical-align: middle;"><label for="t_title">이미지</label></th>
-						<td colspan="2"><input type="file" name="goodsfile"
-							id="title" class="title"></td>
-
+						<th style="vertical-align: middle;"><label for="t_title">일수</label></th>
+						<td><input type="text" name="days" id="title" class="title"></td>
 					</tr>
 					<tr>
 						<th style="vertical-align: middle;"><label for="t_title">가격</label></th>
 						<td><input type="text" name="price" id="title" class="title"></td>
-						<th style="vertical-align: middle; text-align: center;"><label
-							for="t_title">렌탈 가능 날짜</label></th>
-						<td><input type="text" name="startdate" id="title"
-							class="title"></td>
-						<td><input type="text" name="lastdate" id="to" class="title"></td>
-
-
-					</tr>
-					<tr>
-						<th style="vertical-align: middle;"><label for="t_title">품목</label></th>
-						<td colspan="1"><input type="text" name="goods" id="title"
-							class="title"></td>
-						<th style="vertical-align: middle;"><label for="t_title">카테고리</label></th>
-						<td><input type="text" name="category" id="title"
-							class="title"></td>
-
+						<th style="vertical-align: middle;"><label for="t_title">이미지</label></th>
+						<td colspan="3"><input type="file" name="coursefile"
+							id="title" class="title"></td>
 					</tr>
 					<tr>
 						<th style="vertical-align: middle;"><label for="cont">내용</label></th>
-						<td colspan="4"><textarea type="cont" name="content"
+						<td colspan="7"><textarea type="cont" name="content"
 								id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
 					</tr>
 
 
 					<tr>
-						<td colspan="4"><input type="submit" value="저장" class="btn"
-							onclick="noticeSave()"> <input type="button"
+						<td colspan="7"><input type="submit" value="저장" class="btn" onclick="noticeSave()"> <input type="button"
 							onclick="history.back();" value="목록" class="btn"></td>
 					</tr>
 
@@ -152,43 +130,5 @@ body {
     .catch( error => {
         console.log( error );
     } );
-	</script>
-	<script type="text/javascript">
-	$(function(){		
-	var today = new Date();
-	var Year = today.getFullYear();
-	var Month = today.getMonth() + 1;
-	var Day = today.getDate();
-	$("input[name='startdate']").val(Year + "/" + Month + "/" + Day);
-	$("input[name='lastdate']").flatpickr({
-		  enableTime: false,
-		  dateFormat: "Y/m/d",
-		  minDate:today
-		});
-	})
-	</script>
-	<script type="text/javascript">
-	function confirm(){		
-		if(!$("input[name='title']").val()){
-		alert("제목을 적어주세요.");
-		return false;
-		}
-	if(!$("input[name='lastdate']").val()){
-		alert("렌탈 종료 일자를 지정해주세요.");
-		return false;
-	}
-	if(!$("input[name='price']").val()){
-		alert("가격을 적어주세요.");
-		return false;
-	}
-	if(!$("input[name='category']").val()){
-		alert("카테고리를 적어주시길 바랍니다.");
-		return false;
-	}
-	if(!$("input[name='goods']").val()){
-		alert("품목을 지정해주세요.");
-		return false;
-	}
-	}
 	</script>
 	<%@include file="../footer.jsp"%>

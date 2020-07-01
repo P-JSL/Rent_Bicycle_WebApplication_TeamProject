@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 select * from 
        (
        select/*+ index_desc (product product_pk )*/
-		rownum rn , num, userid, goods, content, price, regdate, category, goodsphoto, many, status
+		rownum rn , num, userid, goods, content, price, regdate,startdate,lastdate, category, goodsphoto, status
 		 from product
        where rownum <= #{pageNum} * #{amount}
        ]]>
@@ -35,32 +35,146 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        where rn > (#{pageNum}-1)*#{amount}  
 	]]>
 	</select>
-
 	<insert id="insert">
 		insert into product (num, userid,nickname, goods, content,
 		price, regdate, category,
-		goodsphoto, many, status)
-		values
+		goodsphoto, status,startdate, lastdate)
+			values
 		(seq_product.nextval, #{userid},#{nickname}, #{goods} , #{content} , #{price},
-		sysdate, #{category}, #{goodsphoto}, #{many}, 1)
+		sysdate, #{category}, #{goodsphoto}, 1,#{startdate},#{lastdate})
+		</insert>
+	<insert id="cartinsert">
+	<![CDATA[
+		insert into res_table (num,userid, goods,
+		status,
+		resdate,
+		price,
+		goodsphoto,startdate,lastdate)
+		values (seq_res.nextval
+		#{userid},
+		#{goods}, 2 ,
+		sysdate,
+		#{price},
+		#{goodsphoto},#{startdate},#{enddate})
+		 ]]>
+	</insert>
+
+
+	<insert id="insertrescart">
+	<![CDATA[
+		insert into res_cart (num,n_num, userid,nickname, goods,price,goodsphoto,startdate,lastdate)
+		values (seq_cart.nextval,#{n_num},#{userid},#{nickname},#{goods} ,#{price},#{goodsphoto},#{startdate},#{lastdate})
+		 ]]>
+	</insert>
+
+	<insert id="insertcourse">
+	<![CDATA[
+		insert into course (num, writer, title, content,
+		price, days, regdate,
+		photo)
+		values
+		(seq_course.nextval, '관리자', #{title}
+		, #{content} , #{price},
+		#{days},sysdate,#{photo})
+		 ]]>
 	</insert>
 
 	<select id="getPage" resultType="com.rental.domain.ProductVO">
+	<![CDATA[
 		select * from product where num
 		= #{num}
+		 ]]>
 	</select>
+
 	<update id="notmany">
 	<![CDATA[
 		update product set many = many - 1 where num = #{num}	
 	]]>
 	</update>
 	<update id="statusminus">
+	<![CDATA[
 		update product set status = 0 where num = #{num}
+		]]>
 	</update>
-	
+
 	<select id="AllList" resultType="com.rental.domain.ProductVO">
 	<![CDATA[
 	select * from product where rownum > 0
 	]]>
 	</select>
+
+	<select id="productSearch" parameterType="hashmap"
+		resultType="com.rental.domain.ProductVO">
+	<![CDATA[
+	select * from product where  startdate>= #{startdate} and enddate<= #{enddate}
+	]]>
+	</select>
+
+	<select id="cartlist" resultType="com.rental.domain.ProductVO">
+	<![CDATA[
+	select * from res_cart where userid=#{userid}
+	]]>
+	</select>
+
+	<select id="searchcart" resultType="com.rental.domain.ProductVO">
+	<![CDATA[
+	select * from res_cart where num=#{num}
+	]]>
+	</select>
+
+	<delete id="deletecart">
+	<![CDATA[
+	delete from res_cart where num=#{num}
+	]]>
+	</delete>
+
+	<select id="Ccount" resultType="int">
+	<![CDATA[
+		select count(*) as count from product
+		]]>
+	</select>
+	<select id="User_Cart_count" resultType="int">
+	<![CDATA[
+		select count(*) as count from res_cart where userid=#{userid}
+		]]>
+	</select>
+	<select id="getCList" resultType="com.rental.domain.CourseVO">
+	<![CDATA[	
+		 select * from 
+       (
+       select/*+ index_desc (course course_pk )*/
+		rownum rn ,title, num, content,photo,regdate, price, writer,preview, days from course
+       where rownum <= #{pageNum} * #{amount}) 
+       where rn > (#{pageNum}-1)*#{amount}  
+	]]>
+	</select>
+
+	<select id="getCPage" resultType="com.rental.domain.CourseVO">
+	<![CDATA[
+		select * from course where num
+		= #{num}
+		]]>
+	</select>
+
+	<update id="updatecourse">
+	<![CDATA[
+	update course set title=#{title}, content=#{content},
+		price=#{price}, days=#{days}, regdate=sysdate,
+		photo=#{photo} where num=#{num}
+		]]>
+	</update>
+
+	<update id="viewcount">
+	<![CDATA[
+	update course set preview=preview+1 where num=#{num}
+	]]>
+	</update>
+
+	<delete id="courseDelete">
+	<![CDATA[
+	delete from course where num=#{num}
+	]]>
+	</delete>
+
+
 </mapper>

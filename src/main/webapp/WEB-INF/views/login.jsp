@@ -45,11 +45,12 @@
 				method="post">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token }"> <span
-					class="login100-form-title p-b-34"> 로그인 <c:if
+					class="login100-form-title p-b-34"> ログインページ <c:if
 						test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-						<font color="red">
-							<p>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
-							</p> <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
+						<br>
+						<font color="red" style="font-size:1rem;">
+							${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+							<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" />
 						</font>
 					</c:if>
 					<p>${logout }</p>
@@ -60,29 +61,29 @@
 				<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
 					data-validate="아이디를 입력하세요.">
 					<input id="first-name" class="input100" type="text" name="username"
-						placeholder="아이디를 입력해주세요."> <span class="focus-input100"></span>
+						placeholder="IDを入力してください。"> <span class="focus-input100"></span>
 				</div>
 				<div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20"
-					data-validate="비밀번호를 입력하세요.">
+					data-validate="パスワードを入力してください。">
 					<input class="input100" type="password" name="password"
-						placeholder="비밀번호를 입력해주세요."> <span class="focus-input100"></span>
+						placeholder="パスワードを入力してください。"> <span class="focus-input100"></span>
 				</div>
 				<div class="genric-btn primary-border circle m-b-20"
-					style="font-size: 1.3em;" id="remember">
+					id="remember">
 					<input type="checkbox" id="remember-me" name="remember-me"
-						style="position: relative; top: 4px; right: 5px;"> 자동로그인
+						style="position: relative; top: 4px; right: 5px;">オートログイン
 				</div>
 				<div class="container-login100-form-btn">
-					<button class="login100-form-btn">Sign in</button>
+					<button class="login100-form-btn">ログイン</button>
 				</div>
 
 				<div class="w-full text-center p-t-27 p-b-239">
-					<span class="txt1"> ID/PW Search </span><hr><br> <a
+					<span class="txt1"> ID/PW　Search </span><hr><br> <a
 						href="javascript:void(0)" onClick="window.open('/forgot/forgotid','','width=100px,heigth=100px, resize=none')"
-						class="txt2"> 아이디 찾기 </a>
+						class="txt2"> IDを忘れましたか？ </a>
 						 <hr><br><a
 						href="javascript:void(0)" onclick="window.open('/forgot/forgotpw','','width=100px,heigth=100px, resize=none');"
-						class="txt2"> 비밀번호 찾기 </a>
+						class="txt2"> パスワードを忘れましたか？</a>
 						<hr>
 				</div>
 

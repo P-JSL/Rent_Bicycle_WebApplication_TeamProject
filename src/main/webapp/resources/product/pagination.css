@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@import url(http://weloveiconfonts.com/api/?family=entypo);
  @import url(https://fonts.googleapis.com/css?family=Roboto:300);
  html, body {
 	 font-family: 'Roboto', sans-serif;
@@ -10,7 +9,6 @@
  .pagination-container {
 	 margin-top: 1em;
 	 padding-top: 2em;
-	 border-top: 1px solid #d7dadb;
 	 text-align: center;
 }
  .pagination-item {

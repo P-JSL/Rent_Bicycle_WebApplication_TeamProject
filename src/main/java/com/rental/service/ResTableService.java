@@ -15,4 +15,8 @@ public interface ResTableService {
 	public List<ResTableVO> pageList(HashMap<String,Object> map);
 	
 	public List<ResTableVO> List(HashMap<String,Object> map);
+	
+	public List<ResTableVO> searchList(HashMap<String,Object> map);
+	
+	public int AllDelete(String userid);
 }

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,6 +73,184 @@
 	background-color: #f564a9;
 	height: 5px;
 }
+
+tml, body {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+	float: none;
+}
+
+/* ======== Calendar ======== */
+.my-calendar {
+	width: 700px;
+	margin: 30px;
+	padding: 20px 20px 10px;
+	text-align: center;
+	font-weight: 800;
+	border: 1px solid #ddd;
+	cursor: default;
+}
+
+.my-calendar .clicked-date {
+	border-radius: 25px;
+	margin-top: 36px;
+	float: left;
+	width: 42%;
+	padding: 46px 0 26px;
+	background: #ddd;
+}
+
+.my-calendar .calendar-box {
+	float: right;
+	width: 58%;
+	padding-left: 30px;
+}
+
+.clicked-date .cal-day {
+	font-size: 24px;
+}
+
+.clicked-date .cal-date {
+	font-size: 130px;
+}
+
+.ctr-box {
+	padding: 0 16px;
+	margin-bottom: 20px;
+	font-size: 20px;
+}
+
+.ctr-box .btn-cal {
+	position: relative;
+	float: left;
+	width: 25px;
+	height: 25px;
+	margin-top: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+.ctr-box .btn-cal:after {
+	content: '<';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	line-height: 25px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.ctr-box .btn-cal.next {
+	float: right;
+}
+
+.ctr-box .btn-cal.next:after {
+	content: '>';
+}
+
+.cal-table {
+	width: 100%;
+}
+
+.cal-table th {
+	width: 14.2857%;
+	padding-bottom: 5px;
+	font-size: 16px;
+	font-weight: 900;
+}
+
+.cal-table td {
+	padding: 3px 0;
+	height: 50px;
+	font-size: 15px;
+	vertical-align: middle;
+}
+
+.cal-table td.day {
+	position: relative;
+	cursor: pointer;
+}
+
+.cal-table td.today {
+	background: #ffd255;
+	border-radius: 50%;
+	color: #fff;
+}
+
+.cal-table td.day-active {
+	background: #ff8585;
+	border-radius: 50%;
+	color: #fff;
+}
+
+.cal-table td.has-event:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 4px;
+	background: #FFC107;
+}
+
+.button {
+	display: inline-block;
+	border-radius: 4px;
+	background-color: #f4511e;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 28px;
+	padding: 20px;
+	width: 200px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	vertical-align: middle;
+	float: right;
+	margin-right: 170px;
+}
+
+.button span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.button span:after {
+	content: '\00bb';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -20px;
+	transition: 0.5s;
+}
+
+.button:hover span {
+	padding-right: 25px;
+}
+
+.button:hover span:after {
+	opacity: 1;
+	right: 0;
+}
 </style>
 <body>
 	<!-- Preloader -->
@@ -100,17 +279,73 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Product Management Page</h4>
+						<h4 class="page-title">商品管理ページ</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 						<ol class="breadcrumb">
 							<li><a href="#">Dashboard</a></li>
-							<li class="active">Product Table</li>
+							<li class="active">商品テーブル</li>
 						</ol>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
-				<!-- /row -->
+				<div class="row">
+					<div class="container">
+						<div class="row">
+
+							<div class="my-calendar clearfix"
+								style="display: inline-block; background-color: white; border-radius: 10px;">
+								<div class="clicked-date">
+									<div class="cal-day"></div>
+									<div class="cal-date"></div>
+								</div>
+								<div class="calendar-box">
+									<div class="ctr-box clearfix">
+										<button type="button" title="prev" class="btn-cal prev">
+										</button>
+										<span class="cal-month"></span> <span class="cal-year"></span>
+										<button type="button" title="next" class="btn-cal next">
+										</button>
+									</div>
+									<table class="cal-table">
+										<thead>
+											<tr>
+												<th>S</th>
+												<th>M</th>
+												<th>T</th>
+												<th>W</th>
+												<th>T</th>
+												<th>F</th>
+												<th>S</th>
+											</tr>
+										</thead>
+										<tbody class="cal-body"></tbody>
+									</table>
+								</div>
+							</div>
+							<!-- // .my-calendar -->
+
+							<form name="searchDate" action="/users/searchDate" method="get">
+								<div class="col-md-12"
+									style="position: relative; height: 100px;">
+									<button class="button"
+										style="vertical-align: middle; position: absolute; top: 0; z-index: 11; left: 50%; transform: translateX(-50%);">
+										<input type="hidden" name="userid"
+											value="<%=request.getParameter("userid")%>"> <input
+											type="hidden" name="day" value=""> <input
+											type="hidden" name="month" value=""> <span>검색</span>
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+				$("buttom").click(function(){
+					var form = $(".searchDate");
+					form.submit();
+				})
+</script>
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
@@ -122,15 +357,16 @@
 										<tr>
 											<th>#</th>
 											<th>예약물품</th>
-											<th>렌탈일</th>
+											<th>구매일</th>
+											<th>예약일</th>
 											<th>렌탈 기한</th>
 											<th>금액</th>
 										</tr>
 									</thead>
 									<tbody>
-									<c:set
-									value="${count.count - (pageMaker.cri.pageNum - 1) * pageMaker.cri.amount}"
-									var="bno"/>
+										<c:set
+											value="${pageMaker.total - (pageMaker.cri.pageNum - 1) * pageMaker.cri.amount}"
+											var="bno" />
 										<c:forEach items="${res }" var="res">
 
 											<tr>
@@ -138,19 +374,22 @@
 												<td><img style="max-width: 150px;"
 													src="/upload/${res.goodsphoto }"></td>
 												<td>${res.resdate }</td>
+												<td>${fn:substring(res.startdate,0,10)}~${fn:substring(res.lastdate,0,10)}</td>
 												<td>7일</td>
 												<td id="prices">${res.price }</td>
 											</tr>
-											<c:set var="bno" value="${bno-1 }"/>
+											<c:set var="bno" value="${bno-1 }" />
 										</c:forEach>
 
-										<tr style="border-top: 4px double black;">
+										<!--<tr style="border-top: 4px double black;">
 											<td>렌탈 총 횟수 :</td>
 											<td colspan="2" id="count">${count.count }회</td>
 											<td>총 금액 :</td>
-											<td id="price"><fmt:formatNumber value="${count.price }" type="currency" pattern="###,###원"/></td>
+											<td id="price"><fmt:formatNumber value="${count.price }"
+													type="currency" pattern="###,###원" /></td>
 
 										</tr>
+ -->
 									</tbody>
 
 								</table>
@@ -186,7 +425,7 @@
 		<!-- /#page-wrapper -->
 	</div>
 	<!-- /#wrapper -->
-	
+
 	<form id="actionForm" action="/users/Reservation" method="get">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 	</form>
@@ -205,6 +444,149 @@
 	<!-- Custom Theme JavaScript -->
 	<script src="/resources/admin/js/custom.min.js"></script>
 	<script type="text/javascript">
+	// ================================
+	// START YOUR APP HERE
+	// ================================
+	const init = {
+	  monList: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	  dayList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+	  today: new Date(),
+	  monForChange: new Date().getMonth(),
+	  activeDate: new Date(),
+	  getFirstDay: (yy, mm) => new Date(yy, mm, 1),
+	  getLastDay: (yy, mm) => new Date(yy, mm + 1, 0),
+	  nextMonth: function () {
+	    let d = new Date();
+	    d.setDate(1);
+	    d.setMonth(++this.monForChange);
+	    this.activeDate = d;
+	    return d;
+	  },
+	  prevMonth: function () {
+	    let d = new Date();
+	    d.setDate(1);
+	    d.setMonth(--this.monForChange);
+	    this.activeDate = d;
+	    return d;
+	  },
+	  addZero: (num) => (num < 10) ? '0' + num : num,
+	  activeDTag: null,
+	  getIndex: function (node) {
+	    let index = 0;
+	    while (node = node.previousElementSibling) {
+	      index++;
+	    }
+	    return index;
+	  }
+	};
+
+	const $calBody = document.querySelector('.cal-body');
+	const $btnNext = document.querySelector('.btn-cal.next');
+	const $btnPrev = document.querySelector('.btn-cal.prev');
+
+	/**
+	 * @param {number} date
+	 * @param {number} dayIn
+	*/
+	function loadDate (date, dayIn) {
+	  document.querySelector('.cal-date').textContent = date;
+	  document.querySelector('.cal-day').textContent = init.dayList[dayIn];
+	  var days = $(".cal-date").text();
+	  $("input[name='day']").val(days);
+	  var month = $(".cal-month").text();
+	  $("input[name='month']").val(month);
+	}
+
+	/**
+	 * @param {date} fullDate
+	 */
+	function loadYYMM (fullDate) {
+	  let yy = fullDate.getFullYear();
+	  let mm = fullDate.getMonth();
+	  let firstDay = init.getFirstDay(yy, mm);
+	  let lastDay = init.getLastDay(yy, mm);
+	  let markToday;  // for marking today date
+	  
+	  if (mm === init.today.getMonth() && yy === init.today.getFullYear()) {
+	    markToday = init.today.getDate();
+	  }
+
+	  document.querySelector('.cal-month').textContent = init.monList[mm];
+	  document.querySelector('.cal-year').textContent = yy;
+
+	  let trtd = '';
+	  let startCount;
+	  let countDay = 0;
+	  for (let i = 0; i < 6; i++) {
+	    trtd += '<tr>';
+	    for (let j = 0; j < 7; j++) {
+	      if (i === 0 && !startCount && j === firstDay.getDay()) {
+	        startCount = 1;
+	      }
+	      if (!startCount) {
+	        trtd += '<td>'
+	      } else {
+	        let fullDate = yy + '.' + init.addZero(mm + 1) + '.' + init.addZero(countDay + 1);
+	        trtd += '<td class="day';
+	        trtd += (markToday && markToday === countDay + 1) ? ' today" ' : '"';
+	        trtd += ` data-date="${countDay + 1}" data-fdate="${fullDate}">`;
+	      }
+	      trtd += (startCount) ? ++countDay : '';
+	      if (countDay === lastDay.getDate()) { 
+	        startCount = 0; 
+	      }
+	      trtd += '</td>';
+	    }
+	    trtd += '</tr>';
+	  }
+	  $calBody.innerHTML = trtd;
+	}
+
+	/**
+	 * @param {string} val
+	 */
+	function createNewList (val) {
+	  let id = new Date().getTime() + '';
+	  let yy = init.activeDate.getFullYear();
+	  let mm = init.activeDate.getMonth() + 1;
+	  let dd = init.activeDate.getDate();
+	  const $target = $calBody.querySelector(`.day[data-date="${dd}"]`);
+
+	  let date = yy + '.' + init.addZero(mm) + '.' + init.addZero(dd);
+
+	  let eventData = {};
+	  eventData['date'] = date;
+	  eventData['memo'] = val;
+	  eventData['complete'] = false;
+	  eventData['id'] = id;
+	  init.event.push(eventData);
+	  $todoList.appendChild(createLi(id, val, date));
+	}
+
+	loadYYMM(init.today);
+	loadDate(init.today.getDate(), init.today.getDay());
+
+	$btnNext.addEventListener('click', () => loadYYMM(init.nextMonth()));
+	$btnPrev.addEventListener('click', () => loadYYMM(init.prevMonth()));
+
+	$calBody.addEventListener('click', (e) => {
+	  if (e.target.classList.contains('day')) {
+	    if (init.activeDTag) {
+	      init.activeDTag.classList.remove('day-active');
+	    }
+	    let day = Number(e.target.textContent);
+	    loadDate(day, e.target.cellIndex);
+	    e.target.classList.add('day-active');
+
+	    init.activeDTag = e.target;
+	    init.activeDate.setDate(day);
+	    reloadTodo(); 
+	  }
+	  
+	});
+
+	</script>
+	<script type="text/javascript">
 
 		$(".paging a").on(
 				"click",
@@ -212,15 +594,15 @@
 					e.preventDefault();
 					var num = $(this).attr("href");
 					var userid = '<%=request.getParameter("userid")%>';
-					console.log(num);
-					console.log(userid);
-					var form = $("#actionForm");
-					form.append("<input name='pageNum' value='"+num+"'>");
-					form.append("<input name='userid' value='"+userid+"'>");
-					form.submit();
+			var form = $("#actionForm");
+			form.append("<input name='pageNum' value='"+num+"'>");
+			form.append("<input name='userid' value='"+userid+"'>");
+			form.submit();
 
-				})
+		})
 	</script>
+
+
 </body>
 
 </html>

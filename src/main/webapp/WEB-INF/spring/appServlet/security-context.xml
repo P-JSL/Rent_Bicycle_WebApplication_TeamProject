@@ -24,7 +24,7 @@
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
-				<value>/WEB-INF/messages/spring_security_messages</value>
+				<value>/WEB-INF/messages/spring_security_ja_messages</value>
 			</list>
 		</property>
 		<property name="defaultEncoding" value="UTF-8"></property>
@@ -61,14 +61,14 @@
 
 		<!-- 로그아웃 -->
 		<security:logout
-			logout-success-url="/CustomLogin?logout"
+			logout-success-url="/login?logout"
 			delete-cookies="JSESSIONID,remember-me,JSESSION_ID"
 			invalidate-session="true" />
 
 		<security:session-management
 			session-fixation-protection="changeSessionId">
 			<security:concurrency-control
-				max-sessions="1" expired-url="/CustomLogin"
+				max-sessions="1" expired-url="/login"
 				error-if-maximum-exceeded="true" />
 		</security:session-management>
 

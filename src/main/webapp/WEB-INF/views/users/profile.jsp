@@ -66,7 +66,7 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Profile page</h4>
+						<h4 class="page-title">個人情報</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 						<ol class="breadcrumb">
@@ -84,7 +84,7 @@
 						<div class="white-box">
 							<form class="form-horizontal form-material">
 								<div class="form-group">
-									<label class="col-md-12">User Name</label>
+									<label class="col-md-12">ID</label>
 									<div class="col-md-12">
 										<input type="text" placeholder="Johnathan Doe"
 											class="form-control form-control-line"
@@ -93,7 +93,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="example-email" class="col-md-12">Email</label>
+									<label for="example-email" class="col-md-12">Eメール</label>
 									<div class="col-md-12">
 										<input type="email" placeholder="johnathan@admin.com"
 											class="form-control form-control-line" name="example-email"
@@ -111,8 +111,8 @@
 											readonly class="form-control form-control-line">
 									</div>
 								</div>
-								<a href="../user/UserProfileUpdate?userid=<sec:authentication property='principal.member.userid'/>" class="btn label label-warning">개인정보 수정</a> 
-								<span class="btn label label-danger">회원탈퇴</span>
+								<a href="../user/UserProfileUpdate?userid=<sec:authentication property='principal.member.userid'/>" class="btn label label-warning">修正</a> 
+								<span class="btn label label-danger">脱退</span>
 							</form>
 						</div>
 					</div>

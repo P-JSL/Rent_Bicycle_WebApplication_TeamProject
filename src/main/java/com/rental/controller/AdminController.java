@@ -16,7 +16,6 @@ import com.rental.domain.IPBanList;
 import com.rental.domain.MemberVO;
 import com.rental.domain.PageDTO;
 import com.rental.domain.PageDTO_c;
-import com.rental.domain.ProductVO;
 import com.rental.service.ChartService;
 import com.rental.service.ConTactService;
 import com.rental.service.IPService;
@@ -90,13 +89,6 @@ public class AdminController {
 
 	}
 
-	@GetMapping("/profile")
-	public void profile(String userid, Model model) {
-		model.addAttribute("userid", userid);
-		model.addAttribute("loginfo", service.UserLogInfo(userid));
-		model.addAttribute("users", service.PureAllUser());
-	}
-
 	@GetMapping("/CommunityManager")
 	public void Manager(Model model, String userid, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("userid", userid);
@@ -104,11 +96,7 @@ public class AdminController {
 
 	@GetMapping("/product_manager")
 	public void product(String userid, Model model, @ModelAttribute("cri") Criteria cri) {
-		for (ProductVO pvo : ps.AllList()) {
-			if (pvo.getMany() == 0) {
-				ps.statusminus(pvo.getNum());
-			}
-		}
+		
 		model.addAttribute("userid", userid);
 		model.addAttribute("product", ps.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, ps.count()));

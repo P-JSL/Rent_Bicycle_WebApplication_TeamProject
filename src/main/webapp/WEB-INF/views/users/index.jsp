@@ -82,7 +82,7 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Dashboard</h4>
+						<h4 class="page-title">管理者ページ</h4>
 					</div>
 
 					<!-- /.col-lg-12 -->
@@ -95,7 +95,7 @@
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i data-icon="E" class="linea-icon linea-basic"></i>
-									<h5 class="text-muted vb">로그인 횟수</h5>
+									<h5 class="text-muted vb">ログイン回数</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-danger">${loginfo.login_count }</h3>
@@ -120,7 +120,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
 									<h5 class="text-muted vb">
-										누적 로그인<br> 실패 횟수
+										累積ログイン<br> 失敗回数
 									</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
@@ -145,7 +145,7 @@
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
-									<h4 class="text-muted vb">예약 횟수</h4>
+									<h4 class="text-muted vb">予約回数</h4>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-primary">${count.count == null ? '0' : count.count }</h3>
@@ -168,8 +168,8 @@
 				<!--row -->
 				<div class="row" id="chartRow">
 					<h4 style="text-align: center;">
-						예약 날짜 및 총 금액 <a href="#layer1" class="btn btn-warning btn-example">내
-							상품 예약 </a>
+						予約日および総金額 <a href="#layer1" class="btn btn-warning btn-example">
+							私の商品・予約者現況 </a>
 					</h4>
 					<!-- HTML -->
 					<div id="chartdiv"></div>
@@ -349,20 +349,6 @@
 			actionForm.submit();
 		})
 	</script>
-	<script type="text/javascript">
-	var datas = ${JsonData };
-	var	price = new Array();
-	var days = new Array();
-		for(var i=0; i < datas.length; i++){
-			 price[i] = datas[i].price;
-			days[i]=datas[i].resdate;
-		};	
-		if(datas.length == 0){
-			$("#chartRow").hide();
-		}else if(datas.length !=0){
-			$("#chartRow").show();
-		}
-</script>
 <script type="text/javascript">
 
 	$(function(e) {
@@ -449,7 +435,18 @@
 		})
 </script>
 	<script>
-
+	var datas = ${JsonData };
+	var	price = new Array();
+	var days = new Array();
+		for(var i=0; i < datas.length; i++){
+			 price[i] = datas[i].price;
+			days[i]=datas[i].resdate;
+		};	
+		if(datas.length == 0){
+			$("#chartRow").hide();
+		}else if(datas.length !=0){
+			$("#chartRow").show();
+		}
 am4core.ready(function() {
 
 // Themes begin
@@ -478,13 +475,13 @@ valueAxis.strictMinMax = true;
 valueAxis.renderer.minGridDistance = 30;
 // axis break
 var axisBreak = valueAxis.axisBreaks.create();
-axisBreak.startValue = 2100;
-axisBreak.endValue = 10000;
+axisBreak.startValue = 5000;
+axisBreak.endValue = 15000;
 //axisBreak.breakSize = 0.005;
 
 // fixed axis break
 var d = (axisBreak.endValue - axisBreak.startValue) / (valueAxis.max - valueAxis.min);
-axisBreak.breakSize = 0.05 * (1 - d) / d; // 0.05 means that the break will take 5% of the total value axis height
+axisBreak.breakSize = 0.1 * (1 - d) / d; // 0.05 means that the break will take 5% of the total value axis height
 
 // make break expand on hover
 var hoverState = axisBreak.states.create("hover");

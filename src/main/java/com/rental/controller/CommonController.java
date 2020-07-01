@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rental.domain.ConTactVO;
+import com.rental.domain.CourseVO;
 import com.rental.domain.Criteria;
 import com.rental.domain.Criteria_c;
 import com.rental.domain.MemberVO;
@@ -36,6 +37,7 @@ import com.rental.domain.ReviewVO;
 import com.rental.service.ConTactService;
 import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
+import com.rental.service.ProductService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
 import com.rental.service.ReviewService;
@@ -65,16 +67,19 @@ public class CommonController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private ConTactService cs;
+	@Setter(onMethod_ = { @Autowired })
+	private ProductService ps;
 
-	@GetMapping("/CustomLogin")
+	
+	@GetMapping("/login")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
 		log.info("logout : " + logout);
 		if (error != null) {
-			model.addAttribute("error", "아이디 혹은 비밀번호가 틀리셨습니다.");
+			model.addAttribute("error", "IDかパースワードが間違いました。");
 		}
 		if (logout != null) {
-			model.addAttribute("logout", "로그아웃 하셨습니다.");
+			model.addAttribute("logout", "ログアウトしました。");
 		}
 	}
 
@@ -276,6 +281,110 @@ public class CommonController {
 	public String inquire() {
 
 		return "/inquire/inquire";
+	}
+	
+	@PreAuthorize("hasAnyRole({'ROLE_USER','ROLE_ADMIN'})")
+	@GetMapping("/course/course")
+	public void course(Model model,@ModelAttribute("cri") Criteria cri,@RequestParam("userid") String userid) {
+		log.info("productlist");
+		log.info(ps.getCList(cri));
+		int total = ps.Ccount();
+		model.addAttribute("userid",userid);
+		model.addAttribute("course", ps.getCList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));// total
+	}
+	
+	@GetMapping("/course/coursewrite")
+	public void coursewrite(@RequestParam("userid") String userid,Model model) {
+		model.addAttribute("userid",userid);
+	}
+	
+	@PostMapping("/course/coursewriteok")
+	public String coursewrite(CourseVO cvo,RedirectAttributes rttr,@RequestParam("userid") String userid) {
+		log.info("productregisterAction");
+		rttr.addAttribute("userid", userid);
+		MultipartFile multipartFile = cvo.getCoursefile();
+
+		String uploadFolder = "c:\\upload";
+
+		log.info("upload file name : " + multipartFile.getOriginalFilename());
+		log.info("upload file size : " + multipartFile.getSize());
+
+		String uploadFileName = multipartFile.getOriginalFilename();
+		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("//") + 1);
+
+		log.info(uploadFileName);
+
+		UUID uuid = UUID.randomUUID();
+		uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+		File saveFile = new File(uploadFolder, uploadFileName);
+
+		try {
+			multipartFile.transferTo(saveFile);
+			// ����� ����
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+
+		cvo.setPhoto(uploadFileName);
+		ps.insertcourse(cvo);
+		
+		return "redirect:/course/course";
+	}
+	
+	@GetMapping("/course/courseview")
+	public void view(String userid, Model model, int num,@ModelAttribute("cri") Criteria cri) {
+		ps.viewcount(num);
+		model.addAttribute("userid", userid);
+		model.addAttribute("Cview", ps.getCPage(num));
+	}
+	
+	@GetMapping("/course/courseModify")
+	public void courseModify(@RequestParam("userid") String userid,Model model,@RequestParam("num") int num) {
+		model.addAttribute("userid", userid);
+		model.addAttribute("Cview", ps.getCPage(num));
+	}
+	
+	@PostMapping("/course/courseModifyok")
+	public String courseModifyok(CourseVO cvo,RedirectAttributes rttr,@RequestParam("num") int num,@RequestParam("userid") String userid) {
+		rttr.addAttribute("userid", userid);
+		log.info("productregisterAction");
+
+		MultipartFile multipartFile = cvo.getCoursefile();
+
+		String uploadFolder = "c:\\upload";
+
+		log.info("upload file name : " + multipartFile.getOriginalFilename());
+		log.info("upload file size : " + multipartFile.getSize());
+
+		String uploadFileName = multipartFile.getOriginalFilename();
+		uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("//") + 1);
+
+		log.info(uploadFileName);
+
+		UUID uuid = UUID.randomUUID();
+		uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+		File saveFile = new File(uploadFolder, uploadFileName);
+
+		try {
+			multipartFile.transferTo(saveFile);
+			// ����� ����
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+
+		cvo.setPhoto(uploadFileName);
+		ps.updatecourse(cvo);
+		return "redirect:/course/course";
+	}
+	
+	@GetMapping("/course/courseDelete")
+	public String courseDelete(@RequestParam("userid") String userid,int num,RedirectAttributes rttr) {
+		rttr.addAttribute("userid", userid);
+		ps.courseDelete(num);
+		return "redirect:/course/course";
 	}
 
 }

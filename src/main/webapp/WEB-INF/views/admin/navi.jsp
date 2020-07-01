@@ -7,9 +7,6 @@
 				href="/admin/index?userid=${userid }" class="waves-effect"><i
 					class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span
 					class="hide-menu">Dashboard</span></a></li>
-			<li><a href="/admin/profile?userid=${userid }"
-				class="waves-effect"><i class="fa fa-user fa-fw"
-					aria-hidden="true"></i><span class="hide-menu">Profile</span></a></li>
 			<li><a href="/admin/notice?userid=${userid }"
 				class="waves-effect"><i class="fa fa-leaf fa-fw"
 					aria-hidden="true"></i></i><span class="hide-menu">Notice</span></a></li>

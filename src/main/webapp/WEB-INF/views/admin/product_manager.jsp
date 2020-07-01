@@ -68,12 +68,12 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Product Management Page</h4>
+						<h4 class="page-title">商品管理ページ</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 						<ol class="breadcrumb">
 							<li><a href="#">Dashboard</a></li>
-							<li class="active">Product Table</li>
+							<li class="active">商品テーブル</li>
 						</ol>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -82,19 +82,18 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">상품 테이블</h3>
+							<h3 class="box-title">商品テーブル</h3>
 
 							<div class="table-responsive" style="margin-bottom: 30px;">
 								<table class="table table-striped">
 									<thead style="border-bottom: 2px double">
 										<tr>
 											<th>#</th>
-											<th>상품명</th>
-											<th>상품 이미지</th>
-											<th>상품 가격</th>
-											<th>상품 종류</th>
-											<th>상품 상태</th>
-											<th>재고</th>
+											<th>商品名</th>
+											<th>商品イメージ</th>
+											<th>商品価格</th>
+											<th>種類</th>
+											<th>状態</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -107,7 +106,7 @@
 												<td>${pro.price }</td>
 												<td>${pro.category =='1' ? '일반' : '브랜드' }</td>
 												<td>${pro.status =='2' ? '○': pro.status == '1' ? '예약' : pro.status == '0' ? '렌탈중' : '' }</td>
-												<td>${pro.many }</td>
+												
 											</tr>
 										</c:forEach>
 
@@ -170,6 +169,7 @@
 	<script type="text/javascript">
 		var form = $("#actionForm");
 		function movewrite() {
+
 			form.submit();
 		}
 	</script>

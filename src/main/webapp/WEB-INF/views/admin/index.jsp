@@ -89,7 +89,7 @@ height: 30px;
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Dashboard</h4>
+						<h4 class="page-title">管理者メインページ</h4>
 					</div>
 
 					<!-- /.col-lg-12 -->
@@ -102,7 +102,7 @@ height: 30px;
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i data-icon="E" class="linea-icon linea-basic"></i>
-									<h5 class="text-muted vb">로그인 횟수</h5>
+									<h5 class="text-muted vb">ログイン回数</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-danger">${loginfo.login_count }</h3>
@@ -127,7 +127,7 @@ height: 30px;
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
 									<h5 class="text-muted vb">
-										누적 로그인 실패<br>
+										累積ログイン<br>失敗回数
 									</h5>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
@@ -152,7 +152,7 @@ height: 30px;
 							<div class="col-in row">
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
-									<h4 class="text-muted vb">모든 회원</h4>
+									<h4 class="text-muted vb">全会員</h4>
 								</div>
 								<div class="col-md-6 col-sm-6 col-xs-6">
 									<h3 class="counter text-right m-t-15 text-primary">${users }</h3>
@@ -220,17 +220,17 @@ height: 30px;
 									style="text-align: center; justify-content: center;">
 									<thead style="border-top: 1px solid">
 										<tr>
-											<th style="text-align: center; justify-content: center;">아이디</th>
-											<th style="text-align: center; justify-content: center;">등록일자</th>
+											<th style="text-align: center; justify-content: center;">ユーザーID</th>
+											<th style="text-align: center; justify-content: center;">登録日時</th>
 											<th colspan="1"
-												style="text-align: center; justify-content: center;">ip</th>
+												style="text-align: center; justify-content: center;">IP</th>
 											<th colspan="1"
-												style="text-align: center; justify-content: center;">계정</th>
+												style="text-align: center; justify-content: center;">アカウント</th>
 											<th colspan="3" 
 												style="text-align: center; justify-content: center; padding-bottom: 0 !important;"><table class="table table-striped" id="intable" >
 													<tr >
-														<th style="text-align: center;">계정여부</th>
-														<th style="text-align: center;width:155px; ">IP차단여부</th>
+														<th style="text-align: center;">アカウント状況</th>
+														<th style="text-align: center;width:155px; ">IP遮断可否</th>
 														<th style="text-align: center; width: 75px;">㉿</th>
 													</tr>
 												</table>
@@ -245,29 +245,29 @@ height: 30px;
 												<td class="txt-oflo">${list.regDate }</td>
 												<td class="ip">${list.ip }</td>
 												<td><span class="text-success"
-													id="${list.enabled == true && list.thisip == false ? 'enabled' : 'disenabled'}">${list.enabled == true && list.thisip == false ? '사용가능' : '사용불가' }</span></td>
+													id="${list.enabled == true && list.thisip == false ? 'enabled' : 'disenabled'}">${list.enabled == true && list.thisip == false ? '使用可能' : '使用不可' }</span></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><select name="select"
 													id="select" style="text-align: center;">
-														<option value="null">선택</option>
-														<option value="true">사용가능</option>
-														<option value="false">사용불가</option>
+														<option value="null">選択</option>
+														<option value="true">使用可能</option>
+														<option value="false">使用不可</option>
 												</select> <a href="#" type="button" class="btn" style="color: red;"
-													id="change">변경</a></td>
+													id="change">変更</a></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><select name="ban"
 													id="ban" style="text-align: center;">
-														<option value="null">선택</option>
-														<option value="true">차단헤체</option>
-														<option value="false">차단</option>
+														<option value="null">選択</option>
+														<option value="true">遮断解除</option>
+														<option value="false">遮断</option>
 												</select> <a href="#" type="button" class="btn" style="color: red;"
-													id="ipban">차단</a></td>
+													id="ipban">遮断</a></td>
 												<td class="input-group-addon"
 													style="background-color: #fff;"><input name="out"
 													type="radio"
 													style="position: relative; top: 2px; left: 4px; transform: scale(1.2); cursor: pointer;"><a
 													href="#" id="delete" type="button" class="btn"
-													style="color: red;">탈퇴</a></td>
+													style="color: red;">強制脱退</a></td>
 											</tr>
 										</c:forEach>
 

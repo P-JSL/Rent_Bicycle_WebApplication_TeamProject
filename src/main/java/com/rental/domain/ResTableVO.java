@@ -14,5 +14,6 @@ public class ResTableVO {
 	private int status;
 	private String resdate, goodsphoto;
 	private int price, count;
-
+	private String startdate,lastdate;
+	private String month,day;
 }

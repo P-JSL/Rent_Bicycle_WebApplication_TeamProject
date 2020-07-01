@@ -84,16 +84,16 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">Q&A 테이블</h3>
+							<h3 class="box-title">Q&A テーブル</h3>
 							<div class="table-responsive" style="margin-bottom: 30px;">
 								<table class="table table-striped" id="QNAtable" style="text-align: center;">
 									<thead style="border-bottom: 2px double">
 										<tr>
-											<th style="text-align: center;" scope="row">번호</th>
-											<th style="text-align: center;" scope="row">제목</th>
-											<th style="text-align: center;" scope="row">내용</th>
-											<th style="text-align: center;" scope="row">작성자</th>
-											<th style="text-align: center;" scope="row">작성날짜</th>
+											<th style="text-align: center;" scope="row">#</th>
+											<th style="text-align: center;" scope="row">タイトル</th>
+											<th style="text-align: center;" scope="row">内容</th>
+											<th style="text-align: center;" scope="row">作成者</th>
+											<th style="text-align: center;" scope="row">作成日</th>
 										</tr>
 									</thead>
 									<tbody style="text-align: center;">
@@ -106,9 +106,9 @@
 												<td>${bno}</td>
 												<td><a href="${no.num }" id="num">${no.title }</a></td>
 												<td style="white-space: nowrap; overflow: hidden;  text-overflow: ellipsis; height: 20px;">${fn:substring(no.content,0,30) }...</td>
-												<td class="${no.writer }" id="userid">관리자</td>
+												<td class="${no.writer }" id="userid">管理者</td>
 												<td><fmt:formatDate value="${no.regdate }" pattern="YY-MM-dd HH:MM"/></td>
-												<td><button class="btn btn-dangerous" id="delete">삭제</button></td>
+												<td><button class="btn btn-dangerous" id="delete">削除</button></td>
 											</tr>
 											<c:set value="${bno-1 }" var="bno"></c:set>
 										</c:forEach>
@@ -148,19 +148,19 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="white-box">
-							<h3 class="box-title">ConTactUs 테이블</h3>
+							<h3 class="box-title">ConTactUs テーブル</h3>
 
 							<div class="table-responsive" style="margin-bottom: 30px;">
 								<table class="table table-striped" id="contable"
 									style="text-align: center;">
 									<thead style="border-bottom: 2px double">
 										<tr >
-											<th style="text-align: center;" scope="row">번호</th>
-											<th style="text-align: center;" scope="row">제목</th>
-											<th style="text-align: center;" scope="row">메세지</th>
-											<th style="text-align: center;" scope="row">이메일</th>
-											<th style="text-align: center;" scope="row">작성날짜</th>
-											<th style="text-align: center;" scope="row">상태</th>
+											<th style="text-align: center;" scope="row">#</th>
+											<th style="text-align: center;" scope="row">タイトル</th>
+											<th style="text-align: center;" scope="row">メッセージ</th>
+											<th style="text-align: center;" scope="row">メール</th>
+											<th style="text-align: center;" scope="row">作成日</th>
+											<th style="text-align: center;" scope="row">状態</th>
 										</tr>
 									</thead>
 									<tbody style="text-align: center;">
@@ -175,7 +175,7 @@
 												<td>${no.message }</td>
 												<td class="${no.email }" id="userid">${no.email }</td>
 												<td><fmt:formatDate value="${no.regdate }" pattern="YY-MM-dd HH:MM" /></td>
-												<td>${no.status == '1' ? '안읽음' : '읽음'}</td>
+												<td>${no.status == '1' ? '未読' : '読む'}</td>
 											</tr>
 											<c:set value="${bno-1 }" var="bno"></c:set>
 										</c:forEach>

@@ -13,8 +13,7 @@
 			<div class="row">
 				<div class="col-xl-12">
 					<div class="bradcam_text text-center">
-						<h3>contact</h3>
-						<p>Pixel perfect design with awesome contents</p>
+						<h3>お問い合わせ</h3>
 					</div>
 				</div>
 			</div>
@@ -27,7 +26,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
-					<h2 class="contact-title">1:1 문의</h2>
+					<h2 class="contact-title">お問い合わせ</h2>
 				</div>
 				<div class="col-lg-8">
 					<form class="form-contact contact_form" action="/contact/mail"
@@ -72,7 +71,7 @@
 						</div>
 						<div class="form-group mt-3">
 							<button type="submit" class="genric-btn primary circle arrow"
-								id="send">보내기</button>
+								id="send">送る</button>
 						</div>
 					</form>
 				</div>

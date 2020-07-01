@@ -44,6 +44,7 @@
 <link href="/resources/write/css/sub-notice.css" rel="stylesheet">
 <link href="/resources/write/css/sub-qna.css" rel="stylesheet">
 <link href="/resources/write/css/sub-faq.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <style>
 .notice-write {
@@ -154,7 +155,7 @@
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12" id="writeform">
 						<div class="notice-write ">
-							<form name="write" style="background-color: #6daeb8"
+							<form name="write" style="background-color: #6daeb8"　 onsubmit="return Register();"
 								action="/users/Apply/write" method="post"
 								enctype="multipart/form-data">
 								<input type="hidden" name="${_csrf.parameterName}"
@@ -176,48 +177,52 @@
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
 												for="t_title">제목</label></th>
-											<td><input type="text" name="title" id="title"
-												class="title" placeholder="제목을 입력해주세요"></td>
+											<td colspan="2"><input type="text" name="title"
+												id="title" class="title" placeholder="제목을 입력해주세요"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">카테고리</label></th>
-											<td><input type="text" name="category" id="title"
-												class="title"></td>
+												for="t_title">품목</label></th>
+											<td colspan="1"><input type="text" name="goods"
+												id="title" class="title"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
 												for="t_title">작성자</label></th>
-											<td colspan="3"><input type="text" name="nickname"
+											<td colspan="4"><input type="text" name="nickname"
 												id="title" class="title" readonly value="${nickname }">
 												<input type="hidden" name="userid" id="title" class="title"
 												value="${ userid}"></td>
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
 												for="t_title">가격</label></th>
-											<td><input type="text" name="price" id="title"
+											<td colspan="2"><input type="text" name="price" id="title"
+												class="title"></td>
+											
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">카테고리</label></th>
+											<td><input type="text" name="category" id="title"
 												class="title"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">품목</label></th>
-
-											<td colspan="1"><input type="text" name="goods"
-												id="title" class="title"></td>
-											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">수량</label></th>
-											<td><input type="text" name="many" id="title"
+												for="t_title">렌탈 가능 날짜</label></th>
+											<td><input type="text" name="startdate" id="title"
 												class="title"></td>
-											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">이미지</label></th>
-											<td colspan="1"><input type="file" name="goodsfile"
-												id="title" class="title"></td>
+											<td><input type="text" name="lastdate" id="to"
+												class="title"></td>
+												
 
 										</tr>
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
 												for="cont">내용</label></th>
-											<td colspan="7"><textarea type="cont" name="content"
+											<td colspan="8"><textarea type="cont" name="content"
 													id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
 										</tr>
-
+										<tr>
+											<th style="vertical-align: middle; text-align: center;"><label
+												for="t_title">이미지</label></th>
+											<td colspan="9"><input type="file" name="goodsfile"
+												id="title" class="title"></td>
+										</tr>
 
 										<tr>
-											<td colspan="8"><input type="submit" class="btn"
+											<td colspan="9"><input type="submit" class="btn"
 												onclick="noticeSave()"><input type="button"
 												onclick="history.back();" value="목록" class="btn"></td>
 										</tr>
@@ -252,8 +257,9 @@
 	<!--Wave Effects -->
 	<script src="/resources/admin/js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
+
 	<script src="/resources/admin/js/custom.min.js"></script>
-	<script src="https:/code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#modify").on("click", function(e) {
@@ -292,15 +298,15 @@
 			var phone = $("input[name='phonenum']").val();
 
 			if (!nickname) {
-				alert("닉네임을 적어주시길 바랍니다.");
+				alert("ニックネームを書いてください。");
 				return false;
 			}
 			if (!Addr) {
-				alert("주소를 적어주세요");
+				alert("住所を書いてください。");
 				return false;
 			}
 			if (!phone && phone.length < 12) {
-				alert("핸드폰 번호를 적어주시길 바랍니다.");
+				alert("携帯番号を書いてください。あるいは、会社電話でも構いません。");
 				return false;
 			}
 			form.submit();
@@ -338,6 +344,43 @@
 				})
 			})
 		})
+	</script>
+	<script type="text/javascript">
+		var today = new Date();
+		var Year = today.getFullYear();
+		var Month = today.getMonth() + 1;
+		var Day = today.getDate();
+		function Register(){
+		$("input[name='startdate']").val(Year + "/" + Month + "/" + Day);
+		var lastdate = $("input[name='lastdate']").val();
+		if(!$("input[name='goods']").val()){
+			alert("商品を書いてください。");
+			return false;
+		}	
+		if(!$("input[name='category']").val()){
+			alert("カテゴリーを分かりやすく入力してください。");
+			return false;
+		}	
+		if(!$("input[name='price']").val()){
+				alert("値段を書いてください。～円/ウォン単位はいりません");
+				return false;
+			}
+			if(lastdate.length == 0){
+				alert("レンタル終了日を指定してください。");
+				return false;
+			}
+			if(!$("input[type='file']").val()){
+				alert("商品のイメージは必須です。");
+				return false;
+			}
+		}
+		</script>
+	<script type="text/javascript">
+	$("input[name='lastdate']").flatpickr({
+		  enableTime: false,
+		  dateFormat: "Y/m/d",
+		  minDate:today
+		});
 	</script>
 </body>
 

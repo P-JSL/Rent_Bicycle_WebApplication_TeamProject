@@ -34,6 +34,7 @@
 		<li><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"><a href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
 	</ul>
 </div>
+
 <div class="container">
 	<div class="col-sm-12">
 		<div class="row">

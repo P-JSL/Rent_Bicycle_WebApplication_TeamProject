@@ -21,6 +21,7 @@ import com.rental.domain.ApplyVO;
 import com.rental.domain.Criteria;
 import com.rental.domain.PageDTO;
 import com.rental.domain.ProductVO;
+import com.rental.domain.ResTableVO;
 import com.rental.service.ApplyService;
 import com.rental.service.ChartService;
 import com.rental.service.ProductService;
@@ -56,7 +57,7 @@ public class UserController {
 
 	@GetMapping("/index")
 	public void index(@RequestParam("userid") String userid, Model model, Criteria cri) {
-
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("userid", userid);
 
@@ -104,7 +105,63 @@ public class UserController {
 		}
 
 	}
+	@GetMapping("/searchDate")
+	public String Reservation(@RequestParam("userid") String userid, ResTableVO rvo,Model model, Criteria cri) {
+		for (ProductVO pvo : ps.AllList()) {
+			if (pvo.getMany() == 0 && pvo.getStatus() == 1) {
+				ps.statusminus(pvo.getNum());
+			}
+		}
+		//날짜 검색
+		String monthN;
+		if(rvo.getMonth().equals("January")) {
+			monthN="01";
+		}else if(rvo.getMonth().equals("February")) {
+			monthN="02";
+		}else if(rvo.getMonth().equals("March")) {
+			monthN="03";
+		}else if(rvo.getMonth().equals("April")) {
+			monthN="04";
+		}else if(rvo.getMonth().equals("May")) {
+			monthN="05";
+		}else if(rvo.getMonth().equals("June")) {
+			monthN="06";
+		}else if(rvo.getMonth().equals("July")) {
+			monthN="07";
+		}else if(rvo.getMonth().equals("Auguset")) {
+			monthN="08";
+		}else if(rvo.getMonth().equals("September")) {
+			monthN="09";
+		}else if(rvo.getMonth().equals("October")) {
+			monthN="10";
+		}else if(rvo.getMonth().equals("Nobvember")) {
+			monthN="11";
+		}else {
+			monthN="12";
+		}
+		String days = "";
+		if(Integer.parseInt(rvo.getDay()) < 10) {
+			days="0"+days + rvo.getDay();
+		}
+		String Fullday = "2020/"+monthN + "/" + rvo.getDay();
+		System.out.println("날짜 입니다 한번 조십시오"+Fullday);
+		// 다중 파라미터를 mybatis로 보낼떄
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("days", Fullday);
 
+		map.put("userid", userid);
+		map.put("pageNum", cri.getPageNum());
+		map.put("amount", cri.getAmount());
+		try {			
+			model.addAttribute("count",rst.count(userid) );
+			model.addAttribute("res", rst.searchList(map));
+			model.addAttribute("userid", rvo.getUserid());
+			model.addAttribute("pageMaker", new PageDTO(cri, rst.count(userid).getCount()));
+		}catch(NullPointerException e) {
+			e.getMessage();
+		}
+		return "users/Reservation";
+	}
 	@GetMapping("/Apply")
 	public void Apply(Model model, String userid) {
 		model.addAttribute("userid", userid);

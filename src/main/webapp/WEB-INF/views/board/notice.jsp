@@ -46,7 +46,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body text-center">
-					<h3 class="card-title m-b-0">공지 사항</h3>
+					<h3 class="card-title m-b-0">公知掲示板</h3>
 				</div>
 				<div class="table-responsive">
 					<table class="table">
@@ -56,12 +56,12 @@
 									class="customcheckbox m-b-20"> <input type="checkbox"
 										id="mainCheckbox"> <span class="checkmark"></span>
 								</label></th>
-								<th style="text-align: center;">번호</th>
-								<th style="text-align: center;">이름</th>
-								<th style="text-align: center;">작성자</th>
-								<th style="text-align: center;">좋아요</th>
-								<th style="text-align: center;">싫어요</th>
-								<th style="text-align: center;">조회수</th>
+								<th style="text-align: center;">番号</th>
+								<th style="text-align: center;">タイトル</th>
+								<th style="text-align: center;">作成者</th>
+								<th style="text-align: center;">いいね！</th>
+								<th style="text-align: center;">よくないね！</th>
+								<th style="text-align: center;">ビュー</th>
 							</tr>
 						</thead>
 						<tbody class="customtable">

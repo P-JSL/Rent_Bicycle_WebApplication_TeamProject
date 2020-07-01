@@ -49,7 +49,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = (String) authentication.getPrincipal();
 		String password = (String) authentication.getCredentials();
-
+	
 		log.debug("AuthenticationProvider :::::: 1");
 		HashMap<String, String> ip = new HashMap<String, String>();
 		CustomUser user = (CustomUser) service.loadUserByUsername(username);

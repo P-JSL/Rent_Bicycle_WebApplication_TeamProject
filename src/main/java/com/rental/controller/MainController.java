@@ -1,9 +1,12 @@
 package com.rental.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,13 +14,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.rental.domain.ApplyVO;
@@ -26,10 +32,12 @@ import com.rental.domain.MemberVO;
 import com.rental.domain.NoticeVO;
 import com.rental.domain.QnAVO;
 import com.rental.domain.ReplyVO;
+import com.rental.domain.ResTableVO;
 import com.rental.service.ApplyService;
 import com.rental.service.IPService;
 import com.rental.service.MemberService;
 import com.rental.service.NoticeService;
+import com.rental.service.ProductService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
 import com.rental.service.ResTableService;
@@ -40,16 +48,26 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @PreAuthorize("permitAll")
+
 public class MainController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private MemberService service;
 	@Setter(onMethod_ = { @Autowired })
 	private NoticeService noticeservice;
+	@Setter(onMethod_ = { @Autowired })
+	private ProductService ps;
 
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
 
+		return "index";
+	}
+
+	@GetMapping("/{userid}")
+	public String indexid(Model model, @PathVariable("userid") String userid, HttpSession session) {
+
+		model.addAttribute("cart-count", ps.User_Cart_count(userid));
 		return "index";
 	}
 
@@ -303,6 +321,7 @@ public class MainController {
 		System.out.println("ok ? : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
+
 	@ResponseBody
 	@PostMapping(value = "/reply/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Boolean> replyDelete(@RequestBody String JsonData, HttpServletResponse res,
@@ -323,6 +342,7 @@ public class MainController {
 		System.out.println("ok ? : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
+
 	@Setter(onMethod_ = { @Autowired })
 	private ApplyService as;
 
@@ -348,48 +368,116 @@ public class MainController {
 	@Setter(onMethod_ = { @Autowired })
 	private IPService ipservice;
 
-	
-	  @ResponseBody
-	  
-	  @PostMapping(value = "/ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public ResponseEntity<Boolean> ip(@RequestBody String JsonData,
-	  HttpServletResponse res, HttpServletRequest req) throws JsonParseException,
-	  JsonMappingException, IOException {
-	  
-	  JsonParser parser = new JsonParser(); log.warn(JsonData); String userid =
-	  parser.parse(JsonData).getAsJsonObject().get("userid").getAsString(); String
-	  ip = parser.parse(JsonData).getAsJsonObject().get("ip").getAsString();
-	  boolean ban =
-	  parser.parse(JsonData).getAsJsonObject().get("ban").getAsBoolean();
-	  
-	  IPBanList iplist = new IPBanList();
-	  
-	  iplist.setIp(ip); iplist.setUserid(userid); log.warn("아이디 !! : " + userid);
-	  log.warn("IP !! : " + ip); log.warn("ban 여부 : " + ban); boolean ok = false;
-	  if (!ban) { ok = ipservice.ipinsert(iplist) == 1 ? true : false; } else { ok
-	  = ipservice.ipdelete(iplist) == 1 ? false : true; } log.warn("OK boolean : "
-	  + ok); return new ResponseEntity<>(ok, HttpStatus.OK); }
-	 
-		@Setter(onMethod_ = { @Autowired })
-		private ResTableService rst;
+	@ResponseBody
 
-		
-	  @ResponseBody
-		@PostMapping(value = "/res_conf", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		public ResponseEntity<Boolean> res_conf(@RequestBody String JsonData, HttpServletResponse res,
-				HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+	@PostMapping(value = "/ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> ip(@RequestBody String JsonData, HttpServletResponse res, HttpServletRequest req)
+			throws JsonParseException, JsonMappingException, IOException {
 
-			JsonParser parser = new JsonParser();
-			log.warn(JsonData);
-			String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+		String ip = parser.parse(JsonData).getAsJsonObject().get("ip").getAsString();
+		boolean ban = parser.parse(JsonData).getAsJsonObject().get("ban").getAsBoolean();
 
-			ApplyVO avo = new ApplyVO();
-			avo.setUserid(userid);
+		IPBanList iplist = new IPBanList();
 
-			log.warn("아이디 !! : " + userid);
-
-			boolean ok = rst.count(userid) != null ? true : false;
-			System.out.println("ok ? : " + ok);
-			return new ResponseEntity<>(ok, HttpStatus.OK);
+		iplist.setIp(ip);
+		iplist.setUserid(userid);
+		log.warn("아이디 !! : " + userid);
+		log.warn("IP !! : " + ip);
+		log.warn("ban 여부 : " + ban);
+		boolean ok = false;
+		if (!ban) {
+			ok = ipservice.ipinsert(iplist) == 1 ? true : false;
+		} else {
+			ok = ipservice.ipdelete(iplist) == 1 ? false : true;
 		}
+		log.warn("OK boolean : " + ok);
+		return new ResponseEntity<>(ok, HttpStatus.OK);
+	}
+
+	@Setter(onMethod_ = { @Autowired })
+	private ResTableService rst;
+
+	@ResponseBody
+	@PostMapping(value = "/res_conf", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> res_conf(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+
+		ApplyVO avo = new ApplyVO();
+		avo.setUserid(userid);
+
+		log.warn("아이디 !! : " + userid);
+
+		boolean ok = rst.count(userid) != null ? true : false;
+		System.out.println("ok ? : " + ok);
+		return new ResponseEntity<>(ok, HttpStatus.OK);
+	}
+
+	@ResponseBody
+	@PostMapping(value = "/cart_counter", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Object> cart_counter(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+
+		log.warn("아이디 !! : " + userid);
+
+		return new ResponseEntity<>(ps.User_Cart_count(userid), HttpStatus.OK);
+	}
+
+	@ResponseBody
+	@PostMapping(value = "/cart_insert", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Object> cart_insert(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		// 객체 생성
+		List<ResTableVO> rv = new ArrayList<ResTableVO>();
+		ResTableVO rvo = null;
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		JsonArray num = parser.parse(JsonData).getAsJsonObject().get("num").getAsJsonArray();
+		JsonArray userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsJsonArray();
+		JsonArray nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsJsonArray();
+		JsonArray price = parser.parse(JsonData).getAsJsonObject().get("price").getAsJsonArray();
+		JsonArray goodsphoto = parser.parse(JsonData).getAsJsonObject().get("goodsphoto").getAsJsonArray();
+		JsonArray goods = parser.parse(JsonData).getAsJsonObject().get("goods").getAsJsonArray();
+		JsonArray startdate = parser.parse(JsonData).getAsJsonObject().get("startdate").getAsJsonArray();
+		JsonArray lastdate = parser.parse(JsonData).getAsJsonObject().get("lastdate").getAsJsonArray();
+
+		int size = nickname.size();
+		log.info("번호  : " + num);
+		log.info("아이디  :  " + userid);
+		log.info("가격  :  " + price);
+		log.info("상품 이미지   " + goodsphoto);
+		log.info("닉네임  " + nickname);
+		log.info("상품 " + goods);
+
+		for (int i = 0; i < size; i++) {
+			rvo = new ResTableVO();
+			rvo.setN_num(num.get(i).getAsInt());
+			rvo.setUserid(userid.get(i).getAsString());
+			rvo.setPrice(price.get(i).getAsInt());
+			rvo.setGoodsphoto(goodsphoto.get(i).getAsString());
+			rvo.setNickname(nickname.get(i).getAsString());
+			rvo.setGoods(goods.get(i).getAsString());
+			rvo.setStartdate(startdate.get(i).getAsString());
+			rvo.setLastdate(lastdate.get(i).getAsString());
+			rv.add(rvo);
+		}
+		log.warn("List :" + rv);
+		for (int i = 0; i < rv.size(); i++) {
+			rvo = rv.get(i);
+			rst.insert(rvo);
+		}
+		boolean confirm = rst.AllDelete(userid.get(0).getAsString()) ==1? true : false;
+		return new ResponseEntity<>(confirm, HttpStatus.OK);
+	}
 }

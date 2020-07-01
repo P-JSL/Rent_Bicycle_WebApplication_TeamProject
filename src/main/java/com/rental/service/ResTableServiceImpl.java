@@ -45,4 +45,14 @@ public class ResTableServiceImpl implements ResTableService {
 		// TODO Auto-generated method stub
 		return mapper.List(map);
 	}
+	@Override
+	public java.util.List<ResTableVO> searchList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.searchList(map);
+	}
+	@Override
+	public int AllDelete(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.AllDelete(userid);
+	}
 }
