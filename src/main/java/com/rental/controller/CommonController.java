@@ -386,5 +386,9 @@ public class CommonController {
 		ps.courseDelete(num);
 		return "redirect:/course/course";
 	}
+	@GetMapping("/tourist")
+	public String tourist() {
+		return "tourist/tourist";
+	}
 
 }

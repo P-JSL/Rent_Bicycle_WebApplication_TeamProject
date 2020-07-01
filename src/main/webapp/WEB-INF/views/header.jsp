@@ -108,7 +108,7 @@
 											<li><a href="about.jsp">INFOMATION</a>
 												<ul class="submenu">
 													<li><a href="/about">利用案内</a></li>
-													<li><a href="elements.html">観光名所</a></li>
+													<li><a href="/tourist">観光名所</a></li>
 												</ul></li>
 											<li><a href="#">GOODS</a>
 												<ul class="submenu">
