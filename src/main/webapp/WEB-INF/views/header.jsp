@@ -99,18 +99,18 @@
 									<nav>
 										<ul id="navigation">
 										<sec:authorize access="isAnonymous()">
-											<li><a class="active" href="/">MainPage</a></li>
+											<li><a class="active" href="/">MAIN PAGE</a></li>
 											</sec:authorize>
 										<sec:authorize access="isAuthenticated()">
-											<li><a class="active" href="/<sec:authentication property="principal.member.userid"/>">MainPage</a></li>
+											<li><a class="active" href="/<sec:authentication property="principal.member.userid"/>">MAIN PAGE</a></li>
 											</sec:authorize>
 											
-											<li><a href="about.jsp">Infomation</a>
+											<li><a href="about.jsp">INFOMATION</a>
 												<ul class="submenu">
 													<li><a href="/about">利用案内</a></li>
 													<li><a href="elements.html">観光名所</a></li>
 												</ul></li>
-											<li><a href="#">Goods</a>
+											<li><a href="#">GOODS</a>
 												<ul class="submenu">
 													<li><a href="/product/product">自転車レンタル</a></li>
 													<sec:authorize access="isAuthenticated()">
@@ -119,7 +119,7 @@
 														</li>
 													</sec:authorize>
 												</ul></li>
-											<li><a href="contact.html">Community</a>
+											<li><a href="contact.html">COMMUNITY</a>
 												<ul class="submenu">
 													<li><a href="/board/notice">公知掲示板</a></li>
 													<li><a href="/review/photo">写真レビュー</a></li>
