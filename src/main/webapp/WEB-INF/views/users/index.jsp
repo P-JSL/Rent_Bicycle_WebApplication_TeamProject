@@ -20,7 +20,7 @@
 	th:content="${_csrf.headerName}" />
 <link rel="icon" type="image/png" sizes="16x16"
 	href="/resources/admin/plugins/images/favicon.png">
-<title>Admin Manage Page</title>
+<title>RENTAL BYCICLE COMPANY</title>
 <!-- Bootstrap Core CSS -->
 <link href="/resources/admin/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">

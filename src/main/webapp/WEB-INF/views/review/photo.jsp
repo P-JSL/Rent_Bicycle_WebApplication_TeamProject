@@ -29,9 +29,12 @@
 <div class="action" onclick="actionToggle();">
 	<span>+</span>
 	<ul>
-		<li><i class="fa fa-paper-plane-o fa-fw" aria-hidden="true"><a href="/board/notice">&nbsp;&nbsp;&nbsp;Notice</a></i></li>
-		<li><i class="fa fa-commenting-o fa-fw" aria-hidden="true"><a href="/review/photo">&nbsp;&nbsp;&nbsp;PhotoView</a></i></li>
-		<li><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"><a href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
+		<li><i class="fa fa-paper-plane-o fa-fw" aria-hidden="true"><a
+				href="/board/notice">&nbsp;&nbsp;&nbsp;Notice</a></i></li>
+		<li><i class="fa fa-commenting-o fa-fw" aria-hidden="true"><a
+				href="/review/photo">&nbsp;&nbsp;&nbsp;PhotoView</a></i></li>
+		<li><i class="fa fa-question-circle-o fa-fw" aria-hidden="true"><a
+				href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
 	</ul>
 </div>
 
@@ -46,12 +49,17 @@
 							<img style="width: 100%" src="/upload/review/${re.photo }" alt="">
 						</div>
 						<div class="back">
-							<h2>${re.title } <small><sub>by ${re.nickname == null? re.writer : re.nickname }</sub></small></h2>
-							
-							<p>${re.content }</p>
-							<p class="date">
-								<fmt:formatDate value="${re.regdate }" pattern="YY-MM-dd" />
-							</p>
+							<h2>${re.title }
+								<br>
+								<small><sub>by ${re.nickname == null? re.writer : re.nickname }</sub><span
+									class="date"> &nbsp;&nbsp;<i class="fa fa-calendar fa-lg fa-fw"
+										aria-hidden="true"></i>
+									<fmt:formatDate value="${re.regdate }" pattern="YY-MM-dd" />
+								</span></small>
+							</h2>
+							<br>
+							<p style="border-top: 1px solid #eee">${re.content }</p>
+
 						</div>
 					</li>
 				</c:forEach>
@@ -67,17 +75,18 @@
 
 				<ul class="pagination" style="justify-content: center;">
 					<c:if test="${pageMaker.prev }">
-						<li style="font-size:medium"><a href="${pageMaker.startPage - 1 }"><i
+						<li style="font-size: medium"><a
+							href="${pageMaker.startPage - 1 }"><i
 								class="fa  fa-arrow-left"></i></a></li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage }">
-						<li style="font-size:medium"><a href="${num }"
+						<li style="font-size: medium"><a href="${num }"
 							class="${pageMaker.cri.pageNum == num ? 'active':''  }">${num }</a></li>
 					</c:forEach>
 					<c:if test="${pageMaker.next }">
-						<li style="font-size:medium"><a href="${pageMaker.endPage+1}"><i
-								class="fa  fa-arrow-right"></i></a></li>
+						<li style="font-size: medium"><a
+							href="${pageMaker.endPage+1}"><i class="fa  fa-arrow-right"></i></a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -115,9 +124,9 @@
 	});
 </script>
 <script type="text/javascript">
- function actionToggle(){
-	 var action = document.querySelector(".action");
-	 action.classList.toggle('active');
- }
+	function actionToggle() {
+		var action = document.querySelector(".action");
+		action.classList.toggle('active');
+	}
 </script>
 <%@include file="../footer.jsp"%>

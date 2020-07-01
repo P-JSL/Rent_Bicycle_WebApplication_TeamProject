@@ -14,7 +14,7 @@
 <meta name="author" content="">
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../plugins/images/favicon.png">
-<title>Admin Management Page</title>
+<title>RENTAL BYCICLE COMPANY</title>
 <!-- Bootstrap Core CSS -->
 <link href="/resources/admin/bootstrap/dist/css/bootstrap.min.css"
 	rel="stylesheet">

@@ -59,9 +59,9 @@
 								<th style="text-align: center;">番号</th>
 								<th style="text-align: center;">タイトル</th>
 								<th style="text-align: center;">作成者</th>
-								<th style="text-align: center;">いいね！</th>
-								<th style="text-align: center;">よくないね！</th>
-								<th style="text-align: center;">ビュー</th>
+								<th style="text-align: center;"><i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true" style="color: green"></i></th>
+								<th style="text-align: center;"><i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true" style="color: red"></i></th>
+								<th style="text-align: center;"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></th>
 							</tr>
 						</thead>
 						<tbody class="customtable">
