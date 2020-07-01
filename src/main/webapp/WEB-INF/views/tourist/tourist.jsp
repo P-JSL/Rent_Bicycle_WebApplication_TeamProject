@@ -28,7 +28,7 @@ p.bg-light {
 </style>
 <div class="container">
 <hr>
-	<h2 class="heading-primary" style="text-align: center;">自転車ツアー名所</h2>
+	<h2 class="heading-primary" style="text-align: center;">自転車ツアー名所紹介</h2>
 	<hr>
 	<p class="bg-light">
 		<span>「1泊2日」　チェジュ自転車コース　朝11時前　出発ススメ</span><a class="btn btn-info"

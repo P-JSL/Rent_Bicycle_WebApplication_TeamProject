@@ -105,7 +105,7 @@
 											<li><a class="active" href="/<sec:authentication property="principal.member.userid"/>">MAIN PAGE</a></li>
 											</sec:authorize>
 											
-											<li><a href="about.jsp">INFOMATION</a>
+											<li><a href="#">INFOMATION</a>
 												<ul class="submenu">
 													<li><a href="/about">利用案内</a></li>
 													<li><a href="/tourist">観光名所</a></li>
@@ -119,13 +119,13 @@
 														</li>
 													</sec:authorize>
 												</ul></li>
-											<li><a href="contact.html">COMMUNITY</a>
+											<li><a href="#">COMMUNITY</a>
 												<ul class="submenu">
 													<li><a href="/board/notice">公知掲示板</a></li>
 													<li><a href="/review/photo">写真レビュー</a></li>
 													<li><a href="/QnA/QnA">FAQ</a></li>
 												</ul></li>
-											<li><a href="javascript:void(0)">#</a>
+											<li><a href="#">#</a>
 												<ul class="submenu">
 													<li><sec:authorize access="isAnonymous()">
 															<a href="/login">ログイン</a>
