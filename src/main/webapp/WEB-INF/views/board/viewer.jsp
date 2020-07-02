@@ -124,15 +124,17 @@ body {
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-8 offset-lg-2 col-12 comment-main rounded">
+		<div class="col-lg-8 offset-lg-2 col-12 comment-main rounded"
+			style="padding-bottom: 10px;">
 			<ul class="p-0" id="commend">
 				<c:forEach items="${reply }" var="re">
 
 					<li>
 						<div class="row comment-box p-1 pt-3 pr-4">
 							<div class="col-lg-2 col-3 user-img text-center"
-								style="vertical-align: middle; font-size: 1.3rem;" id="userid" hidden="hidden">${re.userid  }</div>
-								<div class="col-lg-2 col-3 user-img text-center"
+								style="vertical-align: middle; font-size: 1.3rem;" id="userid"
+								hidden="hidden">${re.userid  }</div>
+							<div class="col-lg-2 col-3 user-img text-center"
 								style="vertical-align: middle; font-size: 1.3rem;" id="userid">${re.nickname == null ? re.userid : re.nickname }</div>
 							<div class="col-lg-10 col-9 user-comment bg-light rounded pb-1">
 								<div class="row">
@@ -170,7 +172,8 @@ body {
 													<button class="btn btn-warning" id="delete">삭제</button>
 												</span>
 											</c:if>
-											<c:if test="${(nicknames == re.nickname) && re.nickname ne null}">
+											<c:if
+												test="${(nicknames == re.nickname) && re.nickname ne null}">
 												<span class="float-right" id="dlt">
 													<button class="btn btn-warning" id="delete">삭제</button>
 												</span>
@@ -194,7 +197,7 @@ body {
 				<div class="col-md-12 col-sx-12 col-sm-12 col-lg-12"
 					style="text-align: center; justify-content: center; max-height: 45px; position: relative;">
 					<ul class="pagination"
-						style="justify-content: center; position: relative; top: -10px;">
+						style="justify-content: center; position: relative; top: 5px;">
 						<c:if test="${pageMaker.prev }">
 							<li><a href="${pageMaker.startPage - 1 }"><i
 									class="fa  fa-arrow-left"></i></a></li>

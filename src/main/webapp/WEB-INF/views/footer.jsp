@@ -70,7 +70,68 @@
 		}
 	});
 </script>
+<style>
+.main_public_subtitle {
+	display: block;
+	overflow: hidden;
+	font-weight: 700;
+	letter-spacing: -0.25px;
+	color: #58c464;
+	white-space: nowrap;
+}
 
+.main_public_title {
+	display: block;
+	margin-top: 6px;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.26px;
+	color: #242424;
+	white-space: nowrap;
+}
+
+.main_public_desc {
+	overflow: hidden;
+	line-height: 18px;
+	letter-spacing: -0.25px;
+	color: #424242;
+	white-space: nowrap;
+}
+
+.main_public_desc2 {
+	overflow: hidden;
+	line-height: 18px;
+	letter-spacing: -0.25px;
+	color: #424242;
+	white-space: nowrap;
+}
+
+.one::after {
+	content: '';
+	position: relative;
+	right: -105%;
+	top: -100px;
+	width: 1px;
+	height: 100px;
+	background-color: #e4e8eb;
+	color: black;
+	display: inline-block;
+	width: 1px;
+}
+
+.two::after {
+	content: '';
+	position: relative;
+	right: -105%;
+	top: -100px;
+	width: 1px;
+	height: 100px;
+	background-color: #e4e8eb;
+	color: black;
+	display: inline-block;
+}
+</style>
 <!-- Modal -->
 <div class="modal fade custom_search_pop" id="exampleModalCenter"
 	tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -102,63 +163,20 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-4 col-md-6 col-lg-4 ">
+					<div class="col-xl-offset-2 col-xl-2" style="height: 60px;">
+					</div>
 					<div class="footer_widget">
-						<div class="footer_logo">
-							<a href="#"> <img
-								src="${pageContext.request.contextPath}/resources/img/footer_logo.png"
-								alt="">
-							</a>
-						</div>
-						<p>
-							5th flora, 700/D kings road, green <br> lane New York-1782 <br>
-							<a href="#">+10 367 826 2567</a> <br> <a href="#">contact@carpenter.com</a>
+						<h3 style="text-align: center;">Address</h3>
+						<p style="font-size: 12px; color: black;">
+							大田廣域市(テジョングァンヨクシ) 中區(チュング) <br>龍頭洞(ヨンドゥドン) &nbsp;35-17 <br>
+							ヒヨンビル JSL人材開発院 ５層<br> <a href="#">+10 367 826 2567</a> <br>
+							<a href="#">althsuwpfl@google.com</a>
 						</p>
-						<div class="socail_links">
-							<ul>
-								<li><a href="#"> <i class="ti-facebook"></i>
-								</a></li>
-								<li><a href="#"> <i class="ti-twitter-alt"></i>
-								</a></li>
-								<li><a href="#"> <i class="fa fa-instagram"></i>
-								</a></li>
-								<li><a href="#"> <i class="fa fa-pinterest"></i>
-								</a></li>
-								<li><a href="#"> <i class="fa fa-youtube-play"></i>
-								</a></li>
-							</ul>
-						</div>
-
-					</div>
-				</div>
-				<div class="col-xl-2 col-md-6 col-lg-2">
-					<div class="footer_widget">
-						<h3 class="footer_title">Company</h3>
-						<ul class="links">
-							<li><a href="#">Pricing</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="#"> Gallery</a></li>
-							<li><a href="#"> Contact</a></li>
-						</ul>
 					</div>
 				</div>
 				<div class="col-xl-3 col-md-6 col-lg-3">
 					<div class="footer_widget">
-						<h3 class="footer_title">Popular destination</h3>
-						<ul class="links double_links">
-							<li><a href="#">Indonesia</a></li>
-							<li><a href="#">America</a></li>
-							<li><a href="#">India</a></li>
-							<li><a href="#">Switzerland</a></li>
-							<li><a href="#">Italy</a></li>
-							<li><a href="#">Canada</a></li>
-							<li><a href="#">Franch</a></li>
-							<li><a href="#">England</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-xl-3 col-md-6 col-lg-3">
-					<div class="footer_widget">
-						<h3 class="footer_title">Instagram</h3>
+						<h3 class="footer_title" style="color: black; text-align: center;">PHOTO VIEW</h3>
 						<div class="instagram_feed">
 							<div class="single_insta">
 								<a href="#"> <img
@@ -199,6 +217,27 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-xl-4 col-md-6 col-lg-4 ">
+					<h4 style="margin-top: 50px; text-align: center;border-bottom: 1px solid #eee">Quick Move</h4>
+					<div class="footer_widget" style="display: inline-block;">
+						<div class="col-md-2" style="display: grid;grid-gap: 7px;">
+							<b style="color: black;">PRODUCT</b>
+							<div class="bdr"
+								style="border-bottom: 1px solid #e4e8eb; margin: 0 !important; border-top: none; width: 80px;"></div>
+							<small><a href="#">BICYCLE</a></small> <small><a href="#">RESERVATION</a></small>
+							<small><a href="#">NOTICE</a></small> <small><a href="#">INFOMATION</a></small>
+						</div>
+					</div>
+					<div class="footer_widget" style="float: right;">
+						<div class="col-md-2" style="display: grid;grid-gap: 7px;">
+							<b style="color: black;">BASIC</b>
+							<div class="bdr"
+								style="border-bottom: 1px solid #e4e8eb; margin: 0 !important; border-top: none; width: 80px;"></div>
+							<small><a href="#">MYPAGE</a></small><small><a href="#">USERBOARD</a></small>
+							<small><a href="#">REVIEW</a></small><small><a href="#">FAQ</a></small>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -215,7 +254,7 @@
 						</script>
 						All rights reserved | This template is made with <i
 							class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
+							href="https://colorlib.com" target="_blank">RENTAL</a>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</p>
 				</div>
