@@ -426,11 +426,14 @@ public class MainController {
 
 		JsonParser parser = new JsonParser();
 		log.warn(JsonData);
-		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+		String userid = "";
+		if (JsonData != null) {
+			userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+			return new ResponseEntity<>(ps.User_Cart_count(userid), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(0, HttpStatus.OK);
+		}
 
-		log.warn("아이디 !! : " + userid);
-
-		return new ResponseEntity<>(ps.User_Cart_count(userid), HttpStatus.OK);
 	}
 
 	@ResponseBody
@@ -477,7 +480,7 @@ public class MainController {
 			rvo = rv.get(i);
 			rst.insert(rvo);
 		}
-		boolean confirm = rst.AllDelete(userid.get(0).getAsString()) ==1? true : false;
+		boolean confirm = rst.AllDelete(userid.get(0).getAsString()) == 1 ? true : false;
 		return new ResponseEntity<>(confirm, HttpStatus.OK);
 	}
 }

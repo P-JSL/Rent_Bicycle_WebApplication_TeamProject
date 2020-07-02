@@ -129,4 +129,5 @@
 		action.classList.toggle('active');
 	}
 </script>
+
 <%@include file="../footer.jsp"%>

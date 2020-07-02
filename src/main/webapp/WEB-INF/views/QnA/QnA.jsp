@@ -39,23 +39,25 @@
 				href="/QnA/QnA">&nbsp;&nbsp;&nbsp;QnA</a></i></li>
 	</ul>
 </div>
-<div class="container">
-	<h1 class="heading-primary">FAQ 게시판</h1>
-	<div class="accordion">
-		<dl>
-			<c:forEach items="${list }" var="qa">
-				<dt>
-					<a href="#accordion${qa.num }" aria-expanded="false"
-						aria-controls="accordion${qa.num }"
-						class="accordion-title accordionTitle js-accordionTrigger">${qa.title }</a>
-				</dt>
-				<dd class="accordion-content accordionItem is-collapsed"
-					id="accordion${qa.num }" aria-hidden="true">
-					<div style="overflow: scroll;height: 300px;">${qa.content }</div>
-				</dd>
+<div class="container" style="min-height: 100vh;">
+	<div class="col-md-12 col-xl-12 col-lg-12 col-xm-12">
+		<h1 class="heading-primary" style="font-size: 3em;">FAQ</h1>
+		<div class="accordion">
+			<dl>
+				<c:forEach items="${list }" var="qa">
+					<dt>
+						<a href="#accordion${qa.num }" aria-expanded="false"
+							style="font-size: 1.4em;" aria-controls="accordion${qa.num }"
+							class="accordion-title accordionTitle js-accordionTrigger">${qa.title }</a>
+					</dt>
+					<dd class="accordion-content accordionItem is-collapsed"
+						id="accordion${qa.num }" aria-hidden="true">
+						<div style="overflow: scroll; height: 300px;">${qa.content }</div>
+					</dd>
 
-			</c:forEach>
-		</dl>
+				</c:forEach>
+			</dl>
+		</div>
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

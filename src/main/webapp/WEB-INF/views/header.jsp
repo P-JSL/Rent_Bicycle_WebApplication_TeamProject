@@ -15,37 +15,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- <link rel="manifest" href="site.webmanifest"> -->
 <link rel="shortcut icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/resources/img/favicon.png">
+	href="/resources/img/favicon.png">
 <!-- Place favicon.ico in the root directory -->
 
 <!-- CSS here -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/themify-icons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/nice-select.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/flaticon.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/gijgo.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/animate.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slick.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/slicknav.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/resources/css/magnific-popup.css">
+<link rel="stylesheet" href="/resources/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/css/themify-icons.css">
+<link rel="stylesheet" href="/resources/css/nice-select.css">
+<link rel="stylesheet" href="/resources/css/flaticon.css">
+<link rel="stylesheet" href="/resources/css/gijgo.css">
+<link rel="stylesheet" href="/resources/css/animate.css">
+<link rel="stylesheet" href="/resources/css/slick.css">
+<link rel="stylesheet" href="/resources/css/slicknav.css">
 <link rel="stylesheet"
 	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/style.css">
 
 
 </head>
@@ -75,14 +63,15 @@
 	content: attr(data-count);
 	color: red;
 	position: absolute;
-	font-size:12px;
+	font-size: 12px;
 	top: -20px;
 	right: 5px;
 }
-@media (min-width: 992px){
- .d-lg-block{
-  display: inline-block !important;
- }
+
+@media ( min-width : 992px) {
+	.d-lg-block {
+		display: inline-block !important;
+	}
 }
 </style>
 <body>
@@ -98,13 +87,15 @@
 								<div class="main-menu  d-none d-lg-block">
 									<nav>
 										<ul id="navigation">
-										<sec:authorize access="isAnonymous()">
-											<li><a class="active" href="/">MAIN PAGE</a></li>
+											<sec:authorize access="isAnonymous()">
+												<li><a class="active" href="/">MAIN PAGE</a></li>
 											</sec:authorize>
-										<sec:authorize access="isAuthenticated()">
-											<li><a class="active" href="/<sec:authentication property="principal.member.userid"/>">MAIN PAGE</a></li>
+											<sec:authorize access="isAuthenticated()">
+												<li><a class="active"
+													href="/<sec:authentication property="principal.member.userid"/>">MAIN
+														PAGE</a></li>
 											</sec:authorize>
-											
+
 											<li><a href="#">INFOMATION</a>
 												<ul class="submenu">
 													<li><a href="/about">利用案内</a></li>
@@ -141,7 +132,7 @@
 														</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
 															<li><a
 																href="/admin/index?userid=<sec:authentication property='principal.member.userid'/>">管理者ページ
-																	</a></li>
+															</a></li>
 														</sec:authorize></li>
 													<li><sec:authorize access="isAnonymous()">
 															<li><a href="/signup">会員登録</a>
@@ -167,7 +158,9 @@
 								<div class="cart">
 									<a
 										href="/product/cart?userid=<sec:authentication property='principal.member.userid'/>">
-										<i id='cart' class="fa fa-shopping-cart fa-lg" aria-hidden="true" data-count=${count-cart } data-id='<sec:authentication property='principal.member.userid'/>'></i>
+										<i id='cart' class="fa fa-shopping-cart fa-lg"
+										aria-hidden="true" data-count=${count-cart }
+										data-id='<sec:authentication property='principal.member.userid'/>'></i>
 									</a>
 								</div>
 							</sec:authorize>
@@ -182,8 +175,7 @@
 			</div>
 		</div>
 	</header>
-	<script
-  src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function() {
 			// 시간을 딜레이 없이 나타내기위한 선 실행
@@ -213,27 +205,28 @@
 		}
 	</script>
 	<script type="text/javascript">
-	var id = $("#cart").attr("data-id");
+		$(function() {
+			var id = $("#cart").attr("data-id");
 			var csrfHeaderName = "${_csrf.headerName}";
 			var csrfTokenValue = "${_csrf.token}";
 			$(document).ajaxSend(function(e, xhr, options) {
 				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 			})
-	setInterval(
-		$.ajax({
-			url : "/cart_counter",
-			type : 'post',
-			data : JSON.stringify({
-				"userid" : id
-			}),
-			contentType : "application/json; charset=UTF-8",
-			processData : false,
-			success : function(result) {
-				$("#cart").attr("data-count",result);
-			},
-			error : function(req, status, error) {
-				console.log(error);
-			}
+			$.ajax({
+				url : "/cart_counter",
+				type : 'post',
+				data : JSON.stringify({
+					"userid" : id
+				}),
+				contentType : "application/json; charset=UTF-8",
+				processData : false,
+				success : function(result) {
+					$("#cart").attr("data-count", result);
+
+				},
+				error : function(req, status, error) {
+					console.log(error);
+				}
+			})
 		})
-	,10000)
 	</script>

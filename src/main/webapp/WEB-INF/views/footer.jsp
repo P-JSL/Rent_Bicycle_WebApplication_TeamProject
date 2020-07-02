@@ -1,67 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<!-- link that opens popup -->
-<!--     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-de7e2ef6bfefd24b79a3f68b414b87b8db5b08439cac3f1012092b2290c719cd.js"></script>
-
-    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
-<!-- JS here -->
-
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/vendor/modernizr-3.5.0.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/vendor/jquery-1.12.4.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/popper.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/isotope.pkgd.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/ajax-form.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/waypoints.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.counterup.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/imagesloaded.pkgd.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/scrollIt.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.scrollUp.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/wow.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/nice-select.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.slicknav.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/gijgo.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/slick.min.js"></script>
+<script src="/resources/js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="/resources/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/resources/js/popper.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/owl.carousel.min.js"></script>
+<script src="/resources/js/isotope.pkgd.min.js"></script>
+<script src="/resources/js/ajax-form.js"></script>
+<script src="/resources/js/waypoints.min.js"></script>
+<script src="/resources/js/jquery.counterup.min.js"></script>
+<script src="/resources/js/imagesloaded.pkgd.min.js"></script>
+<script src="/resources/js/scrollIt.js"></script>
+<script src="/resources/js/jquery.scrollUp.min.js"></script>
+<script src="/resources/js/wow.min.js"></script>
+<script src="/resources/js/nice-select.min.js"></script>
+<script src="/resources/js/jquery.slicknav.min.js"></script>
+<script src="/resources/js/jquery.magnific-popup.min.js"></script>
+<script src="/resources/js/plugins.js"></script>
+<script src="/resources/js/gijgo.min.js"></script>
+<script src="/resources/js/slick.min.js"></script>
 
 
 
 <!--contact js-->
-<script src="${pageContext.request.contextPath}/resources/js/contact.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.form.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery.validate.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/mail-script.js"></script>
+<script src="/resources/js/jquery.ajaxchimp.min.js"></script>
+<script src="/resources/js/jquery.form.js"></script>
+<script src="/resources/js/jquery.validate.min.js"></script>
+<script src="/resources/js/mail-script.js"></script>
 
 
-<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<script src="/resources/js/main.js"></script>
 <script>
 	$('#datepicker').datepicker({
 		iconsLibrary : 'fontawesome',
@@ -131,6 +100,17 @@
 	color: black;
 	display: inline-block;
 }
+
+#blocked::after
+{
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 160px;
+    right: 50%;
+    background-color: #eee;
+    top: 31%;	
+}
 </style>
 <!-- Modal -->
 <div class="modal fade custom_search_pop" id="exampleModalCenter"
@@ -145,8 +125,7 @@
 		</div>
 	</div>
 </div>
-<form action="${pageContext.request.contextPath}/logout" method="post"
-	class="logout">
+<form action="/logout" method="post" class="logout">
 	<input type="hidden" name="${_csrf.parameterName }"
 		value="${_csrf.token }">
 </form>
@@ -161,56 +140,51 @@
 <footer class="footer" style="margin-top: 30px;">
 	<div class="footer_top">
 		<div class="container">
-			<div class="row">
+			<div class="row" style="justify-content: center;">
 				<div class="col-xl-4 col-md-6 col-lg-4 ">
-					<div class="col-xl-offset-2 col-xl-2" style="height: 60px;">
+					<div class="col-xl-offset-2 col-xl-2" style="height: 50px;">
 					</div>
 					<div class="footer_widget">
-						<h3 style="text-align: center;">Address</h3>
+						<h3 style="text-align: center; margin-bottom: 10px;">Address</h3>
 						<p style="font-size: 12px; color: black;">
 							大田廣域市(テジョングァンヨクシ) 中區(チュング) <br>龍頭洞(ヨンドゥドン) &nbsp;35-17 <br>
 							ヒヨンビル JSL人材開発院 ５層<br> <a href="#">+10 367 826 2567</a> <br>
-							<a href="#">althsuwpfl@google.com</a>
+							<a href="#">abc@rental.com</a>
 						</p>
 					</div>
 				</div>
 				<div class="col-xl-3 col-md-6 col-lg-3">
 					<div class="footer_widget">
-						<h3 class="footer_title" style="color: black; text-align: center;">PHOTO VIEW</h3>
-						<div class="instagram_feed">
+						<h3 class="footer_title" style="color: black; text-align: center;">PHOTO
+							VIEW</h3>
+						<div class="instagram_feed" style="margin-top: 15px;">
 							<div class="single_insta">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/instagram/1.png"
+								<a href="#"> <img src="/resources/img/instagram/1.png"
 									alt="">
 								</a>
 							</div>
 							<div class="single_insta">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/instagram/2.png"
+								<a href="#"> <img src="/resources/img/instagram/2.png"
 									alt="">
 								</a>
 							</div>
 							<div class="single_insta">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/instagram/3.png"
+								<a href="#"> <img src="/resources/img/instagram/3.png"
 									alt="">
 								</a>
 							</div>
 							<div class="single_insta">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/instagram/4.png"
+								<a href="#"> <img src="/resources/img/instagram/4.png"
 									alt="">
 								</a>
 							</div>
 							<div class="single_insta">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/instagram/5.png"
+								<a href="#"> <img src="/resources/img/instagram/5.png"
 									alt="">
 								</a>
 							</div>
 							<div class="single_insta">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/resources/img/instagram/6.png"
+								<a href="#"> <img src="/resources/img/instagram/6.png"
 									alt="">
 								</a>
 							</div>
@@ -218,23 +192,25 @@
 					</div>
 				</div>
 				<div class="col-xl-4 col-md-6 col-lg-4 ">
-					<h4 style="margin-top: 50px; text-align: center;border-bottom: 1px solid #eee">Quick Move</h4>
-					<div class="footer_widget" style="display: inline-block;">
-						<div class="col-md-2" style="display: grid;grid-gap: 7px;">
+					<h4
+						style="margin-top: 50px; text-align: center; border-bottom: 1px solid #eee; margin-bottom: 10px;">Quick
+						Move</h4>
+					<div class="footer_widget" id="blocked" style="display: inline-block;">
+						<div class="col-md-2" style="display: grid; grid-gap: 7px;">
 							<b style="color: black;">PRODUCT</b>
 							<div class="bdr"
 								style="border-bottom: 1px solid #e4e8eb; margin: 0 !important; border-top: none; width: 80px;"></div>
-							<small><a href="#">BICYCLE</a></small> <small><a href="#">RESERVATION</a></small>
-							<small><a href="#">NOTICE</a></small> <small><a href="#">INFOMATION</a></small>
+							<small><a href="/product/product">BICYCLE</a></small> <small><a href="#">RESERVATION</a></small>
+							<small><a href="/board/notice">NOTICE</a></small> <small><a href="/about">INFOMATION</a></small>
 						</div>
 					</div>
 					<div class="footer_widget" style="float: right;">
-						<div class="col-md-2" style="display: grid;grid-gap: 7px;">
+						<div class="col-md-2" style="display: grid; grid-gap: 7px;">
 							<b style="color: black;">BASIC</b>
 							<div class="bdr"
 								style="border-bottom: 1px solid #e4e8eb; margin: 0 !important; border-top: none; width: 80px;"></div>
 							<small><a href="#">MYPAGE</a></small><small><a href="#">USERBOARD</a></small>
-							<small><a href="#">REVIEW</a></small><small><a href="#">FAQ</a></small>
+							<small><a href="/review/photo">REVIEW</a></small><small><a href="/QnA/QnA">FAQ</a></small>
 						</div>
 					</div>
 				</div>
@@ -262,6 +238,25 @@
 		</div>
 	</div>
 </footer>
-
+<script type="text/javascript">
+	$(function() {
+		$(window).ready(function() {
+			if ($(window).width() < 993) {
+				$(".footer .footer_top .row").css("justify-content", "");
+			}
+			if ($(window).width() > 993) {
+				$(".footer .footer_top .row").css("justify-content", "center");
+			}
+		})
+		$(window).resize(function() {
+			if ($(window).width() < 993) {
+				$(".footer .footer_top .row").css("justify-content", "");
+			}
+			if ($(window).width() > 993) {
+				$(".footer .footer_top .row").css("justify-content", "center");
+			}
+		})
+	})
+</script>
 </body>
 </html>

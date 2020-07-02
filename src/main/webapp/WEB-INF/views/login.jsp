@@ -77,7 +77,7 @@
 					<button class="login100-form-btn">ログイン</button>
 				</div>
 
-				<div class="w-full text-center p-t-27 p-b-239">
+				<div class="w-full text-center p-t-27">
 					<span class="txt1"> ID/PW　Search </span><hr><br> <a
 						href="javascript:void(0)" onClick="window.open('/forgot/forgotid','','width=100px,heigth=100px, resize=none')"
 						class="txt2"> IDを忘れましたか？ </a>

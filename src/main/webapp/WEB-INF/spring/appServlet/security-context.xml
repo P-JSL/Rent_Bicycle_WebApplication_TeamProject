@@ -50,7 +50,7 @@
 			access="isAuthenticated()" requires-channel="https" />
 		<security:intercept-url pattern="/*"
 			access="permitAll()" requires-channel="https" />
-		<security:form-login login-page="/CustomLogin"
+		<security:form-login login-page="/login"
 			authentication-success-handler-ref="customLoginSuccess" />
 		<!-- 로그인 실패시, 에러 뜨는 Controller 참조 설정 -->
 		<security:access-denied-handler
@@ -60,12 +60,12 @@
 			data-source-ref="dataSource" token-validity-seconds="604800" />
 
 		<!-- 로그아웃 -->
-		<security:logout
-			logout-success-url="/login?logout"
+		<security:logout logout-success-url="/login?logout"
 			delete-cookies="JSESSIONID,remember-me,JSESSION_ID"
 			invalidate-session="true" />
 
 		<security:session-management
+			invalid-session-url="/login"
 			session-fixation-protection="changeSessionId">
 			<security:concurrency-control
 				max-sessions="1" expired-url="/login"
