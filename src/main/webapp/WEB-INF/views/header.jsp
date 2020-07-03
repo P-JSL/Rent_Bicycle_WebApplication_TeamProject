@@ -61,7 +61,7 @@
 
 .fa-shopping-cart::after {
 	content: attr(data-count);
-	color: red;
+	color: #ff4757;
 	position: absolute;
 	font-size: 12px;
 	top: -20px;

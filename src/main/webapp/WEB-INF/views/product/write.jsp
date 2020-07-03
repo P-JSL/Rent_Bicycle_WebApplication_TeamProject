@@ -97,19 +97,19 @@ body {
 					</colgroup>
 
 					<tr>
-						<th style="vertical-align: middle;"><label for="t_title">제목</label></th>
+						<th style="vertical-align: middle;"><label for="t_title">タイトル</label></th>
 						<td><input type="text" name="title" id="title" class="title"
 							placeholder="제목을 입력해주세요"></td>
-						<th style="vertical-align: middle;"><label for="t_title">이미지</label></th>
+						<th style="vertical-align: middle;"><label for="t_title">添付イメージ</label></th>
 						<td colspan="2"><input type="file" name="goodsfile"
 							id="title" class="title"></td>
 
 					</tr>
 					<tr>
-						<th style="vertical-align: middle;"><label for="t_title">가격</label></th>
+						<th style="vertical-align: middle;"><label for="t_title">価格</label></th>
 						<td><input type="text" name="price" id="title" class="title"></td>
 						<th style="vertical-align: middle; text-align: center;"><label
-							for="t_title">렌탈 가능 날짜</label></th>
+							for="t_title">レンタル可能期間</label></th>
 						<td><input type="text" name="startdate" id="title"
 							class="title"></td>
 						<td><input type="text" name="lastdate" id="to" class="title"></td>
@@ -117,25 +117,25 @@ body {
 
 					</tr>
 					<tr>
-						<th style="vertical-align: middle;"><label for="t_title">품목</label></th>
+						<th style="vertical-align: middle;"><label for="t_title">品の種類</label></th>
 						<td colspan="1"><input type="text" name="goods" id="title"
 							class="title"></td>
-						<th style="vertical-align: middle;"><label for="t_title">카테고리</label></th>
+						<th style="vertical-align: middle;"><label for="t_title">カテゴリー</label></th>
 						<td><input type="text" name="category" id="title"
 							class="title"></td>
 
 					</tr>
 					<tr>
-						<th style="vertical-align: middle;"><label for="cont">내용</label></th>
+						<th style="vertical-align: middle;"><label for="cont">コンテンツ</label></th>
 						<td colspan="4"><textarea type="cont" name="content"
-								id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
+								id="cont" class="cont" placeholder="内容入力"></textarea>
 					</tr>
 
 
 					<tr>
-						<td colspan="4"><input type="submit" value="저장" class="btn"
+						<td colspan="6"><input type="submit" value="書く" class="btn"
 							onclick="noticeSave()"> <input type="button"
-							onclick="history.back();" value="목록" class="btn"></td>
+							onclick="history.back();" value="戻る" class="btn"></td>
 					</tr>
 
 				</table>
@@ -170,23 +170,23 @@ body {
 	<script type="text/javascript">
 	function confirm(){		
 		if(!$("input[name='title']").val()){
-		alert("제목을 적어주세요.");
+		alert("タイトルをお書きください。");
 		return false;
 		}
 	if(!$("input[name='lastdate']").val()){
-		alert("렌탈 종료 일자를 지정해주세요.");
+		alert("レンタル終了日を指定してください。");
 		return false;
 	}
 	if(!$("input[name='price']").val()){
-		alert("가격을 적어주세요.");
+		alert("価格をお書きください。");
 		return false;
 	}
 	if(!$("input[name='category']").val()){
-		alert("카테고리를 적어주시길 바랍니다.");
+		alert("カテゴリーをお書きください。");
 		return false;
 	}
 	if(!$("input[name='goods']").val()){
-		alert("품목을 지정해주세요.");
+		alert("品の種類をお書きください。");
 		return false;
 	}
 	}

@@ -77,7 +77,9 @@
 }
 
 .aa {
-padding-top:100px;}
+	padding-top: 100px;
+}
+
 a {
 	text-decoration: none;
 	color: black;
@@ -156,12 +158,12 @@ span.price {
 							style="width: 100%; height: 100%;">
 					</div>
 					<div class="col-md-4" style="margin: auto auto;">
-				<div style="text-align: center;">
-						<a href="/product/view?num=${cart.n_num }&userid=${userid }"><span>${cart.goods }</span></a>
-						${cart.content }
+						<div style="text-align: center;">
+							<a href="/product/view?num=${cart.n_num }&userid=${userid }"><span>${cart.goods }</span></a>
+							${cart.content }
 
-						<p>${cart.price }ウォン</p>
-				</div>
+							<p>${cart.price }ウォン</p>
+						</div>
 
 					</div>
 					<div class="col-md-4" style="margin: auto auto;">
@@ -228,6 +230,11 @@ $(document).ajaxSend(function(e, xhr, options) {
 	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 })
 	$("#p").on("click",function(e){
+		if(num.length == 0){
+			alert("商品が存在しません。");
+		}else{			
+		var con = confirm("この商品を予約しますか？");
+		if(con == true){			
 		$.ajax({
 			url : "/cart_insert",
 			type : 'POST',
@@ -254,6 +261,8 @@ $(document).ajaxSend(function(e, xhr, options) {
 				console.log(error);
 			}
 		})
+		}
+		}
 	})
 })
 </script>

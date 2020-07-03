@@ -178,13 +178,11 @@ public class MainController {
 		log.warn(recommend);
 		boolean recommends = parser.parse(recommend).getAsJsonObject().get("recommend").getAsBoolean();
 		int sequence = parser.parse(recommend).getAsJsonObject().get("sequence").getAsInt();
-		String userid = parser.parse(recommend).getAsJsonObject().get("userid").getAsString();
 		int re = recommends == true ? 1 : 0;
 
 		NoticeVO nvo = new NoticeVO();
 		nvo.setSequence(sequence);
 		nvo.setRecommend(re);
-		nvo.setUserid(userid);
 
 		noticeservice.recommend(nvo.getSequence());
 
@@ -203,13 +201,11 @@ public class MainController {
 		log.debug("log recomm : " + recommends);
 		int sequence = parser.parse(recommend).getAsJsonObject().get("sequence").getAsInt();
 		log.debug("log seq : " + sequence);
-		String userid = parser.parse(recommend).getAsJsonObject().get("userid").getAsString();
 		int re = recommends == true ? 1 : 0;
 
 		NoticeVO nvo = new NoticeVO();
 		nvo.setSequence(sequence);
 		nvo.setRecommend(re);
-		nvo.setUserid(userid);
 		log.info(nvo);
 		noticeservice.disrecommend(nvo.getSequence());
 

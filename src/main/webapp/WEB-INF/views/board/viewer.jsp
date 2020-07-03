@@ -19,6 +19,13 @@
 
 
 <link href="/resources/reply/reply.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="/resources/replly.css" rel="stylesheet">
 <!--  header end -->
 
 <style type="text/css">
@@ -33,7 +40,7 @@ body {
 </style>
 <script src="/resources/notice_view.js"></script>
 <!-- sub page start -->
-<div class="notice" style="max-height: 750px;">
+<div class="notice" style="max-height: 790px; margin-bottom: 40px;">
 	<div class="sub-notice">
 		<h2>
 			<span><i class="fas fa-edit"></i> NOTICE-view</span>
@@ -119,118 +126,82 @@ body {
 		</form>
 	</div>
 </div>
-
-
-
 <div class="container">
-	<div class="row">
-		<div class="col-lg-8 offset-lg-2 col-12 comment-main rounded"
-			style="padding-bottom: 10px;">
-			<ul class="p-0" id="commend">
-				<c:forEach items="${reply }" var="re">
+	<div class="row bootstrap snippets" style="justify-content: center;">
+		<div class="col-md-12 col-lg-12 col-sm-12"
+			style="justify-content: center;">
+			<div class="comment-wrapper" style="width: 100%;">
+				<div class="panel panel-info">
+					<div class="panel-heading">Comment panel</div>
+					<div class="panel-body">
+						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal.member.nickname"
+								var="nicknames" />
+							<input type="hidden" name="nickname" value="${nicknames }">
+							<input type="hidden" name="commentid" value="${id }">
+							<textarea class="form-control" placeholder="write a comment..."
+								rows="4" id="comm" style="resize: none;"></textarea>
+							<br>
+							<button type="button" class="btn btn-info pull-right"
+								onclick="submitcom();">Post</button>
+						</sec:authorize>
+						<div class="clearfix"></div>
+						<hr>
+						<ul class="media-list">
+							<c:forEach items="${reply }" var="re">
+								<li class="media"><a href="javascript:void(0)"
+									class="pull-left"> <img
+										src="https://bootdey.com/img/Content/user_1.jpg" alt=""
+										class="img-circle">
+								</a>
+									<div class="media-body" style="margin-bottom: 10px;">
+										<span class="text-muted pull-right"
+											style="text-align: center; display: inline-grid;"> <small
+											class="text-muted" style="display: block;"><fmt:formatDate
+													value="${re.regdate }" pattern="YYYY-MM-dd" /></small>
+											<p class="m-0 mr-2" style="display: inline-block;">
+												<span><i id="likes" class="fa fa-thumbs-up mr-1"
+													aria-hidden="true" style="color: blue;"></i></span> <span
+													style="color: blue;" id="liking">${re.likes }</span>
+											</p>
+											<p class="m-0 mr-2" style="display: inline-block;">
+												<span><i id="hates" class="fa fa-thumbs-down mr-1"
+													aria-hidden="true" style="color: red;"></i></span> <span
+													style="color: red;" id="hat">${re.hates }</span>
 
-					<li>
-						<div class="row comment-box p-1 pt-3 pr-4">
-							<div class="col-lg-2 col-3 user-img text-center"
-								style="vertical-align: middle; font-size: 1.3rem;" id="userid"
-								hidden="hidden">${re.userid  }</div>
-							<div class="col-lg-2 col-3 user-img text-center"
-								style="vertical-align: middle; font-size: 1.3rem;" id="userid">${re.nickname == null ? re.userid : re.nickname }</div>
-							<div class="col-lg-10 col-9 user-comment bg-light rounded pb-1">
-								<div class="row">
-									<div class="col-lg-8 col-8 border-bottom pr-0">
-										<p class="w-100 p-2 m-0">${re.comm }</p>
-									</div>
-									<div class="col-lg-4 col-4 border-bottom">
-										<p class="w-100 p-2 m-0">
+											</p> <sec:authorize access="isAuthenticated()">
+												<sec:authentication property="principal.member.userid"
+													var="uid" />
+												<sec:authorize access="hasRole('ROLE_USER')">
 
-											<span class="float-right"><i
-												class="fa fa-clock-o mr-1" aria-hidden="true"></i> <fmt:formatDate
-													value="${re.regdate }" pattern="YY-MM-dd" /></span>
-										</p>
-									</div>
-								</div>
+													<c:if test="${uid == re.userid}">
+														<span class="float-right" id="dlt">
+															<button class="btn btn-warning" id="delete">삭제</button>
+														</span>
+													</c:if>
 
-								<div class="user-comment-desc p-1 pl-2">
-									<p class="m-0 mr-2">
-										<span><i id="likes" class="fa fa-thumbs-up mr-1"
-											aria-hidden="true" style="color: blue;"></i></span> <span
-											style="color: blue;" id="liking">${re.likes }</span>
-									</p>
-									<p class="m-0 mr-2">
-										<span><i id="hates" class="fa fa-thumbs-down mr-1"
-											aria-hidden="true" style="color: red;"></i></span> <span
-											style="color: red;" id="hat">${re.hates }</span>
-									</p>
 
-									<sec:authorize access="isAuthenticated()">
-										<sec:authentication property="principal.member.userid"
-											var="uid" />
-										<sec:authorize access="hasRole('ROLE_USER')">
-											<c:if test="${uid == re.userid}">
-												<span class="float-right" id="dlt">
-													<button class="btn btn-warning" id="delete">삭제</button>
-												</span>
-											</c:if>
-											<c:if
-												test="${(nicknames == re.nickname) && re.nickname ne null}">
-												<span class="float-right" id="dlt">
-													<button class="btn btn-warning" id="delete">삭제</button>
-												</span>
-											</c:if>
-										</sec:authorize>
-										<sec:authorize access="hasRole('ROLE_ADMIN')">
-											<span class="float-right" id="dlt">
-												<button class="btn btn-warning" id="delete">삭제</button>
-											</span>
-										</sec:authorize>
-									</sec:authorize>
-								</div>
-								<input type="hidden" name="n_num" value="${re.num }" id="number">
-							</div>
-
-						</div>
-					</li>
-
-				</c:forEach>
-
-				<div class="col-md-12 col-sx-12 col-sm-12 col-lg-12"
-					style="text-align: center; justify-content: center; max-height: 45px; position: relative;">
-					<ul class="pagination"
-						style="justify-content: center; position: relative; top: 5px;">
-						<c:if test="${pageMaker.prev }">
-							<li><a href="${pageMaker.startPage - 1 }"><i
-									class="fa  fa-arrow-left"></i></a></li>
-						</c:if>
-						<c:forEach var="num" begin="${pageMaker.startPage }"
-							end="${pageMaker.endPage }">
-							<li><a href="${num }"
-								class="${pageMaker.cri_c.pageNum_c == num ? 'active':''  }">${num }</a></li>
-						</c:forEach>
-						<c:if test="${pageMaker.next }">
-							<li><a href="${pageMaker.endPage+1}"><i
-									class="fa  fa-arrow-right"></i></a></li>
-						</c:if>
-					</ul>
-				</div>
-				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal.member.nickname"
-						var="nicknames" />
-					<div class="row" style="position: relative;">
-						<input type="hidden" name="nickname" value="${nicknames }">
-						<input type="hidden" name="commentid" value="${id }">
-						<div class="col-lg-11 col-11" style="margin-top: 15px;">
-							<textarea class="form-control" id="comment"> </textarea>
-						</div>
-
-						<div class="col-lg-1 col-1 send-icon"
-							style="margin-top: 30px; margin-right: 0; padding: 0; right: -5px;">
-							<a href="javascript:void(0)" onclick="submitcom()"><i
-								class="fa fa-paper-plane" aria-hidden="true"></i></a>
-						</div>
+												</sec:authorize>
+												<sec:authorize access="hasRole('ROLE_ADMIN')">
+													<span class="float-right" id="dlt">
+														<button class="btn btn-warning" id="delete">삭제</button>
+													</span>
+												</sec:authorize>
+											</sec:authorize>
+										</span> <input type="hidden" name="userid" value="${re.userid  }"
+											id="userid">
+										<div class="col-md-11">
+											<strong class="text-success">${re.nickname == null ? re.userid : re.nickname }</strong>
+											<p>${re.comm }</p>
+										</div>
+										<input type="hidden" name="n_num" value="${re.num }"
+											id="number">
+									</div></li>
+							</c:forEach>
+						</ul>
 					</div>
-				</sec:authorize>
-			</ul>
+				</div>
+			</div>
 
 		</div>
 	</div>
@@ -283,12 +254,14 @@ $(e2).css({"height":"50px","overflow-y":"hidden"});
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 var sequence = <%=request.getParameter("sequence")%>;
-$("#commend li #delete").on("click",function(){
-	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
-	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
+$(".media #delete").on("click",function(){
+	var confirms = confirm("コメントを削除しますか？"); 
+	var userid= $(this).parent().parent().parent().parent().find("input[name='userid']").val();
+	var n_num = $(this).parent().parent().parent().find("#number").val();
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
+	if(confirms == true){		
 	$.ajax({
 		url : "/reply/delete",
 		type : 'POST',
@@ -308,17 +281,19 @@ $("#commend li #delete").on("click",function(){
 			console.log(error);
 		}
 	})
+	}
 });
 $("#theup").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
+	var sequence = $("input[name='sequence']").val();
+	
 	$.ajax({
 		url : "/recommend",
 		type : 'POST',
 		data : JSON.stringify({
 			"recommend" : true,
-			"userid" : userid,
 			"sequence" : sequence
 		}),
 		contentType : "application/json; charset=UTF-8",
@@ -340,7 +315,6 @@ $("#down").on("click",function(){
 		type : 'POST',
 		data : JSON.stringify({
 			"disrecommend" : true,
-			"userid" : userid,
 			"sequence" : sequence	}),
 		contentType : "application/json; charset=UTF-8",
 		processData : false,
@@ -352,16 +326,13 @@ $("#down").on("click",function(){
 		}
 	})
 });
-$("#commend #likes").on("click",function(){
+$("ul.media-list .media  #likes").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
-	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
+	var userid= $(this).parent().parent().parent().parent().find("input[name='userid']").val();
 	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
-	console.log(userid);
-	console.log(n_num);
 	var lik = $(this).parent().parent().find("#liking");
-	console.log(lik[0].innerText);
 	$.ajax({
 		url : "/likes",
 		type : 'POST',
@@ -381,14 +352,13 @@ $("#commend #likes").on("click",function(){
 		}
 	})
 });
-$("#commend li #hates").on("click",function(){
+$("ul .media #hates").on("click",function(){
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	})
-	var userid = $(this).parent().parent().parent().parent().parent().find("#userid").text();
+	var userid= $(this).parent().parent().parent().parent().find("input[name='userid']").val();
 	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
 	var lik = $(this).parent().parent().find("#hat");
-	console.log(lik[0].innerText);
 	$.ajax({
 		url : "/hates",
 		type : 'POST',
@@ -409,13 +379,12 @@ $("#commend li #hates").on("click",function(){
 });
 </script>
 <script type="text/javascript">
-
 	var seq =<%=request.getParameter("sequence")%>;
 	function submitcom(){
 		var pageNum = <%=request.getParameter("pageNum")%>;
 		var userid = $("input[name='commentid']").val();
 		var nickname = $("input[name='nickname']").val();
-		var comment = $("#comment").next().find(".ck.ck-editor__main").children().html();
+		var comment = $("#comm").val();
 		var form = $("#servform");
 		form.append("<input type='hidden' name='userid' value='"+userid+"'>");
 		form.append("<input type='hidden' name='nickname' value='"+nickname+"'>");
@@ -433,7 +402,6 @@ $(function(){
 			$(".pagination li a").on("click",function(e){
 				e.preventDefault();
 				var pageNum = $(this).attr("href");
-				console.log(pageNum);
 				var seq = <%=request.getParameter("sequence")%>;
 				var userid = '<%=request.getParameter("userid")%>';
 				var pn = <%=request.getParameter("pageNum")%>;

@@ -95,26 +95,26 @@ body {
 					</colgroup>
 
 					<tr>
-						<th style="vertical-align: middle;"><label for="t_title">제목</label></th>
+						<th style="vertical-align: middle;"><label for="t_title">タイトル</label></th>
 						<td><input type="text" name="title" id="title" class="title"
 							placeholder="제목을 입력해주세요"></td>
 					</tr>
 
 					<tr>
-						<th style="vertical-align: middle;"><label for="cont">내용</label></th>
+						<th style="vertical-align: middle;"><label for="cont">コンテンツ</label></th>
 						<td><textarea type="cont" name="content" id="cont"
 								class="cont" placeholder="내용을 입력해주세요"></textarea>
 					</tr>
 					<tr>
-						<th style="vertical-align: middle;"><label for="cont">이미지
+						<th style="vertical-align: middle;"><label for="cont">添付イメージ
 								파일</label></th>
 						<td><input type="file" name="photos"></td>
 					</tr>
 
 					<tr>
-						<td colspan="2"><input type="submit" value="저장" class="btn"
+						<td colspan="2"><input type="submit" value="書く" class="btn"
 							onclick="noticeSave()"> <input type="button"
-							onclick="history.back();" value="목록" class="btn"></td>
+							onclick="history.back();" value="戻る" class="btn"></td>
 					</tr>
 
 				</table>
