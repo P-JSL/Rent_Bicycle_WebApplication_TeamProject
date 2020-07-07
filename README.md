@@ -40,8 +40,8 @@ README.md
  - Https 및 인증서 (kettool) 적용    
  ![https](https://user-images.githubusercontent.com/64994827/84469843-f73caf80-acbc-11ea-87cd-8f674887e331.png)
  - Spring framework를 사용하여 MVC pattren을 사용.
- - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 기능
- - Ajax를 이용한 회원 실시간 관리 기능  
+ - JSP 와 Ajax 를 이용한 실시간 좋아요/싫어요, 댓글 추가/삭제 기능
+ - Ajax를 이용한 회원 실시간 관리 기능
  - 비밀번호 변경 및 아이디 찾기 기능
  - Spring security 의 암호화를 이용한 비밀번호 보안
  - Spring security 를 사용하여, 관리자/회원/비회원 권한 부여.
@@ -61,7 +61,9 @@ README.md
  - 물품 및 예약자 현황 날짜 검색 기능 (간예은)
  - 실시간 카드 갯수 확인 및 카드/예약 기능 (간예은)
  - 다국어 지원 (KR/JP)
- - 
+ - 카트 (물품 담기 기능 추가) 
+ - 카트 실시간 갯수 확인 기능
+ - ?
  
  ---
 
