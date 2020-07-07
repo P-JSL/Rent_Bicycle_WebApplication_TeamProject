@@ -24,4 +24,6 @@ public interface ReplyMapper {
 	public int ReplyDelete(ReplyVO rvo);
 	
 	public int count(int n_num);
+	
+	public ReplyVO OneUser(ReplyVO rvo);
 }

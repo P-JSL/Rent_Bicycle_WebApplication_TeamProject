@@ -1,6 +1,7 @@
 package com.rental.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -595,6 +596,43 @@ public class MainController {
 		map.put("num", num);
 		boolean ok = ar.delete(map) == 1 ? true : false;
 		return new ResponseEntity<>(ok, HttpStatus.OK);
+
+	}
+	
+	
+	
+	@ResponseBody
+	@PostMapping(value = "/notice/reply/insert", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String,Object>> notice_insert_reply(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		int n_num = parser.parse(JsonData).getAsJsonObject().get("n_num").getAsInt();
+		String nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsString();
+		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
+		String comm = parser.parse(JsonData).getAsJsonObject().get("comm").getAsString();
+
+		ReplyVO rvo =  new ReplyVO();
+		rvo.setComm(comm);
+		rvo.setN_num(n_num);
+		rvo.setNickname(nickname);
+		rvo.setUserid(userid);
+		
+		rs.insert(rvo);
+		
+		rvo = rs.OneUser(rvo);
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		String times = sdf.format(rvo.getRegdate());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", rvo.getUserid());
+		map.put("num", rvo.getNum());
+		map.put("nickname", rvo.getNickname());
+		map.put("comm", rvo.getComm());
+		map.put("date", times);
+		map.put("like", rvo.getLikes());
+		map.put("hate", rvo.getHates());
+		return new ResponseEntity<>(map, HttpStatus.OK);
 
 	}
 }

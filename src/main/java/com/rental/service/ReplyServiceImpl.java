@@ -62,4 +62,9 @@ public class ReplyServiceImpl implements ReplyService {
 		// TODO Auto-generated method stub
 		return mapper.count(n_num);
 	}
+	@Override
+	public ReplyVO OneUser(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return mapper.OneUser(rvo);
+	}
 }

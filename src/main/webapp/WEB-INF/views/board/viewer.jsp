@@ -71,8 +71,7 @@ body {
 					<tr>
 						<th style="text-align: center; vertical-align: middle;"><label
 							for="t_title">제목</label></th>
-						<sec:authorize
-							access="isAuthenticated() and hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+						<sec:authorize access="isAuthenticated() and hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
 							<sec:authentication property="principal.member.userid" var="id" />
 							<c:if test="${id == userid }">
 								<td><input type="text" name="title" id="title"
@@ -133,7 +132,7 @@ body {
 			<div class="comment-wrapper" style="width: 100%;">
 				<div class="panel panel-info">
 					<div class="panel-heading">Comment panel</div>
-					<div class="panel-body">
+					<div class="panel-body" id="panel">
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication property="principal.member.nickname"
 								var="nicknames" />
@@ -142,8 +141,8 @@ body {
 							<textarea class="form-control" placeholder="write a comment..."
 								rows="4" id="comm" style="resize: none;"></textarea>
 							<br>
-							<button type="button" class="btn btn-info pull-right"
-								 id="post" onclick="submitcom()">작성</button>
+							<button type="button" class="btn btn-info pull-right" data-nickname='${nicknames }' data-id='${id }'
+								 id="post" onclick="submitcom(this)">작성</button>
 						</sec:authorize>
 						<div class="clearfix"></div>
 						<hr>
@@ -254,144 +253,58 @@ $(e2).css({"height":"50px","overflow-y":"hidden"});
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 var sequence = <%=request.getParameter("sequence")%>;
-$(".media #delete").on("click",function(){
-	var confirms = confirm("コメントを削除しますか？"); 
-	var userid= $(this).parent().parent().parent().parent().find("input[name='userid']").val();
-	var n_num = $(this).parent().parent().parent().find("#number").val();
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	})
-	if(confirms == true){		
-	$.ajax({
-		url : "/reply/delete",
-		type : 'POST',
-		data : JSON.stringify({
-			"userid" : userid,
-			"n_num" : n_num
-		}),
-		contentType : "application/json; charset=UTF-8",
-		processData : false,
-		success : function(result) {
-		if(result){			
-			alert("삭제되었습니다.");
-			location.href = location.href;
-		}
-			},
-		error : function(req, status, error) {
-			console.log(error);
-		}
-	})
-	}
-});
-$("#theup").on("click",function(){
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	})
-	var sequence = $("input[name='sequence']").val();
-	
-	$.ajax({
-		url : "/recommend",
-		type : 'POST',
-		data : JSON.stringify({
-			"recommend" : true,
-			"sequence" : sequence
-		}),
-		contentType : "application/json; charset=UTF-8",
-		processData : false,
-		success : function(result) {
-			document.getElementById("recommend").innerText=result.recommend;
-			},
-		error : function(req, status, error) {
-			console.log(error);
-		}
-	})
-});
-$("#down").on("click",function(){
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	})
-	$.ajax({
-		url : "/disrecommend",
-		type : 'POST',
-		data : JSON.stringify({
-			"disrecommend" : true,
-			"sequence" : sequence	}),
-		contentType : "application/json; charset=UTF-8",
-		processData : false,
-		success : function(result) {
-			document.getElementById("disrecommend").innerText=result.disrecommend;
-		},
-		error : function(req, status, error) {
-			console.log(error);
-		}
-	})
-});
-$("ul.media-list .media  #likes").on("click",function(){
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	})
-	var userid= $(this).parent().parent().parent().parent().find("input[name='userid']").val();
-	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
-	var lik = $(this).parent().parent().find("#liking");
-	$.ajax({
-		url : "/likes",
-		type : 'POST',
-		data : JSON.stringify({
-			"userid" : userid,
-			"num" : n_num,
-			"n_num" : sequence
-		}),
-		contentType : "application/json; charset=UTF-8",
-		processData : false,
-		success : function(result) {
-			console.log(result);
-			lik[0].innerText=result.likes;
-		},
-		error : function(req, status, error) {
-			console.log(error);
-		}
-	})
-});
-$("ul .media #hates").on("click",function(){
-	$(document).ajaxSend(function(e, xhr, options) {
-		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-	})
-	var userid= $(this).parent().parent().parent().parent().find("input[name='userid']").val();
-	var n_num = $(this).parent().parent().parent().parent().find("#number").val();
-	var lik = $(this).parent().parent().find("#hat");
-	$.ajax({
-		url : "/hates",
-		type : 'POST',
-		data : JSON.stringify({
-			"userid" : userid,
-			"num" : n_num,
-			"n_num" : sequence
-	}),
-		contentType : "application/json; charset=UTF-8",
-		processData : false,
-		success : function(result) {
-			lik[0].innerText=result.hates;
-		},
-		error : function(req, status, error) {
-			console.log(error);
-		}
-	})
-});
+
+</script>
+<script src="/resources/noticejs.js" type="text/javascript">
 </script>
 <script type="text/javascript">
 	var seq =<%=request.getParameter("sequence")%>;
-	function submitcom(){
-		var pageNum = <%=request.getParameter("pageNum")%>;
-		var userid = $("input[name='commentid']").val();
-		var nickname = $("input[name='nickname']").val();
+	function submitcom(res){
+		var userid = $(res).attr("data-id");
+		var nickname = $(res).attr("data-nickname");
 		var comment = $("#comm").val();
-		var form = $("#servform");
-		form.append("<input type='hidden' name='userid' value='"+userid+"'>");
-		form.append("<input type='hidden' name='nickname' value='"+nickname+"'>");
-		form.append("<input type='hidden' name='comm' value='"+comment+"'>");
-		form.append("<input type='hidden' name='n_num' value='"+seq+"'>");
-		form.append("<input type='hidden' name='pageNum' value='"+pageNum+"'>");
-		form.submit();
+		$.ajax({
+			url : "/notice/reply/insert",
+			type : 'POST',
+			timeout:2000,
+			data : JSON.stringify({
+				"userid" : userid,
+				"nickname" : nickname,
+				"n_num" : sequence,
+				"comm" : comment
+		}),
+			contentType : "application/json; charset=UTF-8",
+			processData : false,
+			success : function(res) {
+			$(".media-list").prepend(replys(res));
+			$.getScript("/resources/noticejs.js");
+				function replys(ress){					
+				var HTML = ""; 
+				HTML += "<li class='media'><a href='javascript:void(0)' class='pull-left'>";
+				HTML +="<img src='https://bootdey.com/img/Content/user_1.jpg' class='img-circle'>";
+				HTML +="</a><div class='media-body' style='margin-bottom: 10px;'>";
+				HTML +="<span class='text-muted pull-right' style='text-align: center; display: inline-grid;'>"; 
+				HTML +="<small class='text-muted' style='display: block;'>";
+				HTML +=ress.date+"</small>";
+				HTML +="<p class='m-0 mr-2' style='display: inline-block;'>";
+				HTML +="<span><i id='likes' class='fa fa-thumbs-up mr-1' aria-hidden='true' style='color: blue;'></i></span> <span style='color: blue;' id='liking'>"+ress.like+"</span>"
+				HTML +="</p><p class='m-0 mr-2' style='display: inline-block;'>";
+				HTML +="<span><i id='hates' class='fa fa-thumbs-down mr-1' aria-hidden='true' style='color: red;''></i></span> <span style='color: red;' id='hat'>"+ress.hate+"</span>";
+				HTML +="</p>"; 
+				HTML +="<c:if test='${uid == re.userid}'> <span class='float-right' id='dlt'>";
+				HTML +="<button class='btn btn-warning' id='delete'>삭제</button></span></c:if>";
+
+				HTML +="<span class='float-right' id='dlt'><button class='btn btn-warning' id='delete'>삭제</button></span>";
+				HTML +="</span> <input type='hidden' name='userid' value='"+ress.id+"' id='userid'>"
+				HTML +="<div class='col-md-11'><strong class='text-success'>"+ress.nickname+"</strong>";
+				HTML +="<p>"+ress.comm+"</p></div><input type='hidden' name='num' value='"+res.num+"' id='number'></div></li>";
+				return HTML;
+				}
+			},
+			error : function(req, status, error) {
+				console.log(error);
+			}
+		})
 }
 
 	</script> 
