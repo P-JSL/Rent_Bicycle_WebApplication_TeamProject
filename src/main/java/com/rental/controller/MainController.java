@@ -1,10 +1,12 @@
 package com.rental.controller;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -543,15 +545,16 @@ public class MainController {
 		String comm = parser.parse(JsonData).getAsJsonObject().get("comm").getAsString(); // 댓글
 		String nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsString(); // 댓글
 		int n_num = parser.parse(JsonData).getAsJsonObject().get("sequence").getAsInt();
-		// 댓글, 닉네임,
+		String pw = parser.parse(JsonData).getAsJsonObject().get("pw").getAsString();
+		
 
 		AReplyVO re = new AReplyVO();
+		re.setUserid(pw);
 		re.setComm(comm);
 		re.setNickname(nickname);
 		re.setN_num(n_num);
-		
 		ar.insert(re);
-		String ReplyHTMLDiv = Utility.ReplyHTML(comm, nickname, n_num);
+		String ReplyHTMLDiv = Utility.ReplyHTML(comm, nickname, n_num,pw);
 		// Reply.add(ReplyHTMLDiv);
 		HashMap<String, String> rep = new HashMap<String, String>();
 		rep.put("html", ReplyHTMLDiv);

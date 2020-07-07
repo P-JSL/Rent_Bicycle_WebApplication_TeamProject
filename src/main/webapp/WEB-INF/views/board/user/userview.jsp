@@ -274,7 +274,7 @@ body {
 							<div class="clearfix"></div>
 							<hr>
 							<ul class="media-list">
-								
+
 							</ul>
 						</div>
 					</div>
@@ -377,15 +377,19 @@ body {
 					$(document).ajaxSend(function(e, xhr, options) {
 						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 					})
+					var pw = prompt("Password");
 					var comm = $("#comm").val();
 					var nickname = $("input[name='nickname']").val();
+
 					$.ajax({
 						url : "/board/reply",
 						type : 'POST',
 						data : JSON.stringify({
 							"comm" : comm,
 							"nickname" : nickname,
-							"sequence" : sequence
+							"sequence" : sequence,
+							"pw" : pw
+
 						}),
 						contentType : "application/json; charset=UTF-8",
 						processData : false,
@@ -401,25 +405,31 @@ body {
 		})
 	</script>
 	<script type="text/javascript">
-	function deleted(data) {
-		var nickname = $(data).attr("data-name");
-		var n_num = $(data).attr("data-nnum");
-		$.ajax({
-			url : "/board/reply/delete",
-			type : 'POST',
-			data : JSON.stringify({
-				"nickname" : nickname,
-				"n_num" : n_num
-			}),
-			contentType : "application/json; charset=UTF-8",
-			processData : false,
-			success : function(res) {
-				$(data).parent().parent().parent().parent().remove();
-			},
-			error : function(req, status, error) {
-				console.log(error);
+		function deleted(data) {
+			var nickname = $(data).attr("data-name");
+			var n_num = $(data).attr("data-nnum");
+			var pw = $(data).attr("data-pw");
+			var pwconfirm = prompt("Setting your password");
+			if (pw == pwconfirm) {
+				$.ajax({
+					url : "/board/reply/delete",
+					type : 'POST',
+					data : JSON.stringify({
+						"nickname" : nickname,
+						"n_num" : n_num
+					}),
+					contentType : "application/json; charset=UTF-8",
+					processData : false,
+					success : function(res) {
+						$(data).parent().parent().parent().parent().remove();
+					},
+					error : function(req, status, error) {
+						console.log(error);
+					}
+				})
+			} else {
+				alert(new Error("No this reply Pw"));
 			}
-		})
-	}
+		}
 	</script>
 	<%@include file="../../footer.jsp"%>

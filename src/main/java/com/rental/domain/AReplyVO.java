@@ -13,6 +13,7 @@ public class AReplyVO {
 	
 	private int num,n_num;
 	private String nickname;
+	private String userid; //삭제 버튼 관련
 	private String comm;
 	private Date regdate;
 }
