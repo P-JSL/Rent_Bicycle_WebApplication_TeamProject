@@ -36,4 +36,6 @@ public interface ProductService {
 	
 	//
 	public int User_Cart_count(String userid);
+	public List<CourseVO> getmain();
+	public List<ProductVO> getPmain();
 }

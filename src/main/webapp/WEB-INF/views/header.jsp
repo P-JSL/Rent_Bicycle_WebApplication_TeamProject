@@ -104,6 +104,7 @@
 											<li><a href="#">GOODS</a>
 												<ul class="submenu">
 													<li><a href="/product/product">自転車レンタル</a></li>
+
 													<sec:authorize access="isAuthenticated()">
 														<li><a
 															href="/course/course?userid=<sec:authentication property='principal.member.userid'/>">ガイドツアー情報</a>
@@ -112,8 +113,16 @@
 												</ul></li>
 											<li><a href="#">COMMUNITY</a>
 												<ul class="submenu">
-													<li><a href="/board/notice">公知掲示板</a></li>
-													<li><a href="/review/photo">写真レビュー</a></li>
+													<li><a href="/board/notice">お知らせ</a></li>
+													<sec:authorize access="isAnonymous()">
+														<li><a href="/usernotice/Usernotice">掲示板</a></li>
+													</sec:authorize>
+													<sec:authorize access="isAuthenticated()">
+														<li><a
+															href="/usernotice/Usernotice?userid=<sec:authentication property='principal.member.userid'/>">掲示板</a>
+														</li>
+													</sec:authorize>
+													<li><a href="/review/photo">フォトレビュー</a></li>
 													<li><a href="/QnA/QnA">FAQ</a></li>
 												</ul></li>
 											<li><a href="#">#</a>

@@ -72,11 +72,11 @@ footer {
 			<c:forEach items="${product }" var="pro">
 				<div class="product-card">
 					<div class="product-image">
-						<img src="/upload/${pro.goodsphoto }">
+						<img src="/upload/product/${pro.goodsphoto }">
 					</div>
 					<div class="product-info">
 						<h5>${pro.goods }</h5>
-						<h6>${pro.price }원</h6>
+						<h6>${pro.price }ウォン</h6>
 					</div>
 					<c:choose>
 						<c:when test="${pro.status !=0 }">
@@ -140,7 +140,7 @@ footer {
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	function NoRes() {
-		alert("재고가 부족합니다. 1:1문의를 해주시기 바랍니다.");
+		alert("在庫が足りません。お問い合わせをご利用お願いいたします。");
 		return false;
 	}
 </script>
@@ -225,6 +225,7 @@ footer {
 		var daying = distributeDate(day);
 		if (compareToDate(today, daying)) {
 			$(days[i]).attr("disabled", true);
+			$(days[i]).parent().attr("hidden",true);
 			$(days[i]).text("レンタルに期間過ぎ");
 			$(days[i]).css({
 				"border-color" : "red",
@@ -242,7 +243,7 @@ footer {
 		if (day != null || day != "") {
 			return new Date(year, month, days);
 		} else {
-			return null;
+			return new Date(null);
 		}
 	}
 	function transNowDate(year, month, day) {

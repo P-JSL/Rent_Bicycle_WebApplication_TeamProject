@@ -110,13 +110,13 @@ public class MemberServiceImpl implements MemberService {
 				helper.setFrom("althsuwpfl@gmail.com");
 				helper.setTo(mvo.getUseremail());
 
-				helper.setSubject(mvo.getNickname() + " 님 회원가입을 축하합니다.");
-				String body = new StringBuffer().append("<html>").append("<body>").append("<h2>안녕하세요.</h2>")
-						.append("<p> 이메일 인증 입니다.</p>").append("<p>인증하기 버튼을 누르시면 계정을 사용 하실 수 있습니다.</p>")
+				helper.setSubject(mvo.getNickname() + " 様の会員登録を歓迎いたします。");
+				String body = new StringBuffer().append("<html>").append("<body>").append("<h2>おはようございます。</h2>")
+						.append("<p>メール認証でございます。</p>").append("<p>認証するボタンを押すとアカウントが使用できます。</p>")
 						.append("<b><a href='http://localhost:8080/emailauth?userid=").append(mvo.getUserid())
 						.append("&enabled=").append(true).append("&target='_blank")
-						.append("'><button type='button' style='border:1px solid green; background-color:transparent;padding:10px; border-radius:4px;'>이메일 인증하기</button></a></b><br>")
-						.append("<br><p>잘못 전송된 이메일 이라면 무시하십시오.</p></body></html>").toString();
+						.append("'><button type='button' style='border:1px solid green; background-color:transparent;padding:10px; border-radius:4px;'>メール認証</button></a></b><br>")
+						.append("<br><p>もし、間違って送られたメールならば無視してください。</p></body></html>").toString();
 				helper.setText(body); // 여기에 이메일 쓸 컨텐츠 부분.
 				mimeMessage.setContent(body, "text/html; charset=UTF-8");
 				log.info(helper.getMimeMessage());

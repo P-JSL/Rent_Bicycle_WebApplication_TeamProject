@@ -46,7 +46,7 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body text-center">
-					<h3 class="card-title m-b-0">公知掲示板</h3>
+					<h3 class="card-title m-b-0">お知らせ</h3>
 				</div>
 				<div class="table-responsive">
 					<table class="table">

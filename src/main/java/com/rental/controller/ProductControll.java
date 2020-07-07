@@ -77,7 +77,7 @@ public class ProductControll {
 
 		MultipartFile multipartFile = product.getGoodsfile();
 
-		String uploadFolder = "c:\\upload";
+		String uploadFolder = "c:\\upload\\product";
 
 		log.info("upload file name : " + multipartFile.getOriginalFilename());
 		log.info("upload file size : " + multipartFile.getSize());

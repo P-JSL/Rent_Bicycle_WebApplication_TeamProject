@@ -175,6 +175,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	delete from course where num=#{num}
 	]]>
 	</delete>
-
+<select id="getCmain" resultType="com.rental.domain.CourseVO">
+	<![CDATA[
+	select*from course where rownum <=3
+	]]>
+	</select>
+	
+	<select id="getPmain" resultType="com.rental.domain.ProductVO">
+	<![CDATA[
+	select*from product where rownum <=6
+	]]>
+	</select>
 
 </mapper>

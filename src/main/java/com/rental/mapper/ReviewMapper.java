@@ -14,4 +14,6 @@ public interface ReviewMapper {
 	public int count();
 	
 	public ReviewVO OneUser(String userid);
+	
+	public List<ReviewVO> getRmain();
 }

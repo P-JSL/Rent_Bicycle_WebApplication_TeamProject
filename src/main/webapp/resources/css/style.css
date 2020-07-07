@@ -1086,6 +1086,7 @@ color:#fff;
 
 /* line 195, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_header.scss */
 .header-area .main-header-area .main-menu ul li:hover > .submenu {
+  box-shadow: 0 1px 1px 1px rgba(0,0,0,.15);
   opacity: 1;
   visibility: visible;
   top: 225%;
@@ -2764,7 +2765,7 @@ color:#fff;
   font-size: 12px;
   border-radius: 30px;
   font-weight: 400;
-  padding: 0px 12px;
+  padding: 0px 10px;
   height: 25px;
   line-height: 25px;
   color: #fff;

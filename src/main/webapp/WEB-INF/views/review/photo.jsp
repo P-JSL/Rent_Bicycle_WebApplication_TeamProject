@@ -40,13 +40,13 @@
 
 <div class="container">
 	<div class="col-sm-12">
-		<div class="row">
+		<div class="row" style="overflow-x: scroll;">
 			<ul id="projects">
 				<c:forEach items="${list }" var="re">
 
 					<li id="p1" class="flipper">
 						<div class="front">
-							<img style="width: 100%" src="/upload/review/${re.photo }" alt="">
+							<img style="width: 100%;height: 100%;" src="/upload/review/${re.photo }" alt="">
 						</div>
 						<div class="back">
 							<h2>${re.title }
@@ -70,7 +70,7 @@
 					<sec:authentication property="principal.member.userid" var="id" />
 					<button type="button" class="genric-btn info-border circle"
 						style="position: relative; top: -33px; left: 400px;"
-						onclick="javascript:location.href='/review/write?writer=${id}'">글쓰기</button>
+						onclick="javascript:location.href='/review/write?writer=${id}'">レビュー登録</button>
 				</sec:authorize>
 
 				<ul class="pagination" style="justify-content: center;">

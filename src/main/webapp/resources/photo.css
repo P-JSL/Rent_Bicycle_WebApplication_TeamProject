@@ -55,17 +55,22 @@ a:link, a:visited {
 	transform-style: preserve-3d;
 	position: relative;
 }
-
-@media screen and (max-width:990px){
+@media screen and (max-width:1270px){
 	#projects .flipper,#projects .flipper .back, #projects .flipper .front{
 		width:350px;
 		height: 260px;
 	}
 }
+@media screen and (max-width:990px){
+	#projects .flipper,#projects .flipper .back, #projects .flipper .front{
+		width:310px;
+		height: 230px;
+	}
+}
 @media screen and (max-width:768px){
 	#projects .flipper,#projects .flipper .back, #projects .flipper .front{
-		width:325px;
-		height: 245px;
+		width:290px;
+		height: 215px;
 	}
 }
 #projects .flipper:hover {
@@ -202,8 +207,4 @@ input.btn {
 
 .row {
 	display: inherit !important;
-}
-
-#projects {
-	width: 1400px !important;
 }

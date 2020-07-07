@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.UserNoticeMapper">
+	<insert id="Insert">
+		insert into usernoticewrite (SEQUENCE, nickname, title, goodsphoto, content)
+		values( SEQ_USERNOTICEWRITE.nextval , #{nickname} , #{title} ,#{goodsphoto}, #{content} )
+	</insert>
+	<select id="List" resultType="com.rental.domain.UserNoticeVO">
+ 	<![CDATA[	
+		 select * from 
+       (
+       select/*+ index_desc (usernoticewrite usernoticewrite_pk )*/
+       sequence,nickname,title, content,viewer,recommend,disrecommend,goodsphoto from usernoticewrite
+       where rownum <= #{pageNum} * #{amount}
+       ) 
+       where sequence > (#{pageNum}-1)*#{amount}  
+	]]>
+	</select>
+	<select id="NoticeCount" resultType="int">
+		select count(*) as count from usernoticewrite where rownum > 0
+	</select>
+	<select id="viewer" resultType="com.rental.domain.UserNoticeVO">
+		select * from usernoticewrite where sequence = #{sequence}
+	</select>
+	<update id="modify">
+		update usernoticewrite set title = #{title}, content = #{content} ,goodsphoto=#{goodsphoto} where sequence
+		= #{sequence}
+	</update>
+	<delete id="delete">
+		delete from usernoticewrite where sequence = #{sequence}
+	</delete>
+	<update id="viewcount" >
+	update usernoticewrite set viewer = viewer + 1 where sequence = #{sequence}
+	</update>
+	<update id="recommend">
+	update usernoticewrite set recommend =recommend  + 1 where sequence=#{sequence}
+	</update>
+	<update id="disrecommend">
+	update usernoticewrite set disrecommend = disrecommend+ 1 where sequence= #{sequence}
+	</update>
+	
+	
+</mapper>

@@ -37,5 +37,11 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 		return mapper.OneUser(userid);
 	}
+	@Override
+	public List<ReviewVO> getRmain() {
+		// TODO Auto-generated method stub
+		return mapper.getRmain();
+	}
+
 
 }

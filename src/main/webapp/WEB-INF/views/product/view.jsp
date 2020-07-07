@@ -25,10 +25,10 @@
 	<div class="container">
 		<div class="col-lg-8 border p-3 main-section bg-white">
 			<div class="row hedding m-0 pl-3 pt-0 pb-3"
-				style="justify-content: center;">상품 상세화면</div>
+				style="justify-content: center;">詳細画面</div>
 			<div class="row m-0">
 				<div class="col-lg-7 left-side-product-box pb-3">
-					<img src="/upload/${view.goodsphoto }"
+					<img src="/upload/product/${view.goodsphoto }"
 						style="position: relative; top: 50%; transform: translateY(-50%);"
 						class="border p-3">
 				</div>
@@ -36,16 +36,18 @@
 					<div class="right-side-pro-detail border p-3 m-0">
 						<div class="row" style="text-align: center;">
 							<div class="col-lg-12">
-								<span> 상품 </span> <br>
+								<span> 商品名 </span> <br>
 								<p class="m-0 p-0" style="color: black;">${view.goods }</p>
 							</div>
 							<div class="col-lg-12">
 
 								<hr class="p-0 m-0">
 							</div>
-							<div class="col-lg-12 pt-2" style="margin: 20px 0;">
-								<h5 class="price-pro">가격</h5>
+							<div class="col-lg-12 pt-2" style="margin-top: 20px 0;">
+							<div style="margin:10px;">
+								<span class="price-pro" style="color:green">価格</span> : 
 								<span>${view.price }$</span>
+							</div>
 								<hr class="m-0 pt-2" style="margin-top: 20px;">
 							</div>
 							<div class="col-lg-12" style="margin-bottom: 20px;">
@@ -53,13 +55,13 @@
 									<strong>Tags : </strong><a href="">Bike</a><a href="">,
 										Nomal</a>
 								</p>
-								<hr class="m-0 pt-2" style="margin-top: 20px;">
+								<hr class="m-0 pt-2" style="margin-top: 20px !important;">
 							</div>
 
 							<div class="col-lg-12" style="margin-bottom: 20px;">
 								<p class="tag-section">
-									<strong>렌탈 가능 기간</strong><br> <strong>시작일: </strong>${fn:substring(view.startdate,0,10) }
-									<br> <strong>~마지막날: </strong>${fn:substring(view.lastdate,0,10) }
+									<strong>レンタル期間</strong><br> <strong>開始日:</strong>${fn:substring(view.startdate,0,10) }
+									<br><strong>終了日:</strong>${fn:substring(view.lastdate,0,10) }
 									<br>
 								</p>
 								<div class="row">
@@ -74,7 +76,7 @@
 										<sec:authorize access="isAnonymous()">
 											<a href="javascript:void(0)" class="btn  btn-warning w-100"
 												onclick="confirms();"
-												style="font-size: 1.5rem;">Add to cart</a>
+												style="font-size: 1.5rem;">カート入れ</a>
 										</sec:authorize>
 									</div>
 
@@ -84,13 +86,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="row" style="border-top: 3px double black">
-				<div class="col-lg-12 text-center pt-3">
-					<h4>제품 상세 내용</h4>
+			<div class="row">
+				<div class="col-lg-12 text-center pt-3" style="border-bottom: .01px solid ;text-shadow: 0px 1px #ffffff, 4px 4px 0px #dad7d7;">
+					<h4>詳細内容</h4>
 				</div>
 			</div>
 			<div class="row mt-3 p-0 text-center pro-box-section"
-				style="border-bottom: 3px double black; margin-bottom: 40px;">
+				style=" margin-bottom: 40px;">
 
 				<div class="container" style="text-align: center;">${view.content }</div>
 				<hr class="m-0 pt-2 mt-2">

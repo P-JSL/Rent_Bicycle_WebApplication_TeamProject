@@ -59,7 +59,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single_place">
 						<div class="thumb">
-							<img src="/upload/${course.photo}" alt=""
+							<img src="/upload/course/${course.photo}" alt=""
 								style="width: 350px; height: 250px;"> <a href="#"
 								class="prise">${course.price}원</a>
 						</div>

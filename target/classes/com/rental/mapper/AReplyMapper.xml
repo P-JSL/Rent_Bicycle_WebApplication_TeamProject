@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rental.mapper.AReplyMapper">
+<insert id="insert">
+	insert into AReply (num, n_num, nickname, comm, regdate)
+	values (seq_ar.nextval, #{n_num},#{nickname},#{comm},sysdate)
+</insert>
+<select id="list" resultType="com.rental.domain.AReplyVO">
+	select * from AReply order by regdate
+</select>
+<delete id="delete" parameterType="map">
+delete from AReply where num = #{num} and nickname=#{nickname} 
+</delete>
+</mapper>

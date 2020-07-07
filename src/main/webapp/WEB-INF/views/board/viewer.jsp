@@ -143,13 +143,13 @@ body {
 								rows="4" id="comm" style="resize: none;"></textarea>
 							<br>
 							<button type="button" class="btn btn-info pull-right"
-								onclick="submitcom();">Post</button>
+								 id="post" onclick="submitcom()">작성</button>
 						</sec:authorize>
 						<div class="clearfix"></div>
 						<hr>
 						<ul class="media-list">
-							<c:forEach items="${reply }" var="re">
-								<li class="media"><a href="javascript:void(0)"
+					<c:forEach items="${reply }" var="re">
+					<li class="media"><a href="javascript:void(0)"
 									class="pull-left"> <img
 										src="https://bootdey.com/img/Content/user_1.jpg" alt=""
 										class="img-circle">
@@ -194,10 +194,10 @@ body {
 											<strong class="text-success">${re.nickname == null ? re.userid : re.nickname }</strong>
 											<p>${re.comm }</p>
 										</div>
-										<input type="hidden" name="n_num" value="${re.num }"
+										<input type="hidden" name="num" value="${re.num }"
 											id="number">
 									</div></li>
-							</c:forEach>
+					</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -394,7 +394,7 @@ $("ul .media #hates").on("click",function(){
 		form.submit();
 }
 
-	</script>
+	</script> 
 
 <script type="text/javascript">
 $(function(){	

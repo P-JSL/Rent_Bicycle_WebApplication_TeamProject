@@ -356,11 +356,11 @@ tml, body {
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>예약물품</th>
-											<th>구매일</th>
-											<th>예약일</th>
-											<th>렌탈 기한</th>
-											<th>금액</th>
+											<th>予約商品</th>
+											<th>購買日</th>
+											<th>予約非</th>
+											<th>レンタル期間</th>
+											<th>金額</th>
 										</tr>
 									</thead>
 									<tbody>

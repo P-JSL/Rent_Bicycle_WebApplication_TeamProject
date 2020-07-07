@@ -11,4 +11,5 @@ public interface ReviewService {
 	public List<ReviewVO> list(Criteria cri);
 	public int count();
 	public ReviewVO UserNickName(String userid);
+	public List<ReviewVO> getRmain();
 }

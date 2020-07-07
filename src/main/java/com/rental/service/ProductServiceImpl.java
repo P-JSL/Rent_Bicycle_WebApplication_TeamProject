@@ -132,6 +132,14 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return mapper.User_Cart_count(userid);
 	}
-	
+	@Override
+	public List<CourseVO> getmain(){
+		return mapper.getCmain();
+	}
+
+	@Override
+	public List<ProductVO> getPmain(){
+		return mapper.getPmain();
+	}
 
 }

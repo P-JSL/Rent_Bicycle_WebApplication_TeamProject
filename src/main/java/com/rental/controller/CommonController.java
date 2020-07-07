@@ -96,7 +96,7 @@ public class CommonController {
 		if (service.signup(memvo)) {
 			service.Account_loginto(memvo.getUserid());
 			log.info("sign up success");
-			return "redirect:/CustomLogin";
+			return "redirect:/login";
 		}
 
 		return "redirect:/signup";

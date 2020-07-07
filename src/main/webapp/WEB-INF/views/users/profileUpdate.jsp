@@ -101,8 +101,8 @@
 										<input type="email" class="form-control form-control-line" id="example-email" value="${user.useremail}" readonly>
 									</div>
 								</div>
-								<span href="" class="btn label label-warning">확인</span> <span
-									class="btn label label-danger">취소</span>
+								<span href="" class="btn label label-warning">確認</span> <span
+									class="btn label label-danger">キャンセル</span>
 							</form>
 						</div>
 					</div>

@@ -112,7 +112,7 @@ body {
 					<div class="col-lg-4 col-md-6">
 						<div class="single_trip">
 							<div class="thumb">
-								<img src="/upload/${Cview.photo }" alt="">
+								<img src="/upload/product/${Cview.photo }" alt="">
 							</div>
 							<div class="info">
 								<div class="date">

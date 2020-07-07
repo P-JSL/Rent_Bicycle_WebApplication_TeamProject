@@ -92,7 +92,7 @@ body {
 				style="justify-content: center;">상품 상세화면</div>
 			<div class="row m-0">
 				<div class="col-lg-7 left-side-product-box pb-3">
-					<img src="/upload/${view.goodsphoto }"
+					<img src="/upload/product/${view.goodsphoto }"
 						style="position: relative; top: 50%; transform: translateY(-50%);"
 						class="border p-3">
 				</div>

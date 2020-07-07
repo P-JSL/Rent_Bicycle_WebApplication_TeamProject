@@ -39,24 +39,24 @@
 				style="border-bottom: 1px solid black; background-color: aliceblue;">
 				<form class="form" action="/forgot/reset" method="get">
 					<div class="panel-body">
-						<label>아이디</label>
+						<label>ID</label>
 						<div class="form-group">
 							<input type="text" name="userid" id="IdInput"
 								class="form-control" placeholder="Your id">
 						</div>
-						<label>새 비밀번호</label>
+						<label>新しいパスワード</label>
 						<div class="form-group pass_show">
 							<input type="password" name="userpw" id="IdInput"
 								class="form-control" placeholder="New Password">
 						</div>
-						<label>비밀번호 확인</label>
+						<label>パスワード確認</label>
 						<div class="form-group pass_show">
 							<input type="password" name="password_confirm" id="IdInput"
 								class="form-control" placeholder="Confirm Password">
 						</div>
 						<div class="form-group">
 							<input class="btn btn-lg btn-outline-info btn-block"
-								value="비밀번호 변경 " id="submit" type="button">
+								value="パスワード変更 " id="submit" type="button">
 						</div>
 					</div>
 				</form>
@@ -87,16 +87,16 @@
 					"click",
 					function() {
 						if (!$("input[name='userid']").val()) {
-							alert("아이디를 입력해주세요.");
+							alert("IDを入力してください。");
 							return false;
 						}
 						if (!$("input[name='userpw']").val()) {
-							alert("비밀번호를 입력해주세요.");
+							alert("パスワードを入力してください。");
 							return false;
 						}
 						if ($("input[name='userpw']").val() != $(
 								"input[name='password_confirm']").val()) {
-							alert("재대로 비밀번호를 입력해주세요.");
+							alert("パスワードを確実に入力してください。");
 							$("input[name='userpw']").val("");
 							$("input[name='password_confirm']").val("");
 							return false;
@@ -116,7 +116,7 @@
 							success : function(result) {
 
 								$(opener.document).find("#change").text(
-										"정상적으로 비밀번호가 변경되었습니다.");
+										"正常的にパスワードが変更されました。");
 								self.close();
 								return;
 

@@ -2,6 +2,7 @@ package com.rental.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +27,18 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.rental.domain.AReplyVO;
 import com.rental.domain.ApplyVO;
+import com.rental.domain.CourseVO;
 import com.rental.domain.IPBanList;
 import com.rental.domain.MemberVO;
 import com.rental.domain.NoticeVO;
+import com.rental.domain.ProductVO;
 import com.rental.domain.QnAVO;
 import com.rental.domain.ReplyVO;
 import com.rental.domain.ResTableVO;
+import com.rental.domain.ReviewVO;
+import com.rental.service.AReplyServiceImpl;
 import com.rental.service.ApplyService;
 import com.rental.service.IPService;
 import com.rental.service.MemberService;
@@ -41,6 +47,9 @@ import com.rental.service.ProductService;
 import com.rental.service.QNAService;
 import com.rental.service.ReplyService;
 import com.rental.service.ResTableService;
+import com.rental.service.ReviewService;
+import com.rental.service.UserNoticeService;
+import com.rental.util.Utility;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -57,16 +66,40 @@ public class MainController {
 	private NoticeService noticeservice;
 	@Setter(onMethod_ = { @Autowired })
 	private ProductService ps;
+	@Setter(onMethod_ = { @Autowired })
+	private ReplyService rs;
+	@Setter(onMethod_ = { @Autowired })
+	private QNAService qs;
+	@Setter(onMethod_ = { @Autowired })
+	private ApplyService as;
+	@Setter(onMethod_ = { @Autowired })
+	private IPService ipservice;
+	@Setter(onMethod_ = { @Autowired })
+	private ResTableService rst;
+	@Setter(onMethod_ = { @Autowired })
+	private UserNoticeService uns;
+	@Setter(onMethod_ = { @Autowired })
+	private ReviewService rservice;
 
 	@GetMapping("/")
 	public String index(Model model) {
-
+		List<CourseVO> cvo = ps.getmain();
+		List<ProductVO> pvo = ps.getPmain();
+		List<ReviewVO> rvo = rservice.getRmain();
+		model.addAttribute("clist", cvo);
+		model.addAttribute("plist", pvo);
+		model.addAttribute("rlist", rvo);
 		return "index";
 	}
 
 	@GetMapping("/{userid}")
 	public String indexid(Model model, @PathVariable("userid") String userid, HttpSession session) {
-
+		List<CourseVO> cvo = ps.getmain();
+		List<ProductVO> pvo = ps.getPmain();
+		List<ReviewVO> rvo = rservice.getRmain();
+		model.addAttribute("clist", cvo);
+		model.addAttribute("plist", pvo);
+		model.addAttribute("rlist", rvo);
 		model.addAttribute("cart-count", ps.User_Cart_count(userid));
 		return "index";
 	}
@@ -74,7 +107,7 @@ public class MainController {
 	@GetMapping("/emailauth")
 	public String UserEnable(MemberVO mvo) {
 		log.info(service.AccountEnabled(mvo));
-		return "/All/CustomLogin";
+		return "/login";
 	}
 
 	@ResponseBody
@@ -214,6 +247,37 @@ public class MainController {
 	}
 
 	@ResponseBody
+	@PostMapping(value = "/board/thup", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Object> userrecom(@RequestBody String recommend, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(recommend);
+		boolean recommends = parser.parse(recommend).getAsJsonObject().get("recommend").getAsBoolean();
+		int sequence = parser.parse(recommend).getAsJsonObject().get("sequence").getAsInt();
+		uns.recommend(sequence);
+
+		return new ResponseEntity<>(uns.viewer(sequence).getRecommend(), HttpStatus.OK);
+
+	}
+
+	@ResponseBody
+	@PostMapping(value = "/board/down", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Object> userdisrecom(@RequestBody String recommend, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(recommend);
+		boolean recommends = parser.parse(recommend).getAsJsonObject().get("disrecommend").getAsBoolean();
+		log.debug("log recomm : " + recommends);
+		int sequence = parser.parse(recommend).getAsJsonObject().get("sequence").getAsInt();
+		log.debug("log seq : " + sequence);
+		uns.disrecommend(sequence);
+		return new ResponseEntity<>(uns.viewer(sequence).getDisrecommend(), HttpStatus.OK);
+
+	}
+
+	@ResponseBody
 	@PostMapping(value = "/forgot/reset", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> Reset(@RequestBody String recommend, HttpServletResponse res, HttpServletRequest req)
 			throws JsonParseException, JsonMappingException, IOException {
@@ -248,9 +312,6 @@ public class MainController {
 		return new ResponseEntity<>(mvo.getUserid(), HttpStatus.OK);
 
 	}
-
-	@Setter(onMethod_ = { @Autowired })
-	private ReplyService rs;
 
 	@ResponseBody
 	@PostMapping(value = "/likes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -292,9 +353,6 @@ public class MainController {
 		return new ResponseEntity<>(rs.Yreply(rvo), HttpStatus.OK);
 
 	}
-
-	@Setter(onMethod_ = { @Autowired })
-	private QNAService qs;
 
 	@ResponseBody
 	@PostMapping(value = "/QnA/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -339,9 +397,6 @@ public class MainController {
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
 
-	@Setter(onMethod_ = { @Autowired })
-	private ApplyService as;
-
 	@ResponseBody
 	@PostMapping(value = "/confirm", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Boolean> ApplyConfirm(@RequestBody String JsonData, HttpServletResponse res,
@@ -361,11 +416,7 @@ public class MainController {
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
 
-	@Setter(onMethod_ = { @Autowired })
-	private IPService ipservice;
-
 	@ResponseBody
-
 	@PostMapping(value = "/ip", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Boolean> ip(@RequestBody String JsonData, HttpServletResponse res, HttpServletRequest req)
 			throws JsonParseException, JsonMappingException, IOException {
@@ -392,9 +443,6 @@ public class MainController {
 		log.warn("OK boolean : " + ok);
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 	}
-
-	@Setter(onMethod_ = { @Autowired })
-	private ResTableService rst;
 
 	@ResponseBody
 	@PostMapping(value = "/res_conf", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -478,5 +526,75 @@ public class MainController {
 		}
 		boolean confirm = rst.AllDelete(userid.get(0).getAsString()) == 1 ? true : false;
 		return new ResponseEntity<>(confirm, HttpStatus.OK);
+	}
+
+	
+	@Setter(onMethod_ = {@Autowired})
+	private AReplyServiceImpl ar;
+	//
+	@ResponseBody
+	@PostMapping(value = "/board/reply", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String, String>> boardreply(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		String comm = parser.parse(JsonData).getAsJsonObject().get("comm").getAsString(); // 댓글
+		String nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsString(); // 댓글
+		int n_num = parser.parse(JsonData).getAsJsonObject().get("sequence").getAsInt();
+		// 댓글, 닉네임,
+
+		AReplyVO re = new AReplyVO();
+		re.setComm(comm);
+		re.setNickname(nickname);
+		re.setN_num(n_num);
+		
+		ar.insert(re);
+		String ReplyHTMLDiv = Utility.ReplyHTML(comm, nickname, n_num);
+		// Reply.add(ReplyHTMLDiv);
+		HashMap<String, String> rep = new HashMap<String, String>();
+		rep.put("html", ReplyHTMLDiv);
+		return new ResponseEntity<>(rep, HttpStatus.OK);
+
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "/board/list/reply", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String,Object>> boardreplylist(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		int num = parser.parse(JsonData).getAsJsonObject().get("sequence").getAsInt();
+		System.out.println(num);
+
+
+		//불러오기
+		List<AReplyVO> re = ar.list(num);
+		List<String> HTML = Utility.ReplyHTML(re);
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("List", HTML);
+		return new ResponseEntity<>(map, HttpStatus.OK);
+
+	}
+	
+	
+	@ResponseBody
+	@PostMapping(value = "/board/reply/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Boolean> boardreplydelete(@RequestBody String JsonData, HttpServletResponse res,
+			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+
+		JsonParser parser = new JsonParser();
+		log.warn(JsonData);
+		int num = parser.parse(JsonData).getAsJsonObject().get("n_num").getAsInt();
+		String nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsString();
+		
+		HashMap<String,Object> map = new HashMap<String, Object>();
+		map.put("nickname", nickname);
+		map.put("num", num);
+		boolean ok = ar.delete(map) == 1 ? true : false;
+		return new ResponseEntity<>(ok, HttpStatus.OK);
+
 	}
 }

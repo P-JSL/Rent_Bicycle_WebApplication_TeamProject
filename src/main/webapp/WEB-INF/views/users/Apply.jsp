@@ -175,31 +175,31 @@
 
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">제목</label></th>
+												for="t_title">たいとry</label></th>
 											<td colspan="2"><input type="text" name="title"
 												id="title" class="title" placeholder="제목을 입력해주세요"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">품목</label></th>
+												for="t_title">品目</label></th>
 											<td colspan="1"><input type="text" name="goods"
 												id="title" class="title"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">작성자</label></th>
+												for="t_title">作成者</label></th>
 											<td colspan="4"><input type="text" name="nickname"
 												id="title" class="title" readonly value="${nickname }">
 												<input type="hidden" name="userid" id="title" class="title"
 												value="${ userid}"></td>
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">가격</label></th>
+												for="t_title">金額</label></th>
 											<td colspan="2"><input type="text" name="price" id="title"
 												class="title"></td>
 											
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">카테고리</label></th>
+												for="t_title">カテゴリー</label></th>
 											<td><input type="text" name="category" id="title"
 												class="title"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">렌탈 가능 날짜</label></th>
+												for="t_title">レンタル可能日</label></th>
 											<td><input type="text" name="startdate" id="title"
 												class="title"></td>
 											<td><input type="text" name="lastdate" id="to"
@@ -209,21 +209,20 @@
 										</tr>
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="cont">내용</label></th>
+												for="cont">コンテンツ</label></th>
 											<td colspan="8"><textarea type="cont" name="content"
 													id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
 										</tr>
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">이미지</label></th>
+												for="t_title">イメージ</label></th>
 											<td colspan="9"><input type="file" name="goodsfile"
 												id="title" class="title"></td>
 										</tr>
 
 										<tr>
 											<td colspan="9"><input type="submit" class="btn"
-												onclick="noticeSave()"><input type="button"
-												onclick="history.back();" value="목록" class="btn"></td>
+												onclick="noticeSave()" value="登録"></td>
 										</tr>
 
 									</table>

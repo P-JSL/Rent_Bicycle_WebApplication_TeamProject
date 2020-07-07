@@ -53,5 +53,9 @@ public interface ProductMapper {
 	public ProductVO searchcart(int num);
 	
 	public int User_Cart_count(String userid);
+	//
+	public List<CourseVO> getCmain();
+
+	public List<ProductVO> getPmain();
 	
 }

@@ -30,8 +30,7 @@
 							<h3>
 								<i class="fa fa-lock fa-4x"></i>
 							</h3>
-							<h2 class="text-center">아이디를 잊으셨습니까?</h2>
-							<p>아이디를 찾으십시오.</p>
+							<h2 class="text-center">IDをお忘れですか？</h2>
 							<div class="panel-body">
 
 								<form class="form" action="/forgot/findid" method="get">
@@ -47,7 +46,7 @@
 										</div>
 										<div class="form-group" s>
 											<input class="btn btn-lg btn-primary btn-block"
-												value="아이디 찾기 " id="idsubmit" type="button">
+												value="ID探し " id="idsubmit" type="button">
 										</div>
 									</fieldset>
 								</form>
@@ -72,7 +71,7 @@
 					"click",
 					function() {
 						if (!$("input[name='useremail']").val()) {
-							alert("이메일을 입력해주세요.");
+							alert("メールを入力してください。");
 							return false;
 						}
 						let useremail = $("input[name='useremail']").val();
@@ -90,7 +89,7 @@
 							success : function(result) {
 
 								$(opener.document).find("#change").text(
-										"당신의 아이디는 " + result + "입니다.");
+										"あなた様のIDは " + result + "입니다.");
 								self.close();
 								return;
 

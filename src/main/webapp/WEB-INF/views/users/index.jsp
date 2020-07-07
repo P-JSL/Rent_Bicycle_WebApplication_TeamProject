@@ -240,10 +240,10 @@
 										<!-- <th style="text-align: center; vertical-align: middle;"><label
 									class="customcheckbox m-b-20">
 								</label></th> -->
-										<th style="text-align: left;">닉네임</th>
-										<th style="text-align: left;">상품</th>
-										<th style="text-align: left;">가격</th>
-										<th style="text-align: left;">사진</th>
+										<th style="text-align: left;">ニックネーム</th>
+										<th style="text-align: left;">商品名</th>
+										<th style="text-align: left;">価格</th>
+										<th style="text-align: left;">商品</th>
 
 									</tr>
 								</thead>
