@@ -265,7 +265,7 @@ body {
 									class="form__label">NickName</label>
 							</div>
 						</div>
-						<div class="panel-body">
+						<div class="panel-body" id="panel-body">
 
 							<textarea class="form-control" placeholder="write a comment..."
 								rows="3" style="resize: none;" id="comm"></textarea>
@@ -394,7 +394,24 @@ body {
 						contentType : "application/json; charset=UTF-8",
 						processData : false,
 						success : function(res) {
-							$(".media-list").prepend(res.html);
+							$(".media-list").children().remove();
+							$.ajax({
+								url : "/board/list/reply",
+								type : 'POST',
+								data : JSON.stringify({
+									"sequence" : sequence
+								}),
+								contentType : "application/json; charset=UTF-8",
+								processData : false,
+								success : function(res) {
+									for (var i = 0; i < res.List.length; i++) {
+										$(".media-list").prepend(res.List[i]);
+									}
+								},
+								error : function(req, status, error) {
+									console.log(error);
+								}
+							})
 						},
 						error : function(req, status, error) {
 							console.log(error);
@@ -421,7 +438,25 @@ body {
 					contentType : "application/json; charset=UTF-8",
 					processData : false,
 					success : function(res) {
-						$(data).parent().parent().parent().parent().remove();
+						$(".media-list").children().remove();
+						$.ajax({
+							url : "/board/list/reply",
+							type : 'POST',
+							data : JSON.stringify({
+								"sequence" : sequence
+							}),
+							contentType : "application/json; charset=UTF-8",
+							processData : false,
+							success : function(res) {
+								for (var i = 0; i < res.List.length; i++) {
+									$(".media-list").prepend(res.List[i]);
+								}
+							},
+							error : function(req, status, error) {
+								console.log(error);
+							}
+						})
+						
 					},
 					error : function(req, status, error) {
 						console.log(error);

@@ -12,4 +12,5 @@ public interface AReplyMapper {
 	public List<AReplyVO> list(int n_num);
 	
 	public int delete(HashMap<String, Object> map);
+	
 }

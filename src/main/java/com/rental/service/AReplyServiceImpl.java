@@ -31,4 +31,5 @@ public class AReplyServiceImpl {
 		
 		return mapper.delete(map);
 	}
+
 }

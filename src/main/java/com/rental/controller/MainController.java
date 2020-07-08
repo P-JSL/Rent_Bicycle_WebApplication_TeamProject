@@ -531,9 +531,9 @@ public class MainController {
 		return new ResponseEntity<>(confirm, HttpStatus.OK);
 	}
 
-	
-	@Setter(onMethod_ = {@Autowired})
+	@Setter(onMethod_ = { @Autowired })
 	private AReplyServiceImpl ar;
+
 	//
 	@ResponseBody
 	@PostMapping(value = "/board/reply", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -546,7 +546,6 @@ public class MainController {
 		String nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsString(); // 댓글
 		int n_num = parser.parse(JsonData).getAsJsonObject().get("sequence").getAsInt();
 		String pw = parser.parse(JsonData).getAsJsonObject().get("pw").getAsString();
-		
 
 		AReplyVO re = new AReplyVO();
 		re.setUserid(pw);
@@ -554,17 +553,19 @@ public class MainController {
 		re.setNickname(nickname);
 		re.setN_num(n_num);
 		ar.insert(re);
-		String ReplyHTMLDiv = Utility.ReplyHTML(comm, nickname, n_num,pw);
+		String ReplyHTMLDiv = Utility.ReplyHTML(comm, nickname, n_num, pw);
 		// Reply.add(ReplyHTMLDiv);
+
 		HashMap<String, String> rep = new HashMap<String, String>();
 		rep.put("html", ReplyHTMLDiv);
+
 		return new ResponseEntity<>(rep, HttpStatus.OK);
 
 	}
-	
+
 	@ResponseBody
 	@PostMapping(value = "/board/list/reply", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<HashMap<String,Object>> boardreplylist(@RequestBody String JsonData, HttpServletResponse res,
+	public ResponseEntity<HashMap<String, Object>> boardreplylist(@RequestBody String JsonData, HttpServletResponse res,
 			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
 
 		JsonParser parser = new JsonParser();
@@ -572,18 +573,16 @@ public class MainController {
 		int num = parser.parse(JsonData).getAsJsonObject().get("sequence").getAsInt();
 		System.out.println(num);
 
-
-		//불러오기
+		// 불러오기
 		List<AReplyVO> re = ar.list(num);
 		List<String> HTML = Utility.ReplyHTML(re);
-		
+
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("List", HTML);
 		return new ResponseEntity<>(map, HttpStatus.OK);
 
 	}
-	
-	
+
 	@ResponseBody
 	@PostMapping(value = "/board/reply/delete", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Boolean> boardreplydelete(@RequestBody String JsonData, HttpServletResponse res,
@@ -593,21 +592,21 @@ public class MainController {
 		log.warn(JsonData);
 		int num = parser.parse(JsonData).getAsJsonObject().get("n_num").getAsInt();
 		String nickname = parser.parse(JsonData).getAsJsonObject().get("nickname").getAsString();
-		
-		HashMap<String,Object> map = new HashMap<String, Object>();
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("nickname", nickname);
 		map.put("num", num);
 		boolean ok = ar.delete(map) == 1 ? true : false;
+
 		return new ResponseEntity<>(ok, HttpStatus.OK);
 
 	}
-	
-	
-	
+
 	@ResponseBody
 	@PostMapping(value = "/notice/reply/insert", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<HashMap<String,Object>> notice_insert_reply(@RequestBody String JsonData, HttpServletResponse res,
-			HttpServletRequest req) throws JsonParseException, JsonMappingException, IOException {
+	public ResponseEntity<HashMap<String, Object>> notice_insert_reply(@RequestBody String JsonData,
+			HttpServletResponse res, HttpServletRequest req)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		JsonParser parser = new JsonParser();
 		log.warn(JsonData);
@@ -616,14 +615,14 @@ public class MainController {
 		String userid = parser.parse(JsonData).getAsJsonObject().get("userid").getAsString();
 		String comm = parser.parse(JsonData).getAsJsonObject().get("comm").getAsString();
 
-		ReplyVO rvo =  new ReplyVO();
+		ReplyVO rvo = new ReplyVO();
 		rvo.setComm(comm);
 		rvo.setN_num(n_num);
 		rvo.setNickname(nickname);
 		rvo.setUserid(userid);
-		
+
 		rs.insert(rvo);
-		
+
 		rvo = rs.OneUser(rvo);
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 		String times = sdf.format(rvo.getRegdate());

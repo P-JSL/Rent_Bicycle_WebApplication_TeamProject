@@ -278,6 +278,7 @@ var sequence = <%=request.getParameter("sequence")%>;
 			success : function(res) {
 			$(".media-list").prepend(replys(res));
 			$.getScript("/resources/noticejs.js");
+			location.reload();
 				function replys(ress){					
 				var HTML = ""; 
 				HTML += "<li class='media'><a href='javascript:void(0)' class='pull-left'>";
