@@ -49,17 +49,14 @@
 							<img style="width: 100%;height: 100%;" src="/upload/review/${re.photo }" alt="">
 						</div>
 						<div class="back">
-							<h2>${re.title }
-								<br>
-								<small><sub>by ${re.nickname == null? re.writer : re.nickname }</sub><span
+							<h3>${re.title}<br><small><sub>by ${re.nickname == null? re.writer : re.nickname }</sub><span
 									class="date"> &nbsp;&nbsp;<i class="fa fa-calendar fa-lg fa-fw"
 										aria-hidden="true"></i>
 									<fmt:formatDate value="${re.regdate }" pattern="YY-MM-dd" />
 								</span></small>
-							</h2>
+							</h3>
 							<br>
 							<p style="border-top: 1px solid #eee">${re.content }</p>
-
 						</div>
 					</li>
 				</c:forEach>
@@ -106,8 +103,8 @@
 		e.preventDefault();
 		var form = $("#photoForm");
 		let num = $(this).attr("href");
-		form.append("<input type='hidden' name='pageNum' value='"+num+"'>");
-		form.append("<input type='hidden' name='amount' value='"+6+"'>");
+		$(form).find("input[name='pageNum']").val(num);
+		$(form).find("input[name='amount']").val(6);
 		form.submit();
 	})
 </script>
