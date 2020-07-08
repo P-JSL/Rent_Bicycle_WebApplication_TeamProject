@@ -315,7 +315,7 @@
 										style="max-width: 300px; min-height: 200px; max-height: 200px; overflow: hidden;">
 								</div>
 								<div class="info"
-									style="background-color: rgba(104, 109, 224, .15); border-radius: 5px;width: 300px;">
+									style="background-color: rgba(104, 109, 224, .15); border-radius: 5px;width: 290px;">
 									<div class="date">
 										<span>${re.title }</span>
 									</div>

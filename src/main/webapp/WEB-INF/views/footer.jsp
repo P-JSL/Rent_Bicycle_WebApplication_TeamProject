@@ -196,20 +196,20 @@
 						style="margin-top: 50px; text-align: center; border-bottom: 1px solid #eee; margin-bottom: 10px;">Quick
 						Move</h4>
 					<div class="footer_widget" id="blocked" style="display: inline-block;">
-						<div class="col-md-2" style="display: grid; grid-gap: 7px;">
+						<div class="col-md-2" style="display: grid; grid-gap: 7px;font-size: medium;">
 							<b style="color: black;">PRODUCT</b>
 							<div class="bdr"
 								style="border-bottom: 1px solid #e4e8eb; margin: 0 !important; border-top: none; width: 80px;"></div>
-							<small><a href="/product/product">BICYCLE</a></small> <small><a href="#">RESERVATION</a></small>
+							<small><a href="/product/product">BICYCLE</a></small> 
 							<small><a href="/board/notice">NOTICE</a></small> <small><a href="/about">INFOMATION</a></small>
 						</div>
 					</div>
 					<div class="footer_widget" style="float: right;">
-						<div class="col-md-2" style="display: grid; grid-gap: 7px;">
-							<b style="color: black;">BASIC</b>
+						<div class="col-md-2" style="display: grid; grid-gap: 7px;font-size: medium;">
+							<b style="color: black;">PAGE</b>
 							<div class="bdr"
 								style="border-bottom: 1px solid #e4e8eb; margin: 0 !important; border-top: none; width: 80px;"></div>
-							<small><a href="#">MYPAGE</a></small><small><a href="#">USERBOARD</a></small>
+							<small><a href="/usernotice/Usernotice">USERBOARD</a></small>
 							<small><a href="/review/photo">REVIEW</a></small><small><a href="/QnA/QnA">FAQ</a></small>
 						</div>
 					</div>
