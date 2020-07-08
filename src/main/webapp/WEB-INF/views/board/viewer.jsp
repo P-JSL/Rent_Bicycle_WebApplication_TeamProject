@@ -71,7 +71,8 @@ body {
 					<tr>
 						<th style="text-align: center; vertical-align: middle;"><label
 							for="t_title">제목</label></th>
-						<sec:authorize access="isAuthenticated() and hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
+						<sec:authorize
+							access="isAuthenticated() and hasAnyRole({'ROLE_ADMIN','ROLE_USER'})">
 							<sec:authentication property="principal.member.userid" var="id" />
 							<c:if test="${id == userid }">
 								<td><input type="text" name="title" id="title"
@@ -88,11 +89,13 @@ body {
 						</sec:authorize>
 						<td><i class="fa fa-thumbs-o-up fa-fw fa-2x"
 							aria-hidden="true" id="theup" style="cursor: pointer;"></i><br>
-							<mark id="recommend" style="color: green; font-size: 14px;background: transparent;">${vo.recommend }</mark>
+							<mark id="recommend"
+								style="color: green; font-size: 14px; background: transparent;">${vo.recommend }</mark>
 						</td>
 						<td><i class="fa fa-thumbs-o-down fa-fw fa-2x"
 							aria-hidden="true" id="down" style="cursor: pointer;"></i><br>
-							<mark id="disrecommend" style="color: red; font-size: 14px;background: transparent;">${vo.disrecommend }</mark>
+							<mark id="disrecommend"
+								style="color: red; font-size: 14px; background: transparent;">${vo.disrecommend }</mark>
 
 						</td>
 
@@ -125,7 +128,7 @@ body {
 		</form>
 	</div>
 </div>
-<div class="container">
+<div class="container" id='media'>
 	<div class="row bootstrap snippets" style="justify-content: center;">
 		<div class="col-md-12 col-lg-12 col-sm-12"
 			style="justify-content: center;">
@@ -141,14 +144,16 @@ body {
 							<textarea class="form-control" placeholder="write a comment..."
 								rows="4" id="comm" style="resize: none;"></textarea>
 							<br>
-							<button type="button" class="btn btn-info pull-right" data-nickname='${nicknames }' data-id='${id }'
-								 id="post" onclick="submitcom(this)">작성</button>
+							<button type="button" class="btn btn-info pull-right"
+								data-nickname='${nicknames }' data-id='${id }' id="post"
+								onclick="submitcom(this)">작성</button>
 						</sec:authorize>
 						<div class="clearfix"></div>
 						<hr>
+
 						<ul class="media-list">
-					<c:forEach items="${reply }" var="re">
-					<li class="media"><a href="javascript:void(0)"
+							<c:forEach items="${reply }" var="re">
+								<li class="media"><a href="javascript:void(0)"
 									class="pull-left"> <img
 										src="https://bootdey.com/img/Content/user_1.jpg" alt=""
 										class="img-circle">
@@ -193,10 +198,11 @@ body {
 											<strong class="text-success">${re.nickname == null ? re.userid : re.nickname }</strong>
 											<p>${re.comm }</p>
 										</div>
-										<input type="hidden" name="num" value="${re.num }"
-											id="number">
+										<input type="hidden" name="num" value="${re.num }" id="number">
 									</div></li>
-					</c:forEach>
+							</c:forEach>
+							<script src="/resources/noticejs.js" type="text/javascript"
+								id='jsc'></script>
 						</ul>
 					</div>
 				</div>
@@ -255,8 +261,7 @@ var csrfTokenValue = "${_csrf.token}";
 var sequence = <%=request.getParameter("sequence")%>;
 
 </script>
-<script src="/resources/noticejs.js" type="text/javascript">
-</script>
+
 <script type="text/javascript">
 	var seq =<%=request.getParameter("sequence")%>;
 	function submitcom(res){
@@ -277,9 +282,8 @@ var sequence = <%=request.getParameter("sequence")%>;
 			processData : false,
 			success : function(res) {
 			$(".media-list").prepend(replys(res));
-			$.getScript("/resources/noticejs.js");
 			$("#comm").val("");
-			//location.reload();
+			location.reload();
 				function replys(ress){					
 				var HTML = ""; 
 				HTML += "<li class='media'><a href='javascript:void(0)' class='pull-left'>";
@@ -309,7 +313,7 @@ var sequence = <%=request.getParameter("sequence")%>;
 		})
 }
 
-	</script> 
+	</script>
 
 <script type="text/javascript">
 $(function(){	
