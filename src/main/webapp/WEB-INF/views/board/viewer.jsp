@@ -88,11 +88,11 @@ body {
 						</sec:authorize>
 						<td><i class="fa fa-thumbs-o-up fa-fw fa-2x"
 							aria-hidden="true" id="theup" style="cursor: pointer;"></i><br>
-							<mark id="recommend" style="color: green; font-size: 14px">${vo.recommend }</mark>
+							<mark id="recommend" style="color: green; font-size: 14px;background: transparent;">${vo.recommend }</mark>
 						</td>
 						<td><i class="fa fa-thumbs-o-down fa-fw fa-2x"
 							aria-hidden="true" id="down" style="cursor: pointer;"></i><br>
-							<mark id="disrecommend" style="color: red; font-size: 14px">${vo.disrecommend }</mark>
+							<mark id="disrecommend" style="color: red; font-size: 14px;background: transparent;">${vo.disrecommend }</mark>
 
 						</td>
 
@@ -278,7 +278,8 @@ var sequence = <%=request.getParameter("sequence")%>;
 			success : function(res) {
 			$(".media-list").prepend(replys(res));
 			$.getScript("/resources/noticejs.js");
-			location.reload();
+			$("#comm").val("");
+			//location.reload();
 				function replys(ress){					
 				var HTML = ""; 
 				HTML += "<li class='media'><a href='javascript:void(0)' class='pull-left'>";

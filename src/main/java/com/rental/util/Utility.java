@@ -65,7 +65,7 @@ public class Utility {
 					+ "</small><br>";
 			HTML += "<span class='text-muted pull-right'><button class='btn btn-outline-dangerous' onclick='deleted(this)' data-name='"
 					+ re.get(i).getNickname() + "' data-nnum='" + re.get(i).getNum() + "' data-pw='"
-					+ re.get(i).getUserid() + "'>삭제</button></span></span> <strong class='text-success'>@"
+					+ re.get(i).getPw() + "'>삭제</button></span></span> <strong class='text-success'>@"
 					+ re.get(i).getNickname() + "</strong>";
 			HTML += "<p>" + re.get(i).getComm();
 			HTML += "</p></div></li>";

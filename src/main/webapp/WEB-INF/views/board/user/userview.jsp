@@ -378,6 +378,11 @@ body {
 						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 					})
 					var pw = prompt("Password");
+					
+					if(!pw){
+						alert("삭제 할 비밀번호는 최소 1자리 이상 적어주시길 바랍니다.");
+						return false;
+					}
 					var comm = $("#comm").val();
 					var nickname = $("input[name='nickname']").val();
 
@@ -395,6 +400,7 @@ body {
 						processData : false,
 						success : function(res) {
 							$(".media-list").children().remove();
+							$("#comm").val("");
 							$.ajax({
 								url : "/board/list/reply",
 								type : 'POST',
@@ -407,6 +413,7 @@ body {
 									for (var i = 0; i < res.List.length; i++) {
 										$(".media-list").prepend(res.List[i]);
 									}
+									
 								},
 								error : function(req, status, error) {
 									console.log(error);

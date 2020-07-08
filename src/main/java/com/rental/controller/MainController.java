@@ -548,7 +548,7 @@ public class MainController {
 		String pw = parser.parse(JsonData).getAsJsonObject().get("pw").getAsString();
 
 		AReplyVO re = new AReplyVO();
-		re.setUserid(pw);
+		re.setPw(pw);
 		re.setComm(comm);
 		re.setNickname(nickname);
 		re.setN_num(n_num);
