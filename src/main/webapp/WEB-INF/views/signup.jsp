@@ -300,6 +300,7 @@ input[name='useremail']::after {
 	<script type="application/javascript">
 		
 		
+		
 	$('.btn-example').click(function(){
         var $href = $(this).attr('href');
         layer_popup($href);
@@ -350,17 +351,10 @@ input[name='useremail']::after {
 		$(chk[1]).prop("checked",true);
 	})
     })
-    	
-   
-    
+    	  
   function getIP(json) {
-    console.log("My public IP address is: ", json.ip);
+    return json.ip;
   }
-	
-	
-	
-	
-	
 	</script>
 	<script type="application/javascript"
 		src="https://api.ipify.org?format=jsonp&callback=getIP"></script>

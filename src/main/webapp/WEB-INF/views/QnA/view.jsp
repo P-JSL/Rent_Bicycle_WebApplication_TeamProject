@@ -80,7 +80,7 @@ body {
 			<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 
 			<fieldset>
-				<legend>Q&A 작성</legend>
+				<legend>Q&A 수정</legend>
 
 				<table class="table">
 					<caption>Q&A 작성</caption>

@@ -16,7 +16,7 @@
 
 	<select id="Top6list" resultType="com.rental.domain.ReplyVO">
 	<![CDATA[	
-		select * from noticereply where rownum <= 6
+		select /*+index_desc (noticereply noticereply_pk)*/ * from noticereply where rownum <= 6 order by regdate desc
 	]]>
 	</select>
 	<select id="UserReply" resultType="com.rental.domain.ReplyVO">

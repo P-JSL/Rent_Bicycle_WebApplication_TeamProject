@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="header.jsp"%>
-<body>
-	<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-	<!-- header-start -->
-	<style>
+<style type="text/css">
 .box {
 	width: 150px;
 	height: 150px;
@@ -25,6 +19,8 @@
 	padding-bottom: 60px;
 }
 </style>
+<body>
+	<!-- header-start -->
 
 	<!-- header-end -->
 
@@ -315,7 +311,7 @@
 										style="max-width: 300px; min-height: 200px; max-height: 200px; overflow: hidden;">
 								</div>
 								<div class="info"
-									style="background-color: rgba(104, 109, 224, .15); border-radius: 5px;width: 290px;">
+									style="background-color: rgba(104, 109, 224, .15); border-radius: 5px; width: 290px;">
 									<div class="date">
 										<span>${re.title }</span>
 									</div>
