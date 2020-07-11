@@ -6,7 +6,7 @@
 		values (seq_ar.nextval, #{n_num},#{nickname},#{pw},#{comm},sysdate)
 	</insert>
 	<select id="list" resultType="com.rental.domain.AReplyVO">
-		select * from AReply order by regdate
+		select * from AReply where n_num = #{n_num} order by regdate
 	</select>
 	<delete id="delete" parameterType="map">
 		delete from AReply where num = #{num} and nickname=#{nickname}
