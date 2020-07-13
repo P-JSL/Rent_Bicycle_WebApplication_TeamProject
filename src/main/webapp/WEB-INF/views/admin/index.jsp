@@ -241,7 +241,7 @@ height: 30px;
 										<c:forEach var="list" items="${UserList }">
 
 											<tr id="tab">
-												<td class="txt-oflo" id="userid">${list.nickname == null ? list.userid : list.nickname }</td>
+												<td class="txt-oflo" id="userid">${ list.userid  }</td>
 												<td class="txt-oflo">${list.regDate }</td>
 												<td class="ip">${list.ip }</td>
 												<td><span class="text-success"

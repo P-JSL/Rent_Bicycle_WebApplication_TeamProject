@@ -175,7 +175,7 @@
 
 										<tr>
 											<th style="vertical-align: middle; text-align: center;"><label
-												for="t_title">たいとry</label></th>
+												for="t_title">タイトル</label></th>
 											<td colspan="2"><input type="text" name="title"
 												id="title" class="title" placeholder="제목을 입력해주세요"></td>
 											<th style="vertical-align: middle; text-align: center;"><label
@@ -331,8 +331,9 @@
 				dataType : "json",
 				contentType : "application/json; charset=UTF-8",
 				processData : false,
-				success : $(function(res) {
-					if (!res) {
+				success : (function(res) {
+					console.log(res);
+					if (res == "true") {
 						$("#appform").css("display", "inherit");
 						$("#writeform").css("display", "none");
 					} else {

@@ -101,7 +101,7 @@
 											<tr>
 												<td>${pro.num }</td>
 												<td>${pro.goods }</td>
-												<td><img src="/upload/${pro.goodsphoto }"
+												<td><img src="/upload/product/${pro.goodsphoto }"
 													style="max-width: 120px;"></td>
 												<td>${pro.price }</td>
 												<td>${pro.category =='1' ? '일반' : '브랜드' }</td>
