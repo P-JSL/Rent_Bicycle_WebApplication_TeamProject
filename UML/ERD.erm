@@ -10,13 +10,13 @@
 		<right_margin>30</right_margin>
 	</page_setting>
 	<category_index>0</category_index>
-	<zoom>0.5</zoom>
+	<zoom>0.65</zoom>
 	<x>0</x>
-	<y>0</y>
+	<y>29</y>
 	<default_color>
-		<r>128</r>
-		<g>128</g>
-		<b>192</b>
+		<r>255</r>
+		<g>255</g>
+		<b>255</b>
 	</default_color>
 	<color>
 		<r>255</r>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2020-07-08 18:44:07</creation_date>
-			<updated_date>2020-07-08 19:44:34</updated_date>
+			<updated_date>2020-07-14 07:09:12</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
